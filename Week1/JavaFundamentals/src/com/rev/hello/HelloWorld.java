@@ -2,6 +2,10 @@ package com.rev.hello;
 //with Java as a package-centric language, the first line of every class
 // 	should be the package that it is in. avoid creating classes in the src folder directly
 public class HelloWorld {
+	//HelloWorld hello = new HelloWorld();
+//	public HelloWorld() {
+//		super();
+//	}
 	
 	/*
 	 * Every java program begins execution with its main method.
@@ -12,6 +16,7 @@ public class HelloWorld {
 	
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
+		HelloWorld hello = new HelloWorld();
 		
 		/*
 		 * Java's System class contains several useful class fields and
