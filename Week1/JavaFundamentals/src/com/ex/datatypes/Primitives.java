@@ -1,5 +1,7 @@
 package com.ex.datatypes;
 
+import static java.lang.Math.*;
+
 public class Primitives {
 	//int, long, short, byte, double, float, boolean, char
 	
@@ -62,6 +64,9 @@ public class Primitives {
 		System.out.println(3/4);
 		System.out.println(doub/3);
 		
+		//importing static method sqrt from Math class
+		double sq = sqrt(doub);
+		System.out.println(sq);
 		
 	}
 
