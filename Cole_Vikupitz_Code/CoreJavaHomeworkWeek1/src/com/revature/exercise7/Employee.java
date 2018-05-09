@@ -68,7 +68,7 @@ public class Employee implements Comparator<Employee> {
 		 * If names are not the same, return the difference in the
 		 * lexicographical ordering of the employees' names.
 		 */
-		if (!e1.name.equals(e2))
+		if (!e1.name.equals(e2.name))
 			return e1.name.compareToIgnoreCase(e2.name);
 
 		/*
