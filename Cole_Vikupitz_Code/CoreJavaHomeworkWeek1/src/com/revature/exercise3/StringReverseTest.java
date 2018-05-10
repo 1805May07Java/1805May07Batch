@@ -7,6 +7,7 @@
 
 package com.revature.exercise3;
 
+// Imports
 import static org.junit.Assert.*;
 
 import org.junit.Test;

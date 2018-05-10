@@ -7,6 +7,7 @@
 
 package com.revature.exercise15;
 
+// Imports
 import static org.junit.Assert.*;
 
 import org.junit.After;
@@ -14,8 +15,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.revature.exercise7.Employee;
 
 public class PointTest {
 	
