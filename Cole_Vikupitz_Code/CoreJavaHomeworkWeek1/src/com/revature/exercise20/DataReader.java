@@ -1,7 +1,7 @@
 /*
  * DataReader.java
  * Author: Cole Vikupitz
- * 
+ *
  * Exercise 20: Program that reads data from a file, and displays each
  * entry's full name, age, and location.
  */
@@ -14,22 +14,22 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class DataReader {
-	
+
 	/**
 	 * Reads from the file 'file' and parses its data. Displays each
 	 * entry's full name, age, and location.
-	 * 
+	 *
 	 * @param file - The data file to read from.
 	 */
 	public static void parseDataFile(String file) {
-		
+
 		try {
-			
+
 			// Opens up the specified file, create a reader for that file
 			FileReader fReader = new FileReader(file);
 			BufferedReader bfReader = new BufferedReader(fReader);
 			String dataLine = null;
-			
+
 			// Loop until no more lines can be read in the file
 			while ((dataLine = bfReader.readLine()) != null) {
 				try {
@@ -43,11 +43,11 @@ public class DataReader {
 					// Skip illegal lines (lines that can't be parsed)
 				}
 			}
-			
+
 			// Close up the reader connection(s)
 			bfReader.close();
 			fReader.close();
-			
+
 		} catch (Exception e) {
 			// If file could not open for some reason, display error
 			System.out.printf("Failed to open: %s\n", file);
@@ -55,7 +55,7 @@ public class DataReader {
 	}
 
 	public static void main(String[] args) {
-		
+
 		// Read from the specified data file, parse and display data
 		final String FILE = "Data.txt";
 		parseDataFile(FILE);
