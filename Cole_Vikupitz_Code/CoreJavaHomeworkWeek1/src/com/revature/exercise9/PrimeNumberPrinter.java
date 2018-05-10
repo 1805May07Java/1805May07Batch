@@ -25,6 +25,9 @@ public class PrimeNumberPrinter {
 		// One conventionally not considered prime
 		if (number <= 1)
 			return false;
+		// Two is prime, return true
+		if (number == 2)
+			return true;
 		/*
 		 * When checking a number for primality, we only need to check
 		 * then numbers from 2 up to the square root. We only need to

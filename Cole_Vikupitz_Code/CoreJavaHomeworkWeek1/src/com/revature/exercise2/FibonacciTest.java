@@ -1,3 +1,10 @@
+/*
+ * FibonacciTest.java
+ * Author: Cole Vikupitz
+ * 
+ * JUnit test cases for the fibonacci sequence algorithm for exercise 2.
+ */
+
 package com.revature.exercise2;
 
 import static org.junit.Assert.*;
@@ -33,15 +40,8 @@ public class FibonacciTest {
 	@Test
 	public void test() {
 		System.out.println("IN TEST METHOD");
-		long actual = Fibonacci.fibonacciSequence(5);
-		long expected = 5L;
-		assertEquals(actual, expected);
-		assertEquals(Fibonacci.fibonacciSequence(6), 8);
-	}
-
-	@Test
-	public void badTest() {
-		System.out.println("IN BAD TEST");
-		assertNotEquals(Fibonacci.fibonacciSequence(6), 5L);
+		long[] expected = {0L, 1L, 1L, 2L, 3L, 5L, 8L, 13L, 21L, 34L, 55L, 89L, 144L, 233L, 377L};
+		for (int i = 0; i < expected.length; i++)
+			assertEquals(Fibonacci.fibonacciSequence(i), expected[i]);
 	}
 }

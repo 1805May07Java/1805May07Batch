@@ -20,6 +20,9 @@ public class Palindromes {
 	 */
 	public static boolean isPalindrome(String str) {
 		
+		//Empty string counts as palindrome, return true
+		if (str.equals(""))
+			return true;
 		int len = str.length();
 		// Retrieve 2 characters from opposite ends of the string
 		// Compare the 2 characters; if unequal, string cannot be a palindrome
