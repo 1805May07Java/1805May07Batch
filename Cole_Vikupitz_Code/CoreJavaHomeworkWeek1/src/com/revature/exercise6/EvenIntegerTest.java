@@ -13,18 +13,33 @@ import org.junit.Test;
 
 public class EvenIntegerTest {
 
+	// Test Case 1
 	@Test
-	public void test() {
-		
-		// Test Case 1
+	public void test1() {
 		assertEquals(EvenInteger.isEven(0), true);
-		// Test Case 2
+	}
+	
+	// Test Case 2
+	@Test
+	public void test2() {
 		assertEquals(EvenInteger.isEven(1), false);
-		// Test Case 3
+	}
+	
+	// Test Case 3
+	@Test
+	public void test3() {
 		assertEquals(EvenInteger.isEven(4), true);
-		// Test Case 4
+	}
+	
+	// Test Case 4
+	@Test
+	public void test4() {
 		assertEquals(EvenInteger.isEven(5), false);
-		// Test Case 5
+	}
+	
+	// Test Case 5
+	@Test
+	public void test5() {
 		assertEquals(EvenInteger.isEven(9), false);
 	}
 
