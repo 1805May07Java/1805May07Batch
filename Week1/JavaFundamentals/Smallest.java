@@ -23,7 +23,7 @@ public class Smallest {
 		else
 		{
 			answer = a < b ? a : b;
-			System.out.println(answer + "is the smallest.");
+			System.out.println(answer + " is the smallest.");
 		}
 	}
 
