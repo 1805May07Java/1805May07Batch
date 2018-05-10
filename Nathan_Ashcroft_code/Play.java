@@ -9,16 +9,17 @@ import java.util.Scanner;
 
 public class Play {
 	public static void main(String[] args) {
-		System.out.println("welcome to hangman! Lets begin: ");
 		boolean again = true;
 		while(again) {
+		System.out.println("welcome to hangman! Lets begin: ");
+		
 			guess(getWord());
 			System.out.println("Do you want to play again?");
 			
 			Scanner scan = new Scanner(System.in);
-			String letter = scan.nextLine();
+			String letter = scan.nextLine().toLowerCase();
 			again = false;
-			if(letter.toLowerCase() == "y") {
+			if(letter.charAt(0) == 'y') {
 				again = true;
 			}
 		}
