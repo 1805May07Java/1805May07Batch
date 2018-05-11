@@ -1,5 +1,10 @@
 package com.ex.hangman;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Play {
@@ -7,7 +12,7 @@ public class Play {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to Hangman! Let's begin:");
-		guess("test");
+		guess(getWord());
 	}
 
 	static void guess(String word) {
@@ -54,5 +59,37 @@ public class Play {
 		}
 		return ret;
 	}
+	
+	static String getWord() {
+		ArrayList<String> words = new ArrayList<String>();
+		
+		String path = "src/com/ex/hangman/words.txt";
+		
+		//Try with resources -- must implement Autocloseable 
+		try(BufferedReader br = new BufferedReader(new FileReader(path))){
+			String currLine = null;
+			while((currLine=br.readLine())!=null) {
+				words.add(currLine);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		int rand = (int) (Math.random() * words.size()-1);
+		
+		
+		return words.get(rand);	
+	}
 
+	/*
+	 * Add business rules to game
+	 *  -- input validation
+	 *  -- only allow 5 guesses
+	 *  -- no duplicate guesses
+	 *  -- loop to keep playing upon user request
+	 *  -- case insensitive
+	 *  -- theme game // separate by difficulty (optional)
+	 */
 }
