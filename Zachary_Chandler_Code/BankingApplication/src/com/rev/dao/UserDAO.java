@@ -26,28 +26,6 @@ public class UserDAO {
 	public synchronized boolean exists(String id) {
 		return new File(DIR +id).exists();
 	}
-	
-	public synchronized String getCredentials(String id) throws FileNotFoundException {
-		
-		Scanner s = new Scanner(new File(DIR +id));
-		
-		while (s.hasNextLine()) {
-			String value = s.nextLine();
-			
-			if (value.equals("password")) {
-				String result = s.nextLine();
-				s.close();
-				
-				return result;
-			}
-			
-			s.nextLine();
-		}
-		
-		s.close();
-
-		throw new IllegalStateException();
-	}
 
 	public synchronized void write(User user) {
 		
@@ -60,11 +38,11 @@ public class UserDAO {
 			return;
 		}
 
-		out.printf("%s\n%s\n", "email", user.getEmail());
-		out.printf("%s\n%s\n", "firstName", user.getFirstName());
-		out.printf("%s\n%s\n", "lastName", user.getLastName());
-		out.printf("%s\n%s\n", "password", user.getPassword());
-		out.printf("%s\n%s\n", "balance", Long.toString(user.getBalance()));
+		out.printf("%s: %s\n", "email", user.getEmail());
+		out.printf("%s: %s\n", "firstName", user.getFirstName());
+		out.printf("%s: %s\n", "lastName", user.getLastName());
+		out.printf("%s: %s\n", "password", user.getPassword());
+		out.printf("%s: %s\n", "balance", Long.toString(user.getBalance()));
 		
 		out.close();
 	}
@@ -82,42 +60,45 @@ public class UserDAO {
 		
 		while (s.hasNextLine() && !error) {
 			String value = s.nextLine();
+			int keyPos = value.indexOf(": ");
+			String key = value.substring(0, keyPos);
+			value = value.substring(keyPos + 2);
 			
-			switch(value) {
+			switch(key) {
 			case "email":
 				if (email != null) {
 					error = true;
 				}
 				
-				email = s.nextLine();
+				email = value;
 				break;
 			case "firstName":
 				if (firstName != null) {
 					error = true;
 				}
 				
-				firstName = s.nextLine();
+				firstName = value;
 				break;
 			case "lastName":
 				if (lastName != null) {
 					error = true;
 				}
 				
-				lastName = s.nextLine();
+				lastName = value;
 				break;
 			case "password":
 				if (password != null) {
 					error = true;
 				}
 				
-				password = s.nextLine();
+				password = value;
 				break;
 			case "balance":
 				if (balance != -1) {
 					error = true;
 				}
 				
-				balance = Long.parseLong(s.nextLine());
+				balance = Long.parseLong(value);
 				break;
 			default:
 				error = true;
