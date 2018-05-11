@@ -5,20 +5,32 @@ public class Fibonacci {
 	public static void main(String[] args) {
 		System.out.println("The following is the first 25 fibonacci numbers beginning at 0:");
 		
-		//use an array dummy
-		int a = 0, b = 0;
-		int c = 1;
-		for(int i = 0; i < 25 ; i++) {
+		int[] fib = new int[25];
+		
+		populateFibNumbers(fib);
+		
+		for(int i : fib) {
+			System.out.print(i);
+			System.out.print(",");
+		}
+	}
+	
+	public static int[] populateFibNumbers(int[] arry) {
+		
+		for(int i = 0; i < arry.length ; i++) {
 			if(i == 0) {
-				a = 0;
-				b = 1;
+				arry[0] = 0;
 				continue;
 			}
-			c = a+b;
-			b = ;
-			b = c;
-			System.out.println(c);
 			
+			if(i == 1) {
+				arry[1] = 1;
+				continue;
+			}
+			
+			arry[i] = arry[i-1] + arry[i-2]; 
 		}
+		
+		return arry;
 	}
 }

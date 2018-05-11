@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class Factorial {
 	int iteration = 0;
 	public static void main(String[] args) {
+		
+		System.out.println("enter a number to find the n factorial of: ");
 		Scanner keyboard = new Scanner(System.in);
 		int n = keyboard.nextInt();
 		

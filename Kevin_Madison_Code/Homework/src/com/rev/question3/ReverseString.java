@@ -14,13 +14,19 @@ public class ReverseString {
 		}		
 		
 		System.out.print("The reverse of your word: '" +str+"' is '");
+		String result = reverseString(str);
+		System.out.println(result + "'.");
+		
+		
+	}
+	
+	public static String reverseString(String str) {
 		String result = "";
 		
 		for(int i = str.length()-1; i>-1; i--) {
 			result += str.charAt(i);
 		}
-		System.out.println(result + "'.");
-		
-		
+
+		return result;		
 	}
 }
