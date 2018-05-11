@@ -26,8 +26,9 @@ public class BubbleSort {
 			return array;
 		
 		// Iterate through the array
-		for (int i = 0; i < array.length; i++) {
-			for (int j = 0; j < array.length - 1; j++) {
+		int len = array.length;
+		for (int i = 0; i < len; i++) {
+			for (int j = 0; j < len - i - 1; j++) {
 				// Jump to the next two elements
 				prev = array[j];
 				next = array[j + 1];
