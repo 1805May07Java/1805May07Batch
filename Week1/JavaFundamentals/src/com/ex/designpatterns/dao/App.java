@@ -2,10 +2,8 @@ package com.ex.designpatterns.dao;
 
 import java.util.Scanner;
 
-import com.ex.exceptions.IncorrectInputException;
-
 public class App {
-	
+
 	static StudentService service = new StudentService();
 
 	//main class to run student app
@@ -52,7 +50,7 @@ public class App {
 		String username = in.nextLine();
 		if(!service.exists(username)) {
 			System.out.println("You arent a user. please try again");
-			logIn(); 
+			logIn();
 		}
 		else {
 			Student stud = service.getByUsername(username);
@@ -68,19 +66,36 @@ public class App {
 				logIn();
 			}
 		}
-	
+
 	}
 
 	static void signUp() {
+
+
 		//username; must be UNIQUE
-		//password - 
+		//password -
 		//ask gpa
-		//id 
-		
+		//id
+		Scanner scanner = new Scanner(System.in);
+		while (true) {
+			System.out.println("Enter your desired username.");
+			String line = scanner.nextLine();
+			if (service.exists(line)) {
+				System.out.println("That username already exists.");
+
+			} else {
+
+				System.out.println("Enter your password.");
+				String pw = scanner.nextLine();
+				Student user = new Student(1, line, pw, 0.0);
+				service.students.add(user);
+			}
+		}
+
 
 	}
 
 	static void doThings(Student s) {
-		
+
 	}
 }

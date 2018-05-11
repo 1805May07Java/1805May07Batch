@@ -1,10 +1,13 @@
+/*
+ * Driver.java
+ * Author: Cole Vikupitz
+ *
+ *
+ */
+
 package com.revature.version1;
 
-import java.util.Scanner;
-
 public class Driver {
-
-	private static Scanner scanner = new Scanner(System.in);
 
 	/*
 	 * Banking Requirements
@@ -17,6 +20,6 @@ public class Driver {
 
 	public static void main(String[] args) {
 
-		scanner.close();
+		new BankMachine().run();
 	}
 }
