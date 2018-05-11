@@ -32,12 +32,16 @@ public class UserDAO {
 		Scanner s = new Scanner(new File(DIR +id));
 		
 		while (s.hasNextLine()) {
-			String[] values = s.nextLine().split(" ");
+			String value = s.nextLine();
 			
-			if (values[0].equals("password")) {
+			if (value.equals("password")) {
+				String result = s.nextLine();
 				s.close();
-				return values[1];
+				
+				return result;
 			}
+			
+			s.nextLine();
 		}
 		
 		s.close();
@@ -56,11 +60,11 @@ public class UserDAO {
 			return;
 		}
 
-		out.printf("%s %s\n", "email", user.getEmail());
-		out.printf("%s %s\n", "firstName", user.getFirstName());
-		out.printf("%s %s\n", "lastName", user.getLastName());
-		out.printf("%s %s\n", "password", user.getPassword());
-		out.printf("%s %s\n", "balance", Long.toString(user.getBalance()));
+		out.printf("%s\n%s\n", "email", user.getEmail());
+		out.printf("%s\n%s\n", "firstName", user.getFirstName());
+		out.printf("%s\n%s\n", "lastName", user.getLastName());
+		out.printf("%s\n%s\n", "password", user.getPassword());
+		out.printf("%s\n%s\n", "balance", Long.toString(user.getBalance()));
 		
 		out.close();
 	}
@@ -77,43 +81,43 @@ public class UserDAO {
 		boolean error = false;
 		
 		while (s.hasNextLine() && !error) {
-			String[] values = s.nextLine().split(" ");
+			String value = s.nextLine();
 			
-			switch(values[0]) {
+			switch(value) {
 			case "email":
 				if (email != null) {
 					error = true;
 				}
 				
-				email = values[1];
+				email = s.nextLine();
 				break;
 			case "firstName":
 				if (firstName != null) {
 					error = true;
 				}
 				
-				firstName = values[1];
+				firstName = s.nextLine();
 				break;
 			case "lastName":
 				if (lastName != null) {
 					error = true;
 				}
 				
-				lastName = values[1];
+				lastName = s.nextLine();
 				break;
 			case "password":
 				if (password != null) {
 					error = true;
 				}
 				
-				password = values[1];
+				password = s.nextLine();
 				break;
 			case "balance":
 				if (balance != -1) {
 					error = true;
 				}
 				
-				balance = Long.parseLong(values[1]);
+				balance = Long.parseLong(s.nextLine());
 				break;
 			default:
 				error = true;

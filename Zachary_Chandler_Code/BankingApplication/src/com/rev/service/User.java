@@ -65,11 +65,11 @@ public final class User {
 	public static User getUser(String email, String password) {
 		
 		String id = hash(email.toLowerCase());
-		String attempt = hash(password);
+		password = hash(email.toLowerCase() + password);
 		User u;
 		
 		try {
-			if (!attempt.equals(DAO.getCredentials(id))) {
+			if (!password.equals(DAO.getCredentials(id))) {
 				return null;
 			}
 			
@@ -82,7 +82,7 @@ public final class User {
 	}
 	
 	public static User createUser(String email, String firstName, String lastName, String p1) {
-		Data data = new Data(email, firstName, lastName, hash(p1), 0);
+		Data data = new Data(email, firstName, lastName, hash(email.toLowerCase() + p1), 0);
 		
 		if (DAO.exists(data.id)) {
 			throw new IllegalArgumentException();
@@ -138,6 +138,15 @@ public final class User {
 		public long balance;
 		
 		public Data(String email, String firstName, String lastName, String password, long balance) {
+			
+			if (email.contains("\n") ||
+				firstName.contains("\n") ||
+				lastName.contains("\n") ||
+				password.contains("\n")) {
+				
+				throw new IllegalArgumentException();
+			}
+			
 			this.id = User.hash(email.toLowerCase());
 			this.email = email;
 			this.firstName = nameFormat(firstName);
