@@ -3,6 +3,8 @@ package com.rev.service;
 import java.io.FileNotFoundException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
+import java.util.TreeMap;
 
 import com.rev.dao.UserDAO;
 
@@ -130,6 +132,9 @@ public final class User {
 	}
 	
 	public static class Data {
+		
+		private static Map<String, Data> datas = new TreeMap<String, Data>();
+		
 		public final String id;
 		public final String email;
 		public final String firstName;
@@ -137,13 +142,38 @@ public final class User {
 		public final String password;
 		public long balance;
 		
-		public Data(String email, String firstName, String lastName, String password, long balance) {
-			this.id = User.hash(email.toLowerCase());
+		private Data(String email, String firstName, String lastName, String password, long balance) {
+			this.id = getID(email);
 			this.email = email;
 			this.firstName = nameFormat(firstName);
 			this.lastName = nameFormat(lastName);
 			this.password = password;
 			this.balance = balance;
+		}
+		
+		public static String getID(String email) {
+			return User.hash(email.toLowerCase());
+		}
+		
+		public static Data getData(String id) {
+			return datas.get(id);
+		}
+		
+		public static synchronized Data createData(String email, String firstName, String lastName, String password, long balance) {
+			Data d = getData(getID(email));
+			
+			if (d == null) {
+				d = new Data(email, firstName, lastName, password, balance);
+				datas.put(d.id, d);
+			} else if (d.firstName != firstName || 
+					   d.lastName != lastName || 
+					   d.password != password || 
+					   d.balance != balance) {
+				
+				throw new IllegalArgumentException();
+			}
+			
+			return d;
 		}
 	}
 }

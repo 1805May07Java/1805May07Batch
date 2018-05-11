@@ -48,6 +48,13 @@ public class UserDAO {
 	}
 	
 	public synchronized Data getData(String id) throws FileNotFoundException {
+		
+		Data d = Data.getData(id);
+		
+		if (d != null) {
+			return d;
+		}
+		
 		Scanner s = new Scanner(new File(DIR +id));
 		
 		String email = null;
@@ -111,7 +118,7 @@ public class UserDAO {
 			throw new IllegalStateException();
 		}
 		
-		return new User.Data(email, firstName, lastName, password, balance);
+		return Data.createData(email, firstName, lastName, password, balance);
 	}
 	
 }
