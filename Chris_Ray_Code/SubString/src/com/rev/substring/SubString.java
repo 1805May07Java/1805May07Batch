@@ -1,12 +1,12 @@
 package com.rev.substring;
 
-import java.util.*;
+//import java.util.*;
 
 public class SubString {
 
 	public static void main(String[] args) {
 		
-		String s = getSubString("hellohello", 7);
+		String s = getSubString("aardvaark", 7);
 		System.out.println(s);
 	}
 	
