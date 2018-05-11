@@ -13,7 +13,7 @@ public class Application {
 		int x=i;
 		switch(x) {
 		case 1:
-			//System.out.println("Find the square root of a number using the Math class method. "+Math.sqrt(arg0)sqrt(x));
+			System.out.println("Find the square root of a number using the Math class method. "+ Math.sqrt(x));
 			break;
 		case 2: 
 			System.out.println("Display today’s date.");
