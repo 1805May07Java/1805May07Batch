@@ -1,4 +1,4 @@
-package q7.comparator.hw1;
+package q8.palindromes.hw1;
 
 import static org.junit.Assert.*;
 
@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class employeeCompareTest {
+public class palindromesTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -28,7 +28,12 @@ public class employeeCompareTest {
 
 	@Test
 	public void test() {
-		
+		assertEquals(palindromes.checkPalindrome("boob"), true);
+		assertEquals(palindromes.checkPalindrome("booob"), true);
+		assertEquals(palindromes.checkPalindrome("booooooob"), true);
+		assertEquals(palindromes.checkPalindrome("test"), false);
+		assertEquals(palindromes.checkPalindrome("racecar"), true);
+		assertEquals(palindromes.checkPalindrome("napkin"),false);
 	}
 
 }
