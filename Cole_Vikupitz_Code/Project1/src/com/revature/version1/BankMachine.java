@@ -2,7 +2,9 @@
  * BankMachine.java
  * Author: Cole Vikupitz
  *
- * FIXME - ADD DESCRIPTION
+ * Class that represents an ATM machine connected to the banking
+ * database that allows users to create and login to accounts and
+ * deposit/withdraw money.
  */
 
 package com.revature.version1;
