@@ -13,7 +13,9 @@ public class StudentService {
 	
 	ArrayList<Student> getAllStudents(){
 		//until we deal w DAO, all we do here is return our static arraylist
-		return students;
+		
+		IODAO dao = new IODAO();
+		return dao.readStudents();
 	}
 	
 	boolean exists (String username) {
@@ -28,6 +30,15 @@ public class StudentService {
 					findFirst().get();
 	}
 	
+	
+	Student addStudent(String username, String password, double gpa) {
+		int id = (int)( Math.random()*10000);
+		
+		Student s = new Student(id, username, password, gpa); 
+		IODAO dao = new IODAO();
+		dao.addStudent(s);
+		return s;
+	}
 	
 	
 	
