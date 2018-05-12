@@ -31,7 +31,8 @@ public class BankDatabase {
 	 */
 	public static BankDatabase getInstance() {
 
-		if (instance == null) // Create new instance if not already
+		if (instance == null)
+			// Create new instance if not already
 			instance = new BankDatabase();
 		return instance;
 	}
@@ -73,9 +74,11 @@ public class BankDatabase {
 	public User authenticate(String username, String password) {
 
 		User user = instance.map.get(username);
-		if (user == null) // Username does not exist
+		// Username does not exist
+		if (user == null)
 			return null;
-		if (!user.getPassword().equals(password)) // Username and password don't match
+		// Username and password don't match
+		if (!user.getPassword().equals(password))
 			return null;
 		return user;
 	}

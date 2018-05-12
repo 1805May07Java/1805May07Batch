@@ -12,24 +12,45 @@ import java.util.Scanner;
 
 public class BankMachine {
 
+	// Scanner object used for user input
 	private Scanner scanner;
+	// Instance (connection) of the banking database containing all users
 	private BankDatabase database;
+	// Keeps track of the currently logged in user
 	private User currentUser;
 
+	// Constructor
 	public BankMachine() {
 
+		// Create scanner for user input
 		this.scanner = new Scanner(System.in);
+		// Connect to the banking database
 		this.database = BankDatabase.getInstance();
+		// Keeps track of currently logged in user
 		this.currentUser = null;
+	}
+
+	private void displayMainMenu() {
+
+		System.out.println("\n----- Revature Banking System -----");
+		System.out.println("1: Login");
+		System.out.println("2: Create Account");
+		System.out.println("0: Exit");
+	}
+
+	private void displayAccountMenu() {
+
+		System.out.printf("Logged in as %s\n", this.currentUser.getUsername());
+		System.out.printf("Account Balance: $%.2f\n", this.currentUser.getBalance());
+		System.out.println("1: Deposit");
+		System.out.println("2: Withdraw");
+		System.out.println("0: Logout");
 	}
 
 	public void run() {
 
 		boolean running = true;
-		System.out.println("----- Revature Banking System -----\n");
-		System.out.println("1: Login");
-		System.out.println("2: Create Account");
-		System.out.println("0: Exit");
+		this.displayMainMenu();
 
 		while (running) {
 			switch (this.promptNumber(0, 2)) {
@@ -70,10 +91,21 @@ public class BankMachine {
 			}
 		}
 
+		notValid = true;
 		System.out.println("Enter your desired password.");
-		System.out.println("> ");
-		password = this.scanner.nextLine();
+		while (notValid) {
+			System.out.print("> ");
+			password = this.scanner.nextLine();
+			if (!this.isValid(password)) {
+				System.out.println("Password is not valid.");
+				System.out.println("Must contain at least 2 characters and only letters and numbers.");
+			} else {
+				notValid = false;
+			}
+		}
+
 		this.currentUser = new User(username, password, 0.0F);
+		this.database.addUser(this.currentUser);
 	}
 
 	private void login() {
@@ -98,24 +130,80 @@ public class BankMachine {
 	private void modifyAccount() {
 
 		boolean loggedIn = true;
-		System.out.printf("Welcome %s\n", this.currentUser.getUsername());
-		System.out.printf("Account Balance: %0.2f\n", this.currentUser.getBalance());
-		System.out.println("1: Deposit");
-		System.out.println("2: Withdraw");
-		System.out.println("3: ");
-		System.out.println("0: Logout");
+		this.displayAccountMenu();
 
 		while (loggedIn) {
 
-			switch (this.promptNumber(0, 3)) {
-
+			switch (this.promptNumber(0, 2)) {
+				case 1:
+					this.deposit();
+					break;
+				case 2:
+					this.withdraw();
+					break;
+				case 0:
+					this.currentUser = null;
+					this.displayMainMenu();
+					return;
+				default:
+					break;
+					// FIXME - Should anything happen here?
 			}
 		}
 	}
 
-	private void deposit() {}
-	private void withdraw() {}
+	private void deposit() {
 
+		boolean notValid = true;
+		double amount;
+
+		System.out.println("Enter the deposit amount.");
+		while (notValid) {
+
+			System.out.print("> ");
+			try {
+				amount = Double.parseDouble(this.scanner.nextLine());
+				if (amount > 0.0F) {
+					this.currentUser.deposit(amount);
+					notValid = false;
+				} else {
+					System.out.println("Invalid entry, please enter a valid amount.");
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid entry, please enter a valid amount.");
+			}
+		}
+
+		this.displayAccountMenu();
+	}
+
+	private void withdraw() {
+
+		boolean notValid = true;
+		double amount;
+
+		System.out.println("Enter the withdraw amount.");
+		while (notValid) {
+
+			System.out.print("> ");
+			try {
+				amount = Double.parseDouble(this.scanner.nextLine());
+				if (amount > 0.0F) {
+					if (!this.currentUser.withDraw(amount)) {
+						System.out.println("Not enough money in account to satisfy amount.");
+					} else {
+						notValid = false;
+					}
+				} else {
+					System.out.println("Invalid entry, please enter a valid amount.");
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid entry, please enter a valid amount.");
+			}
+		}
+
+		this.displayAccountMenu();
+	}
 
 	private int promptNumber(int min, int max) {
 
@@ -136,8 +224,10 @@ public class BankMachine {
 
 	private boolean isValid(String entry) {
 
+		// String must be at least 2 characters long
 		if (entry.length() < 2)
 			return false;
+		// String must contain only letters and numbers
 		for (char ch : entry.toCharArray())
 			if (!Character.isLetter(ch) && !Character.isDigit(ch))
 				return false;
