@@ -2,8 +2,8 @@
  * BankDatabase.java
  * Author: Cole Vikupitz
  *
- * Singleton class that represents the database system for all bank
- * records. Users can authenticate, retrieve, save, and load bank records.
+ * Class that represents the database system for all bank records.
+ * Users can authenticate, retrieve, save, and load bank records.
  */
 
 package com.revature.version1;
