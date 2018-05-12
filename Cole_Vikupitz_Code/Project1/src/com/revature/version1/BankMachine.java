@@ -26,6 +26,8 @@ public class BankMachine {
 		this.scanner = new Scanner(System.in);
 		// Connect to the banking database
 		this.database = BankDatabase.getInstance();
+		// Load all user records into database
+		this.database.loadDBfromFile(FileUtility.FILE);
 		// Keeps track of currently logged in user
 		this.currentUser = null;
 	}
@@ -70,6 +72,9 @@ public class BankMachine {
 					// FIXME - should anything happen here?
 			}
 		}
+
+		// Save all database records to file
+		this.database.saveDBtoFile(FileUtility.FILE);
 	}
 
 	private void createUser() {

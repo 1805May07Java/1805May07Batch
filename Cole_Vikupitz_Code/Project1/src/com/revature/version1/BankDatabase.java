@@ -86,11 +86,12 @@ public class BankDatabase {
 	/**
 	 * Saves the user record database to the specified file 'filePath'.
 	 *
-	 * @param filePath - The file (and path) to save the records to.
+	 * @param filePath - The file (including path) to save the records to.
 	 */
 	public void saveDBtoFile(String filePath) {
 
-		User[] users = (User[]) instance.map.values().toArray();
+		int len = this.map.size();
+		User[] users = instance.map.values().toArray(new User[len]);
 		FileUtility.saveData(users, filePath);
 	}
 
@@ -98,13 +99,14 @@ public class BankDatabase {
 	 * Loads all user account records into the database from the specified
 	 * file 'filePath'.
 	 *
-	 * @param filePath - The file (and path) to load the records from.
+	 * @param filePath - The file (including path) to load the records from.
 	 */
 	public void loadDBfromFile(String filePath) {
 
 		User[] users = FileUtility.loadData(filePath);
-		for (User user : users)
-			instance.map.put(user.getUsername(), user);
+		if (users != null)
+			for (User user : users)
+				instance.map.put(user.getUsername(), user);
 	}
 
 }
