@@ -1,13 +1,15 @@
 package com.ex.designpatterns.dao;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
 	
 	/*
 	 * POJO
 	 */
 	private int id; // hardest 
 	private String username;
-	private String password;
+	transient private String password;
 	private double gpa;
 	
 	
@@ -62,7 +64,7 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", username=" + username + ", password=" + password + ", gpa=" + gpa + "]";
+		return  id + ":" + username + ":" + password + ":" + gpa + "\n";
 	}
 	
 	
