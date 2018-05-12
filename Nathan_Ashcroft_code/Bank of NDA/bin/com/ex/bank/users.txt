@@ -1,0 +1,4 @@
+Nathan:Ashcroft:thorgrimfelblade:foo123:4500.0
+Jim:Johns:thorfel:foo123:32.33
+sarah:Adams:thorgrimfel:foo123:50002.21
+LeeAnne:Ashcroft:thor:foo123:4999949.46
