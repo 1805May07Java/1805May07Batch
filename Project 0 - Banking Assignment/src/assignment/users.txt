@@ -1,0 +1,9 @@
+0:alexmoon:Alex:Moon:password:1.50
+1:obams:Barack:Obama:password:1000.00
+2:realDonald:Donald:Trump:password:1000000.00
+3:1:1:1:4:100.00
+4:ww:Willy:Wonka:password:0.00
+5:leking:LeBron:James:password:23.00
+6:a:a:a:a:400.00
+8:billgates:Bill:Gates:password:1000000000.00
+11:euler:Leonard:Euler:password:2.71
