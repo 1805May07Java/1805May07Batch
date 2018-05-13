@@ -85,7 +85,7 @@ public class User {
 	 */
 	public boolean withDraw(double amount) {
 
-		if (this.balance - amount < 0.0F)
+		if (this.balance - amount < 0.0)
 			return false;
 		this.balance -= amount;
 		return true;

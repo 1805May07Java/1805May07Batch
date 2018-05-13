@@ -138,7 +138,7 @@ public class BankMachine {
 		}
 
 		// Creates the new account, updates database, logs user in
-		this.currentUser = new User(username, password, 0.0F);
+		this.currentUser = new User(username, password, 0.0);
 		this.database.addUser(this.currentUser);
 		this.modifyAccount();
 	}
@@ -224,7 +224,7 @@ public class BankMachine {
 
 		boolean notValid = true;
 		String line;
-		double amount = 0.0F;
+		double amount = 0.0;
 
 		System.out.println("Enter the deposit amount ('-' to cancel).");
 		while (notValid) {
@@ -240,7 +240,7 @@ public class BankMachine {
 				}
 				// Parse the amount from the input
 				amount = Double.parseDouble(line);
-				if (amount > 0.0F) {
+				if (amount > 0.0) {
 					// Deposit the money into the account
 					this.currentUser.deposit(amount);
 					notValid = false;
@@ -267,7 +267,7 @@ public class BankMachine {
 
 		boolean notValid = true;
 		String line;
-		double amount = 0.0F;
+		double amount = 0.0;
 
 		System.out.println("Enter the withdraw amount ('-' to cancel).");
 		while (notValid) {
@@ -283,7 +283,7 @@ public class BankMachine {
 				}
 				// Parse the entered amount
 				amount = Double.parseDouble(line);
-				if (amount > 0.0F) {
+				if (amount > 0.0) {
 					// Attempt to withdraw amount from account
 					// Print error if insufficient funds
 					if (!this.currentUser.withDraw(amount)) {
