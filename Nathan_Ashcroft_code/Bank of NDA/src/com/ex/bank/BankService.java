@@ -3,15 +3,11 @@ package com.ex.bank;
 import java.util.ArrayList;
 
 public class BankService {
-	//list of all users
-	//static ArrayList<User> users = new ArrayList<User>();
 	
-	//logged in user
-	//static User u = new User();
+	private static ioDAO dao = new ioDAO();
 	
 	//get all users
 	ArrayList<User> getAllUsers(){
-		ioDAO dao = new ioDAO();
 		return dao.getAllUsers();
 	}
 	
@@ -30,7 +26,6 @@ public class BankService {
 	//add a new user
 	void addUser(String fName, String lName, String uName, String pass) {
 		User u = new User(fName, lName, uName, pass, 0);
-		ioDAO dao = new ioDAO();
 		dao.addUser(u);
 	}
 	
@@ -42,7 +37,6 @@ public class BankService {
 				users.set(i, u);
 			}
 		}
-		ioDAO dao = new ioDAO();
 		dao.addAllUsers(users);
 	}
 }

@@ -3,9 +3,9 @@ package com.ex.bank;
 import java.util.Scanner;
 
 public class BankApp {
-	static BankService service = new BankService();
-	static User curUser = new User();
-	static Scanner scan = new Scanner(System.in);
+	private static BankService service = new BankService();
+	private static User curUser = new User();
+	private static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
 
@@ -53,7 +53,7 @@ public class BankApp {
 			String userName = scan.nextLine();
 
 			if(!service.exists(userName)) {
-				System.out.println("incorrect userName please try again");
+				System.out.println("Invalid userName please try again");
 			}
 			else {
 				System.out.println("Please enter your Password:");
@@ -66,6 +66,7 @@ public class BankApp {
 				}
 				else {
 					System.out.println("Your password is incorrect. Try again");
+					loop = false;
 				}
 			}
 		}

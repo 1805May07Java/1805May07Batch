@@ -48,6 +48,7 @@ public class ioDAO {
 		return list;
 	}
 
+	//reset file for a change in a user
 	void addAllUsers(ArrayList<User> u){
 		try {
 			BufferedWriter writter = new BufferedWriter(new FileWriter(fileLocation, false));
