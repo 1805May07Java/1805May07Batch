@@ -1,11 +1,28 @@
 package com.ex.datatypes;
 
+import static java.lang.Math.*;
+
 public class Primitives {
 	//int, long, short, byte, double, float, boolean, char
 	
 	public static void main(String[] args) {
-		long lon = 81781367261L;
+		/*
+		 * when a number is present in code, it is called a 
+		 * literal. By default, Java assumes you are defining
+		 * an int value with a whole number literal. In the 
+		 * following example. 98323559823 is out of range for an
+		 * int, so we get a compiler error when trying to declare
+		 * it without the L signifier. 
+		 */
+		//long wronglong = 98_323_559_823; // does not compile
+		long rightlong = 98323559823L;
 		
+		//cannot use commas for separation of digits but can use _
+				//underscores have to be located within digits
+				int commas = 1_000_000_000;
+				//int wrong = _100;
+				//int alsowrong = 100_;
+				//double doublewrong = 10_._0_;
 		int millions = 1_000_000;
 		double test = 4.5_12;
 		
@@ -62,6 +79,9 @@ public class Primitives {
 		System.out.println(3/4);
 		System.out.println(doub/3);
 		
+		//importing static method sqrt from Math class
+		double sq = sqrt(doub);
+		System.out.println(sq);
 		
 	}
 
