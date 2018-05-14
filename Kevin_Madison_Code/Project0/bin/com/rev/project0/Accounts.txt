@@ -1,0 +1,3 @@
+kevin:madison:admin:pass:100.0
+kevin:madison:kevjumbo:12345:100.0
+kev:mad:123:12345:440.0
