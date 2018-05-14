@@ -1,0 +1,9 @@
+mike:bryant:332.827
+kristen:bryant:11.0
+larry:meech:0.0
+kyle:ham:0.0
+knox:help:0.0
+jim:bean:0.0
+john:doe:0.0
+young:boy:340.0
+richard:hammins:45.0
