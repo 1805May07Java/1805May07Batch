@@ -68,7 +68,7 @@ public class FileUtility {
 	protected static void saveData(User[] users, String filePath) {
 
 		// Attempt to write all user records onto specified file
-		try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));) {
+		try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 			// Write each user record into file in specific format
 			for (User user : users)
 				writer.write(String.format("%s:%s:%.2f\n",

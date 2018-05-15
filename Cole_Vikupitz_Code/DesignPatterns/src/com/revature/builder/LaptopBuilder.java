@@ -44,7 +44,7 @@ public class LaptopBuilder {
 	}
 
 	public LaptopBuilder setBatteryLife(int batteryLife) {
-		this.batteryLife = (batteryLife < 0) ? 100 : batteryLife;
+		this.batteryLife = (batteryLife < 0) ? 0 : batteryLife;
 		return this;
 	}
 
