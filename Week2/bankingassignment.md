@@ -14,7 +14,8 @@ As a user, I can:
 * create one or multiple accounts
 * deposit money
 * withdraw money
-* transfer money between accounts
+* have a joint account with another user
+* have at least these three account types - 'Credit', 'Savings', 'Checking'
 * view account balance
 
 Good luck!
