@@ -11,10 +11,12 @@ public class App {
 	public static void main(String[] args) {
 		ArtistDAO dao = new ArtistDAOImpl();
 		
-		ArrayList<Artist> artists = dao.getAll();
-		for(Artist a : artists) {
-			System.out.println(a.toString());
-		}
+//		ArrayList<Artist> artists = dao.getAll();
+//		for(Artist a : artists) {
+//			System.out.println(a.toString());
+//		}
+		System.out.println(dao.addArtist("Alina Baraz"));
+		//System.out.println(dao.getById(276).toString());
 	}
 
 }
