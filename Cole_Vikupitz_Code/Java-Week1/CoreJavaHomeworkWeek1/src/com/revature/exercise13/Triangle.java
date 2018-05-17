@@ -9,13 +9,13 @@
 package com.revature.exercise13;
 
 public class Triangle {
-	
+
 	public static void displayRightTriangle(int height) {
-		
+
 		// Boolean variable that alternates
 		// Determines if '0' or '1' is printed
 		boolean isZero = true;
-		
+
 		// Two loops needed:
 		// The outer loop runs 'height' times
 		// The inner loop used to build each row of triangle
@@ -31,7 +31,7 @@ public class Triangle {
 	}
 
 	public static void main(String[] args) {
-		
+
 		// Prints a right triangle, given a height
 		final int HEIGHT = 4;
 		displayRightTriangle(HEIGHT);
