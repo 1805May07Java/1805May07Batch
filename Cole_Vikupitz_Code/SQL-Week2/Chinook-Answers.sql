@@ -60,12 +60,12 @@ DELETE FROM CUSTOMER
  * 3.0 - SQL Functions
  */
 -- 3.1 - System Defined Funtions
-SELECT CURRENT_TIMESTAMP FROM dual;
+--SELECT CURRENT_TIMESTAMP FROM dual;
 
 
 -- 3.2 - System Defined Aggregate Functions
-SELECT AVG(TOTAL) FROM INVOICE;
-SELECT MAX(UNITPRICE) FROM TRACK;
+--SELECT AVG(TOTAL) FROM INVOICE;
+--SELECT MAX(UNITPRICE) FROM TRACK;
 
 -- 3.3 - User Defined Functions
 
@@ -89,6 +89,7 @@ SELECT MAX(UNITPRICE) FROM TRACK;
  */
 -- 6.1 - AFTER/FOR
 
+
 /*
  * 7.0 - Joins
  */
@@ -110,5 +111,30 @@ SELECT ats.NAME, alb.TITLE
   ORDER BY ats.NAME ASC;
 
 -- 7.4 - CROSS
+SELECT art.NAME, alb.TITLE FROM ALBUM alb
+  CROSS JOIN ARTIST art
+  ORDER BY art.NAME ASC;
+
 -- 7.5 - SELF
+SELECT A.LASTNAME, A.FIRSTNAME FROM EMPLOYEE A, EMPLOYEE B
+  WHERE A.REPORTSTO = B.REPORTSTO
+  ORDER BY LASTNAME ASC;
+
 -- 7.6 - Complicated Join assignment
+
+/*
+create view joinsview as 
+select al.TITLE as  album, art.NAME as artist, tr.name as track, g.NAME as genre, pl.NAME as playlist, inv.TOTAL
+from album al
+join artist art on art.artistid = al.artistid
+join track tr on tr.ALBUMID = al.ALBUMID
+join genre g on g.GENREID = tr.GENREID
+join PLAYLISTTRACK plt on plt.TRACKID = tr.trackid
+join playlist pl on pl.PLAYLISTID = plt.PLAYLISTID
+join invoiceline inl on inl.TRACKID = tr.TRACKID
+join invoice inv on inl.INVOICEID = inv.INVOICEID
+join mediatype mt on mt.MEDIATYPEID = tr.MEDIATYPEID
+join customer cust on cust.CUSTOMERID = inv.CUSTOMERID
+join EMPLOYEE emp on emp.EMPLOYEEID = cust.SUPPORTREPID
+where tr.trackid < 10;
+*/
