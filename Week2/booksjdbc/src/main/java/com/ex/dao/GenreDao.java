@@ -1,6 +1,7 @@
 package com.ex.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -36,13 +37,36 @@ public class GenreDao implements Dao<Genre, Integer>{
 	}
 
 	public Genre findOne(Integer id) {
-		// TODO Auto-generated method stub
+
+		
 		return null;
 	}
 
 	public Genre save(Genre obj) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		try(Connection conn = ConnectionFactory.getInstance().getConnection();){
+			conn.setAutoCommit(false);
+			String query = "insert into genre (NAME) values (?)";
+			
+			String[] keys = new String[1];
+			keys[0] = "genre_id";
+			
+			PreparedStatement ps = conn.prepareStatement(query, keys);
+			ps.setString(1, obj.getName());
+			
+			int rows = ps.executeUpdate();
+			
+			if(rows != 0) {
+				ResultSet pk = ps.getGeneratedKeys();
+				while(pk.next()) {
+					obj.setId(pk.getInt(1));
+				}
+				conn.commit();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return obj;
 	}
 
 	public Genre update(Genre obj) {

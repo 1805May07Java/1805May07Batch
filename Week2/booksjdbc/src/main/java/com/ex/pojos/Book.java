@@ -3,14 +3,14 @@ package com.ex.pojos;
 public class Book {
 	
 	private int id;
-	private long isbn;
+	private String isbn;
 	private String title;
 	private double price;
 	private int genreId;
 	
 	public Book() {}
 	
-	public Book(long isbn, String title, double price, int genreId) {
+	public Book(String isbn, String title, double price, int genreId) {
 		super();
 		this.isbn = isbn;
 		this.title = title;
@@ -18,7 +18,7 @@ public class Book {
 		this.genreId = genreId;
 	}
 
-	public Book(int id, long isbn, String title, double price, int genreId) {
+	public Book(int id, String isbn, String title, double price, int genreId) {
 		super();
 		this.id = id;
 		this.isbn = isbn;
@@ -35,11 +35,11 @@ public class Book {
 		this.id = id;
 	}
 
-	public long getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setIsbn(long isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 
@@ -66,8 +66,11 @@ public class Book {
 	public void setGenreId(int genreId) {
 		this.genreId = genreId;
 	}
-	
-	
-	
 
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", isbn=" + isbn + ", title=" + title + ", price=" + price + ", genreId=" + genreId
+				+ "]";
+	}
+	
 }

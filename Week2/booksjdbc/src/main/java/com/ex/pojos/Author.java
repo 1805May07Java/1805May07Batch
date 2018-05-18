@@ -7,7 +7,7 @@ public class Author {
 	private String lastName;
 	private String bio;
 	
-	private Author() {}
+	public Author() {}
 	
 	public Author(String firstName, String lastName, String bio) {
 		super();
