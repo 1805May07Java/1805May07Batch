@@ -1,3 +1,6 @@
+
+select * from artist where name like 'A%' or name like 'B%';
+
 -- Intro to functions
 /* There are two kinds of functions
 Aggregate - Functions that operate on multiple rows of data
@@ -8,7 +11,7 @@ select name from artist where upper(name) like 'A %';
 select name from artist where lower(name) like 't_e%';
 select name from artist where length(name) < 10;
 select name from artist where lower(name) like '%s';
-select nam
+
 
 -- aggregate functions, perform function on entire column/set of data --
 select max(albumid) from album;
@@ -134,3 +137,35 @@ select * From customer where firstname like 'L%' union all select * from custome
 select * from invoiceline where unitprice > .99;
 select * from invoiceline where trackid  < 3000;
 select * from invoiceline where unitprice > .99 minus select * from invoiceline where trackid  < 3000; 
+
+
+
+select max(artistid) from artist;
+
+
+
+
+create sequence artist_seq
+start with 276
+increment by 1;
+/
+create or replace trigger artist_seq_trigger
+before insert on artist -- when is it happening
+for each row -- how often
+begin
+    -- where meat of trigger resides
+    select artist_seq.nextVal into :new.artistid from dual;
+end;
+/
+
+select * from artist where artistid = 278;
+
+update artist set name = 'Genesis' where artistid = 278;
+
+
+
+
+insert into artist (NAME) values ('Beyonce');
+select * from artist order by artistid desc;
+
+commit;
