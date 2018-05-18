@@ -60,17 +60,41 @@ DELETE FROM CUSTOMER
  * 3.0 - SQL Functions
  */
 -- 3.1 - System Defined Funtions
---SELECT CURRENT_TIMESTAMP FROM dual;
 
+-- Return the current timestamp
+SELECT CURRENT_TIMESTAMP FROM DUAL;
+
+-- Return length of mediatype by ID
+-- FIXME
 
 -- 3.2 - System Defined Aggregate Functions
---SELECT AVG(TOTAL) FROM INVOICE;
---SELECT MAX(UNITPRICE) FROM TRACK;
+
+-- Get average of invoices
+SELECT AVG(INVOICE.TOTAL) FROM INVOICE;
+
+-- Get most expensive track record
+-- FIXME
 
 -- 3.3 - User Defined Functions
 
+-- Returns the average of all invoices
+CREATE OR REPLACE FUNCTION getInvoiceAverage RETURN FLOAT
+IS
+  average FLOAT;
+BEGIN
+  SELECT AVG(INVOICE.TOTAL) INTO average FROM INVOICE;
+  RETURN average;
+END;
+/
+-- Test the function
+SELECT getInvoiceAverage FROM DUAL;
+/
 
 -- 3.4 - User Defined Table Valued Functions
+
+-- Return all employee records born after 1968
+-- FIXME
+
 
 /*
  * 4.0 - Stored Procedures
