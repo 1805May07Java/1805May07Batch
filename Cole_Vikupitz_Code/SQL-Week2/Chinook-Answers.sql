@@ -54,29 +54,26 @@ SELECT * FROM EMPLOYEE
 -- 2.7 - DELETE
 DELETE FROM CUSTOMER
   WHERE FIRSTNAME='Robert' AND LASTNAME='Walter';
---- DOES NOT WORK!
 
 /*
  * 3.0 - SQL Functions
  */
 -- 3.1 - System Defined Funtions
-
 -- Return the current timestamp
 SELECT CURRENT_TIMESTAMP FROM DUAL;
 
 -- Return length of mediatype by ID
--- FIXME
+SELECT LENGTH(MEDIATYPEID) FROM MEDIATYPE
+  WHERE MEDIATYPEID = 1;
 
 -- 3.2 - System Defined Aggregate Functions
-
 -- Get average of invoices
 SELECT AVG(INVOICE.TOTAL) FROM INVOICE;
 
 -- Get most expensive track record
--- FIXME
+SELECT MAX(UNITPRICE) FROM TRACK;
 
 -- 3.3 - User Defined Functions
-
 -- Returns the average of all invoices
 CREATE OR REPLACE FUNCTION getInvoiceAverage RETURN FLOAT
 IS
@@ -91,9 +88,17 @@ SELECT getInvoiceAverage FROM DUAL;
 /
 
 -- 3.4 - User Defined Table Valued Functions
-
 -- Return all employee records born after 1968
--- FIXME
+CREATE OR REPLACE PROCEDURE getAllAfter1968(
+  cursorParam OUT SYS_REFCURSOR
+) IS
+BEGIN
+  OPEN cursorParam FOR
+  SELECT * FROM EMPLOYEE
+  WHERE BIRTHDATE >= '12-31-1968';
+END;
+
+/
 
 
 /*
@@ -146,19 +151,19 @@ SELECT A.LASTNAME, A.FIRSTNAME FROM EMPLOYEE A, EMPLOYEE B
 
 -- 7.6 - Complicated Join assignment
 
-/*
-create view joinsview as 
-select al.TITLE as  album, art.NAME as artist, tr.name as track, g.NAME as genre, pl.NAME as playlist, inv.TOTAL
-from album al
-join artist art on art.artistid = al.artistid
-join track tr on tr.ALBUMID = al.ALBUMID
-join genre g on g.GENREID = tr.GENREID
-join PLAYLISTTRACK plt on plt.TRACKID = tr.trackid
-join playlist pl on pl.PLAYLISTID = plt.PLAYLISTID
-join invoiceline inl on inl.TRACKID = tr.TRACKID
-join invoice inv on inl.INVOICEID = inv.INVOICEID
-join mediatype mt on mt.MEDIATYPEID = tr.MEDIATYPEID
-join customer cust on cust.CUSTOMERID = inv.CUSTOMERID
-join EMPLOYEE emp on emp.EMPLOYEEID = cust.SUPPORTREPID
-where tr.trackid < 10;
-*/
+/
+CREATE VIEW joinsview AS 
+SELECT al.TITLE AS album, art.NAME AS artist,
+  tr.name AS track, g.NAME AS genre, pl.NAME AS playlist, inv.TOTAL
+  FROM ALBUM al
+JOIN ARTIST art ON art.artistid = al.artistid
+JOIN TRACK tr ON tr.ALBUMID = al.ALBUMID
+JOIN GENRE g ON g.GENREID = tr.GENREID
+JOIN PLAYLISTTRACK plt ON plt.TRACKID = tr.trackid
+JOIN PLAYLIST pl ON pl.PLAYLISTID = plt.PLAYLISTID
+JOIN INVOICELINE inl ON inl.TRACKID = tr.TRACKID
+JOIN INVOICE inv ON inl.INVOICEID = inv.INVOICEID
+JOIN MEDIATYPE mt ON mt.MEDIATYPEID = tr.MEDIATYPEID
+JOIN CUSTOMER cust ON cust.CUSTOMERID = inv.CUSTOMERID
+JOIN EMPLOYEE emp ON emp.EMPLOYEEID = cust.SUPPORTREPID;
+/
