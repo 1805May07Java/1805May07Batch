@@ -1,6 +1,7 @@
 package com.ex.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -44,13 +45,29 @@ public class AuthorDao implements Dao<Author, Integer> {
 	}
 
 	public Author save(Author obj) {
-		// TODO Auto-generated method stub
-		return null;
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String sql = "insert into author(firstname, lastname, bio) values (?, ?,?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, obj.getFirstName());
+			ps.setString(2, obj.getLastName());
+			ps.setString(3, obj.getBio());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return obj;
 	}
 
 	public Author update(Author obj) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean isUnique(Author obj) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
