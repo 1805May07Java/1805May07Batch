@@ -105,8 +105,54 @@ END;
  * 4.0 - Stored Procedures
  */
 -- 4.1 - Basic Stored Procedure
+-- Selects first and last names of all employees
+CREATE OR REPLACE PROCEDURE getAllNames(
+  cursorParam OUT SYS_REFCURSOR
+) IS
+BEGIN
+  OPEN cursorParam FOR SELECT FIRSTNAME, LASTNAME FROM EMPLOYEE;
+END;
+
+/
+
 -- 4.2 - Stored Procedure Input Parameters
+-- Updates employee information
+CREATE OR REPLACE PROCEDURE updateEmployee(
+  e_id IN NUMBER,
+  fname IN VARCHAR2,
+  lname IN VARCHAR2
+) IS
+BEGIN
+  UPDATE EMPLOYEE
+  SET FIRSTNAME = fname, LASTNAME = lname
+  WHERE EMPLOYEEID = e_id;
+END;
+
+/
+
+-- Get all managers for an employee
+CREATE OR REPLACE PROCEDURE getManagers(
+  cursorParam OUT SYS_REFCURSOR,
+  e_id IN NUMBER
+) IS
+BEGIN
+  OPEN cursorParam FOR SELECT * FROM EMPLOYEE
+  WHERE REPORTSTO = c_id;
+END;
+
+/
+
 -- 4.3 - Stored Procedure Output Parameters
+-- Selects first and last names of all employees
+CREATE OR REPLACE PROCEDURE getNameCompany(
+  cursorParam OUT SYS_REFCURSOR,
+  c_id IN NUMBER
+) IS
+BEGIN
+  OPEN cursorParam FOR SELECT FIRSTNAME, LASTNAME, COMPANY FROM CUSTOMER
+  WHERE CUSTOMERID = c_id;
+END;
+/
 
 /*
  * 5.0 - Transactions
@@ -150,8 +196,6 @@ SELECT A.LASTNAME, A.FIRSTNAME FROM EMPLOYEE A, EMPLOYEE B
   ORDER BY LASTNAME ASC;
 
 -- 7.6 - Complicated Join assignment
-
-/
 CREATE VIEW joinsview AS 
 SELECT al.TITLE AS album, art.NAME AS artist,
   tr.name AS track, g.NAME AS genre, pl.NAME AS playlist, inv.TOTAL
