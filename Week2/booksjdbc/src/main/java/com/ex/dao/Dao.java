@@ -9,5 +9,6 @@ public interface Dao<T, I extends Serializable> {
 	T findOne(I id);
 	T save(T obj);
 	T update(T obj);
+	boolean isUnique(T obj);
 	
 }
