@@ -52,52 +52,99 @@ SELECT * FROM EMPLOYEE
   WHERE HIREDATE BETWEEN '1-JUN-03' AND '1-MAR-04';
 
 -- 2.7 - DELETE
+DELETE FROM INVOICE
+  WHERE CUSTOMERID = (
+    SELECT CUSTOMERID FROM CUSTOMER
+    WHERE FIRSTNAME='Robert' AND LASTNAME='Walter'
+  );
 DELETE FROM CUSTOMER
   WHERE FIRSTNAME='Robert' AND LASTNAME='Walter';
+
 
 /*
  * 3.0 - SQL Functions
  */
 -- 3.1 - System Defined Funtions
 -- Return the current timestamp
-SELECT CURRENT_TIMESTAMP FROM DUAL;
+CREATE OR REPLACE FUNCTION getCurrentTime RETURN TIMESTAMP
+IS
+  ctime TIMESTAMP;
+BEGIN
+  SELECT CURRENT_TIMESTAMP INTO ctime FROM DUAL;
+  RETURN ctime;
+END;
+/
+SELECT getCurrentTime FROM DUAL;
+/
 
 -- Return length of mediatype by ID
-SELECT LENGTH(MEDIATYPEID) FROM MEDIATYPE
-  WHERE MEDIATYPEID = 1;
+CREATE OR REPLACE FUNCTION getMediaTypeLength(mid IN NUMBER)
+RETURN NUMBER
+IS
+  len NUMBER;
+BEGIN
+  SELECT LENGTH(NAME) INTO len FROM MEDIATYPE
+  WHERE MEDIATYPEID = mid;
+  RETURN len;
+END;
+/
+SELECT getMediaTypeLength(1) FROM DUAL;
+/
 
 -- 3.2 - System Defined Aggregate Functions
--- Get average of invoices
-SELECT AVG(INVOICE.TOTAL) FROM INVOICE;
-
--- Get most expensive track record
-SELECT MAX(UNITPRICE) FROM TRACK;
-
--- 3.3 - User Defined Functions
--- Returns the average of all invoices
-CREATE OR REPLACE FUNCTION getInvoiceAverage RETURN FLOAT
+-- Return average of invoices
+CREATE OR REPLACE FUNCTION getInvoiceAvg RETURN NUMBER
 IS
-  average FLOAT;
+  average NUMBER(10, 2);
 BEGIN
-  SELECT AVG(INVOICE.TOTAL) INTO average FROM INVOICE;
+  SELECT AVG(TOTAL) INTO average FROM INVOICE;
   RETURN average;
 END;
 /
--- Test the function
-SELECT getInvoiceAverage FROM DUAL;
+SELECT getInvoiceAvg FROM DUAL;
+/
+
+-- Get most expensive track record
+CREATE OR REPLACE FUNCTION mostExpTrack RETURN SYS_REFCURSOR
+IS
+  maxpr Number(10, 2);
+  t_cursor SYS_REFCURSOR;
+BEGIN
+  SELECT MAX(UNITPRICE) INTO maxpr FROM TRACK;
+  OPEN t_cursor FOR
+  SELECT * FROM TRACK
+  WHERE UNITPRICE >= maxpr;
+  RETURN t_cursor;
+END;
+/
+SELECT mostExpTrack FROM DUAL;
+
+-- 3.3 - User Defined Functions
+-- Returns the average of all invoicelines
+CREATE OR REPLACE FUNCTION getInvoiceLineAvg RETURN NUMBER
+IS
+  average NUMBER(10, 2);
+BEGIN
+  SELECT AVG(UNITPRICE) INTO average FROM INVOICELINE;
+  RETURN average;
+END;
+/
+SELECT getInvoiceLineAvg FROM DUAL;
 /
 
 -- 3.4 - User Defined Table Valued Functions
 -- Return all employee records born after 1968
-CREATE OR REPLACE PROCEDURE getAllAfter1968(
-  cursorParam OUT SYS_REFCURSOR
-) IS
+CREATE OR REPLACE FUNCTION getAllAfter68 RETURN SYS_REFCURSOR
+IS
+  e_cursor SYS_REFCURSOR;
 BEGIN
-  OPEN cursorParam FOR
+  OPEN e_cursor FOR
   SELECT * FROM EMPLOYEE
-  WHERE BIRTHDATE >= '12-31-1968';
+  WHERE BIRTHDATE >= TO_DATE('01-01-1968','DD-MM-YYYY');
+  RETURN e_cursor;
 END;
-
+/
+SELECT getAllAfter68 FROM DUAL;
 /
 
 
@@ -106,63 +153,110 @@ END;
  */
 -- 4.1 - Basic Stored Procedure
 -- Selects first and last names of all employees
-CREATE OR REPLACE PROCEDURE getAllNames(
-  cursorParam OUT SYS_REFCURSOR
-) IS
+CREATE OR REPLACE PROCEDURE getAllNames(e_cursor OUT SYS_REFCURSOR)
+AS
 BEGIN
-  OPEN cursorParam FOR SELECT FIRSTNAME, LASTNAME FROM EMPLOYEE;
+  OPEN e_cursor FOR
+  SELECT FIRSTNAME, LASTNAME FROM EMPLOYEE;
 END;
-
 /
 
 -- 4.2 - Stored Procedure Input Parameters
 -- Updates employee information
-CREATE OR REPLACE PROCEDURE updateEmployee(
-  e_id IN NUMBER,
-  fname IN VARCHAR2,
-  lname IN VARCHAR2
-) IS
+CREATE OR REPLACE PROCEDURE updateName(eid IN NUMBER, fname IN VARCHAR2, lname IN VARCHAR2)
+AS
 BEGIN
   UPDATE EMPLOYEE
   SET FIRSTNAME = fname, LASTNAME = lname
-  WHERE EMPLOYEEID = e_id;
+  WHERE EMPLOYEEID = eid;
 END;
-
 /
 
 -- Get all managers for an employee
-CREATE OR REPLACE PROCEDURE getManagers(
-  cursorParam OUT SYS_REFCURSOR,
-  e_id IN NUMBER
-) IS
+CREATE OR REPLACE PROCEDURE getManagers(eid IN NUMBER, e_cursor OUT SYS_REFCURSOR)
+AS
 BEGIN
-  OPEN cursorParam FOR SELECT * FROM EMPLOYEE
-  WHERE REPORTSTO = c_id;
+  OPEN e_cursor FOR
+  SELECT * FROM EMPLOYEE
+  WHERE EMPLOYEEID = (
+    SELECT REPORTSTO FROM EMPLOYEE
+    WHERE EMPLOYEEID = eid
+  );
 END;
-
 /
 
 -- 4.3 - Stored Procedure Output Parameters
--- Selects first and last names of all employees
-CREATE OR REPLACE PROCEDURE getNameCompany(
-  cursorParam OUT SYS_REFCURSOR,
-  c_id IN NUMBER
-) IS
+-- Returns the name and company of a customer
+CREATE OR REPLACE PROCEDURE customerInfo(cid IN NUMBER, c_cursor OUT SYS_REFCURSOR)
+AS
 BEGIN
-  OPEN cursorParam FOR SELECT FIRSTNAME, LASTNAME, COMPANY FROM CUSTOMER
-  WHERE CUSTOMERID = c_id;
+  OPEN c_cursor FOR
+  SELECT FIRSTNAME, LASTNAME, COMPANY FROM CUSTOMER
+  WHERE CUSTOMERID = cid;
 END;
 /
+
 
 /*
  * 5.0 - Transactions
  */
+-- Transaction that deletes an invoice given the ID
+CREATE OR REPLACE PROCEDURE deleteTransaction(iid IN NUMBER)
+AS
+BEGIN
+  DELETE FROM INVOICELINE WHERE INVOICEID = iid;
+  DELETE FROM INVOICE WHERE INVOICEID = iid;
+  COMMIT;
+END;
+/
 
+-- Transaction that stores a new customer record
+CREATE OR REPLACE PROCEDURE insertCustomer(
+  fname IN VARCHAR2,
+  lname IN VARCHAR2,
+  e_mail IN VARCHAR2
+)
+AS
+BEGIN
+  INSERT INTO CUSTOMER (FIRSTNAME, LASTNAME, EMAIL)
+  VALUES (fname, lname, e_mail);
+  COMMIT;
+END;
+/
 
 /*
  * 6.0 - Triggers
  */
 -- 6.1 - AFTER/FOR
+-- After insert trigger on employee table
+CREATE OR REPLACE TRIGGER employeeInsert
+AFTER INSERT
+ON EMPLOYEE
+FOR EACH ROW
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Inserted new employee record.');
+END;
+/
+
+-- After update trigger on album table
+CREATE OR REPLACE TRIGGER albumUpdate
+AFTER UPDATE
+ON ALBUM
+FOR EACH ROW
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Album record updated.');
+END;
+/
+
+-- After delete trigger on customer table
+CREATE OR REPLACE TRIGGER customerDelete
+AFTER DELETE
+ON CUSTOMER
+FOR EACH ROW
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Deleted the customer record.');
+END;
+/
 
 
 /*
