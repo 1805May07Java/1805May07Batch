@@ -1,43 +1,47 @@
 package com.bk.pojos;
 
 import com.bk.dao.DAO;
+import com.bk.service.Accounts;
 
-public class Account {
+public class Account{
      private static int id=-1;
-     private int userid= -1;
-     private int userid1= -1;
-     private double balance=0.0;
-     private String name="";
-     
-
-
-	public static void setName(String string) {
-		// TODO Auto-generated method stub
-		
+     private static int userid= -1;
+     private static double balance=0.0;
+     private static String name="";
+  
+	public static int getUserid() {
+		return userid;
 	}
-
-	public static void setBalance(String string) {
-		// TODO Auto-generated method stub
-		
+	public static void setUserid(int userid) {
+		Account.userid = userid;
 	}
-
-	public static void setUsrId(String string) {
-		// TODO Auto-generated method stub
-		
+  
+	public static double getBalance() {
+		return balance;
 	}
-
-	public static void setID(int int1) {
-		// TODO Auto-generated method stub
-		
+	public static void setBalance(double s) {
+		Account.balance = s;
 	}
-
+	public static String getName() {
+		return name;
+	}
+	public static void setName(String name) {
+		Account.name = name;
+	}
+	
 	public static int getId() {
 		return id;
 	}
-
-	public void setId(int id) {
-		this.id = id;
+	public static void setId(int id) {
+		Account.id = id;
 	}
+     
+
+
+
+	 
+
+ 
 
 	 
 
