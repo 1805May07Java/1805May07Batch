@@ -100,7 +100,7 @@ public class DAO implements DataSys {
 		 Account Account = new Account();
 			try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 				//Retrieve Access Record Item
-				String query = "select * from ACCOUNTS where USERID = ?";
+				String query = "select * from ABS_ACCOUNTS where USERID = ?";
 				PreparedStatement ps = conn.prepareStatement(query);
 				ps.setInt(1, usr_access.getId());
 				ResultSet info = ps.executeQuery();
@@ -121,7 +121,29 @@ public class DAO implements DataSys {
 		}
 	
 
- 
+	public Account newAccountByInt(Access usr_access) {
+		 Account Account = new Account();
+			try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+				//Retrieve Access Record Item
+				String query = "INSERT INTO ABS_ACCOUNTS (USERID, NAME, BALANCE,TYPEID) VALUES (?, ?, ?,?)";
+				PreparedStatement ps = conn.prepareStatement(query);
+				ps.setInt(1, usr_access.getId());
+				ps.setString(2, "Savings");
+				ps.setDouble(3, 0.00);
+				ps.setInt(4, 500);
+				ResultSet info = ps.executeQuery();
+				//conn.commit();
+
+
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return Account;
+		}
+	
+
  
 
  

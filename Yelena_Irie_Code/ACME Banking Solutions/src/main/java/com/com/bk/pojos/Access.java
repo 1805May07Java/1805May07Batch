@@ -2,17 +2,13 @@ package com.bk.pojos;
 
 import com.bk.dao.DAO;
 
-public class Access {
+public class Access extends User {
    
 	private String username;
 
 	private String password;
 	private int id=-1;
 	public boolean status = false;
-
-	public boolean isStatus() {
-		return status;
-	}
 
 	public void setStatus(boolean status) {
 		this.status = status;
@@ -56,13 +52,5 @@ public class Access {
 		return false;
 	}
 
-	public Access Login(String usr, String psswrd) {
-		DAO dataAccessTable = new DAO();
-		Access usrAccess = dataAccessTable.getAccessByPass(usr, psswrd);
-		if(usrAccess.getId() != -1) {
-			usrAccess.setStatus(true);
-		}
-		return usrAccess;
 
-	}
 }
