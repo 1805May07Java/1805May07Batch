@@ -1,0 +1,38 @@
+body {
+	color: lightgray;
+	background-color: black;
+}
+
+h1 {
+	color: red;
+}
+
+th, td {
+	border-color: white;
+}
+
+.code {
+	border-color: lightgrey;
+}
+
+a {
+	color: red;
+}
+
+a:hover {
+	color: pink;
+}
+
+nav > ul {
+	border-color: red;
+}
+
+nav > ul > li > a:hover {
+	background-color: #222;
+}
+
+
+.large-solid-button {
+	background-color: darkred;
+	color: lightgrey;
+}

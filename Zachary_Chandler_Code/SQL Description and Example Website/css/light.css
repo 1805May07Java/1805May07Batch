@@ -1,0 +1,37 @@
+body {
+	color: black;
+	background-color: white;
+}
+
+h1 {
+	color: red;
+}
+
+th, td {
+	border-color: black;
+}
+
+.code {
+	border-color: black;
+}
+
+a {
+	color: red;
+}
+
+a:hover {
+	color: darkred;
+}
+
+nav > ul {
+	border-color: red;
+}
+
+nav > ul > li > a:hover {
+	background-color: lightgrey;
+}
+
+.large-solid-button {
+	background-color: darkred;
+	color: white;
+}

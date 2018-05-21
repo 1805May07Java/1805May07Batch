@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Example</title>
+		<link rel="shortcut icon" href="logo.ico"/>
+		<link rel="stylesheet" type="text/css" href="css/structure.css">
+		<link rel="stylesheet" type="text/css" href="css/light.css" id="themeStyle">
+	</head>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	<script>
+		toggle = function() {
+			let currentStyle = $("#themeStyle").attr("href")
+			
+			if (currentStyle === "css/dark.css") {
+				$("#themeStyle").attr("href","css/light.css");
+			} else {
+				$("#themeStyle").attr("href","css/dark.css");
+			}
+		}
+	</script>
+	
+	<body>
+	
+		<div class="large-solid-button" onclick="toggle()">Toggle Dark Mode</div>
+	
+		<div class="header">
+		<a href="default.html"><h1><img class="logo" src="logo.png"></img>Mauris vitae nisi non dolor</h1></a>
+		</div>
+		
+		<nav>
+		<ul>
+		  <li><a href="default.html">Home</a></li>
+		  <li><a href="submit.html">Submit</a></li>
+		  <li><a href="Example.html">Example</a></li>
+		  <li><a href="contact.html">Contact</a></li>
+		  <li><a href="about.html">About</a></li>
+		</ul>
+		</nav>
+	
+		<p>Lorem ipsum dlior sit amet, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam vliuptatem quia vliuptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dliores eos qui ratione vliuptatem sequi nesciunt. Neque porro quisquam est, qui dliorem ipsum quia dlior sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dliore magnam aliquam quaerat vliuptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea vliuptate velit esse quam nihil mliestiae consequatur, vel illum qui dliorem eum fugiat quo vliuptas nulla pariatur?</p>
+		
+		<ol>
+			<li>Donec cursus lacus vitae leo pretium viverra?</li>
+			<li>Sed fermentum augue vitae ipsum posuere consectetur?</li>
+			<li>Morbi vitae massa eget nisi imperdiet accumsan condimentum a dlior?</li>
+			<li>Praesent tincidunt lacus congue, dignissim augue ac, scelerisque lorem?</li>
+		</ol>
+		
+		<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris elementum posuere quam eget tempor. Nulla sit amet urna ac dolor ornare volutpat. Donec fringilla hendrerit arcu, a tristique ligula convallis vitae. Curabitur condimentum sodales gravida. Morbi ac lectus risus. Nulla facilisi. Nulla pulvinar risus at diam pretium fermentum. Proin velit nisl, tempor porttitor nisl eu, aliquam tincidunt est. Aliquam sollicitudin felis a odio rutrum, vitae posuere velit egestas. Suspendisse blandit purus ac augue viverra, nec accumsan felis scelerisque. Proin non tincidunt mauris, ornare ultrices massa.</p>
+		
+		<ul>
+		<li>Vivamus interdum nisl maximus lacus euismod euismod.</li>
+		<li>Ut sagittis ipsum non fermentum rutrum.</li>
+		<li>Nunc tincidunt tortor in ipsum porta, non finibus sem ullamcorper.</li>
+		<li>Aenean ut magna gravida, maximus nibh nec, ullamcorper mauris.</li>
+		<li>Pellentesque aliquam tortor ut ex convallis, ut suscipit urna scelerisque.</li>
+		</ul>
+		
+		<p>Duis at vulputate purus. Vestibulum posuere quis ipsum ac facilisis. Nulla rhoncus dui in ante ullamcorper, et tempus massa elementum. Praesent consectetur magna porta odio tincidunt, eget posuere lorem venenatis. Proin at facilisis massa. Curabitur suscipit ex non tellus aliquam interdum. Quisque sit amet faucibus arcu. Vestibulum porta interdum lorem vitae cursus. Nam venenatis, felis ac cursus bibendum, libero libero viverra velit, sit amet euismod magna erat eu odio. Morbi volutpat, diam nec eleifend maximus, risus lacus varius erat, ut convallis felis odio et augue.</p>
+		
+		<div class="code">
+		<code>praesent = 32;</code><br>
+		<code>egestas = 21;</code><br>
+		<code>comvallis = praesent + egestas;</code><br>
+		</div>
+		
+		<table style="width: 100%">
+			<tr><th>Praesent</th> <th>Egestas</th> <th>Convallis</th></tr>
+			<tr><td>Condimentum</td> <td>Vestibulum</td> <td>Ullamcorper</td></tr>
+			<tr><td>Phasellus</td> <td>Malesuada</td> <td>Purus</td></tr>
+			<tr><td>Dignissim</td> <td>Sapien</td> <td>Hendrerit</td></tr>
+		</table>
+		<br>
+		<a href="#">Jump to the top</a>
+	</body>
+</html>
+

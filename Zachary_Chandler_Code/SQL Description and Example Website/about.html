@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<title>SQL</title>
+	<link rel="shortcut icon" href="logo.ico"/>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="default.html"><img style="height: 1em; width: 1em" src="logo.png"></a>
+	<a class="navbar-brand" href="default.html">Home</a>
+	<a class="navbar-brand" href="submit.html">Submit</a>
+	<a class="navbar-brand" href="Example.html">News</a>
+	<a class="navbar-brand" href="about.html">About</a>
+	<a class="navbar-brand mr-auto" href="login.html">Login</a>
+	
+	<form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit">Search</button>
+    </form>
+		
+		
+	</nav>
+	
+	<div class="pb-5 container">
+	<h1 class="mt-5 mb-3">About SQL</h1>
+
+	<p>SQL or Structured Query Language, is a language dealing with many different facets of databases. From designing the database schema, to updating the tables within the database, to managing user access, SQL covers many topics looked for in language to manipulate a database. It works as a:
+	<ol>
+		<li>Data Control Language</li>
+		<li>Data Definition Language</li>
+		<li>Data Manipulation Language (CRUD)</li>
+		<li>Data Query Language</li>
+		<li>Transaction Control Language</li>
+	</ol>
+	</p>
+
+	<p>Every table in SQL is broken up into columns and rows. Column headers define what data can go into each attribute within a row. While each row in a table is considered a single tuple or record of those attributes.</p>
+
+	<p>Each row in SQL can be queried by using the appropriate SELECT statement on the table the row is in. If the row matches the WHERE clause in the SELECT statement, it will be added to the result set. An example of a SELECT statement would be:
+	<pre class="bg-light pt-3">
+	SELECT * FROM customers WHERE email LIKE "%@gmail.com"
+	</pre>
+	</p>
+
+	<p>The exact classifications of the most relevant SQL statements would look something like:</p>
+	<table class="table table-bordered" style="width: 100%">
+		<tr><th>DCL</th><th>DDL</th> <th>DML</th><th>DQL</th><th>TCL</th></tr>
+		<tr><td>GRANT</td><td>CREATE</td><td>INSERT</td><td>SELECT</td><td>COMMIT</td></tr>
+		<tr><td>REVOKE</td><td>ALTER</td><td>SELECT</td><td></td><td>ROLLBACK</td></tr>
+		<tr><td><td>DROP</td><td>UPDATE</td><td></td><td>SAVEPOINT</td></tr>
+		<tr><td><td>TRUNCATE</td><td>DELETE</td><td></td><td></td></tr>
+	</table>
+	<br>
+	
+	<a href="#">Jump to the top</a>
+	
+	</div>
+</body>
+</html>
