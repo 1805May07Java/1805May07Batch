@@ -1,0 +1,51 @@
+System.out.println("Welcome to Student database!");
+		
+		//check method to see if new
+		boolean newUser = false;
+		do {
+			System.out.print("Please input username: ");
+				
+			Scanner scan = new Scanner(System.in);
+			String letter = scan.nextLine().toLowerCase();
+			
+			//method to check database
+			
+			newUser = true;
+			if(newUser) {
+				System.out.print("do you want to create a new user?");
+				
+				String letter2 = scan.nextLine().toLowerCase();
+				
+				if(letter2.charAt(0) == 'y') {
+					Student s = new Student();
+					System.out.print("Enter name");
+					s.setUserName(letter);
+					s.setName(letter2);
+					
+					System.out.print("\nEnter password");
+					letter2 = scan.nextLine().toLowerCase();
+					s.setPassword(letter2);
+					
+					System.out.print("\nEnter GPA");
+					letter = scan.nextLine().toLowerCase();
+					//s.setGpa(letter2);
+				}
+			}
+				
+		}while(!newUser);
+		
+		boolean pass = false;
+		
+		do {
+			System.out.print("Please input password: ");
+				
+			Scanner scan = new Scanner(System.in);
+			String letter = scan.nextLine().toLowerCase();
+			
+			//method to check database
+			
+			pass = true;
+				
+		}while(!pass);
+		
+		//call method to print gpa
