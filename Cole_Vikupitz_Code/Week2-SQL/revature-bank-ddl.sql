@@ -45,26 +45,20 @@ CREATE TABLE Account_Type (
 CREATE TABLE User_Profile (
 
     UserId NUMBER PRIMARY KEY,
-    FirstName VARCHAR2(24) NOT NULL,
-    LastName VARCHAR2(24) NOT NULL,
-    Username VARCHAR2(50) NOT NULL UNIQUE,
-    Password VARCHAR2(24) NOT NULL
+    First_Name VARCHAR2(25) NOT NULL,
+    Last_Name VARCHAR2(25) NOT NULL,
+    Username VARCHAR2(25) NOT NULL UNIQUE,
+    Password_ VARCHAR2(25) NOT NULL
 );
 
 CREATE TABLE Account (
 
     AccountId NUMBER PRIMARY KEY,
+    AccountUser_FK NUMBER NOT NULL,
     AccountType_FK NUMBER NOT NULL,
     AccountBalance NUMBER(20, 2) DEFAULT 0,
+    FOREIGN KEY(AccountUser_FK) REFERENCES User_Profile(UserId),
     FOREIGN KEY(AccountType_FK) REFERENCES Account_Type(AccountTypeId)
-);
-
-CREATE TABLE User_Account (
-
-    UserId_FK NUMBER NOT NULL,
-    AccountId_FK NUMBER NOT NULL,
-    FOREIGN KEY(UserId_FK) REFERENCES User_Profile(UserId),
-    FOREIGN KEY(AccountId_FK) REFERENCES Account(AccountId)
 );
 
 
