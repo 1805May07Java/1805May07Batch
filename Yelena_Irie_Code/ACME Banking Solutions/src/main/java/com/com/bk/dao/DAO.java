@@ -123,7 +123,7 @@ public class DAO implements DataSys {
 		}
 	
 
-	public Account newAccount(Access usr_access) {
+	public Account newAccount(Access usr_access,double balance,int account_type) {
 		 Account Account = new Account();
 			try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 				//Insert new Account Information into  Access Record Item
@@ -131,9 +131,9 @@ public class DAO implements DataSys {
 				String query = "INSERT INTO ABS_ACCOUNTS (USERID, NAME, BALANCE,TYPEID) VALUES (?, ?, ?,?)";
 				PreparedStatement ps = conn.prepareStatement(query);
 				ps.setInt(1, usr_access.getId());
-				ps.setString(2, "Savings");
-				ps.setDouble(3, 0.00);
-				ps.setInt(4, 500);
+				ps.setString(2, "ACC1");
+				ps.setDouble(3, balance);
+				ps.setInt(4, account_type);
 				int info = ps.executeUpdate();
 				if (info > 0 ) {
 					Account.setId(getNewAccountId());
@@ -171,7 +171,37 @@ public class DAO implements DataSys {
 		// TODO Auto-generated method stub
 		
 	}
- 
+	public Account getAllAccByAccID(int accId) {
+		 Account Account = new Account();
+			try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+				//Retrieve Access Record Item
+				String query = "select ID,USERID, NAME, BALANCE from ABS_ACCOUNTS where ID = ?";
+				PreparedStatement ps = conn.prepareStatement(query);
+				ps.setInt(1, accId);
+				ResultSet info = ps.executeQuery();
+				while(info.next()) { 
+				
+				Account.setId(info.getInt(ID));
+				Account.setUserid(info.getInt(USERID));
+				Account.setName(info.getString(NAME));
+				Account.setBalance(info.getDouble(BALANCE));
+				
+				
+				}
+					 
+				return Account;
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			
+		
+		
+		return null;
+		// TODO Auto-generated method stub
+		
+	}
 	public Account getAccByAccID(int accId) {
 		 Account Account = new Account();
 			try(Connection conn = ConnectionFactory.getInstance().getConnection()){
@@ -250,6 +280,32 @@ public class DAO implements DataSys {
 		
 		return null;
 		
+	}
+
+	public int saveAccount(Account account) {
+		// TODO Auto-generated method stub
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			//Insert new Account Information into  Access Record Item
+			conn.setAutoCommit(false);
+			String query = "UPDATE ABS_ACCOUNTS SET USERID=?, NAME=?, BALANCE= ? WHERE ID=?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, account.getUserid());
+			ps.setString(2, account.getName());
+			ps.setDouble(3, account.getBalance());
+			ps.setInt(4, account.getId());
+			int info = ps.executeUpdate();
+		   
+			conn.commit();
+			return info;
+
+			
+		} 
+		
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return -1;
 	}
 	
 

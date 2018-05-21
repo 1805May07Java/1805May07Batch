@@ -49,29 +49,63 @@ public class FeatureTest {
 	}
 	@Test
 	public void verifyVarInt() {
+		
 		Access outputAccessObj = p.Login(user, password);
 		assertTrue("User Not Logged IN",outputAccessObj.getId() != -1);
 	    
 	    
 		
 	}
+	@Test
+	public void TransDeposit() {
+	 
+		int accid=100000267;
+		
+		System.out.println("Please Enter the Deposit Amount:");
+		Scanner s = new Scanner(System.in);
 	
+		double deposit = Math.abs(Double.parseDouble(s.nextLine()));
+		
+		Accounts acc= new Accounts(p.Login(user,password),accid);
+		double oldbalance = acc.getAccount(accid).getBalance();
+		acc.Deposit(deposit);
+		acc.confirm(acc);
+	     double newbalance = acc.getAccount(accid).getBalance();
+	 	assertTrue("Balance is not correct",newbalance != oldbalance);   	
+	
+		
+		
+
+	}
+	@Test public void TransWithrawal() {
+		int accid=100000267;
+		System.out.println("Please Enter the Withdrawal Amount:");
+		Scanner s = new Scanner(System.in);
+	 	double withdraw = -1*Math.abs(Double.parseDouble(s.nextLine()));
+		Accounts acc= new Accounts(p.Login(user,password),accid);
+		double oldbalance = acc.getAccount(accid).getBalance();
+		acc=acc.Deposit(withdraw);
+		acc.confirm(acc);
+	     double newbalance = acc.getAccount(accid).getBalance();
+	 	assertTrue("Balance is not correct",newbalance != oldbalance);
+	};
+ 
 	@Test
 	public void verifyNewAccount() {
+		//* create an account with a unique email and/or username
 		p.Login(user, password);
 		System.out.println("Input Email:");
 		String email=new Scanner(System.in).nextLine();
 		Accounts acc = new Accounts(p.Login(user, password));
 		User Customer = new User();
-		acc.createAccount(p.Login(user, password),Customer,email);
+		Customer=acc.createAccount(p.Login(user, password),Customer,email,500.00,500);
 	 
 		//Expect: AccountID 
 		assertTrue("Missing Account ID",acc.getId() != -1);
 		//Expect: CustID
 		acc.getAccount(Customer.getAccId());
 		int saved = Customer.getAccId();
-		assertSame("Account ID Not Linked to Customer  Expected:"+acc.getAccount(saved).getId()+"Actual: "
-		           + acc.getAccount(saved).getId(),acc.getAccount(saved).getId(),saved);
+		assertTrue("Account ID Not Linked to Customer",acc.getAccount(saved).getId() == Customer.getAccId());
 		
 		
 	}
@@ -82,7 +116,7 @@ public class FeatureTest {
 		Access outputAccessObj = p.Login(user, password);
 		User Customer=new User();
 		String email=new Scanner(System.in).nextLine();
-		int outputAccountObj = acc.createAccount(outputAccessObj,Customer,email).getAccId();
+		int outputAccountObj = acc.createAccount(outputAccessObj,Customer,email,500.00,500).getAccId();
 		return acc;
 	}
 	public Access Login(String user, String password){

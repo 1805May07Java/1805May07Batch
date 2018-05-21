@@ -14,9 +14,11 @@ public interface DataSys {
 	public int USER=3;
 	public int PASSWORD=4;
 	//Accounts table Fields
+	
 	public int USERID =2; 
-	public int BALANCE= 3;
-	public int NAME=4;
+	public int BALANCE= 4;
+	public int NAME=3;
+	public int TYPEID=4;
 	public Access getById(int id); 
 	public Access getAccessByPass(String usr, String psswrd);
 }
