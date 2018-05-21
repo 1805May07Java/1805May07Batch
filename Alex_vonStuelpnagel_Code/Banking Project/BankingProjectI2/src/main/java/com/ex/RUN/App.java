@@ -98,6 +98,7 @@ public class App {
 	    							switch (response) {
 		    		    			case 'y':
 		    		    				accDAO.removeAccount(toUpdate.getAccountNumber());
+		    		    				loggedOn.removeAccount(toUpdate);
 		    		    				break;
 		    		    			case 'n':
 		    		    				break;
@@ -114,13 +115,19 @@ public class App {
     					
     					break;
     				case 2:
-    					System.out.println("What type of account would you like to create?:"
-    							+ "\n0: Credit"
-    							+ "\n1: Savings"
-    							+ "\n2: Checking");
-    					int accType = scanner.nextInt();
-    					accDAO.addAccount(loggedOn.getUserID(), accType);
-    					System.out.println("account deleted");
+    					int accType;
+    					do {
+	    					System.out.println("What type of account would you like to create?:"
+	    							+ "\n0: Credit"
+	    							+ "\n1: Savings"
+	    							+ "\n2: Checking");
+	    					accType = scanner.nextInt();
+	    					if (accType != 0 && accType != 1 && accType != 1) {
+	    						System.out.println("Sorry, input was not recognized");
+	    					}
+    					} while (accType != 0 && accType != 1 && accType != 1);
+    					int newAccNumber = accDAO.addAccount(loggedOn.getUserID(), accType);
+    					loggedOn.addAccount(accDAO.getById(newAccNumber));
     					break;
     				case 3:
     					loggedOn = null;
@@ -129,10 +136,11 @@ public class App {
     					loggedOn = null;
     					break;
     				default :
+    					System.out.println("Sorry, input was not recognized");
     					break;
     			}
-    		} while (option1!=0 && option1!=2);	//return to login
-    	} while (option1!=0);					//exit application
+    		} while (option1!=4 && option1!=3);	//return to login
+    	} while (option1!=4);					//exit application
     	//do while not exit
 
     	scanner.close();

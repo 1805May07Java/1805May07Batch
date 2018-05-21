@@ -25,7 +25,7 @@ public class AccountDAOimp implements AccountDAO {
 			
 			while(rs.next()) {
 				Account temp = new Account();
-				temp.setAccountNumber(rs.getInt("AccType"));
+				temp.setAccountNumber(rs.getInt(1));
 				temp.setAccType(rs.getInt(2));
 				temp.setBalance(rs.getDouble(3));
 				
@@ -50,7 +50,7 @@ public class AccountDAOimp implements AccountDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				acc.setAccountNumber(rs.getInt("Acc_Type"));
+				acc.setAccountNumber(rs.getInt(1));
 				acc.setAccType(rs.getInt(2));
 				acc.setBalance(rs.getDouble(3));
 
@@ -64,8 +64,8 @@ public class AccountDAOimp implements AccountDAO {
 	}
 
 	@Override
-	public void addAccount(int userID, int accountType) {
-		Account acc = new Account();
+	public int addAccount(int userID, int accountType) {
+		int newAccNumber = (Integer) null;
 		try(Connection conn = ConnectionFactory.getInstance().getConnection();){
 			conn.setAutoCommit(false);
 			String query = "call new_account (?,?)";
@@ -74,12 +74,19 @@ public class AccountDAOimp implements AccountDAO {
 			ps.setInt(1, userID);
 			ps.setInt(2, accountType);
 
-			
-			ps.executeUpdate();
+			int rows = ps.executeUpdate();
+			if(rows != 0) {
+				ResultSet pk = ps.getGeneratedKeys();
+				while(pk.next()) {
+					newAccNumber = pk.getInt(1);
+				}
+				conn.commit();
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return newAccNumber;
 
 	}
 
@@ -87,7 +94,7 @@ public class AccountDAOimp implements AccountDAO {
 	public void removeAccount(int id) {
 		try(Connection conn = ConnectionFactory.getInstance().getConnection();){
 			conn.setAutoCommit(false);
-			String query = "delete from Accounts where Accountid = ?";
+			String query = "delete from Accounts where Acc_id = ?";
 			
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setInt(1, id);
@@ -105,17 +112,15 @@ public class AccountDAOimp implements AccountDAO {
 	public void updateAccountBalance(int id, double newBalance) {
 		try(Connection conn = ConnectionFactory.getInstance().getConnection();){
 			conn.setAutoCommit(false);
-			String query = "update Accounts set balance = ? where Accountid = ?";
+			String query = "update Accounts set balance = ? where Acc_id = ?";
 			
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setDouble(1, newBalance);
 			ps.setInt(2, id);
-		System.out.println( ps.executeUpdate()) ;
-		//	System.out.println(row + "rows affected");
+			ps.executeUpdate();
 			conn.commit();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

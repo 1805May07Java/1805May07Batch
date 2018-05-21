@@ -36,7 +36,7 @@ public class User {
 		this.isAdmin = isAdmin;
 	}
 	
-	public static int getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 
@@ -82,6 +82,21 @@ public class User {
 	
 	public void setAccounts(ArrayList<Account> accounts) {
 		this.accounts = accounts;
+	}
+	
+	public void addAccount(Account account) {
+		this.accounts.add(account);
+	}
+	
+	public void removeAccount(Account account) {
+		int index = 0;
+		for (Account a : accounts) {
+			if (a.equals(account)) {
+				accounts.remove(index);
+				return;
+			}
+			index++;
+		}
 	}
 
 }
