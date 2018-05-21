@@ -11,6 +11,7 @@ public class Driver {
 
 	public static void main(String[] args) {
 
+		// Instantiate and run new bank machine
 		new BankMachine().run();
 	}
 }

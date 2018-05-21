@@ -23,15 +23,141 @@ public class BankMachine {
 
 	public void run() {
 
+		boolean running = true;
+		this.displayMainMenu();
 
+		while (running) {
+			// Prompt user for desired option
+			switch (this.promptNumber(0, 2)) {
+				// Login the user
+				case 1:
+					this.login();
+					break;
+				// Create a new user
+				case 2:
+					this.createUser();
+					break;
+				// Shut down the machine
+				case 0:
+					running = false;
+					break;
+				// Invalid option, do nothing
+				default:
+					break;
+			}
+		}
 	}
 
-	/*
-	 * Prompts the user for an integer within the specified range (must be
-	 * greater than or equal to 'min', and less than or equal to 'max').
-	 * Continues to prompt the user if number failed to parse or the number
-	 * given is out of range. Returns the number when successfully entered.
-	 */
+	// Display the banking system's main menu
+	private void displayMainMenu() {
+
+		System.out.println("\n----- Revature Banking System -----");
+		System.out.println("1: Login");
+		System.out.println("2: Create Account");
+		System.out.println("0: Exit");
+	}
+
+	// Prompts user for their full name, username, and password
+	private void createUser() {
+
+		String firstName, lastName, username, password;
+		System.out.println("Enter new account information ('-' to cancel).");
+
+		while (true) {
+			System.out.print("First Name: ");
+			firstName = this.scanner.nextLine();
+			if (firstName.equals("-")) {
+				this.displayMainMenu();
+				return;
+			}
+			if (this.entryIsValid(firstName))
+				break;
+			System.out.println("First name is not valid.");
+			System.out.println("Must be 2-24 characters and only letters and numbers.");
+		}
+
+		while (true) {
+			System.out.print("Last Name: ");
+			lastName = this.scanner.nextLine();
+			if (lastName.equals("-")) {
+				this.displayMainMenu();
+				return;
+			}
+			if (this.entryIsValid(lastName))
+				break;
+			System.out.println("Last name is not valid.");
+			System.out.println("Must be 2-24 characters and only letters and numbers.");
+		}
+
+		while (true) {
+			System.out.print("Username: ");
+			username = this.scanner.nextLine();
+			if (username.equals("-")) {
+				this.displayMainMenu();
+				return;
+			}
+			if (!this.entryIsValid(username)) {
+				System.out.println("Username is not valid.");
+				System.out.println("Must be 2-24 characters and only letters and numbers.");
+				continue;
+			}
+
+			/// FIXME check if username is taken...
+			break;
+		}
+
+		while (true) {
+			System.out.print("Password: ");
+			password = this.scanner.nextLine();
+			if (password.equals("-")) {
+				this.displayMainMenu();
+				return;
+			}
+			if (this.entryIsValid(password))
+				break;
+			System.out.println("Password is not valid.");
+			System.out.println("Must be 2-24 characters and only letters and numbers.");
+		}
+
+		// FIXME - Create the new user here...
+	}
+
+	// Prompts the user for their username and password
+	// Authenticates the user's entered credentials
+	private void login() {
+
+		String username, password;
+		boolean notValid = true;
+
+		System.out.println("Authenticate user (type '-' to cancel).");
+		while (notValid) {
+
+			// Prompt user for their username
+			System.out.print("Username: ");
+			username = this.scanner.nextLine();
+			// Cancels the request
+			if (username.equals("-")) {
+				this.displayMainMenu();
+				return;
+			}
+
+			// Prompts the user for their password
+			System.out.print("Password: ");
+			password = this.scanner.nextLine();
+			// Cancels the request
+			if (password.equals("-")) {
+				this.displayMainMenu();
+				return;
+			}
+
+			/// FIXME - authenticate user here...
+			break;
+		}
+	}
+
+	// Prompts the user for an integer within the range [min, max]
+	// Continues to prompt the user until a valid integer is entered
+	// The specified integer is then returned
 	private int promptNumber(int min, int max) {
 
 		// Continue to prompt user until success
@@ -53,14 +179,8 @@ public class BankMachine {
 		}
 	}
 
-	/*
-	 * Verifies whether 'entry' is valid or not. Used to validate
-	 * entries for names, usernames, and passwords. Returns true
-	 * if valid, or false otherwise.
-	 *
-	 * Entry is valid if it's 2-24 characters long, and contains
-	 * only letters and digits.
-	 */
+	// Returns true/false if 'entry' is valid
+	// Valid if 2-24 characters long, and contains only letters and numbers
 	private boolean entryIsValid(String entry) {
 
 		// String must be 2-24 characters long

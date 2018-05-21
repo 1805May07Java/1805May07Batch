@@ -1,6 +1,7 @@
 /*
  * User.java
  * Author: Cole Vikupitz
+ *
  */
 
 package com.revature.pojos;
