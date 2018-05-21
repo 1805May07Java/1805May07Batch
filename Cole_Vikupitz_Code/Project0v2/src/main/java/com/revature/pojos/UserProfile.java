@@ -10,8 +10,9 @@ public class UserProfile {
 	private int id;
 	private String firstName, lastName, username, password;
 
-	public UserProfile(int id, String firstName,
-			String lastName, String username, String password) {
+	public UserProfile(int id, String firstName, String lastName,
+			String username, String password) {
+
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;

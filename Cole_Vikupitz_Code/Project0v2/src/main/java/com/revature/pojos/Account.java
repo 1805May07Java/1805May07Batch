@@ -7,12 +7,14 @@ package com.revature.pojos;
 
 public class Account {
 
-	private int id, type;
+	private int id, userId, typeId;
 	private double balance;
 
-	public Account(int id, int type, double balance) {
+	public Account(int id, int userId, int typeId, double balance) {
+
 		this.id = id;
-		this.type = type;
+		this.userId = userId;
+		this.typeId = typeId;
 		this.balance = balance;
 	}
 
@@ -24,12 +26,20 @@ public class Account {
 		this.id = id;
 	}
 
-	public int getType() {
-		return type;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(int typeId) {
+		this.typeId = typeId;
 	}
 
 	public double getBalance() {
@@ -37,9 +47,7 @@ public class Account {
 	}
 
 	public void setBalance(double balance) {
-		if (balance < 0.0D)
-			this.balance = 0.0D;
-		else
-			this.balance = balance;
+		this.balance = balance;
 	}
+
 }

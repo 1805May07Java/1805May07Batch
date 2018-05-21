@@ -45,8 +45,8 @@ CREATE TABLE Account_Type (
 CREATE TABLE User_Profile (
 
     UserId NUMBER PRIMARY KEY,
-    First_Name VARCHAR2(25) NOT NULL,
-    Last_Name VARCHAR2(25) NOT NULL,
+    FirstName VARCHAR2(25) NOT NULL,
+    LastName VARCHAR2(25) NOT NULL,
     Username VARCHAR2(25) NOT NULL UNIQUE,
     Password_ VARCHAR2(25) NOT NULL
 );
