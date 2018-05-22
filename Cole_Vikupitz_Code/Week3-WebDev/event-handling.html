@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Event Handling</title>
+</head>
+
+<body>
+    
+    <h1>Function Viewer</h1>
+    <hr>
+    <br>
+    <h3>Fibonacci</h3>
+    <input id="fib-n" type=number/>
+    <button id="doFib">Submit</button>
+    <p id="output">???</p>
+
+    <script>
+    	document.getElementById("doFib").addEventListener("click", runFib, false);
+
+    	function runFib() {
+    		var n = document.getElementById("fib-n").value;
+    		document.getElementById("output").innerHTML = fibonacci(n)
+    	}
+
+
+		function fibonacci(n) {
+
+			if (n == 0)
+				return 0;
+			if (n == 1)
+				return 1;
+			return fibonacci(n-1) + fibonacci(n-2);
+		}
+
+    </script>
+
+
+    <hr>
+    <br>
+    <h3>Factorial</h3>
+    <input id="fact-n" type=number/>
+    <button id="doFact">Submit</button>
+    <p id="output2">???</p>
+
+    <script>
+    	document.getElementById("doFact").addEventListener("click", runFact, false);
+
+    	function runFact() {
+    		var n = document.getElementById("fact-n").value;
+    		document.getElementById("output2").innerHTML = factorial(n)
+    	}
+
+
+		function factorial(n) {
+
+		    if (n <= 1)
+		        return 1;
+		    if (n == 2)
+		        return 2;
+		    return n * factorial(n - 1);
+		}
+
+    </script>
+
+    
+</body>
+
+</html>
