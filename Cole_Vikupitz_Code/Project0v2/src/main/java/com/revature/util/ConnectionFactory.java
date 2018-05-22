@@ -1,6 +1,9 @@
 /*
  * ConnectionFactory.java
  * Author: Cole Vikupitz
+ *
+ * Class that provides functionality to connect to
+ * the bank database.
  */
 
 package com.revature.util;
@@ -15,17 +18,23 @@ import java.util.Properties;
 
 public class ConnectionFactory {
 
+	// Use a singleton design pattern
+	// The instance itself
 	private static ConnectionFactory instance = null;
 
+	// Private constructor
 	private ConnectionFactory() {}
 
+	// Returns the single instance of the connection factory class
 	public static synchronized ConnectionFactory getInstance() {
 
-		if(instance == null)
+		// Create instance if needed
+		if (instance == null)
 			instance = new ConnectionFactory();
 		return instance;
 	}
 
+	// Returns a connection to the database
 	public Connection getConnection() {
 
 		Connection conn = null;

@@ -28,6 +28,7 @@ public class BankMachine {
 		this.currentUser = null;
 	}
 
+	// Run the bank machine
 	public void run() {
 
 		boolean running = true;
@@ -78,53 +79,63 @@ public class BankMachine {
 	private void createUser() {
 
 		String firstName, lastName, username, password;
-		System.out.println("Enter new account information ('-' to cancel).");
 
+		// Prompt user for their first name
+		System.out.println("Enter new account information ('-' to cancel).");
 		while (true) {
 			System.out.print("First Name: ");
 			firstName = this.scanner.nextLine();
+			// User cancels the prompt
 			if (firstName.equals("-")) {
 				this.displayMainMenu();
 				return;
 			}
+			// Check for validity
 			if (this.entryIsValid(firstName))
 				break;
 			System.out.println("First name is not valid.");
 			System.out.println("Must be 2-24 characters and only letters and numbers.");
 		}
 
+		// Prompt the user for their last name
 		while (true) {
 			System.out.print("Last Name: ");
 			lastName = this.scanner.nextLine();
+			// User cancels the prompt
 			if (lastName.equals("-")) {
 				this.displayMainMenu();
 				return;
 			}
+			// Check for validity
 			if (this.entryIsValid(lastName))
 				break;
 			System.out.println("Last name is not valid.");
 			System.out.println("Must be 2-24 characters and only letters and numbers.");
 		}
 
+		// Prompt the user for their username
 		while (true) {
 			System.out.print("Username: ");
 			username = this.scanner.nextLine();
+			// User cancels the prompt
 			if (username.equals("-")) {
 				this.displayMainMenu();
 				return;
 			}
+			// Check for validity
 			if (!this.entryIsValid(username)) {
 				System.out.println("Username is not valid.");
 				System.out.println("Must be 2-24 characters and only letters and numbers.");
 				continue;
 			}
-
+			// Check if username is unique
 			if (UserProfileDao.usernameUnique(username))
 				break;
 			System.out.println("That username already exists, please try a different one.");
 			System.out.println(username);
 		}
 
+		// Prompt the user for their password
 		while (true) {
 			System.out.print("Password: ");
 			password = this.scanner.nextLine();
@@ -132,14 +143,16 @@ public class BankMachine {
 				this.displayMainMenu();
 				return;
 			}
+			// User cancels the prompt
 			if (this.entryIsValid(password))
 				break;
 			System.out.println("Password is not valid.");
 			System.out.println("Must be 2-24 characters and only letters and numbers.");
 		}
 
-		this.currentUser = new UserProfile(0, firstName, lastName, username, password);
-		UserProfileDao.addUserRecord(this.currentUser);
+		// Create the new user, upload to database
+		UserProfileDao.addUserRecord(new UserProfile(0, firstName, lastName, username, password));
+		this.currentUser = UserProfileDao.authenticate(username, password);
 	}
 
 	// Prompts the user for their username and password
@@ -170,8 +183,10 @@ public class BankMachine {
 				return;
 			}
 
+			// Authenticate the user credentials
 			if ((this.currentUser = UserProfileDao.authenticate(username, password)) != null)
 				notValid = false;
+			// USername/password incorrect, print error and retry
 			else
 				System.out.println("Invalid username and password. Please try again.");
 		}
