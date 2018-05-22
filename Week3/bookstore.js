@@ -37,7 +37,8 @@ function addBook(){
     var price = document.getElementById("price").value;
     var e = document.getElementById("genres");
     var genre = e.options[e.selectedIndex].value;
-    console.log(e.selectedIndex);
+    
+    
 
 
 
