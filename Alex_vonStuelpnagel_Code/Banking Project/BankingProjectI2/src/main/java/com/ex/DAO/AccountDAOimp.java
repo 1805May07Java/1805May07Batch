@@ -62,10 +62,11 @@ public class AccountDAOimp implements AccountDAO {
 		
 		return acc;
 	}
+	
+	
 
 	@Override
-	public int addAccount(int userID, int accountType) {
-		int newAccNumber = (Integer) null;
+	public void addAccount(int userID, int accountType) {
 		try(Connection conn = ConnectionFactory.getInstance().getConnection();){
 			conn.setAutoCommit(false);
 			String query = "call new_account (?,?)";
@@ -78,7 +79,7 @@ public class AccountDAOimp implements AccountDAO {
 			if(rows != 0) {
 				ResultSet pk = ps.getGeneratedKeys();
 				while(pk.next()) {
-					newAccNumber = pk.getInt(1);
+					System.out.println(pk.getInt(1));
 				}
 				conn.commit();
 			}
@@ -86,7 +87,6 @@ public class AccountDAOimp implements AccountDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return newAccNumber;
 
 	}
 
@@ -102,7 +102,6 @@ public class AccountDAOimp implements AccountDAO {
 			conn.commit();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -128,7 +127,7 @@ public class AccountDAOimp implements AccountDAO {
 
 	@Override
 	public void addAccountOwner(int id, int userID) {
-		// TODO Auto-generated method stub
+		// TODO
 		
 	}
 

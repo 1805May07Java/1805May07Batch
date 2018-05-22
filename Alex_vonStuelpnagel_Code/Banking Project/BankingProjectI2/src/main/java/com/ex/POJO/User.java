@@ -13,8 +13,6 @@ public class User {
 	
 	ArrayList<Account> accounts;
 	
-	
-	//default contstructor
 	public User() {
 		
 	}

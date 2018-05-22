@@ -48,7 +48,7 @@ public class App {
     	
     		//check if admin, disply admin options
     		do {
-    			for (Account a : loggedOn.getAccounts()) {
+    			for (Account a :  userDAO.getUserAccounts(loggedOn.getUserID())) {
     				a.displayAccountInfo();
     			}
     			//addaccount remove account
@@ -64,13 +64,13 @@ public class App {
     					System.out.println("Which account would you like to update?");
     					int accNo = scanner.nextInt();
     					while (toUpdate == null) {
-	    					for (Account a : loggedOn.getAccounts()) {
+	    					for (Account a : userDAO.getUserAccounts(loggedOn.getUserID())) {
 	    						if (a.getAccountNumber() == accNo) {
 	    							toUpdate = a;
 	    						}
 	    					}
     					}
-    					//TODO add remove account
+    					// add remove account
     					System.out.println("What change do you want to make?:"
     							+ "\n1: deposit"
     							+ "\n2: withdraw"
@@ -122,12 +122,12 @@ public class App {
 	    							+ "\n1: Savings"
 	    							+ "\n2: Checking");
 	    					accType = scanner.nextInt();
-	    					if (accType != 0 && accType != 1 && accType != 1) {
+	    					if (accType != 0 && accType != 1 && accType != 2) {
 	    						System.out.println("Sorry, input was not recognized");
 	    					}
-    					} while (accType != 0 && accType != 1 && accType != 1);
-    					int newAccNumber = accDAO.addAccount(loggedOn.getUserID(), accType);
-    					loggedOn.addAccount(accDAO.getById(newAccNumber));
+    					} while (accType != 0 && accType != 1 && accType != 2);
+    					accDAO.addAccount(loggedOn.getUserID(), accType);
+    					loggedOn.addAccount(userDAO.getUserAccounts(loggedOn.getUserID()).get(userDAO.getUserAccounts(loggedOn.getUserID()).size()-1) );
     					break;
     				case 3:
     					loggedOn = null;

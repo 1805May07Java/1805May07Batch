@@ -21,6 +21,4 @@ public interface UserDAO {
 	public void updateUserPassword(int id, String newPass);		//confirm
 	
 	public ArrayList<Account> getUserAccounts(int id);
-	
-	//public void addAccount(int id, int accountID);  			//TODO not sure how to handle for junction table
 }
