@@ -12,13 +12,18 @@ package com.revature.main;
 
 import java.util.Scanner;
 
+import com.revature.dao.UserProfileDao;
+import com.revature.pojos.UserProfile;
+
 public class BankMachine {
 
 	private Scanner scanner;
+	private UserProfile currentUser;
 
 	public BankMachine() {
 
 		this.scanner = new Scanner(System.in);
+		this.currentUser = null;
 	}
 
 	public void run() {
@@ -102,8 +107,10 @@ public class BankMachine {
 				continue;
 			}
 
-			/// FIXME check if username is taken...
-			break;
+			if (UserProfileDao.usernameUnique(username))
+				break;
+			System.out.println("That username already exists, please try a different one.");
+			System.out.println(username);
 		}
 
 		while (true) {
@@ -119,7 +126,8 @@ public class BankMachine {
 			System.out.println("Must be 2-24 characters and only letters and numbers.");
 		}
 
-		// FIXME - Create the new user here...
+		this.currentUser = new UserProfile(0, firstName, lastName, username, password);
+		UserProfileDao.addUserRecord(this.currentUser);
 	}
 
 	// Prompts the user for their username and password
@@ -150,9 +158,18 @@ public class BankMachine {
 				return;
 			}
 
-			/// FIXME - authenticate user here...
-			break;
+			if ((this.currentUser = UserProfileDao.authenticate(username, password)) != null)
+				notValid = false;
+			else
+				System.out.println("Invalid username and password. Please try again.");
 		}
+
+		this.modifyAccount();
+	}
+
+	private void modifyAccount() {
+
+		System.out.println("MODIFY...");
 	}
 
 	// Prompts the user for an integer within the range [min, max]
