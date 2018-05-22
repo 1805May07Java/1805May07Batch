@@ -51,7 +51,7 @@ public class AccountDao {
 		return accounts;
 	}
 
-	protected String getAccountType(int id) {
+	protected static String getAccountType(int id) {
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -67,6 +67,42 @@ public class AccountDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "";
+		}
+	}
+
+	public static void updateAccount(Account account) {
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			conn.setAutoCommit(false);
+			String query = "UPDATE Account SET AccountBalance = ? WHERE AccountId = ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setDouble(1, account.getBalance());
+			ps.setInt(2, account.getId());
+			ps.executeQuery();
+			conn.commit();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void addAccountRecord(int userFk, int type) {
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			conn.setAutoCommit(false);
+			String query = "INSERT INTO Account (AccountUser_FK, AccountType_FK) VALUES (?, ?)";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, userFk);
+			ps.setInt(2, type);
+			ps.executeQuery();
+			conn.commit();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

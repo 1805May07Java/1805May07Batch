@@ -49,6 +49,10 @@ public class Account {
 		return balance;
 	}
 
+	public void deposit(double amount) {
+		this.balance += amount;
+	}
+
 	public boolean withdraw(double amount) {
 		if (this.balance - amount < 0.0)
 			return false;
@@ -67,8 +71,8 @@ public class Account {
 	@Override
 	public String toString() {
 
-		return String.format("[%d][%s]: $%.2f",
-				this.userId, this.type, this.balance);
+		return String.format("(%d) %s - $%.2f",
+				this.id, this.type, this.balance);
 	}
 
 }

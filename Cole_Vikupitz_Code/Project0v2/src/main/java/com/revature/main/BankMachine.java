@@ -10,9 +10,12 @@
 
 package com.revature.main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.revature.dao.AccountDao;
 import com.revature.dao.UserProfileDao;
+import com.revature.pojos.Account;
 import com.revature.pojos.UserProfile;
 
 public class BankMachine {
@@ -21,11 +24,17 @@ public class BankMachine {
 	private Scanner scanner;
 	// The currently logged in user
 	private UserProfile currentUser;
+	// The current account being modified
+	private Account currentAccount;
+	// List of all logged in user's accounts
+	private ArrayList<Account> accounts;
 
 	public BankMachine() {
 
 		this.scanner = new Scanner(System.in);
 		this.currentUser = null;
+		this.currentAccount = null;
+		this.accounts = null;
 	}
 
 	// Run the bank machine
@@ -65,13 +74,22 @@ public class BankMachine {
 		System.out.println("0: Exit");
 	}
 
+	private void fetchAccounts() {
+
+		this.accounts = AccountDao.getUserAccounts(this.currentUser.getId());
+	}
+
 	// Display the currently signed on user's info and a menu
 	private void displayAccountMenu() {
 
-		System.out.printf("Welcome %s %s\n",
+		int count = 2;
+
+		System.out.printf("\nWelcome %s %s\n",
 				this.currentUser.getFirstName(), this.currentUser.getLastName());
 		System.out.printf("Logged in as %s\n", this.currentUser.getUsername());
 		System.out.println("1: Create Account");
+		for (Account temp : this.accounts)
+			System.out.printf("%d: %s\n", count++, temp.toString());
 		System.out.println("0: Logout");
 	}
 
@@ -132,7 +150,6 @@ public class BankMachine {
 			if (UserProfileDao.usernameUnique(username))
 				break;
 			System.out.println("That username already exists, please try a different one.");
-			System.out.println(username);
 		}
 
 		// Prompt the user for their password
@@ -153,6 +170,7 @@ public class BankMachine {
 		// Create the new user, upload to database
 		UserProfileDao.addUserRecord(new UserProfile(0, firstName, lastName, username, password));
 		this.currentUser = UserProfileDao.authenticate(username, password);
+		this.modifyAccount();
 	}
 
 	// Prompts the user for their username and password
@@ -194,10 +212,167 @@ public class BankMachine {
 		this.modifyAccount();
 	}
 
+	private void createAccount() {
+
+		System.out.println("Select which account type you want.");
+		System.out.println("1: Credit");
+		System.out.println("2: Savings");
+		System.out.println("3: Checking");
+		System.out.println("0: Cancel");
+
+		int type = this.promptNumber(0, 3);
+		if (type == 0) {
+			this.displayAccountMenu();
+			return;
+		}
+
+		AccountDao.addAccountRecord(this.currentUser.getId(), type);
+		this.fetchAccounts();
+		this.displayAccountMenu();
+	}
+
 	// FIXME
 	private void modifyAccount() {
 
+		boolean loggedIn = true;
 
+		this.fetchAccounts();
+		this.displayAccountMenu();
+
+		while (loggedIn) {
+			int choice = this.promptNumber(0, this.accounts.size() + 1);
+			if (choice == 0) {
+				loggedIn = false;
+			} else if (choice == 1) {
+				this.createAccount();
+			} else {
+				this.currentAccount = this.accounts.get(choice - 2);
+				this.configureAccount();
+			}
+		}
+
+		this.currentUser = null;
+		this.accounts = null;
+		this.displayMainMenu();
+	}
+
+	private void displayConfMenu() {
+
+		System.out.println("What would you like to do?");
+		System.out.println("1: Deposit");
+		System.out.println("2: Withdraw");
+		System.out.println("3: View Balance");
+		System.out.println("0: Return to Account");
+	}
+
+	private void configureAccount() {
+
+		boolean flag = true;
+		this.displayConfMenu();
+
+		while (flag) {
+
+			switch (this.promptNumber(0, 3)) {
+				case 0:
+					flag = false;
+					break;
+				case 1:
+					this.deposit();
+					break;
+				case 2:
+					this.withdraw();
+					break;
+				case 3:
+					System.out.printf("Current Balance: $%.2f\n", this.currentAccount.getBalance());
+					break;
+			}
+		}
+
+		this.displayAccountMenu();
+	}
+
+	private void deposit() {
+
+		boolean notValid = true;
+		String line;
+		double amount = 0.0;
+
+		System.out.println("Enter the deposit amount ('-' to cancel).");
+		while (notValid) {
+
+			System.out.print("> ");
+			try {
+				// Prompt the user for a deposit amount
+				line = this.scanner.nextLine();
+				// Cancels the request
+				if (line.equals("-")) {
+					this.displayAccountMenu();
+					return;
+				}
+				// Parse the amount from the input
+				amount = Double.parseDouble(line);
+				if (amount > 0.0) {
+					// Deposit the money into the account
+					this.currentAccount.deposit(amount);
+					notValid = false;
+				} else {
+					// Deposit amount invalid - display error
+					System.out.println("Invalid entry, please enter a valid amount.");
+				}
+			} catch (NumberFormatException e) {
+				// Failed to parse amount - display error
+				System.out.println("Invalid entry, please enter a valid amount.");
+			}
+		}
+
+		// Display success message, return to account menu
+		System.out.printf("Successfully deposited $%.2f\n\n", amount);
+		AccountDao.updateAccount(this.currentAccount);
+		this.displayConfMenu();
+	}
+
+	private void withdraw() {
+
+		boolean notValid = true;
+		String line;
+		double amount = 0.0;
+
+		System.out.println("Enter the withdraw amount ('-' to cancel).");
+		while (notValid) {
+
+			System.out.print("> ");
+			try {
+				// Prompt the user for the desired amount
+				line = this.scanner.nextLine();
+				// Cancels the request
+				if (line.equals("-")) {
+					this.displayAccountMenu();
+					return;
+				}
+				// Parse the entered amount
+				amount = Double.parseDouble(line);
+				if (amount > 0.0) {
+					// Attempt to withdraw amount from account
+					// Print error if insufficient funds
+					if (!this.currentAccount.withdraw(amount)) {
+						System.out.println("Sorry, your account has insufficient funds.");
+					} else {
+						notValid = false;
+					}
+				} else {
+					// Amount specified invalid - print error
+					System.out.println("Invalid entry, please enter a valid amount.");
+				}
+			} catch (NumberFormatException e) {
+				// Failed to parse amount - print error
+				System.out.println("Invalid entry, please enter a valid amount.");
+			}
+		}
+
+		// Display success message, return to account menu
+		System.out.printf("Sucessfully withdrew $%.2f\n\n", amount);
+		AccountDao.updateAccount(this.currentAccount);
+		this.displayAccountMenu();
 	}
 
 	// Prompts the user for an integer within the range [min, max]
