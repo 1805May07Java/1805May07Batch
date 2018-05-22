@@ -62,14 +62,20 @@ public class App {
     				case 1:
     					Account toUpdate = null;
     					System.out.println("Which account would you like to update?");
-    					int accNo = scanner.nextInt();
-    					while (toUpdate == null) {
-	    					for (Account a : userDAO.getUserAccounts(loggedOn.getUserID())) {
-	    						if (a.getAccountNumber() == accNo) {
-	    							toUpdate = a;
-	    						}
-	    					}
-    					}
+						int accNo;
+    					do {
+    						accNo = scanner.nextInt();
+    						if (loggedOn.getAccountNumbers().contains(accNo)) {
+		    					for (Account a : userDAO.getUserAccounts(loggedOn.getUserID())) {
+		    						if (a.getAccountNumber() == accNo) {
+		    							toUpdate = a;
+		    						}
+		    					}
+    						} else {
+    							System.out.println("That is not your account.");
+    							System.out.println("Which account would you like to update?");
+    						}
+    					} while (!loggedOn.getAccountNumbers().contains(accNo));
     					// add remove account
     					System.out.println("What change do you want to make?:"
     							+ "\n1: deposit"
@@ -82,14 +88,14 @@ public class App {
     						case 1:
     							System.out.println("Amount?");
     							amount = scanner.nextDouble();
-    							toUpdate.setBalance(toUpdate.getBalance()+amount);
-    							accDAO.updateAccountBalance(toUpdate.getAccountNumber(), toUpdate.getBalance()+amount);
+    							toUpdate.deposit(amount);
+    							accDAO.updateAccountBalance(toUpdate.getAccountNumber(), toUpdate.getBalance());
     							break;
     						case 2:
     							System.out.println("Amount?");
     							amount = scanner.nextDouble();
-    							toUpdate.setBalance(toUpdate.getBalance()-amount);
-    							accDAO.updateAccountBalance(toUpdate.getAccountNumber(), toUpdate.getBalance()+amount);
+    							toUpdate.withdraw(amount);
+    							accDAO.updateAccountBalance(toUpdate.getAccountNumber(), toUpdate.getBalance());
     							break;
     						case 3:
     							System.out.println("Are you sure? (y/n)");

@@ -3,14 +3,14 @@ package com.ex.POJO;
 public class Account {
 	int accountNumber;
 	double balance;
-	int accType; 		//LOOKUP TABLE
+	String accType; 		
 
 	public Account() {
 	}
 	
 	public Account(int accNo, int accType) {
 		accountNumber = accNo;
-		this.accType = accType;
+		setAccType(accType);
 		balance = 0;
 	}
 	
@@ -22,11 +22,11 @@ public class Account {
 		this.balance = balance;
 	}
 	
-	public void chargeBalance(double charge) {
+	public void withdraw(double charge) {
 		this.balance -= charge;
 	}
 	
-	public void depositBalance(double deposit) {
+	public void deposit(double deposit) {
 		this.balance += deposit;
 	}
 
@@ -38,15 +38,25 @@ public class Account {
 		accountNumber = accNo;
 	}
 	
-	public int getAccType() {
+	public String getAccType() {
 		return accType;
 	}
 
 	public void setAccType(int accType) {
-		this.accType = accType;
+		switch (accType) {
+		case 0:
+			this.accType = "Credit";
+			break;
+		case 1:
+			this.accType = "Savings";
+			break;
+		case 2:
+			this.accType = "Checking";
+			break;
+		}
 	}
 	
 	public void displayAccountInfo() {
-		System.out.println("Account Number: " + accountNumber + " Balance: " + balance);
+		System.out.println("Account Number: " + accountNumber + " " + accType + " Balance: " + balance);
 	}
 }

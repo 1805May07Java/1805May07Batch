@@ -78,6 +78,14 @@ public class User {
 		return accounts;
 	}
 	
+	public ArrayList<Integer> getAccountNumbers(){
+		ArrayList<Integer> accountNumbers = new ArrayList<Integer>();
+		for (Account a : accounts) {
+			accountNumbers.add(a.getAccountNumber());
+		}
+		return accountNumbers;
+	}
+	
 	public void setAccounts(ArrayList<Account> accounts) {
 		this.accounts = accounts;
 	}
