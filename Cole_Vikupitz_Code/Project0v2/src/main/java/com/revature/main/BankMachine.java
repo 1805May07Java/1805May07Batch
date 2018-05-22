@@ -17,7 +17,9 @@ import com.revature.pojos.UserProfile;
 
 public class BankMachine {
 
+	// Scanner allowing users to interact with machine
 	private Scanner scanner;
+	// The currently logged in user
 	private UserProfile currentUser;
 
 	public BankMachine() {
@@ -60,6 +62,16 @@ public class BankMachine {
 		System.out.println("1: Login");
 		System.out.println("2: Create Account");
 		System.out.println("0: Exit");
+	}
+
+	// Display the currently signed on user's info and a menu
+	private void displayAccountMenu() {
+
+		System.out.printf("Welcome %s %s\n",
+				this.currentUser.getFirstName(), this.currentUser.getLastName());
+		System.out.printf("Logged in as %s\n", this.currentUser.getUsername());
+		System.out.println("1: Create Account");
+		System.out.println("0: Logout");
 	}
 
 	// Prompts user for their full name, username, and password
@@ -167,9 +179,10 @@ public class BankMachine {
 		this.modifyAccount();
 	}
 
+	// FIXME
 	private void modifyAccount() {
 
-		System.out.println("MODIFY...");
+
 	}
 
 	// Prompts the user for an integer within the range [min, max]

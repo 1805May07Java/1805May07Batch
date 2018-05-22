@@ -8,15 +8,16 @@ package com.revature.pojos;
 
 public class Account {
 
-	private int id, userId, typeId;
+	private int id, userId;
 	private double balance;
+	private String type;
 
-	public Account(int id, int userId, int typeId, double balance) {
+	public Account(int id, int userId, double balance, String type) {
 
 		this.id = id;
 		this.userId = userId;
-		this.typeId = typeId;
 		this.balance = balance;
+		this.type = type;
 	}
 
 	public int getId() {
@@ -35,20 +36,23 @@ public class Account {
 		this.userId = userId;
 	}
 
-	public int getTypeId() {
-		return typeId;
-	}
-
-	public void setTypeId(int typeId) {
-		this.typeId = typeId;
-	}
-
 	public double getBalance() {
 		return balance;
 	}
 
-	public void setBalance(double balance) {
-		this.balance = balance;
+	public boolean withdraw(double amount) {
+		if (this.balance - amount < 0.0)
+			return false;
+		this.balance -= amount;
+		return true;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }
