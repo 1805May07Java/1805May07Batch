@@ -61,4 +61,11 @@ public class UserProfile {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+
+		return String.format("%s %s, %s:%s",
+				this.firstName, this.lastName, this.username, this.password);
+	}
+
 }
