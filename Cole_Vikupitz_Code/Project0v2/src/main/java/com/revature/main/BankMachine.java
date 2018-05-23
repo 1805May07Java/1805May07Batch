@@ -334,7 +334,7 @@ public class BankMachine {
 				line = this.scanner.nextLine();
 				// Cancels the request
 				if (line.equals("-")) {
-					this.displayAccountMenu();
+					this.displayConfMenu();
 					return;
 				}
 				// Parse the amount from the input
@@ -375,7 +375,7 @@ public class BankMachine {
 				line = this.scanner.nextLine();
 				// Cancels the request
 				if (line.equals("-")) {
-					this.displayAccountMenu();
+					this.displayConfMenu();
 					return;
 				}
 				// Parse the entered amount
