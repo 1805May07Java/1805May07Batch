@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Event Handleing</title>
+</head>
+
+<body>
+	<h1>Function Veiwer</h1>
+	<hr><br>
+	<h3>Fibonacci</h3>
+	<input id="fib-n" type="number"/>
+	<button id="doFib">Submit</button>
+	<p id="Output"></p>
+	<br>
+	
+	<h3>Factorial</h3>
+	<input id="fact-n" type="number"/>
+	<button id="doFact">Submit</button>
+	<p id="Fact-Output"></p>
+	
+	<br>
+	
+	<h3>RevString</h3>
+	<input id="rev-n" type="String"/>
+	<button id="doRev">Submit</button>
+	<p id="Rev-Output"></p>
+	
+	
+	<script>
+		//window.onload(alert("Hello this is Javascript"));
+		//document.ready(alert("Hello this is Javascript"));
+		
+		//addeventlistener(event, Function, [propegate])
+		document.getElementById("doFib").addEventListener("click", runFib, false);
+		document.getElementById("doFact").addEventListener("click", runFact, false);
+		document.getElementById("doRev").addEventListener("click", runRev, false);
+		
+		function runFib(){
+			var n = document.getElementById("fib-n").value;
+			document.getElementById("Output").innerHTML = fib(n);
+			console.log(fib(n));
+			
+		}
+		
+		function runFact(){
+			var f = document.getElementById("fact-n").value;
+			document.getElementById("Fact-Output").innerHTML = fact(f);
+		}
+		
+		function runRev(){
+			var g = document.getElementById("fact-n").value;
+			document.getElementById("Rev-Output").innerHTML = revStr(g);
+		}
+		
+		function fib(n){
+			if(n == 0) return 0;
+			if(n == 1) return 1;
+			return fib(n-1) + fib(n-2);
+		};
+		
+		function fact(num){
+			f = 1;
+		
+			while (num != 0) {
+				f *= num;
+				num--;
+			}
+			
+			return f;
+}
+
+		function revStr(str){
+			a="";
+			for(i = str.length - 1; i >= 0; i--) {
+					var a =	a + str.charAt(i);	
+					}
+					return a;
+		}
+	</script>
+</body>
+</html>
