@@ -275,6 +275,7 @@ public class BankMachine {
 	// User can display balance, withdraw, and deposit from the account
 	private void displayConfMenu() {
 
+		System.out.println("\n" + this.currentAccount);
 		System.out.println("What would you like to do?");
 		System.out.println("1: Deposit");
 		System.out.println("2: Withdraw");
@@ -400,7 +401,7 @@ public class BankMachine {
 		// Display success message, return to account menu
 		System.out.printf("Sucessfully withdrew $%.2f\n\n", amount);
 		AccountDao.updateAccount(this.currentAccount);
-		this.displayAccountMenu();
+		this.displayConfMenu();
 	}
 
 	// Prompts the user for an integer within the range [min, max]
