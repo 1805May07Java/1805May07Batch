@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <title>Kev Jumbo's Week 3 Website</title>
+  </head>
+  <body>
+    <h1>Three SQL Concepts</h1>
+		<div id = "first-div">
+			<h2>RDBMS</h2>
+			<p style="color: red">What does this mean? How did we get here. Where can we go? Well researchers have develeoped a new RDBMS technology, also known as relational database management system. <span style="color: blue">this text is blue</span></p>
+			This is a <a href="https://google.com">link</a>>
+		</div>
+		<div>
+			<h2>Properties of Tranactions</h2>
+			<p>ACID - Atomicity, Consistency, Isolation, Durability</p>
+		</div>
+		<div>
+			<h2>Isolation</h2>
+			<p>There are level to which you DB can isolate its transactions. These are called tx isolation levels. Each prevents your transctions from a different set of problems.</p>
+			<table border="2">
+				<thead>
+					<tr>
+						<th>Isolation Level</th>
+						<th>Dirty Read</th>
+						<th>Non-Repeatable Read</th>
+						<th>Phantom Read</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Read Uncomitted</td>
+						<td>x</td>
+						<td>x</td>
+						<td>x</td>
+					</tr>
+					<tr>
+						<td>Read Committed</td>
+						<td>yes</td>
+						<td>x</td>
+						<td>x</td>
+					</tr>
+					<tr>
+						<td>Repeatable Read</td>
+						<td>yes</td>
+						<td>yes</td>
+						<td>x</td>
+					</tr>
+					<tr>
+						<td>Serializable</td>
+						<td>yes</td>
+						<td>yes</td>
+						<td>yes</td>
+					</tr>
+				</tbody>
+				<caption>Tranactions</caption>
+			</table>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>
