@@ -1,0 +1,62 @@
+<! DOCTYPE html>
+<html>
+	<head>
+		<title> Event Handling </title>
+	</head>
+	<body>
+		<h1>Function Viewer</h1>
+		<hr>
+		<br>
+		<h3>Fibonacci</h3>
+			<input id="fib-n" type="number"/>
+			<button id = "doFib">Submit</button>
+			<p id = "output"></p>
+			
+		<h3>String Reversal</h3>
+			<input id = "reverser" type = "string"/>
+			<button id = "goReverse">Reverse</button>
+			<p id = "reverseLand"></p>
+			
+			
+		<script>
+			//add event listener(event, function, [propogate])
+			document.getElementById("doFib").addEventListener("click", runFib, false);
+			function runFib()
+			{
+				let n = document.getElementById("fib-n").value;
+				document.getElementById("output").innerHTML = fib(n);
+				console.log(fib(n));
+			}
+			
+			function fib(n)
+			{
+				if (n==0) return 0;
+				if (n==1) return 1;
+				return fib(n-1) + fib(n-2);
+			}
+			
+			document.getElementById("goReverse").addEventListener("click", runRever, false)
+			function runRever()
+			{
+				let m = document.getElementById("reverser").value;
+				document.getElementById().innerHTML = reverse(m);
+				console.log(reverse(m));
+			}
+			
+			
+			function reverse(string)
+			{
+				for(let i = (string.length -1); i >=0; i--;)
+				{
+					console.log(string.charAt(i));
+				}
+			}
+			
+			
+			
+			
+		</script>
+		
+		
+	</body>
+</html>

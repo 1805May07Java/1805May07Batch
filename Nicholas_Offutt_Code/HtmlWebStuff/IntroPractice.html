@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	
+	
+    <title>Hello, Structured Query Language!</title>
+  </head>
+  
+  <body>
+   
+	<h1>Hello, Structured Query Language!</h1>
+		<div class="container">
+			<p>Well, here we are talking about Structured Query Language, from now on referred to as SQL, being pronounced as sequel. If you heard the same thing both times the first one was S Q L as separate letters.</p>
+			<p>So what do we use this SQL for? Creating, Modifying, and Searching data that we have stored in a database. SQL is the language we use to talk to a specific kind of database called a relational database.</p>
+			<p>Relational Databases are a complex subject and what is discussed here is only a fairly low level </p>	
+		</div>
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<ul>
+						<li>Records</li>
+						<li>Columns</li>
+						<li>Keys</li>
+						<li>Table</li>
+					</ul>
+				</div>
+				<div class="col-md-6">
+					<table class = "table">
+						<thead>
+							<tr>
+							<th scope = "col">ID</th>
+							<th scope = "col">First Name</th>
+							<th scope = "col">Last Name</th>
+							<th scope = "col">Job</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope = "row">1<th>
+								<td>Bob</td>
+								<td>Smith</td>
+								<td>Baker</td>
+							</tr>
+							<tr>
+								<th scope = "row">2<th>
+								<td>Adam</td>
+								<td>Baker</td>
+								<td>Mechanist</td>
+							</tr>
+							<tr>
+								<th scope = "row">3<th>
+								<td>Scott</td>
+								<td>Cutter</td>
+								<td>Tailor</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			<div>
+		</div>
+		<div class = "container">
+			<p>So the above List and Table show what a data base table might look like.  A table is how a relational database organizes information, each column of 
+			the table is a different property or piece of information about an object or person.  A row or record in a data base is a collection of information from 
+			each column that forms a picture about what is stored in that table. In this case there is stored the First and Last names of a person and their job.</p>
+			<p>That takes care of three of the columns but what is that ID column about? That is the relational part of relational database, it is what is known 
+			as the Primmary Key. The Primary Key is a unique identifier that allows searches through the database to tell records apart. In this case it is an arbitrarily
+			assigned ID value that tells them apart.  It is not always an ID number there are cases where a particular kind of data is naturally unique or constrained as 
+			unique such as an email addresses. </p>
+			<p>So how does a special column that helps tell things apart lead into a relational database? In more complex sets of tables you can represent a relationship 
+			between records by having the primary key from one table be a column in another table.  This ties the information from those two tables together logically. 
+			An example would be if we added addresses to the above table and those addresses were the primary key in a table concerning buildings or houses. Those addresses would 
+			be what is known as a foreign key in the person table above.</p>
+			
+			<p>This was a lot of information, poorly explained so here have a link to a search engine.<a href = "https://www.google.com">Google</a> or better yet a place that explains this much better than me<a href = "https://www.w3schools.com"> W3 Schools</a></p>
+			
+		</div>
+		<div class = "container">
+		<p>Now after that long rambling look at tables let us look at some actual SQL.  SQl is written in statements that perform different actions </p>
+		</div>
+		<div class = "container">
+		<div class="col-md-3">
+					<ul>
+						<li>Data Design Language</li>
+						<li>CREATE</li>
+						<li>DROP</li>
+						<li>ALTER</li>
+					</ul>
+				</div>
+		</div>	
+		<div class="col-md-3">
+					<ul>
+						<li>Data Manipulation Language</li>
+						<li>Columns</li>
+						<li>Keys</li>
+						<li>Table</li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<ul>
+						<li>Records</li>
+						<li>Columns</li>
+						<li>Keys</li>
+						<li>Table</li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<ul>
+						<li>Records</li>
+						<li>Columns</li>
+						<li>Keys</li>
+						<li>Table</li>
+					</ul>
+				</div>
+				
+				
+				
+				
+				
+				
+				
+				 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  
+  </body>
+  
+  
+  
+</html>
