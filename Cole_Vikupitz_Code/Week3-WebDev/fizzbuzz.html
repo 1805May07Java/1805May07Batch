@@ -28,16 +28,59 @@
 
 	<body>
 		
-		<div id="jumbotron">
+		<div class="jumbotron">
             <h1>Welcome to FizzBuzz</h1>
             <h4>
-            Task: Allow a user to enter a number (n) and submit, the program will
-            then print out all numbers from 1-n.
+                Task: Allow a user to enter a number (n) and submit,
+                the program will print the fizzbuzz sequence for that number,
+                which is the following:
+                <br>
             </h4>
+            
+            <h6>
+                <ul>
+                    <li>If number is not divisible by 3 or 5, print the number.</li>
+                    <li>If number is divisible by 3, print 'Fizz'.</li>
+                    <li>If number is divisible by 5, print 'Buzz'.</li>
+                    <li>If number is divisible by 3 and 5, print 'FizzBuzz'.</li>
+                </ul>
+            </h6>
+            
+            <hr>
+            
+            Enter N:&nbsp&nbsp&nbsp
+            <input type="number" id="N">
+            <br><br>
+            <button class="btn btn-submit" id="go">FizzBuzz Me Brah!</button>
+            <ul id="output"></ul>
+            
         </div>
 
 		
-		
+		<script>
+        
+            $('#go').on('click', run);
+            
+            function run() {/* FIXME */}
+        
+            function fizzbuzz(n) {
+                var values = [];
+                
+                for (let i = 1; i <= n; i++) {
+                    if (i % 3 == 0 & i % 5 == 0) {
+                        values.push('FizzBuzz');
+                    } else if (i % 3 == 0) {
+                        values.push('Fizz');
+                    } else if (i % 5 == 0) {
+                        values.push('Buzz');
+                    } else {
+                        values.push(i);
+                    }
+                }
+
+                return values;
+            }
+        </script>
 
 	</body>
 
