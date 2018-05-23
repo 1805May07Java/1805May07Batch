@@ -10,6 +10,7 @@
 
 package com.revature.main;
 
+// Imports
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,6 +32,7 @@ public class BankMachine {
 
 	public BankMachine() {
 
+		// Initialize instance members
 		this.scanner = new Scanner(System.in);
 		this.currentUser = null;
 		this.currentAccount = null;
@@ -74,6 +76,7 @@ public class BankMachine {
 		System.out.println("0: Exit");
 	}
 
+	// Returns array list of all the accounts belonging to currently logged in user
 	private void fetchAccounts() {
 
 		this.accounts = AccountDao.getUserAccounts(this.currentUser.getId());
@@ -82,11 +85,13 @@ public class BankMachine {
 	// Display the currently signed on user's info and a menu
 	private void displayAccountMenu() {
 
-		int count = 2;
+		int count = 2; // Always at least 2 options
 
+		// Display user's username and full name
 		System.out.printf("\nWelcome %s %s\n",
 				this.currentUser.getFirstName(), this.currentUser.getLastName());
 		System.out.printf("Logged in as %s\n", this.currentUser.getUsername());
+		// Display all options, including all availale accounts
 		System.out.println("1: Create Account");
 		for (Account temp : this.accounts)
 			System.out.printf("%d: %s\n", count++, temp.toString());
@@ -212,50 +217,62 @@ public class BankMachine {
 		this.modifyAccount();
 	}
 
+	// Creates a new account; prompts user to select the account type
+	// Creates a new account, and updates database accordingly
 	private void createAccount() {
 
+		// Display available account types
 		System.out.println("Select which account type you want.");
 		System.out.println("1: Credit");
 		System.out.println("2: Savings");
 		System.out.println("3: Checking");
 		System.out.println("0: Cancel");
-
+		// Prompt user for their desired account type
 		int type = this.promptNumber(0, 3);
 		if (type == 0) {
+			// User cancels out, return to user menu
 			this.displayAccountMenu();
 			return;
 		}
 
+		// Create the account, update the database
 		AccountDao.addAccountRecord(this.currentUser.getId(), type);
 		this.fetchAccounts();
 		this.displayAccountMenu();
 	}
 
-	// FIXME
+	// Allows the user to select an account; or to create a new one
 	private void modifyAccount() {
 
 		boolean loggedIn = true;
-
+		// Fetch and display all of user's available accounts
 		this.fetchAccounts();
 		this.displayAccountMenu();
 
 		while (loggedIn) {
+			// Prompt user for their choice
 			int choice = this.promptNumber(0, this.accounts.size() + 1);
 			if (choice == 0) {
+				// User logs out, return to main menu
 				loggedIn = false;
 			} else if (choice == 1) {
+				// User wants to create a new account
 				this.createAccount();
 			} else {
+				// User wants to deposit/withdraw from an account
 				this.currentAccount = this.accounts.get(choice - 2);
 				this.configureAccount();
 			}
 		}
 
+		// Nullify current user and accounts, return to main menu
 		this.currentUser = null;
 		this.accounts = null;
 		this.displayMainMenu();
 	}
 
+	// Display all options to modify account to user
+	// User can display balance, withdraw, and deposit from the account
 	private void displayConfMenu() {
 
 		System.out.println("What would you like to do?");
@@ -265,6 +282,8 @@ public class BankMachine {
 		System.out.println("0: Return to Account");
 	}
 
+	// Prompts the user for an option in the account menu
+	// User can deposit, withdraw, or view the account balance
 	private void configureAccount() {
 
 		boolean flag = true;
@@ -273,17 +292,24 @@ public class BankMachine {
 		while (flag) {
 
 			switch (this.promptNumber(0, 3)) {
+				// User wants to exit, return to profile menu
 				case 0:
 					flag = false;
 					break;
+				// User wants to deposit money
 				case 1:
 					this.deposit();
 					break;
+				// User wants to withdraw money
 				case 2:
 					this.withdraw();
 					break;
+				// User wants to view the balance
 				case 3:
 					System.out.printf("Current Balance: $%.2f\n", this.currentAccount.getBalance());
+					break;
+				// Error, do nothing
+				default:
 					break;
 			}
 		}
@@ -291,6 +317,7 @@ public class BankMachine {
 		this.displayAccountMenu();
 	}
 
+	// Prompts the user to enter the deposit amount; updates account accordingly
 	private void deposit() {
 
 		boolean notValid = true;
@@ -331,6 +358,7 @@ public class BankMachine {
 		this.displayConfMenu();
 	}
 
+	// Prompts the user to enter the withdraw amount; updates account accordingly
 	private void withdraw() {
 
 		boolean notValid = true;

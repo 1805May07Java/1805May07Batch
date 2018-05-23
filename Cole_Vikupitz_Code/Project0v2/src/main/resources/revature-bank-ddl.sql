@@ -103,6 +103,18 @@ END;
 
 
 /*
+ * Create stored procedures/functions
+ */
+CREATE OR REPLACE PROCEDURE updateBalance(aid IN NUMBER, nbalance IN NUMBER)
+AS
+BEGIN
+	UPDATE Account
+	SET AccountBalance = nbalance
+	WHERE AccountId = aid;
+END;
+/
+
+/*
  * Commit all changes, exit
  */
 COMMIT;
