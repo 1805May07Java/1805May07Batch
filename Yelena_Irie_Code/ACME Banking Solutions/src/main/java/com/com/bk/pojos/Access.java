@@ -6,7 +6,7 @@ public class Access extends User {
    
 	private String username;
 
-	private String password;
+	public String password;
 	private int id=-1;
 	public boolean status = false;
 

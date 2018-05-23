@@ -8,6 +8,7 @@ public class Account{
      private static int userid= -1;
      private static double balance=0.0;
      private static String name="";
+     private static int typeid=500;
   
 	public static int getUserid() {
 		return userid;
@@ -35,6 +36,13 @@ public class Account{
 	public static void setId(int id) {
 		Account.id = id;
 	}
+	public static int getTypeid() {
+		return typeid;
+	}
+	public static void setTypeid(int typeid) {
+		Account.typeid = typeid;
+	}
+ 
      
 
 

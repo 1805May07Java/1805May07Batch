@@ -37,6 +37,36 @@ public class FeatureTest {
 	     
 		
 	}
+ 
+	@Test
+	public void createLogin() {
+		//*Login
+		System.out.println("Please providethe following Information:");
+		System.out.println("Enter your Email   :");
+		Access newaccess = new Access();
+		User newusr =new User();
+		Account newacc =new Account();
+		newaccess.setEmail(getInput().nextLine());
+		System.out.println("Enter your UserName:");
+		newaccess.setUsername(getInput().nextLine());
+		System.out.println("Enter your Password:");
+		newaccess.setPassword(getInput().nextLine());
+		System.out.println("Please Enter in Your Account Information:");
+		System.out.println("Account Name:");
+		newacc.setName(getInput().nextLine());
+		System.out.println("Intial Deposit:");
+		newacc.setBalance(Double.parseDouble(getInput().nextLine()));
+		System.out.println("Account Type:");
+		newacc.setTypeid(Integer.parseInt(getInput().nextLine()));
+		p.registerUser(newaccess,newacc);
+		Access outputAccessObj =new Access();
+		assertFalse("User Status: Should be intialize to False",outputAccessObj.status);
+	    Access outputAccessObj1= p.Login(user, password);
+        assertTrue("User Status: False",outputAccessObj1.status);
+		 
+	     
+		
+	}
 	private void outputAccessObj() {
 		// TODO Auto-generated method stub
 		
@@ -124,7 +154,10 @@ public class FeatureTest {
 		return p.Login(user,password);
 		
 	}
-	 
+	 Scanner getInput(){
+		 Scanner s = new Scanner(System.in);
+		 return s;
+	 }
  
 	 
 	
