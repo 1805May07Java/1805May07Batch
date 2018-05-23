@@ -11,9 +11,13 @@ public interface UserDAO {
 	public User getById(int id);
 	public User getByEmail(String email);
 	public User addUser(String email, String fName, String lName, String pass);	//TODO sequence makes id num
-	public User removeUser(int id);
+	public void removeUser(int id);
+	public void makeAdmin(int id);
 	
 	public boolean checkUserEmail(String email);
+	public boolean checkUserID(int id);
+	public boolean checkIsAdmin(int id);
+	public boolean checkUserPassword(int id, String pass);
 	
 	public void updateUserFirstName(int id, String newFname);
 	public void updateUserLastName(int id, String newLname);

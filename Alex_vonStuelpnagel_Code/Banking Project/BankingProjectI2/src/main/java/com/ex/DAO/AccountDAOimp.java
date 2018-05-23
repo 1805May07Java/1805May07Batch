@@ -75,14 +75,7 @@ public class AccountDAOimp implements AccountDAO {
 			ps.setInt(1, userID);
 			ps.setInt(2, accountType);
 
-			int rows = ps.executeUpdate();
-			if(rows != 0) {
-				ResultSet pk = ps.getGeneratedKeys();
-				while(pk.next()) {
-					System.out.println(pk.getInt(1));
-				}
-				conn.commit();
-			}
+			ps.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -126,9 +119,61 @@ public class AccountDAOimp implements AccountDAO {
 	}
 
 	@Override
-	public void addAccountOwner(int id, int userID) {
-		// TODO
-		
+	public boolean addAccountOwner(int userID, int accountID) {
+		boolean successful = true;
+		try(Connection conn = ConnectionFactory.getInstance().getConnection();){
+			conn.setAutoCommit(false);
+			String query = "insert into ACCOUNTS_USERS values(?, ?)";
+			
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, userID);
+			ps.setInt(2, accountID);
+
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+
+		} catch (SQLException e) {
+			successful = false;
+			System.out.println("An error occurred, make sure the user is not already on the account");
+		}
+		return successful;
 	}
 
+	@Override
+	public boolean checkAccID(int ID) {
+		boolean doesContain = false;
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String query = "select count(1) from Accounts where acc_id = ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, ID);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			doesContain = (rs.getInt(1) == 1);			//if the id exists already, rs should return 1, else 0
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return doesContain;
+	}
+
+	@Override
+	public void removeAccountOwner(int accID, int userID) {
+		try(Connection conn = ConnectionFactory.getInstance().getConnection();){
+			conn.setAutoCommit(false);
+			String query = "delete from accounts_users where acc_id = ? and user_id = ?)";
+			
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, accID);
+			ps.setInt(2, userID);
+
+			ps.executeUpdate();
+			conn.commit();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
+
+

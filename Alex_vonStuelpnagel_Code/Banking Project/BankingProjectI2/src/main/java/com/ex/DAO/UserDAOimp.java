@@ -101,7 +101,7 @@ public class UserDAOimp implements UserDAO {
 		User user = new User();
 		try(Connection conn = ConnectionFactory.getInstance().getConnection();){
 			conn.setAutoCommit(false);
-			String query = "call new_user(?, ?, ?, ?)";
+			String query = "call new_user(?, ?, ?, (HASHBYTES('SHA2_512', ?)))";
 			
 			String[] keys = new String[1];
 			keys[0] = "User_id";
@@ -134,9 +134,19 @@ public class UserDAOimp implements UserDAO {
 	}
 	
 	@Override
-	public User removeUser(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public void removeUser(int id) {
+		try(Connection conn = ConnectionFactory.getInstance().getConnection();){
+			conn.setAutoCommit(false);
+			String query = "delete from users where user_id = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, id);
+			ps.executeUpdate();
+			conn.commit();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -156,6 +166,63 @@ public class UserDAOimp implements UserDAO {
 		
 		return doesContain;
 	}
+	
+	@Override
+	public boolean checkUserID(int id) {
+		boolean doesContain = false;
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String query = "select count(1) from Users where user_id = ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			doesContain = (rs.getInt(1) == 1);			//if the email exists already, rs should return 1, else 0
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return doesContain;
+	}
+	
+	@Override
+	public boolean checkUserPassword(int id, String pass) {
+		boolean correctPass = false;
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String query = "select count(1) from Users where user_id = ? && pass = HASHBYTES('SHA2_512', ?)";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, id);
+			ps.setString(1, pass);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			correctPass = (rs.getInt(1) == 1);			//if the email exists already, rs should return 1, else 0
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return correctPass;
+	}
+
+	
+	@Override
+	public boolean checkIsAdmin(int id) {
+		boolean doesContain = false;
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String query = "select is_admin from USERS where user_id = ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			doesContain = (rs.getInt(1) == 1);			//if the email exists already, rs should return 1, else 0
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return doesContain;
+	}
+
 
 
 	@Override
@@ -276,5 +343,26 @@ public class UserDAOimp implements UserDAO {
 		
 		return accounts;
 	}
+
+	@Override
+	public void makeAdmin(int id) {
+		try(Connection conn = ConnectionFactory.getInstance().getConnection();){
+			conn.setAutoCommit(false);
+			String query = "update Users set is_Admin = 1 where user_id = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, id);
+		System.out.println( ps.executeUpdate()) ;
+			conn.commit();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	
+	
+	
 
 }

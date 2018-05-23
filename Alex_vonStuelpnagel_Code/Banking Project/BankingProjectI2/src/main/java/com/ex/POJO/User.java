@@ -27,6 +27,7 @@ public class User {
 	}
 	
 	public boolean getIsAdmin() {
+		System.out.println(isAdmin);
 		return isAdmin;
 	}
 
