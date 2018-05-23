@@ -1,0 +1,69 @@
+<!doctype html>
+
+<html>
+<head>
+<title>Hi</title>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+
+</head>
+<body>
+<nav><a href="http://www.yahoo.com">yahoo</a> <a href="http://www.google.com">Google</a> <a href="http://www.cnn.com">news</a></nav>
+	<p>Here is a list</p></br>
+	<ul style="list-style-type:circle">
+		<li>one</li>
+		<li>two</li>
+		<li>three</li>
+	</ul>
+	</br>
+	<table style="width:100%">
+	<tr>
+		<td>one</td>
+		<td>two</td>
+		</tr>
+	<tr>
+		<td>one</td>
+		<td>two</td>
+	</tr>
+	</table>
+	
+	</br>
+	<p>some code</p>
+	<code>
+	try(Connection conn = ConnectionFactory.getInstance().getConnection();){
+			conn.setAutoCommit(false);
+			String query = "insert into Users values(?,?,?,?,?)";
+						
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, user.getSsn());
+			ps.setString(2, user.getUname());
+			ps.setString(3, user.getPwd());
+			ps.setString(4, user.getFname());
+			ps.setString(5, user.getLname());
+		
+	</code>
+	
+	</br>
+	
+	<a href="http://www.google.com">Search at google</a>
+	</br>
+	<p>An image</p>
+	<img src="sqljoins.jpg"></img>
+	
+</body>
+</html>

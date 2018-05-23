@@ -1,0 +1,19 @@
+div#first-div {
+			background-color: lightgreen;
+			
+		}
+		div > * {
+			border: 1px solid black;
+		}
+		strong, i, span {
+			border: 5px dashed purple;
+		}
+		a:active {
+			color: pink;
+		}
+		a:hover {
+			color: yellow;
+		}
+		a:visited {
+			color: grey;
+		}
