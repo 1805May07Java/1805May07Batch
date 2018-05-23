@@ -76,6 +76,7 @@ public class AccountDAOimp implements AccountDAO {
 			ps.setInt(2, accountType);
 
 			ps.executeUpdate();
+			conn.commit();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -158,10 +159,10 @@ public class AccountDAOimp implements AccountDAO {
 	}
 
 	@Override
-	public void removeAccountOwner(int accID, int userID) {
+	public void removeAccountOwner(int userID, int accID ) {
 		try(Connection conn = ConnectionFactory.getInstance().getConnection();){
 			conn.setAutoCommit(false);
-			String query = "delete from accounts_users where acc_id = ? and user_id = ?)";
+			String query = "delete from accounts_users where acc_id = ? and user_id = ?";
 			
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setInt(1, accID);

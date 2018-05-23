@@ -15,7 +15,7 @@ public interface AccountDAO {
 	
 	public void updateAccountBalance(int id, double newBalance);
 	
-	public boolean addAccountOwner(int accID, int userID);
-	public void removeAccountOwner(int accID, int userID);
+	public boolean addAccountOwner(int userID, int accID );
+	public void removeAccountOwner(int userID, int accID );
 
 }

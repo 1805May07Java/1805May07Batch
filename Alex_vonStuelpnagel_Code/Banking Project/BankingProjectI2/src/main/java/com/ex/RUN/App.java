@@ -72,14 +72,15 @@ public class App {
         						} else {
         							System.out.println("That account is not in the system.");
         							System.out.println("Which account would you like to update?");
+        							accNo = scanner.nextInt();
         						}
         					} while (!accDAO.checkAccID(accNo));
         					System.out.println("What change do you want to make?:"
         							+ "\n1: set balance"
         							+ "\n2: add user"
         							+ "\n3: remove user"
-        							+ "\n3: delete account"
-        							+ "\n4: back");
+        							+ "\n4: delete account"
+        							+ "\n5: back");
         					option2 = scanner.nextInt();
         					double amount;
         					toUpdate = accDAO.getById(accNo);
@@ -96,12 +97,14 @@ public class App {
         								System.out.println("Which user would you like to add?(0 to exit):");
         								userId = scanner.nextInt();
         							
-        								if (!(userDAO.checkUserID(userId))) {
-        									System.out.println("That userid is not in the system");
-        								} else if (userId ==0) {break;
+        								if (userId == 0) {break;
         								} else if (userDAO.checkUserID(userId)) {
-        									accDAO.addAccountOwner(accNo, userId);
+        									accDAO.addAccountOwner(userId, accNo);
         									System.out.println("Account owner added");
+        								}else if (!(userDAO.checkUserID(userId))) {
+        									System.out.println("That userid is not in the system");
+        									System.out.println("Which user would you like to add?(0 to exit):");
+            								userId = scanner.nextInt();
         								}
         							} while (!(userDAO.checkUserID(userId)));
         							break;
@@ -109,15 +112,16 @@ public class App {
         							do {
         								System.out.println("Which user would you like to remove?(0 to exit):");
         								userId = scanner.nextInt();
-        							
-        								if (!(userDAO.getUserAccounts(userId).contains(accDAO.getById(accNo)))) {
-        									System.out.println("That userid is not in the system");
-        								} else if (userId ==0) {break;
-        								} else if (!(userDAO.getUserAccounts(userId).contains(accDAO.getById(accNo)))) {
-        									accDAO.removeAccountOwner(accNo, userId);
+        								if (userId == 0) {break;
+        								} else if (userDAO.checkUserID(userId)) {
+        									accDAO.removeAccountOwner(userId, accNo);
         									System.out.println("Account owner removed");
+        								}else if (!(userDAO.checkUserID(userId))) {
+        									System.out.println("That userid is not in the system");
+        									System.out.println("Which user would you like to add?(0 to exit):");
+            								userId = scanner.nextInt();
         								}
-        							} while (!(userDAO.getUserAccounts(userId).contains(accDAO.getById(accNo))));
+        							} while (!(userDAO.checkUserID(userId)));
         							break;
         						case 4:
         							System.out.println("Are you sure? (y/n)");
@@ -147,8 +151,9 @@ public class App {
         					do {
         						if (userDAO.checkUserID(userNo)) {
         						} else {
-        							System.out.println("That account is not in the system.");
-        							System.out.println("Which account would you like to update?");
+        							System.out.println("That user is not in the system.");
+        							System.out.println("Which user would you like to update?");
+        							userNo = scanner.nextInt();
         						}
         					} while (!userDAO.checkUserID(userNo));
         					System.out.println("What change do you want to make?:"
@@ -177,7 +182,7 @@ public class App {
         							} while(confirm!='y' && confirm != 'n');
         							break;
         					}
-        			} break; //if admin, and done with activity				
+        			} //break; //if admin, and done with activity				
     			} else {
     			
     			for (Account a :  userDAO.getUserAccounts(loggedOn.getUserID())) {
@@ -263,7 +268,7 @@ public class App {
 	    					}
     					} while (accType != 0 && accType != 1 && accType != 2);
     					accDAO.addAccount(loggedOn.getUserID(), accType);
-    					loggedOn.addAccount(userDAO.getUserAccounts(loggedOn.getUserID()).get(userDAO.getUserAccounts(loggedOn.getUserID()).size()-1) );
+    					loggedOn.setAccounts(userDAO.getUserAccounts(loggedOn.getUserID()));
     					break;
     				case 3:
     					loggedOn = null;
@@ -298,10 +303,10 @@ public class App {
 			System.out.println("Password:");
 			password = scanner.next();
 		
-			if (!(userDAO.checkUserEmail(email)) && !userDAO.checkUserPassword(userDAO.getByEmail(email).getUserID(),password)) {
+			if (!(userDAO.checkUserEmail(email)) || !userDAO.checkUserPassword(userDAO.getByEmail(email).getUserID(),password)) {
 				System.out.println("Wrong username or password");
 			}
-		} while (!(userDAO.checkUserEmail(email)));
+		} while (!(userDAO.checkUserEmail(email)) || !userDAO.checkUserPassword(userDAO.getByEmail(email).getUserID(),password));
 		
 		return userDAO.getByEmail(email);
 	}
@@ -320,7 +325,7 @@ public class App {
 			
 			if (userDAO.checkUserEmail(email)) {
 				System.out.println("Eamil is already being used, try another");
-				//TODO return user to log in, as likely already signed up
+				return null;
 			}
 		} while (userDAO.checkUserEmail(email));
 		

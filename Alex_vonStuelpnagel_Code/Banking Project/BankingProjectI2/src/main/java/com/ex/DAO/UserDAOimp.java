@@ -101,7 +101,7 @@ public class UserDAOimp implements UserDAO {
 		User user = new User();
 		try(Connection conn = ConnectionFactory.getInstance().getConnection();){
 			conn.setAutoCommit(false);
-			String query = "call new_user(?, ?, ?, (HASHBYTES('SHA2_512', ?)))";
+			String query = "call new_user(?, ?, ?, ?)";
 			
 			String[] keys = new String[1];
 			keys[0] = "User_id";
@@ -189,14 +189,13 @@ public class UserDAOimp implements UserDAO {
 	public boolean checkUserPassword(int id, String pass) {
 		boolean correctPass = false;
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-			String query = "select count(1) from Users where user_id = ? && pass = HASHBYTES('SHA2_512', ?)";
+			String query = "select count(1) from Users where user_id = ? and pass = ?";
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setInt(1, id);
-			ps.setString(1, pass);
+			ps.setString(2, pass);
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 			correctPass = (rs.getInt(1) == 1);			//if the email exists already, rs should return 1, else 0
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -359,6 +358,15 @@ public class UserDAOimp implements UserDAO {
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public ArrayList<Integer> getUserAccountNumbers(int id) {
+		ArrayList<Integer> accNumbers = new ArrayList<Integer>();
+		for (Account a : getUserAccounts(id)) {
+			accNumbers.add(a.getAccountNumber());
+		}
+		return accNumbers;
 	}
 
 	

@@ -25,4 +25,5 @@ public interface UserDAO {
 	public void updateUserPassword(int id, String newPass);		//confirm
 	
 	public ArrayList<Account> getUserAccounts(int id);
+	public ArrayList<Integer> getUserAccountNumbers(int id); 
 }
