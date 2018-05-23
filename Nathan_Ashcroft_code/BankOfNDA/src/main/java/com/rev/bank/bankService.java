@@ -13,6 +13,11 @@ import com.rev.pojos.User;
 
 public class bankService {
 
+	public ArrayList<User> getUsers(){
+		UserDAO dao = new UserDAOImpl();
+		return dao.getAllUsers();
+	}
+	
 	public boolean exists(String userName) {
 		UserDAO dao = new UserDAOImpl();
 		return dao.findUser(userName);

@@ -35,7 +35,8 @@ public class BankApp {
 					+ "What would you like to do?\n"
 					+ "1.) Sign in to an existing account\n"
 					+ "2.) Sign up for a new account\n"
-					+ "3.) Exit");
+					+ "3.) List of famous users\n"
+					+ "4.) Exit");
 
 
 			int op = 0;
@@ -49,10 +50,21 @@ public class BankApp {
 			switch(op) {
 			case 1: login(); break;
 			case 2: signUp(); break;
-			case 3: loop = false; break;
+			case 3: userList(); break;
+			case 4: loop = false; break;
 			default: System.out.println("Sorry that is not an option"); break;
 			}
 		}
+	}
+
+	private static void userList() {
+		ArrayList<User> u = service.getUsers();
+		System.out.println("This is the famous users of this bank you may recognize some names!");
+		for(int i = 0; i < u.size(); i++) {
+			System.out.println(u.get(i).getfName() + " " + u.get(i).getlName());
+		}
+		System.out.println("You too can add yoru name to the list!!!\n\n\n");
+		
 	}
 
 	//Log in menu
@@ -153,11 +165,12 @@ public class BankApp {
 					System.out.println("Enter your Last Name:");
 					lName = scan.nextLine();
 
-					curUser.setfName(fName);
+					/*curUser.setfName(fName);
 					curUser.setlName(lName);
 					curUser.setPassword(password);
-					curUser.setUserName(userName);
+					curUser.setUserName(userName);*/
 					service.addUser(fName, lName, userName, password);
+					curUser = service.getByUserName(userName);
 
 					banking();
 					loop = false;
