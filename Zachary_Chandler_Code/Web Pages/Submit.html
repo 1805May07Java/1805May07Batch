@@ -14,14 +14,8 @@
 	<a class="navbar-brand" href="default.html">Home</a>
 	<a class="navbar-brand" href="submit.html">Submit</a>
 	<a class="navbar-brand" href="Example.html">News</a>
-	<a class="navbar-brand" href="about.html">About</a>
-	<a class="navbar-brand mr-auto" href="login.html">Login</a>
-	
-	<form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit">Search</button>
-    </form>	
-		
+	<a class="navbar-brand mr-auto" href="about.html">About</a>
+	<a class="navbar-brand" href="login.html">Login</a>
 	</nav>
 	
 	<div class="container w-50 mx-auto" >
@@ -31,12 +25,20 @@
 
 	<div class="form-group mx-auto">
 		<label for="ticketAmount">Amount</label>
-		<input type="text" class="form-control" id="ticketAmount" placeholder="Enter ammount">
+		<div class="input-group">
+			<div class="input-group-prepend"><span class="input-group-text">$</span></div>
+			<input type="number"class="form-control" min="0.01" step="0.01" value="0.00" id="ticketAmount"/>
+		</div>
 	</div>
 
 	<div class="form-group mx-auto">
 		<label for="ticketType">Expense type</label>
-		<input type="text" class="form-control" id="ticketType" placeholder="Enter type of expense">
+		<select class="custom-select" id="ticketType">
+			<option selected>Lodging</option>
+			<option value="1">Travel</option>
+			<option value="2">Food</option>
+			<option value="3">Other</option>
+		</select>
 	</div>
 	
 	<div class="form-group mx-auto">
