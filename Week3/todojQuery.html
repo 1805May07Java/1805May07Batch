@@ -51,6 +51,7 @@
 	</div>
 
 	<script>
+    
         $('#add').on('click', function(){
             var text = $('#newItem').val();
             var item = document.createElement('li');
@@ -58,6 +59,10 @@
             $('#toBuy').append(item);
             $('#newItem').val('');
         });
+
+        $('#toBuy').on('click', 'li', function(){
+		$('#bought').append(this);
+	})
         
 		
 	</script>
