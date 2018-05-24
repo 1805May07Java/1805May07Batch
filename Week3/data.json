@@ -1,0 +1,55 @@
+{
+    "books" : [
+        {
+            "id": 1,
+            "title": "Game of Thrones"
+        },
+        {
+            "id": 2,
+            "title": "Goosebumps"
+        },
+        {
+            "id": 3,
+            "title": "TBD"
+            
+        }
+
+    ],
+
+    "genres" : [
+        {
+            "id": 1,
+            "name" : "Fiction"
+        },
+        {
+            "id": 2,
+            "name" : "country"        
+            
+        },
+        {
+            "id": 3,
+            "name" : "information"
+        }
+    ],
+
+    "authors" : [
+        {
+            "id": 1,
+            "name" : "George RR Martin"
+        },
+
+        {
+            "id": 2,
+            "name" : "Rl Stein"
+        },
+        {
+            "id":3,
+            "name" : "Rl Stein"
+        }
+
+
+    ]
+
+
+
+}
