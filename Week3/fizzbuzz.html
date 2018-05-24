@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Intro to jQuery</title>
+
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+	crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+	<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+	<div class="jumbotron">
+		<h1>FizzBuzz</h1>
+		
+		
+		<hr>
+		Enter n: <input type = "number" id = "n">
+		<button class = "btn btn-submit" id = "go">FizzBuzz!!</button>
+		<ul id = "output"></ul>
+		
+		
+	</div>
+
+	<script>
+		$('#go').on('click',run);
+		
+		function run(){
+			var out = $('#output');
+			out.empty();
+			var n = $('#n').val();
+			for (x of fizzbuzz(n))
+			{
+				var li = document.createElement('li');
+				li.innerHTML = x;
+				out.append(li);
+			}
+		}
+		
+		function fizzbuzz(n){
+			var values = [];
+			
+			for(let i = 1; i<=n; i++)
+			{
+				if (i%15==0)
+				{
+					values[i] = "FizzBuzz";
+				}
+				else if(i%5 == 0)
+				{
+					values[i] = "Buzz";
+				}
+				else if(i%3 == 0)
+				{
+					values[i] = "Fizz";
+				}
+				else
+				{
+					values[i] = i;
+				}
+				
+			}
+			
+			return values;
+		}
+	</script>
+
+</body>
+</html>
