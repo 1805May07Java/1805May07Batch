@@ -52,6 +52,8 @@
             <input type="number" id="N">
             <br><br>
             <button class="btn btn-submit" id="go">FizzBuzz Me Brah!</button>
+            <br>
+            <br>
             <ul id="output"></ul>
             
         </div>
@@ -61,7 +63,20 @@
         
             $('#go').on('click', run);
             
-            function run() {/* FIXME */}
+            function run() {
+                
+                $('#output').empty();
+                var N = $('#N').val();
+                var vals = fizzbuzz(N);
+
+                for (let i = 0; i < vals.length; i++) {
+
+                    var e = document.createElement('li');
+                    e.innerHTML = vals[i];
+                    $('#output').append(e);
+                }
+
+            }
         
             function fizzbuzz(n) {
                 var values = [];

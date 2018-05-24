@@ -10,75 +10,141 @@ Author: Cole Vikupitz
 
     <head>
         <title>SQL Concepts</title>
+        <meta charset="UTF-8">
+            
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+            integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+            crossorigin="anonymous">
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+            
         <style>
+            
             table, th, td {
                 border: 1px solid black;
                 border-collapse: collapse;
-                padding: 12px;
+                align: center;
+                padding: 24px;
+            }
+
+            a:visited {
+                color: gray;
+                background-color: transparent;
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: red;
+                background-color: transparent;
+                text-decoration: underline;
+            }
+
+            a:active {
+                color: green;
+                background-color: transparent;
+                text-decoration: underline;
             }
         </style>
+
     </head>
 
     <body>
 
-        <h1>What is SQL?</h1>
-        <ul>
-            <li>Acronym for 'Structured Query Language'</li>
-            <li>Allows us to communicate with relational databases</li>
-            <li>Not case-sensitive ('account', 'ACCOUNT', & 'Account' are all the same)</li>
-        </ul>
-        
-        <p>
-        There are a variety of commands available in SQL.
-        They are typically organized into the following categories outlined below.
-        </p>
-        
-        <table>
-            <tr>
-                <th>Category</th>
-                <th>Common Commands</th>
-            </tr>
-            <tr>
-                <td>Data Definition Language (DDL)</td>
-                <td>
-                    <ul>
-                        <li>'CREATE'</li>
-                        <li>'ALTER'</li>
-                        <li>'DROP'</li>
-                        <li>'TRUNCATE'</li>
-                        <li>'GRANT'</li>
-                        <li>'REVOKE'</li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>Data Manipulation Language (DML)</td>
-                <td>
-                    <ul>
-                        <li>'SELECT'</li>
-                        <li>'INSERT'</li>
-                        <li>'UPDATE'</li>
-                        <li>'DELETE'</li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>Transaction Control Language (TCL)</td>
-                <td>
-                    <ul>
-                        <li>'COMMIT'</li>
-                        <li>'ROLLBACK'</li>
-                        <li>'SAVEPOINT'</li>
-                        <li>'SET TRANSACTION'</li>
-                    </ul>
-                </td>
-            </tr>
-        </table>
-        
-        <h4>Additional Online Resources:</h5>
-        <a href="https://www.w3schools.com/sql/">W3 Schools</a><br>
-        <a href="https://www.tutorialspoint.com/sql/index.htm">Tutorials Point</a><br>
-        <a href="https://www.geeksforgeeks.org/sql-tutorial/">Geek for Geeks</a><br>
+        <div class="jumbotron">
+            <h1 align="center">What is SQL?</h1>
+            <hr>
+            <ul>
+                <li>Acronym for "Structured Query Language"</li>
+                <li>Allows us to communicate with relational databases</li>
+                <li>Not case-sensitive ('account', 'ACCOUNT', & 'Account' are all the same)</li>
+            </ul>
+            
+            <p>
+            There are a variety of sub-languages within SQL.
+            They are organized into the following categories outlined below.
+            </p>
+            
+            <table>
+                <tr>
+                    <th>Category</th>
+                    <th>Common Commands</th>
+                </tr>
+                <tr>
+                    <td>Data Control Language (DCL)</td>
+                    <td>
+                        <ul>
+                            <li>'GRANT'</li>
+                            <li>'REVOKE'</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Data Definition Language (DDL)</td>
+                    <td>
+                        <ul>
+                            <li>'CREATE'</li>
+                            <li>'ALTER'</li>
+                            <li>'DROP'</li>
+                            <li>'TRUNCATE'</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Data Manipulation Language (DML)</td>
+                    <td>
+                        <ul>
+                            <li>'INSERT'</li>
+                            <li>'UPDATE'</li>
+                            <li>'DELETE'</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Transaction Control Language (TCL)</td>
+                    <td>
+                        <ul>
+                            <li>'COMMIT'</li>
+                            <li>'ROLLBACK'</li>
+                            <li>'SAVEPOINT'</li>
+                            <li>'SET TRANSACTION'</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Data Query Language (DQL)</td>
+                    <td>
+                        <ul>
+                            <li>'SELECT'</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <br><br>
+            
+            <p>
+            There are also several types of joins we can perform on our tables. They are shown as such below.
+            <p>
+            <br>
+            <img src="img/joins-pic.png" alt="Join Types Chart" />
+            
+            
+            <h4>Additional Online Resources:</h5>
+            <a href="https://www.w3schools.com/sql/">W3 Schools</a><br>
+            <a href="https://www.tutorialspoint.com/sql/index.htm">Tutorials Point</a><br>
+            <a href="https://www.geeksforgeeks.org/sql-tutorial/">Geek for Geeks</a><br>
+        </div>
+
     </body>
     
 </html>
