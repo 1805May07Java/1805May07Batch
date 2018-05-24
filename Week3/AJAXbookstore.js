@@ -1,7 +1,6 @@
 window.onload = function(){
     loadGenres();
-    testing = getGenreById(1);
-    console.log(testing);
+    $('#add').on('click', addNewBook);
 }
 
 /*
@@ -12,7 +11,9 @@ function loadGenres(){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
         if(xhr.readyState==4 && xhr.status == 200){
+            console.log(xhr.responseText);
             var genres = JSON.parse(xhr.responseText);
+            console.log(genres);
             for(let i = 0; i < genres.length; i++){
                 var elem = document.createElement("option");
                 elem.value = genres[i].id;
@@ -47,8 +48,7 @@ function loadBooks(genres){
         if(xhr.readyState==4 && xhr.status == 200){
             var books = JSON.parse(xhr.responseText);
             for(let i = 0; i < books.length; i++){
-                addBookRow(books[i], genres);
-            
+                addBookRow(books[i], genres[books[i].genre-1].name);
             }
         }
     }
@@ -57,15 +57,42 @@ function loadBooks(genres){
     xhr.send();
 }
 
+function addNewBook(){
+    var isbn = document.getElementById("isbn").value;
+    var title = document.getElementById("title").value;
+    var price = document.getElementById("price").value;
+    var e = document.getElementById("genres");
+    var genre = e.options[e.selectedIndex].value;
+    var newBook = {
+        "isbn": isbn, 
+        "title": title, 
+        "price" : price,
+        "genre" : genre
+    }
 
-function addBookRow(book, genres){
-    console.log(genres);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status >= 200 && xhr.status <=299){
+            
+            newBook = JSON.parse(xhr.responseText);
+            addBookRow(newBook,e.options[e.selectedIndex].innerHTML);
+        }
+    }
+
+    xhr.open("POST", "http://localhost:3000/books", true );
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(JSON.stringify(newBook));
+}
+
+
+
+function addBookRow(book, genre){
     //getting our input values 
     var id = book.id;
     var isbn = book.isbn;
     var title = book.title;
     var price = book.price;
-    var genre = genres[book.genre-1].name;
+
 
     //generate new elements
     var row = document.createElement("tr");
@@ -91,8 +118,6 @@ function addBookRow(book, genres){
     row.appendChild(cell5);
 
     document.getElementById("tablebody").appendChild(row);
-
-
 
 
 }
