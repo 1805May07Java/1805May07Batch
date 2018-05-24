@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+          crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+
+    <meta charset="utf-8" />
+    <title>SQL Info</title>
+    <style>
+        body{
+            color:black;
+            font-weight:bold;
+        }
+        h1{
+            color:black;
+            font-weight:bold;
+        }
+        p {
+            color: black;
+            font-weight: bold;
+        }
+        ol {
+            color: black;
+            font-weight: bold;
+        }
+        ul {
+            color: black;
+            font-weight: bold;
+        }
+        li {
+            color: black;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body style="background-image:url(DragonRed.jpg); height:100%; background-size:cover; background-position:center 0%; background-repeat:no-repeat" ;>
+    <div class="container" style="align-content:center; justify-content:center"><h1 style="font-size:10rem; color:black; justify-content:center">Welcome!</h1></div>
+    <ul class="nav justify-content-left" style="border:outset">
+        <li class="nav-item">
+            <a class="nav-link active" href="https://www.kongregate.com">Someplace fun</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://www.w3schools.com/sql/default.asp">Someplace useful</a>
+        </li>
+    </ul>
+    <div><h1>Three SQL Concepts</h1></div>
+    <br />
+    <div>
+        <h3>Normalization</h3>
+        <p>Normalization has many forms but the first three are what is used by many.</p>
+        <ol>
+            <li>
+                1NF: First Normal Form
+                <ul>
+                    <li>Table is broken into its smallest component or atomic components.</li>
+                    <li>Primary keys are required</li>
+                </ul>
+            </li>
+            <li>
+                2NF: Second Normal Form
+                <ul>
+                    <li>Must have 1NF</li>
+                    <li>
+                        Must not have partial dependencies.
+                        <ul>
+                            No clolumns in the table should depend of part of the primary key,
+                            <br />
+                            usually involves composite primary keys
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                3NF: Third Normal Form
+                <ul>
+                    <li>Must have 2NF</li>
+                    <li>
+                        Must not have transitive dependencies
+                        <ul>
+                            The primary key of the table shouldn't depend on any other table column
+                            <br />
+                            that also depends on another table
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+    <br />
+    <div>
+        <h3>Joins</h3>
+        <p>
+            Joins combine columns from various tables together in a query.  Its a little hard to explain so <br />
+            here is a site with helpful pictures and explainations.<br />
+            <a href="https://teamsql.io/blog/?p=923"> Join Pictures</a>
+        </p>
+        
+    </div>
+    <br />
+
+
+
+</body>
+</html>
