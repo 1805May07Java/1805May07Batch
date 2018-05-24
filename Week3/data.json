@@ -2,22 +2,30 @@
     "books": [
         {
             "id": 1,
+            "isbn": 9101231231,
+            "price": 10.99,
             "title": "Game of Thrones",
-            "genre": "Fantasy"
+            "genre": 1
         },
         {
             "id": 2,
+            "isbn": 9100031231,
+            "price": 12.99,
             "title": "Goosebumps",
-            "genre": "Scary stories 4 Kids"
+            "genre": 3
         },
         {
             "id": 3,
+            "isbn": 9121231231,
+            "price": 11.99,
             "title": "TBD",
-            "genre": "excellent question"
+            "genre": 2
         },
         {
             "title": "OCA",
-            "genre": "Tech",
+            "isbn": 2101231231,
+            "price": 20.99,
+            "genre": 2,
             "id": 4
         }
     ],
