@@ -1,0 +1,23 @@
+{
+	"books": [
+		{
+			"id": 1,
+			"title" : "Game of Thrones",
+			"author" : "George RR Martin",
+			"genre" : "Fantasy"
+		},
+		{
+			"id": 2,
+			"title" : "Goosebumps",
+			"author" : "RL Stein",
+			"genre" : "Horror"
+		},
+		{
+			"id": 3,
+			"title" : "The Bible",
+			"author" : "Unknown",
+			"genre" : "Religion"
+		}
+	]
+
+}

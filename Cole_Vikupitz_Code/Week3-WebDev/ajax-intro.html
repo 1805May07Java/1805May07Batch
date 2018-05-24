@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<title>
+			Document
+		</title>
+
+	</head>
+
+	<body>
+		<h1>AJAX: Asynchronous JavaScript and XML</h1>
+
+		<script type="text/javascript" src="event-propagation.js"></script>
+		<h5>About AJAX</h5>
+		<ul>
+			
+			<li>
+				Not a programming language! It is a series of interactions between JS, the HTML DOM, and
+				the XMLHttpRequest object from the browser
+			</li>
+			<li>
+				It is asynchronous because AJAX can exchange information with a server "behind the scenes" 
+				-- meaning, there is no need to reload the page in order to display the content received
+				from the response.
+			</li>
+			<li>
+				Requests will not have to wait for a response from a prior request in order to be sent.
+			</li>
+		</ul>
+
+		<h5>About the XMLHttpRequest Object</h5>
+		<ul>
+			
+			<li>
+				Supported by most modern browsers *cough* don't use IE *cough*
+			</li>
+			<li>
+				Used to exchange data with a server.
+			</li>
+			<li>
+				<code>
+					var xhr = new XMLHttpRequest();
+				</code>
+			</li>
+			<li>
+				The object has various methods and properties.
+			</li>
+			<li>
+				<b>Important Methods:</b>
+				<ul>
+					<li>
+						<code>new XMLHttpRequest()</code> --> creates a new object
+					</li>
+					<li>
+						<code>abort()</code> --> Cancels the current request
+					</li>
+					<li>
+						<code>getAllResponseHeaders()</code> & <code>getResponseHeader()</code> -->
+						Get response metadata
+					</li>
+					<li>
+						<code>open(method, url, async, username, password</code>--> Specify request
+						<ul>
+							
+							<li>method = HTTP verb</li>
+							<li>URL = Location to send the request</li>
+							<li>async = Whether to execute request asynchronously or not; usually true</li>
+							<li>username and password = Optional server credentials</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+	</body>
+
+</html>
