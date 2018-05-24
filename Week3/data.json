@@ -1,0 +1,49 @@
+{
+    "books": [
+        {
+            "id": 1,
+            "title": "Game of Thrones",
+            "genre": "Fantasy"
+        },
+        {
+            "id": 2,
+            "title": "Goosebumps",
+            "genre": "Scary stories 4 Kids"
+        },
+        {
+            "id": 3,
+            "title": "TBD",
+            "genre": "excellent question"
+        },
+        {
+            "title": "OCA",
+            "genre": "Tech",
+            "id": 4
+        }
+    ],
+    "genres": [
+        {
+            "id": 1,
+            "name": "Fiction"
+        },
+        {
+            "id": 2,
+            "name": "Non-Fiction"
+        },
+        {
+            "id": 3,
+            "name": "Romance"
+        }
+    ],
+    "authors": [
+        {
+            "id": 1,
+            "firstname" : "J.K",
+            "lastname": "Rowling",
+            "bio": "She is a phenomenal author"
+        }
+    ],
+    "book_authors": [
+        {"book_id": 1, "author_id":1}
+    ]
+}
