@@ -33,6 +33,7 @@ public class CreditService {
 		
 		public boolean exists(int id) {
 			boolean exists = false;
+			allAccounts = (ArrayList<Credit>) getAllAccounts();
 			for(Credit c: allAccounts) {
 				if(c.getAccountID() == id) {
 					exists = true;

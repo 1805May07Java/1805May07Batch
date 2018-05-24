@@ -35,6 +35,7 @@ public class SavingsService {
 		
 		public boolean exists(int id) {
 			boolean exists = false;
+			allAccounts = (ArrayList<Savings>) getAllAccounts();
 			for(Savings c: allAccounts) {
 				if(c.getAccountID() == id) {
 					exists = true;

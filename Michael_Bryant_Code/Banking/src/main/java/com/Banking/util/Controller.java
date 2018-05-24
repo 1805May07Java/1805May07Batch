@@ -93,7 +93,7 @@ public class Controller {
 			System.out.println("Account Accessed!");
 			System.out.println();
 			
-			accountManage(account.getByUsername(username));
+			accountManage(account.getByUsername(username).getAccountid());
 		}
 	
 		
@@ -138,13 +138,16 @@ public class Controller {
 			 temp = account.addAccount(temp);
 			 //Signed Up!
 			 System.out.println("Accounts made!");
-			 System.out.println(temp.getAccountid());
-			 accountManage(temp);
+			 accountManage(temp.getAccountid());
 		 }
 		
 	}
 
-	public void accountManage(Account temp) {
+	//We run into an error whenever we create a new account
+	//It seems as though the account ID is not registered correctly
+	//There for the account is not made in the database
+	
+	public void accountManage(int id) {
 			
 		 System.out.print(   "------------------------------------------------" +"\n"
 					+"Let's Edit your account!" +"\n"
@@ -158,39 +161,40 @@ public class Controller {
 
 int option = 0;
 try {
-	 	
 		option = Integer.parseInt(scan.nextLine());	
 		}catch(NumberFormatException nfe) {
 			System.out.println("!!INVALID INPUT!! Try Again!");
-			accountManage(temp);
+			accountManage(id);
 		}
 
 switch(option) {
 	case 1:  
-		if(!checking.exists(temp.getAccountid())) {
+		System.out.println(id);
+		if(!checking.exists(id)) {
 			System.out.println("You don't have a Checking Account with us!");
-			addChecking(temp);
+			addChecking(account.getById(id));
+		
 		}else {
-		checking(checking.getById(temp.getAccountid()));
+			checking(checking.getById(id));
 		}
 		break; //checking
 	
 	
 	case 2:  
-		if(!savings.exists(temp.getAccountid())) {
+		if(!savings.exists(id)) {
 			System.out.println("You don't have a Savings Account with us!");
-			addSavings(temp);
+			addSavings(account.getById(id));
 		}else {
-		savings(savings.getById(temp.getAccountid()));
+		savings(savings.getById(id));
 		}
 		break; //savings
 		
 	case 3:
-		if(!credit.exists(temp.getAccountid())) {
+		if(!credit.exists(id)) {
 			System.out.println("You don't have a Credit Account with us!");
-			addCredit(temp);
+			addCredit(account.getById(id));
 		}else {
-		credit(credit.getById(temp.getAccountid()));
+		credit(credit.getById(id));
 		}
 		break; //credit
 		
@@ -199,7 +203,7 @@ switch(option) {
 		break;
 	
 	default: System.out.println("Sorry, that's not an option. Please try again");
-	accountManage(temp);
+	accountManage(id);
 	}
 
 	}
@@ -218,7 +222,7 @@ switch(option) {
 				credit(temp);
 				break; //add
 			case 2:  
-				accountManage(a);
+				accountManage(a.getAccountid());
 				break; //don't add
 				
 			default: System.out.println("Sorry, that's not an option. Please try again");
@@ -241,7 +245,7 @@ switch(option) {
 				savings(temp);
 				break; //add
 			case 2:  
-				accountManage(a);
+				accountManage(a.getAccountid());
 				break; //don't add
 				
 			default: System.out.println("Sorry, that's not an option. Please try again");
@@ -264,7 +268,7 @@ switch(option) {
 				checking(temp);
 				break; //add
 			case 2:  
-				accountManage(a);
+				accountManage(a.getAccountid());
 				break; //don't add
 				
 			default: System.out.println("Sorry, that's not an option. Please try again");
@@ -391,19 +395,20 @@ switch(option) {
 		checking.update(c);
 		System.out.println("Your new balance is: $" +formatter.format(c.getBalance()));
 		System.out.println();
-		accountManage(account.getById(c.getAccountID()));
+		accountManage(c.getAccountID());
 	}
 }
 
 	private void withdraw(Checking j) {
-	System.out.println("How much would you like to withdraw?"); 
-	double amount = 0;
-	
+
 	if(j.getBalance() == 0) {
 		System.out.println("You don't have any money in your account!");
-		accountManage(account.getById(j.getAccountID()));
-	}
+		accountManage(j.getAccountID());
+	} else {
+	
 	//make sure the input is an integer
+		System.out.println("How much would you like to withdraw?"); 
+		double amount = 0;
 	try {
 		amount = Double.parseDouble(scan.nextLine());
 		}catch(NumberFormatException nfe) {
@@ -422,9 +427,9 @@ switch(option) {
 		checking.update(j);
 		
 		System.out.println("Your new balance is: $" +formatter.format(j.getBalance()));
-		accountManage(account.getById(j.getAccountID()));
+		accountManage(j.getAccountID());
 	}
-	
+	}
 	
 	
 }
@@ -449,20 +454,21 @@ switch(option) {
 		savings.update(s);
 		System.out.println("Your new balance is: $" +formatter.format(s.getBalance()));
 		System.out.println();
-		accountManage(account.getById(s.getAccountID()));
+		accountManage(s.getAccountID());
 	}
 	
 }
 
 	private void withdraw(Savings j) {
-	System.out.println("How much would you like to withdraw?"); 
+	 
 	double amount = 0;
 	if(j.getBalance() == 0) {
 		System.out.println("You don't have any money in your account!");
-		accountManage(account.getById(j.getAccountID()));
-	}
+		accountManage(j.getAccountID());
+	} else {
 	//make sure the input is an integer
 	try {
+		System.out.println("How much would you like to withdraw?");
 		amount = Double.parseDouble(scan.nextLine());
 		}catch(NumberFormatException nfe) {
 			System.out.println("!!INVALID INPUT!! Try Again! ");
@@ -480,9 +486,9 @@ switch(option) {
 		savings.update(j);
 		
 		System.out.println("Your new balance is: $" +formatter.format(j.getBalance()));
-		accountManage(account.getById(j.getAccountID()));
+		accountManage(j.getAccountID());
 	}
-	
+	}
 }
 	
 	private void deposit(Credit c) {
@@ -505,7 +511,7 @@ switch(option) {
 		credit.update(c);
 		System.out.println("Your new balance is: $" +formatter.format(c.getBalance()));
 		System.out.println();
-		accountManage(account.getById(c.getAccountID()));
+		accountManage(c.getAccountID());
 	}
 	
 }
@@ -515,8 +521,8 @@ switch(option) {
 	double amount = 0;
 	if(j.getBalance() == 0) {
 		System.out.println("You don't have any money in your account!");
-		accountManage(account.getById(j.getAccountID()));
-	}
+		accountManage(j.getAccountID());
+	}else {
 	//make sure the input is an integer
 	try {
 		amount = Double.parseDouble(scan.nextLine());
@@ -536,8 +542,8 @@ switch(option) {
 		credit.update(j);
 		
 		System.out.println("Your new balance is: $" +formatter.format(j.getBalance()));
-		accountManage(account.getById(j.getAccountID()));
+		accountManage(j.getAccountID());
 	}
-	
+	}
 }
 }

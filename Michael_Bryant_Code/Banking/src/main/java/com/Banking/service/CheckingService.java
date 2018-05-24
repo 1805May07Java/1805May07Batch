@@ -34,6 +34,7 @@ public class CheckingService {
 		
 		public boolean exists(int id) {
 			boolean exists = false;
+			allAccounts = (ArrayList<Checking>) getAllAccounts();
 			for(Checking c: allAccounts) {
 				if(c.getAccountID() == id) {
 					exists = true;

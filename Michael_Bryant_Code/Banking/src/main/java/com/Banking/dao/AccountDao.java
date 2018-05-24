@@ -127,7 +127,7 @@ public class AccountDao implements Dao<Account, Integer> {
 			rs.next();
 		
 			//give out information from rs
-			a.setAccountid(id);
+			a.setAccountid(rs.getInt(1));
 			a.setUser(rs.getString(2));
 			a.setPass(rs.getString(3));
 			a.setEmail(rs.getString(4));

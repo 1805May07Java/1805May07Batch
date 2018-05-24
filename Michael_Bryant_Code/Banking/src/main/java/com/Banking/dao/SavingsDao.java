@@ -61,7 +61,7 @@ public class SavingsDao implements Dao<Savings, Integer > {
 
 	@Override
 	public Savings save(Savings obj) {
-		Savings temp = new Savings(obj.getSavingsId(), obj.getBalance());
+		Savings temp = new Savings(obj.getAccountID(), obj.getBalance());
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 			conn.setAutoCommit(false);
 			String query= "Insert into Savings(accountid, balance) "
@@ -78,11 +78,13 @@ public class SavingsDao implements Dao<Savings, Integer > {
 			if(rows != 0) {
 				ResultSet pk = ps.getGeneratedKeys();
 				while(pk.next()) {
-					temp.setAccountID(pk.getInt(1));
+					temp.setSavingsId(pk.getInt(1)); //Savings id??
 				}
 			
-			conn.commit();
+			
 		} 
+			
+			conn.commit();
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}

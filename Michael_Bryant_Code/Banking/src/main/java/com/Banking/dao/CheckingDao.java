@@ -61,28 +61,30 @@ public class CheckingDao implements Dao<Checking, Integer > {
 
 	@Override
 	public Checking save(Checking obj) {
-		Checking temp = new Checking(obj.getCheckingId(), obj.getBalance());
+		Checking temp = new Checking(obj.getAccountID(), obj.getBalance());
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 			conn.setAutoCommit(false);
 			String query= "Insert into checking(accountid, balance) "
 						+ "values(?,?)";
 			String[] keys = new String[1];
 			keys[0] = "checkingid";
-			
+	
 			PreparedStatement ps = conn.prepareStatement(query, keys);
 			ps.setInt(1, obj.getAccountID());
 			ps.setDouble(2, obj.getBalance());
 			
-				int rows = ps.executeUpdate();
+			int rows = ps.executeUpdate();
 			
 			if(rows != 0) {
 				ResultSet pk = ps.getGeneratedKeys();
 				while(pk.next()) {
-					temp.setAccountID(pk.getInt(1));
+					temp.setCheckingId(pk.getInt(1));
 				}
 			
-			conn.commit();
+			
 		} 
+			
+			conn.commit();
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}

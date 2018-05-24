@@ -61,14 +61,14 @@ public class CreditDao implements Dao<Credit, Integer > {
 
 	@Override
 	public Credit save(Credit obj) {
-		Credit temp = new Credit(obj.getCreditId(), obj.getBalance());
+		Credit temp = new Credit(obj.getAccountID(), obj.getBalance());
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 			conn.setAutoCommit(false);
 			String query= "Insert into Credit(accountid, balance) "
 						+ "values(?,?)";
 			String[] keys = new String[1];
 			keys[0] = "Creditid";
-			
+			System.out.println("CheckingDao Save account ID: " +obj.getAccountID());
 			PreparedStatement ps = conn.prepareStatement(query, keys);
 			ps.setInt(1, obj.getAccountID());
 			ps.setDouble(2, obj.getBalance());
@@ -78,11 +78,12 @@ public class CreditDao implements Dao<Credit, Integer > {
 			if(rows != 0) {
 				ResultSet pk = ps.getGeneratedKeys();
 				while(pk.next()) {
-					temp.setAccountID(pk.getInt(1));
+					temp.setCreditId(pk.getInt(1));
 				}
 			
-			conn.commit();
+			
 		} 
+			conn.commit();
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
