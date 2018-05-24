@@ -6,8 +6,7 @@ window.onload = function() {
 
 function loadGenres() {
 
-	var genres = ["Business", "Comedy", "Cooking", "Drama", "Engineering",
-				"Fiction", "History", "Horror", "Non-Ficiton", "Romance", "Science"];
+	var genres = [];
 
 	for (let i = 0; i < genres.length; i++) {
 		var elem = document.createElement("option");

@@ -1,0 +1,64 @@
+{
+	"books" : [
+		{
+			"id" : 1,
+			"title" : "Game of Thrones",
+			"genre" : "Fantasy"
+		},
+		{
+			"id" : 2,
+			"title" : "Goosebumps",
+			"genre" : "Horror"
+		},
+		{
+			"id" : 3,
+			"title" : "The Bible",
+			"genre" : "Religion"
+		}
+	],
+	"genres" : [
+		{
+			"id" : 1,
+			"name" : "Fiction"
+		},
+		{
+			"id" : 2,
+			"name" : "Non-Fiction"
+		},
+		{
+			"id" : 3,
+			"name" : "Horror"
+		},
+		{
+			"id" : 4,
+			"name" : "Religion"
+		},
+		{
+			"id" : 5,
+			"name" : "Fantasy"
+		},
+		{
+			"id" : 6,
+			"name" : "Documentary"
+		}
+	],
+	"authors" : [
+		{
+			"id" : 1,
+			"name" : "George RR Martin"
+		},
+		{
+			"id" : 2,
+			"name" : "JK Rowling"
+		},
+		{
+			"id" : 3,
+			"name" : "John Steinbeck"
+		},
+		{
+			"id" : 4,
+			"name" : "Charles Dickens"
+		}
+	]
+
+}
