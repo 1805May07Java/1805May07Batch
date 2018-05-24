@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>Kev Jumbo's Week 3 Website</title>
+</head>
+
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Kevin's Notes</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active">
+					<a href="#">Home</a>
+				</li>
+				<li>
+					<a href="#">Java</a>
+				</li>
+				<li>
+					<a href="#">SQL</a>
+				</li>
+				<li>
+					<a href="#">HTML</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<h1>Three SQL Concepts</h1>
+	<div id="first-div">
+		<h2>Normalization</h2>
+		<p style="color: red"> Process of organizing a DB into tables & columns.
+			<li>1NF: All attributes are Atomic values (value cannot be divided further).</li>
+			<li>2NF: Must be 1NF & no partial dependencies (when a column depends on only part of a PK). </li>
+			<li>
+				<span style="color: blue">3NF: Must be 2NF & no transitive dependencies (when a column depends on another column that is not the PK. </span>
+			</li>
+		</p>
+		<img src="sql_normalization.jpg" alt="SQL Normalization Diagram"> This is a
+		<a href="https://google.com">link to google a topic</a>>
+	</div>
+	<div>
+		<h2>Properties of Tranactions</h2>
+		<p>ACID -
+			<li>Atomacity</li>
+			<li>Consistency</li>
+			<li>Isolation</li>
+			<li>Durability</li>
+		</p>
+	</div>
+	<div>
+		<h2>Isolation</h2>
+		<p>There are level to which you DB can isolate its transactions. These are called tx isolation levels. Each prevents your
+			transctions from a different set of problems.</p>
+		<table border="2">
+			<thead>
+				<tr>
+					<th>Isolation Level</th>
+					<th>Dirty Read</th>
+					<th>Non-Repeatable Read</th>
+					<th>Phantom Read</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Read Uncomitted</td>
+					<td>x</td>
+					<td>x</td>
+					<td>x</td>
+				</tr>
+				<tr>
+					<td>Read Committed</td>
+					<td>yes</td>
+					<td>x</td>
+					<td>x</td>
+				</tr>
+				<tr>
+					<td>Repeatable Read</td>
+					<td>yes</td>
+					<td>yes</td>
+					<td>x</td>
+				</tr>
+				<tr>
+					<td>Serializable</td>
+					<td>yes</td>
+					<td>yes</td>
+					<td>yes</td>
+				</tr>
+			</tbody>
+			<caption>Tranactions</caption>
+		</table>
+
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		 crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		 crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+		 crossorigin="anonymous"></script>
+</body>
+
+</html>
