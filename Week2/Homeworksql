@@ -1,0 +1,149 @@
+--Daniel Stehley--
+
+--2.1--
+select * from employee;
+select * from employee where lastname = 'King';
+select * from employee where firstname = 'Andrew' and REPORTSTO is null;
+
+--2.2--
+select * from album order by title desc;
+select firstname from customer order by city asc;
+
+--2.3--
+insert into Genre values (26, 'Death Metal');
+insert into Genre values (27, 'Parady');
+insert into Employee values (9, 'Stehley', 'Daniel', 'IT Manager', 1, (DATE '1985-11-14'), (DATE '2018-05-07'), '112 Robin Lane', 'Saint Boniface', 'PA', 'USA', '12345', '1 (814)-2335', '1 (403)-1776', 'd@gmail.com');
+insert into Employee values (10, 'Anderson', 'Bridget', 'IT Staff', 9, (DATE '1987-10-04'), (DATE '2018-01-22'), '123 Here lane', 'Atlanta', 'GA', 'USA', '12335', '1 (514)-8735', '1 (403)-1126', 'g@gmail.com');
+insert into Customer values (60, 'Billy', 'Crystal', 'ActorsRUs', '234219 Overhere Drive', 'CA', 'USA', '15009', '1 (908)-6932', '1 (888)-8057', 'crystal@gmail.com', 3);
+insert into Customer values (60, 'Chavez', 'Guerro', '', '3232 Scenic Loop', '', 'Spain', '111009', '1 (918)-6302', '1 (111)-0937', 'goodlookin@gmail.com', 10);
+
+--2.4--
+update customer set firstname = 'Robert', lastname = 'Walter' where firstname = 'Aaron' AND lastname = 'Mitchell';
+update artist set name = 'CCR' where name = 'Creedence Clearwater Revival';
+
+--2.5--
+select * from invoice where billingaddress like 'T%'; 
+
+--2.6--
+select * from invoice where total between 15 and 50;
+select * from employee where hiredate between (date '2003-06-01') and (date '2004-03-01');
+
+--2.7--
+alter table invoice DISABLE constraint FK_INVOICECUSTOMERID;
+delete from customer where firstname = 'Robert' and lastname = 'Walter';
+
+--3.1--
+create or replace function getSysdate
+return date is
+  l_sysdate date;
+begin
+  select sysdate
+    into l_sysdate
+    from dual;
+  return l_sysdate;
+end;
+/
+select getSysdate() from dual;
+
+
+--3.2--
+
+
+--6.1--
+create sequence book_seq
+start with 100
+increment by 1;
+
+create sequence auth_seq;
+
+-- TRIGGERS
+
+create or replace trigger employee_trigger -- naming trigger
+after insert on employee -- when is it happening
+for each row -- how often
+declare
+v_username varchar2(10);
+begin
+    -- where meat of trigger resides
+   SELECT user INTO v_username
+   FROM dual;
+end;
+/
+
+create or replace trigger album_trigger -- naming trigger
+after update on album -- when is it happening
+for each row -- how often
+declare
+v_username varchar2(10);
+begin
+    -- where meat of trigger resides
+   SELECT user INTO v_username
+   FROM dual;
+end;
+/
+
+create or replace trigger customer_trigger -- naming trigger
+after delete on customer -- when is it happening
+for each row -- how often
+declare
+v_username varchar2(10);
+begin
+    -- where meat of trigger resides
+   SELECT user INTO v_username
+   FROM dual;
+end;
+/
+
+--7.1--
+SELECT firstname, lastname, invoiceid
+FROM customer
+INNER JOIN invoice
+ON customer.customerid = invoice.customerid;
+
+--7.2--
+SELECT customer.customerid, customer.firstname, customer.lastname, invoice.invoiceid, invoice.total
+FROM customer
+FULL JOIN invoice
+ON customer.customerid = invoice.customerid;
+
+--7.3--
+SELECT artist.name, album.title
+FROM artist
+RIGHT OUTER JOIN album
+ON artist.artistid = album.artistid;
+
+--7.4--
+SELECT * 
+FROM album 
+CROSS JOIN artist order by artist.name asc;
+
+--7.5--
+select  e1.lastname as "MANAGER", e2.lastname as "EMPLOYEE"
+from employee e1 
+inner join employee e2 on e1.reportsto = e2.employeeid;
+
+--7.6--
+SELECT *
+FROM track
+INNER JOIN genre
+ON track.genreid = genre.genreid
+inner join mediatype
+on track.mediatypeid = mediatype.mediatypeid
+inner join album
+on track.albumid = album.albumid
+inner join artist
+on album.artistid = artist.artistid
+inner join playlisttrack
+on track.trackid = playlisttrack.trackid
+inner join playlist
+on playlisttrack.playlistid = playlist.playlistid
+inner join invoiceline
+on track.trackid = invoiceline.trackid
+inner join invoice
+on invoiceline.invoiceid = invoice.invoiceid
+inner join customer
+on invoice.customerid = customer.customerid
+inner join employee
+on customer.supportrepid = employee.employeeid;
+
+--9.0--
