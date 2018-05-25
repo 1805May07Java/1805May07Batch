@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SQL Concpets Assignment</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">SQL Concepts</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="file:///G:/My%20Drive/Revature/HTML(week3)/htmlAssn.html#">What is SQL</a></li>
+      <li class="active"><a href="#">Command Categories</a></li>
+      <li><a href="file:///G:/My%20Drive/Revature/HTML(week3)/htmlAssn3.html#">Types of JOINS</a></li>
+      <li><a href="file:///G:/My%20Drive/Revature/HTML(week3)/htmlAssn4.html#">Isolation in Transactions</a></li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container">
+  <h3>Command Categories</h3>
+  <p>SQL commands are mainly categorized into four categories as discussed below:</p>
+  <br>
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">DDL (Data Definition Language)</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse in">
+        <div class="panel-body"> 
+		<ul>
+		<li>DDL or Data Definition Language actually consists of the SQL commands that can be 
+		used to define the database schema. It simply deals with descriptions of the database schema and is used to 
+		create and modify the structure of database objects in database. </li>
+		<li>Examples of DDL Commands: CREATE, DROP, ALTER, TRUNCATE, COMMENT, RENAME</li>
+		</ul>
+		</div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">DML (Data Manipulation Language)</a>
+        </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+        <div class="panel-body">
+		<ul>
+		<li> The SQL commands that deals with the manipulation of data present in database belong to DML or Data 
+		Manipulation Language and this includes most of the SQL statements. </li>
+		<li>Examples of DML Commands: SELECT, INSERT, UPDATE, DELETE</li>
+		</ul>
+		</div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">DCL (Data Control Language)</a>
+        </h4>
+      </div>
+      <div id="collapse3" class="panel-collapse collapse">
+        <div class="panel-body">
+		<ul>
+		<li> DCL includes commands such as GRANT and REVOKE which mainly deals with the rights, permissions and other controls of the database system. </li>
+		<li>Examples of DCL Commands: GRANT, REVOKE</li>
+		</ul>
+		</div>
+      </div>
+    </div>
+	 <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">TCL (Transaction Control Language)</a>
+        </h4>
+      </div>
+      <div id="collapse4" class="panel-collapse collapse">
+        <div class="panel-body">
+		<ul>
+		<li> TCL commands deals with the transaction within the database. </li>
+		<li>Transactions group a set of tasks into a single execution unit. Each transaction begins with a specific 
+		task and ends when all the tasks in the group successfully complete.</li>
+		<li>Examples of TCL Commands: COMMIT, ROLLBACK, SAVEPOINT, SET TRANSACTION</li>
+		</ul>
+		</div>
+      </div>
+    </div>
+  </div> 
+</div>
+
+
+</body>
+</html>

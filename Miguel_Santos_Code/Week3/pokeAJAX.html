@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Pokemon AJAX Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <input type="number" id="num" placeholder="Enter a number here" class="col-4" />
+        <button id="go" class="btn btn-primary btn-sm">GO!</button>
+        <br>
+        <br>
+        <div class="col-6">
+            <img id="pokeimage" alt="" src="" width=200px height="200px">
+            <h4 id="name"></h4>
+            <h4 id="pokeid"></h4>
+            <h5 id="weight"></h5>
+        </div>
+    </div>
+
+    <script>
+        var pokemon;
+        window.onload = function(){
+            console.log("window loaded");
+            $('#go').on('click', getPokemon);
+        }
+        
+
+        function getPokemon(){
+            var id = $('#num').val();
+            $('#num').val('');
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    pokemon = JSON.parse(xhr.responseText);
+
+                    $('#name').html(pokemon.name.toUpperCase());
+                    var image = $('#pokeimage');
+                    image.attr("src", pokemon.sprites.front_shiny);
+                    image.attr("alt", pokemon.name);
+                    $('#weight').html("Weight: "+pokemon.weight);
+                    $('#pokeid').html("#"+pokemon.id);
+                }
+            }
+
+            xhr.open("GET", `https://pokeapi.co/api/v2/pokemon/${id}/`,true);
+            xhr.send();
+        }
+    </script>
+
+
+</body>
+
+</html>

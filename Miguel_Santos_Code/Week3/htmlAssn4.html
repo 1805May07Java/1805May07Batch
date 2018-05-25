@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SQL Concpets Assignment</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">SQL Concepts</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="file:///G:/My%20Drive/Revature/HTML(week3)/htmlAssn.html#">What is SQL</a></li>
+      <li><a href="file:///G:/My%20Drive/Revature/HTML(week3)/htmlAssn2.html#">Command Categories</a></li>
+      <li><a href="file:///G:/My%20Drive/Revature/HTML(week3)/htmlAssn3.html#">Types of JOINS</a></li>
+      <li class="active"><a href="#">Isolation in Transactions</a></li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container">
+  <h3>Isolation Transaction Property</h3>
+  <p>
+  <ul>
+  <li>The system state during concurrent transactions is the same as if the transactions were sequential.</li>
+  <li>There are levels to which your database can isolate its transactions. These are called transaction 
+  isolation levels. Each prevents your transaction from a different set of problems</li>
+  <li>Transaction isolation levels are a measure of the extent to which transaction isolation succeeds. 
+  They are defined by the presence/absence of the following phenomena</li>
+  </ul> 
+  </p>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Isolation Level</th>
+        <th><center>Dirty Road</center></th>
+        <th><center>Non-Repeatable Read</center></th>
+		<th><center>Phantom Read</center></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Read Uncommitted</td>
+        <td><center>X</center></td>
+        <td><center>X</center></td>
+		<td><center>X</center></td>
+      </tr>
+      <tr>
+        <td>Read Committed</td>
+        <td><center>✔</center></td>
+        <td><center>X</center></td>
+		<td><center>X</center></td>
+      </tr>
+      <tr>
+        <td>Repeatable Read</td>
+        <td><center>✔</center></td>
+        <td><center>✔</center></td>
+		<td><center>X</center></td>
+      </tr>
+	  <tr>
+        <td>Serializable</td>
+        <td><center>✔</center></td>
+        <td><center>✔</center></td>
+		<td><center>✔</center></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FIZZBUZZ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <div class="jumbotron">
+        <h1 class="display-3">Fizzbuzz Assignment</h1>
+        <br>
+        <p class="lead col-6">Take in an input number 'n' and output numbers 1-n while replacing those divisible by 3 by "fizz", those divisible by
+            5 by "buzz", and those divisible by both 3 and 5 by "fizzbuzz".
+        </p>
+        <hr class="my-4">
+        <input type="number" id="n" placeholder="Enter a number here" class="col-2" />
+        <button id="go" class="btn btn-primary btn-sm">GO!</button> 
+        <br>
+        <ul id="list"></ul>
+    
+    </div>
+
+    <script>
+
+        $('#go').on('click', run);
+
+        function run(){
+            $('#list').empty();
+            var n = $('#n').val();
+            $('#n').val('');
+            vals = fizzbuzz(n);
+            for (var i = 0; i < vals.length; i++){
+                var item = document.createElement('li');
+                item.innerHTML = vals[i];
+                $('#list').append(item);
+            }
+            
+        }
+
+        function fizzbuzz(n) {
+                var arr = [];
+                var i;
+                for (i = 1; i <= n; i++) {
+                    if ((i % 15) === 0) {
+                        arr[i-1] = "fizzbuzz";
+                    }
+                    else if ((i % 3) === 0) {
+                        arr[i-1] = "fizz";
+                    }
+                    else if ((i % 5) === 0) {
+                        arr[i-1] = "buzz";
+                    }
+                    else {
+                        arr[i-1] = i;
+                    }
+                    
+                }
+                return arr;
+            }
+
+    </script>
+
+</body>
+</html>
+
