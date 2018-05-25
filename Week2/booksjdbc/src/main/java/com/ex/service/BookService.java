@@ -22,6 +22,11 @@ public class BookService {
 	public void addBookToAuthor(Author a, Book b){
 
 	}
+	public Book getBookById(int id){
+	    Book book = new Book();
+
+	    return book;
+    }
 
 
 

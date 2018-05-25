@@ -7,7 +7,7 @@ import com.ex.pojos.Book;
 import com.ex.service.BookService;
 
 public class App {
-
+	static BookService bookService = new BookService();
 	public static void main(String[] args) {
 		System.out.println("Welcome to the book store app!");
 		run();
@@ -61,7 +61,7 @@ public class App {
 	static void add() {}
 
 	static void editBook(int id) {
-		
+		Book book = bookService.getBookById(id);
 	}
 
 

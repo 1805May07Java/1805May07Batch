@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JDBC Statements</title>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<div>
+	<h1>Three types of JDBC Statements:</h1>
+</div>
+<ul>
+  <li>Statement</li>
+  <li>PreparedStatement</li>
+  <li>CallableStatement</li>
+</ul>
+<p><a href="https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html">Processing SQL Statements Documentation</a></p>
+
+<p><span style="color: red">This is a paragraph</span></p>
+<table style="width:100%">
+	<caption>JDBC Table</caption>
+  <tr>
+    <th>JDBC Statement</th>
+    <th>Usage</th> 
+    <th>SQL Injection Safe</th>
+  </tr>
+  <tr>
+    <td>Statement</td>
+    <td>General purpose</td> 
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>PreparedStatement</td>
+    <td>Pre-compiled SQL command with support for input parameters</td> 
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>CallableStatement</td>
+    <td>Accessing procedures in DB</td> 
+    <td>Yes</td>
+  </tr>
+</table>
+
+<blockquote>
+<code>
+String query = "select * from artist where artistid = ?";<br>
+			PreparedStatement ps = conn.prepareStatement(query);<br>
+			ps.setInt(1, id);<br>
+			ResultSet info = ps.executeQuery();<br>
+			
+			while(info.next()) {<br>
+				&nbsp;artist.setId(info.getInt(1));<br>
+				&nbsp;artist.setName(info.getString(2));<br>
+			}<br>
+</code>
+</blockquote>
+
+<div>
+	<ol>
+		<li>Item 1</li>
+		<li>Item 2</li>
+		<li>Item 3</li>
+	</ol>
+</div>
+<img src="http://ecomputernotes.com/images/Jdbc-Statement.jpg" alt="JDBC Statement Hierarchy"/>
+</body>
+</html>

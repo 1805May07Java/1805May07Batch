@@ -37,9 +37,19 @@ public class GenreDao implements Dao<Genre, Integer>{
 	}
 
 	public Genre findOne(Integer id) {
+		Genre g = new Genre();
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+		    String query = "select * from genre where genre_id = ?";
+		    PreparedStatement ps = conn.prepareStatement(query);
+		    ps.setInt(1,id);
+		    ResultSet rs = ps.executeQuery();
 
-		
-		return null;
+		    g.setName(rs.getString(2));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return g;
 	}
 
 	public Genre save(Genre obj) {

@@ -1,9 +1,6 @@
 package com.ex.dao;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +11,7 @@ public class BookDao implements Dao<Book, Integer> {
 
 	public List<Book> getAll() {
 		List<Book> books = new ArrayList<Book>();
-		try(Connection conn = ConnectionFactory.getInstance().getConnection();){
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 			String query = "select * from book";
 
 			Statement statement = conn.createStatement();
@@ -39,8 +36,23 @@ public class BookDao implements Dao<Book, Integer> {
 	}
 
 	public Book findOne(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		Book book = new Book();
+
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String query = "select * from book where book_id = ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, id);
+			ResultSet info = ps.executeQuery();
+
+			info.next();
+//			book.setId();
+//			book.setIsbn(2);
+//			book.setTitle(3);
+//			book.setPrice(4);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return book;
 	}
 
 	public Book save(Book obj) {
@@ -48,9 +60,23 @@ public class BookDao implements Dao<Book, Integer> {
 		return null;
 	}
 
-	public Book update(Book obj) {
-		// TODO Auto-generated method stub
-		return null;
+	public Book update(Book book) {
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+		    conn.setAutoCommit(false);
+
+		    String query = "update book set isbn = ?, title = ?, price = ?, genre = ? where book_id =?";
+		    PreparedStatement ps = conn.prepareStatement(query);
+
+		    ps.setString(1, book.getIsbn());
+		    ps.setString(2,book.getTitle());
+		    ps.setDouble(3,book.getPrice());
+		    ps.setInt(4,book.getGenreId());
+		    ps.setInt(5,book.getId());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
 	}
 
 }

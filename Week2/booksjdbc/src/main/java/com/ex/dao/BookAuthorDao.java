@@ -17,7 +17,7 @@ public class BookAuthorDao implements Dao<BookAuthor, Integer>{
 	}
 
 	public BookAuthor save(BookAuthor obj) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
