@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SQL Concepts</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: darkgoldenrod !important;">
+		<a class="navbar-brand" href="#">Navbar I lifted from bootstrap</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link" href="#sublanguages">Features</a>
+				<a class="nav-item nav-link" href="#constraints">Pricing</a>
+				<a class="nav-item nav-link" href="#normalization">Pricing</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+
+		<div class="row"><h1 class="rainbow">SQL Concepts</h1></div>
+
+		<div id="sublanguages" name="sub" class="row-wrapper">
+			<div class="row col-lg-8 offset-lg-2">
+				<h2>Sublanguages</h2>
+				<p>SQL can be broken down into 5 sub-languages that have different responsibilities for a RDBMS.</p>  
+				<div>
+					<img src="images/sublanguages.jpg" alt="Where my image at?">
+				</div>
+
+				<div>
+					<ul>
+						<li><b>Database Query Language (DQL)</b> - Retrieve data, sometimes confused or included into DML</li>
+						<li><b>Database Definition Language (DDL)</b> - For creating and changing the structure of a table</li>
+						<li><b>Database Manipulation Language (DML)</b> - For manipulating records inside a table</li>
+						<li><b>Database Control Language (DCL)</b> - Controls who has access to the data</li>
+						<li><b>Transcation Control Language (TCL)</b> - Used to commit and restore data</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div id="constraints" name="con" class="row-wrapper">
+			<div class="row col-lg-6 offset-lg-3">
+		<!-- 		<h2>Constraints</h2>
+				<p>Constraints place restrictions or rules on a table's column.</p> -->
+
+				<h2>Constraints</h2>
+				<p>Constraints place restrictions or rules on a table's column.</p>  
+				<table class="table-dark">
+					<tr>
+						<td>Primary Key</td>
+						<td>Foreign Key</td>
+						<td>Not Null</td>
+					</tr>
+					<tr>
+						<td>Default</td>
+						<td>Unique</td>
+						<td>Check</td>
+					</tr>
+				</table>
+
+				<div>
+					<ul>
+						<li><b>Primary Key</b> - Uniquely identifies a record</li>
+						<li><b>Foreign Key</b> - A column from another table; usually a primary key</li>
+						<li><b>Not Null</b> - Indicates that this column cannot be empty</li>
+						<li><b>Default</b> - A default value for the column if it is left empty</li>
+						<li><b>Unique</b> - The column's value must be unique compared to other values in the same column</li>
+						<li><b>Check</b> - Only allows certain values within a condition</li>
+					</ul>
+				</div>
+
+				<p>To make a foreign key</p>
+				<code>
+					CONSTRAINT FK_Name FOREIGN KEY (Column_Name) REFERENCES Persons(Table_Where_Column_Is)
+				</code>
+
+			</div>
+
+		</div>
+
+
+		<div id="normalization" name="nor" class="row-wrapper">
+			<div class="row col-lg-6 offset-lg-3">
+				<h2>DB Normalization</h2>
+				<p>Normalization is for increasing efficiency and reducing redundancy. It comes down to breaking down tables into smaller tables, and splitting or deleting columns if they are not atomic or not necessary, respectively</p>
+
+				<p>There is also the concept of de-normalization, which involves going in the other direction. This is primarily to increase readability because tables may be overnormalized which makes managing more of a hassle.</p>
+
+				<p><a href="https://www.studytonight.com/dbms/database-normalization.php" target="_blank">Read more here</a></p>
+				<div>
+					<ul>
+						<li><b>1NF</b> - All records have a primary key and all columns have atomic values</li>
+						<li><b>2NF</b> - The table is in 1NF and there are no partial dependencies</li>
+						<li><b>3NF</b> - The table is in 2NF and there are no transitive dependencies</li>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
