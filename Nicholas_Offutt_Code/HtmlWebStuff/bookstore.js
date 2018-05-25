@@ -1,8 +1,5 @@
 
 
-
-
-
 function addBook()
 {
 	var isbn = document.getElementById().value;
@@ -37,3 +34,38 @@ function addBook()
 		
 		
 }
+
+
+
+
+
+
+
+function populate()
+{
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200)
+		{
+			var books = JSON.parse(xhr.responseText);
+
+			for(let i = 0; i < books.length; i++)
+		{	var cell1 = document.createElement();
+			
+			
+			
+		}
+			
+
+
+		}
+		
+
+	}
+	xhr.open("GET","http://localhost:3000/books",true)
+	xhr.send();
+
+
+}
+
+

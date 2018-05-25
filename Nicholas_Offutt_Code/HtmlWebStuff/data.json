@@ -1,0 +1,48 @@
+{
+    "books": [
+        {
+            "id": 1,
+            "title": "Jurassic Park"
+        },
+        {
+            "id": 1,
+            "title": "Lord of the Rings"
+        },
+        {
+            "id": 1,
+            "title": "Some Buried Ceasar"
+        }
+    ],
+
+    "authors":[
+        {
+            "id": 1,
+            "name": "Michael Crichton"
+        },
+        {
+            "id":2,
+            "name": "J.R.R. Tolkein"
+        },
+        {
+            "id":3,
+            "name": "Rex Stout"
+        }
+    ],
+
+    "genres":[
+        {
+            "id": 1,
+            "genre": "Science Fiction"
+        },
+        {
+            "id":2,
+            "genre": "Fantasy"
+        },
+        {
+            "id":3,
+            "genre": "Mystery"
+        }
+    ]
+
+
+}
