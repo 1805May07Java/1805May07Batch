@@ -153,3 +153,31 @@ BEGIN
   END LOOP;
 END;
 /
+
+-- 7.1
+select customer.firstname, invoice.invoiceid
+from customer
+inner join invoice
+on customer.customerid = invoice.invoiceid;
+
+-- 7.2
+select invoice.customerid, customer.firstname, customer.lastname, invoice.invoiceid, invoice.total
+from customer
+full outer join invoice
+on customer.customerid = invoice.invoiceid;
+
+-- 7.3
+select artist.name, album.title
+from album
+right join artist
+on album.artistid = artist.artistid;
+
+-- 7.4
+select artist.name
+from artist
+cross join album
+order by artist.name asc;
+
+-- 7.5
+
+
