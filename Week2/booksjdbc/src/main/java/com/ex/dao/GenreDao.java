@@ -30,7 +30,7 @@ public class GenreDao implements Dao<Genre, Integer>{
 
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+		//	e.printStackTrace();
 		}
 
 		return genres;
@@ -39,6 +39,7 @@ public class GenreDao implements Dao<Genre, Integer>{
 	public Genre findOne(Integer id) {
 		Genre g = new Genre();
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+<<<<<<< HEAD
 		    String query = "select * from genre where genre_id = ?";
 		    PreparedStatement ps = conn.prepareStatement(query);
 		    ps.setInt(1,id);
@@ -50,6 +51,21 @@ public class GenreDao implements Dao<Genre, Integer>{
         }
 
         return g;
+=======
+			String sql = "select * from genre where genre_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet info = ps.executeQuery();
+			
+			info.next();
+			g.setId(info.getInt(1));
+			g.setName(info.getString(2));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return g;
+>>>>>>> master
 	}
 
 	public Genre save(Genre obj) {
@@ -82,6 +98,12 @@ public class GenreDao implements Dao<Genre, Integer>{
 	public Genre update(Genre obj) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean isUnique(Genre obj) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
