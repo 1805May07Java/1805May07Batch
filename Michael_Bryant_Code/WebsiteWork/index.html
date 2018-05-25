@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="./testStylesheet.css">
+    <title>Hello, world!</title>
+  </head>
+  <body>
+  	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About Me</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact Us</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+  <div class="jumbotron jumbotron-fluid" id="display">
+  <div class="container">
+    <h1 class="display-4">Michael Bryant's Website</h1>
+    <p class="lead">This is a website created by Michael Bryant providing all the information you need.</p>
+  </div>
+</div>
+<div class="row">
+  <div class= "col-lg-6">
+    <h1 align= "center">SQL Term Definitions</h1>
+    <br>
+   
+    <ul>
+      <li>Candidate key - column or set of columns which can uniquely identify a DB record.</li>
+      <li>Primary Key - candidate key which Is unique & not null- should not be changed, nor should it be sensitive information.</li>
+      <li>Natural key- naturally occurring NN&U data field. i.e. SSN, passport no.</li>
+      <li>Surrogate key - DB generated PK</li>
+      <li>Referential integrity- ensuring that relationships between entities remain consistent i.e. lack of deletion of columns referenced by F.K.'s & references to fields that do not exist, etc.</li> 
+      <li>Domain integrity- ensuring that all fields are of the allowed type & size.</li>
+     </ul> 
+
+    </div>
+    <div class="col-lg-6" id="link">
+        
+          <br>
+            <a href="https://en.wikipedia.org/wiki/Relational_database_management_system">Relational Database Management System</a>
+            <p>Software used to interact w/ DB</p>
+            <br>
+        
+      </div>
+ </div>
+     <div class="container-fluid" id="table">
+       <table id="QTable">
+         <thead>
+           <th></th>
+           <th>Data Control Language (DCL)</th>
+           <th>Data Definition Language (DDL)</th>
+           <th>Data Manipulation Language (DML)</th>
+           <th>Data Query Language (DQL)</th>
+           <th>Transaction Control Language (TCL)</th>
+         </thead>
+         <tbody>
+            <tr>
+              <th>Description</th>
+              <td>access & permissions to DB (control access to resources)</td>
+              <td>define the schema of DB</td>
+              <td>add/remove/update data</td>
+              <td>run queries on DB</td>
+              <td>manages transactions w/ DB</td>
+            </tr>
+            <tr>
+                <th>Query Commands</th>
+                <td>GRANT, REVOKE</td>
+                <td>CREATE, ALTER, DROP, TRUNCATE</td>
+                <td>INSERT, SELECT, UPDATE, DELETE</td>
+                <td>SELECT</td>
+                <td>COMMIT, ROLLBACK, SAVEPOINT</td>
+            </tr>
+         </tbody>
+       </table>
+     </div>
+     <br><br><br><br>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+
+</html>
