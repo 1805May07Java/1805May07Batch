@@ -1,6 +1,6 @@
 <!--
 
-sql-outlines.html
+join-types.html
 Author: Cole Vikupitz
 
 -->
@@ -28,10 +28,51 @@ Author: Cole Vikupitz
             src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
             integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
             crossorigin="anonymous"></script>
+            
+        <style>
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+                position: -webkit-sticky;
+                position: sticky;
+                top: 0;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            li a:hover:not(.active) {
+                background-color: #111;
+            }
+
+            .active {
+                background-color: #4CAF50;
+            }
+        </style>
          
     </head>
 
     <body>
+    
+        <ul>
+            <li><a href="homepage.html">Home</a></li>
+            <li><a href="sql-syntax.html">Basic Syntax</a></li>
+            <li><a href="sub-languages.html">Sub-Languages</a></li>
+            <li><a class="active" href="join-types.html">Join Types</a></li>
+            <li><a href="resources.html">Resources</a></li>
+        </ul>
 
         <div class="jumbotron">
         
@@ -42,13 +83,12 @@ Author: Cole Vikupitz
             In SQL, we can perform what's called a join, where we query rows from two different tables at once.
             There are several types of joins we may perform on two different tables.
             The most commonly known ones are listed below.
-            <p>
-            <ul>
-                <li>INNER JOIN: Returns records with matching value(s) from both tables.</li>
-                <li>LEFT JOIN: Returns all records from the left table, and all matching records from the right table.</li>
-                <li>RIGHT JOIN: Returns all records from the right table, and all matching records from the left table.</li>
-                <li>OUTER (FULL) JOIN: Returns all records from both tables.</li>
-            </ul>
+            </p>
+            <strong>INNER JOIN:</strong> Returns records with matching value(s) from both tables.<br>
+            <strong>LEFT JOIN:</strong> Returns all records from the left table, and all matching records from the right table.<br>
+            <strong>RIGHT JOIN:</strong> Returns all records from the right table, and all matching records from the left table.<br>
+            <strong>OUTER (FULL) JOIN:</strong> Returns all records from both tables.<br><br>
+
             <p>A diagram showing these different join types is displayed below.</p>
             <hr>
             

@@ -30,6 +30,36 @@ Author: Cole Vikupitz
             crossorigin="anonymous"></script>
             
         <style>
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+                position: -webkit-sticky;
+                position: sticky;
+                top: 0;
+            }
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            li a:hover:not(.active) {
+                background-color: #111;
+            }
+
+            .active {
+                background-color: #4CAF50;
+            }
             
             table, th, td {
                 border: 1px solid black;
@@ -44,6 +74,14 @@ Author: Cole Vikupitz
 
     <body>
 
+        <ul>
+            <li><a href="homepage.html">Home</a></li>
+            <li><a href="sql-syntax.html">Basic Syntax</a></li>
+            <li><a class="active" href="sub-languages.html">Sub-Languages</a></li>
+            <li><a href="join-types.html">Join Types</a></li>
+            <li><a href="resources.html">Resources</a></li>
+        </ul>
+    
         <div class="jumbotron">
         
             <h1 align="center">Sub-Languages of SQL</h1>
@@ -61,52 +99,23 @@ Author: Cole Vikupitz
                 </tr>
                 <tr>
                     <td>Data Control Language (DCL)</td>
-                    <td>
-                        <ul>
-                            <li>GRANT</li>
-                            <li>REVOKE</li>
-                        </ul>
-                    </td>
+                    <td>"GRANT", "REVOKE"</td>
                 </tr>
                 <tr>
                     <td>Data Definition Language (DDL)</td>
-                    <td>
-                        <ul>
-                            <li>CREATE</li>
-                            <li>ALTER</li>
-                            <li>DROP</li>
-                            <li>TRUNCATE</li>
-                        </ul>
-                    </td>
+                    <td>"CREATE", "ALTER", "DROP", "TRUNCATE"</td>
                 </tr>
                 <tr>
                     <td>Data Manipulation Language (DML)</td>
-                    <td>
-                        <ul>
-                            <li>INSERT</li>
-                            <li>UPDATE</li>
-                            <li>DELETE</li>
-                        </ul>
-                    </td>
+                    <td>"INSERT", "UPDATE", "DELETE"</td>
                 </tr>
                 <tr>
                     <td>Transaction Control Language (TCL)</td>
-                    <td>
-                        <ul>
-                            <li>COMMIT</li>
-                            <li>ROLLBACK</li>
-                            <li>SAVEPOINT</li>
-                            <li>SET TRANSACTION</li>
-                        </ul>
-                    </td>
+                    <td>"COMMIT", "ROLLBACK", "SAVEPOINT", "SET TRANSACTION"</td>
                 </tr>
                 <tr>
                     <td>Data Query Language (DQL)</td>
-                    <td>
-                        <ul>
-                            <li>SELECT</li>
-                        </ul>
-                    </td>
+                    <td>"SELECT"</td>
                 </tr>
             </table>
             

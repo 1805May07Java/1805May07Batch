@@ -1,6 +1,6 @@
 <!--
 
-sql-outlines.html
+homepage.html
 Author: Cole Vikupitz
 
 -->
@@ -30,36 +30,68 @@ Author: Cole Vikupitz
             crossorigin="anonymous"></script>
             
         <style>
-            .sidenav {
-                height: 100%;
-                width: 20%;
-                position: fixed;
-                z-index: 1;
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+                position: -webkit-sticky;
+                position: sticky;
                 top: 0;
-                left: 0;
-                background-color: #111;
-                overflow-x: hidden;
-                padding-top: 20px;
             }
 
-            .sidenav a {
-                padding: 6px 8px 6px 16px;
-                text-decoration: none;
-                font-size: 25px;
-                color: #818181;
+            li {
+                float: left;
+            }
+
+            li a {
                 display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
             }
 
-            .sidenav a:hover {
-                color: #f1f1f1;
+            li a:hover:not(.active) {
+                background-color: #111;
+            }
+
+            .active {
+                background-color: #4CAF50;
             }
         </style>
 
     </head>
 
     <body>
-
         
+        <ul>
+            <li><a class="active" href="homepage.html">Home</a></li>
+            <li><a href="sql-syntax.html">Basic Syntax</a></li>
+            <li><a href="sub-languages.html">Sub-Languages</a></li>
+            <li><a href="join-types.html">Join Types</a></li>
+            <li><a href="resources.html">Resources</a></li>
+        </ul>
+        
+        <div class="jumbotron">
+            
+            <h1 align="center">SQL Concepts</h1>
+            <hr>
+            <center><img src="imgs/sql-logo.png" alt="SQL Logo" align="middle" /></center>
+            <br><br>
+            <blockquote cite="https://en.wikipedia.org/wiki/SQL"><i>
+            "SQL is a domain-specific language used in programming and designed for managing data held 
+            in a relational database management system (RDBMS), or for stream processing in a relational 
+            data stream management system (RDSMS). It is particularly useful in handling structured data 
+            where there are relations between different entities/variables of the data. SQL offers two main 
+            advantages over older read/write APIs like ISAM or VSAM: first, it introduced the concept of 
+            accessing many records with one single command; and second, it eliminates the need to specify 
+            how to reach a record, e.g. with or without an index."
+            </i></blockquote>
+            <a href="https://en.wikipedia.org/wiki/SQL">- SQL Wikipedia page</a>
+            
+        </div>
 
     </body>
     
