@@ -1,0 +1,100 @@
+--2.1
+Select * from Employee;
+
+Select * from Employee where lastname = 'King';
+
+Select * from Employee where firstname = 'Andrew' and REPORTSTO = NULL;
+
+--2.2
+Select * from Album order by title desc;
+
+Select firstname from Customer order by city asc;
+
+--2.3
+Insert into Genre values (26,'Sound Effects');
+Insert into Genre values (27,'Personal Recordings');
+
+Insert into Employee values (9, 'LASTNAME', 'FIRSTNAME', 'TITLE', null, '18-FEB-62', '18-FEB-62', 'ADDRESS', 'CITY', 'STATE', 'COUNTRY', 'POSTALCODE', 241342234, 241342234, 'EMAIL');
+Insert into Employee values (10, 'LASTNAME', 'FIRSTNAME', 'TITLE', null, '18-FEB-62', '18-FEB-62', 'ADDRESS', 'CITY', 'STATE', 'COUNTRY', 'POSTALCODE', 241342234, 241342234, 'EMAIL');
+
+Insert into Customer values (60,	'Luís',	'Gonçalves',	'Embraer - Empresa Brasileira de Aeronáutica S.A.',	'Av. Brigadeiro Faria Lima, 2170', 'São José dos Campos',	'SP',	'Brazil',	'12227-000',	'+55 (12) 3923-5555',	'+55 (12) 3923-5566',	'luisg@embraer.com.br',3);
+Insert into Customer values (61,	'Luís',	'Gonçalves',	'Embraer - Empresa Brasileira de Aeronáutica S.A.',	'Av. Brigadeiro Faria Lima, 2170', 'São José dos Campos',	'SP',	'Brazil',	'12227-000',	'+55 (12) 3923-5555',	'+55 (12) 3923-5566',	'luisg@embraer.com.br',3);
+
+--2.4
+Update Customer set firstname = 'Robert Walter' where firstname = 'Aaron Mitchell'; 
+
+Update artist set name = 'CCR' where name = 'Creedence Clearwater Revival';
+
+--2.5
+Select * from invoice where billingaddress like 'T%';
+
+--2.6
+--Select * from invoices where (total > 15) and (total < 50);
+
+--Select * from employees where hiredate between 1stof June 2003 and 1stof March 2004;
+
+--2.7
+--Delete a record in Customer table where the name is Robert Walter (There may be constraints that rely on this, find out how to resolve them).
+
+--3
+--n this section you will be using the Oracle system functions, as well as your own functions, to perform various actions against the database
+
+--3.1
+--select time from dual;
+
+--create a function that returns the length of a mediatype from the mediatype table
+
+--3.2
+--Create a function that returns the average total of all invoices
+
+--Create a function that returns the most expensive track
+
+--3.3
+--Create a function that returns the average price of invoiceline items in the invoiceline table
+
+--3.4
+--Create a function that returns all employees who are born after 1968
+
+--4.1
+--Create a stored procedure that selects the first and last names of all the employees
+
+--4.2
+--Create a stored procedure that updates the personal information of an employee
+
+--Create a stored procedure that returns the managers of an employee
+
+--4.3
+--Create a stored procedure that returns the name and company of a customer
+
+--5
+--Create a transaction that given a invoiceId will delete that invoice (There may be constraints that rely on this, find out how to resolve them).
+
+--Create a transaction nested within a stored procedure that inserts a new record in the Customer table
+
+--6.1
+--Create an after insert trigger on the employee table fired after a new record is inserted into the table
+
+--Create an after update trigger on the album table that fires after a row is inserted inthe table
+
+--Create an after delete trigger on the customer table that fires after a row is deleted from the table
+
+--7.1
+--Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId
+
+--7.2
+--Create an outer join that joins the customer and invoice table, specifying the CustomerId, firstname, lastname, invoiceId, and total
+
+--7.3
+--Create a right join that joins album and artist specifying artist name and title
+
+--7.4
+--Create a cross join that joins album and artist and sorts by artist name in ascending order
+
+--7.5
+--Perform a self-join on the employee table, joining on the reportsto column
+
+--7.6
+--Createaninnerjoinbetweenalltablesinthechinookdatabase
+
+--9
+--Create a .bak file for the Chinook database
