@@ -30,30 +30,28 @@ Author: Cole Vikupitz
             crossorigin="anonymous"></script>
             
         <style>
-            
-            table, th, td {
-                border: 1px solid black;
-                border-collapse: collapse;
-                align: center;
-                padding: 24px;
+            .sidenav {
+                height: 100%;
+                width: 20%;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #111;
+                overflow-x: hidden;
+                padding-top: 20px;
             }
 
-            a:visited {
-                color: gray;
-                background-color: transparent;
+            .sidenav a {
+                padding: 6px 8px 6px 16px;
                 text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
             }
 
-            a:hover {
-                color: red;
-                background-color: transparent;
-                text-decoration: underline;
-            }
-
-            a:active {
-                color: green;
-                background-color: transparent;
-                text-decoration: underline;
+            .sidenav a:hover {
+                color: #f1f1f1;
             }
         </style>
 
@@ -61,95 +59,7 @@ Author: Cole Vikupitz
 
     <body>
 
-        <div class="jumbotron">
         
-            <h1 align="center">What is SQL?</h1>
-            <hr>
-            <ul>
-                <li>Acronym for "Structured Query Language"</li>
-                <li>Allows us to communicate with relational databases</li>
-                <li>Not case-sensitive ('account', 'ACCOUNT', & 'Account' are all the same)</li>
-            </ul>
-            
-            <p>
-            There are a variety of sub-languages within SQL.
-            They are organized into the following categories outlined below.
-            </p>
-            
-            <table>
-                <tr>
-                    <th>Category</th>
-                    <th>Common Commands</th>
-                </tr>
-                <tr>
-                    <td>Data Control Language (DCL)</td>
-                    <td>
-                        <ul>
-                            <li>'GRANT'</li>
-                            <li>'REVOKE'</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Data Definition Language (DDL)</td>
-                    <td>
-                        <ul>
-                            <li>'CREATE'</li>
-                            <li>'ALTER'</li>
-                            <li>'DROP'</li>
-                            <li>'TRUNCATE'</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Data Manipulation Language (DML)</td>
-                    <td>
-                        <ul>
-                            <li>'INSERT'</li>
-                            <li>'UPDATE'</li>
-                            <li>'DELETE'</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Transaction Control Language (TCL)</td>
-                    <td>
-                        <ul>
-                            <li>'COMMIT'</li>
-                            <li>'ROLLBACK'</li>
-                            <li>'SAVEPOINT'</li>
-                            <li>'SET TRANSACTION'</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Data Query Language (DQL)</td>
-                    <td>
-                        <ul>
-                            <li>'SELECT'</li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
-            <br><br>
-            
-            <p>
-            There are also several types of joins we can perform on our tables. They are shown as such below.
-            <p>
-            <br>
-            <img src="imgs/joins-pic.png" alt="Join Types Chart" align="middle" />
-            
-            <h4>Additional Online Resources:</h5>
-            <a href="https://www.w3schools.com/sql/">W3 Schools</a><br>
-            <a href="https://www.tutorialspoint.com/sql/index.htm">Tutorials Point</a><br>
-            <a href="https://www.geeksforgeeks.org/sql-tutorial/">Geek for Geeks</a><br>
-            
-            <a>Basics</a>
-            <a>Sub-Languages</a>
-            <a>Joins</a>
-            <a>Resources</a>
-            
-        </div>
 
     </body>
     
