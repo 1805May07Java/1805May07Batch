@@ -1,0 +1,6 @@
+4:GB:123:4.5
+4:another user:0987:3.0
+0:Pickle:hello:98.0
+0:testing:5:2.0
+6575:Beyonce:is awesome:7.9
+8052:serializable:oaifjoaijf:5.6
