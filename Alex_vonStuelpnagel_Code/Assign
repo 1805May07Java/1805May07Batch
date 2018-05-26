@@ -34,67 +34,179 @@ Select * from invoice where billingaddress like 'T%';
 --Select * from employees where hiredate between 1stof June 2003 and 1stof March 2004;
 
 --2.7
---Delete a record in Customer table where the name is Robert Walter (There may be constraints that rely on this, find out how to resolve them).
-
---3
---n this section you will be using the Oracle system functions, as well as your own functions, to perform various actions against the database
+delete from customer where firstname = 'Robert' and lastname = 'Walter';
 
 --3.1
---select time from dual;
+create or replace function getSysdate
+return date is
+  l_sysdate date;
+
+begin
+  select sysdate
+    into l_sysdate
+    from dual;
+
+  return l_sysdate;
+end;
+
+select getsysdate() from dual;
 
 --create a function that returns the length of a mediatype from the mediatype table
 
 --3.2
 --Create a function that returns the average total of all invoices
 
---Create a function that returns the most expensive track
+select max(unitprice) from track;
+
+create or replace function getMostExpensiveTrack
+return number is
+  price number;
+begin
+  select max(unitprice)
+  into price
+  from track;
+  return price;
+
+end;
+/
+
+select getMostExpensiveTrack from dual;
 
 --3.3
---Create a function that returns the average price of invoiceline items in the invoiceline table
+create or replace function avgInvoice
+return number is
+  average number;
+begin
+  select avg(total)
+    into average
+    from invoice;
+  return average;
+end;
+/
+
+select avgInvoice from dual;
 
 --3.4
---Create a function that returns all employees who are born after 1968
+CREATE OR REPLACE FUNCTION AFTER_1968 RETURN SYS_REFCURSOR
+IS
+  EMPLOYEE_C SYS_REFCURSOR;
+BEGIN
+  OPEN EMPLOYEE_C FOR SELECT * FROM EMPLOYEE WHERE BIRTHDATE >= TO_DATE('01-01-1968','DD-MM-YYYY');
+  RETURN EMPLOYEE_C;
+END;
+/
+
+SELECT AFTER_1968 FROM DUAL;
 
 --4.1
---Create a stored procedure that selects the first and last names of all the employees
+CREATE OR REPLACE PROCEDURE EMPLOYEE_INFO()
+AS
+BEGIN
+  SELECT FIRSTNAME, LASTNAME FROM EMPLOYEE;
+END;
 
 --4.2
---Create a stored procedure that updates the personal information of an employee
-
---Create a stored procedure that returns the managers of an employee
+create or replace procedure getManagers(
+empid in number,
+cursor1 out sys_refcursor
+)
+as
+begin
+  open cursor1 for
+  select * from employee
+  where employeeid = (
+    select reportsto
+    from employee
+    where employeeid = empid
+  );
+end;
+/
 
 --4.3
---Create a stored procedure that returns the name and company of a customer
+create or replace procedure customerinfo(
+cusid in number,
+cursor1 out sys_refcursor
+)
+as
+begin
+  open cursor1 for
+  select * 
+  from customer
+  where customerid = cusid;
+end;
+/
 
 --5
---Create a transaction that given a invoiceId will delete that invoice (There may be constraints that rely on this, find out how to resolve them).
+create or replace procedure deleteInvoice(
+  invid in number
+)
+as
+begin
+  delete from invoiceline
+  where invoiceid = invid;
+  
+  delete from invoice
+  where invoiceid = invid;
+  commit;
+end;
+/
 
---Create a transaction nested within a stored procedure that inserts a new record in the Customer table
-
+create or replace procedure insertCustomer(
+  fn in varchar2,
+  ln in varchar2,
+  cus_email in varchar2
+)
+as
+begin
+  insert into customer (firstname, lastname, email) values (fn, ln, cus_email);
+  commit;
+end;
+/
 --6.1
---Create an after insert trigger on the employee table fired after a new record is inserted into the table
+create or replace trigger insertEmployee
+after insert
+on employee
+for each row
+begin
+  dbms_output.put_line('new employee inserted');
+end;
+/
 
---Create an after update trigger on the album table that fires after a row is inserted inthe table
-
---Create an after delete trigger on the customer table that fires after a row is deleted from the table
+create or replace trigger deleteCustomer
+after delete
+on customer
+for each row
+begin
+  dbms_output.put_line('customer deleted');
+end;
+/
 
 --7.1
---Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId
+select customer.firstname, invoice.invoiceid
+from customer
+inner join invoice
+on customer.customerid = invoice.invoiceid;
 
 --7.2
---Create an outer join that joins the customer and invoice table, specifying the CustomerId, firstname, lastname, invoiceId, and total
+select invoice.customerid, customer.firstname, customer.lastname, invoice.invoiceid, invoice.total
+from customer
+full outer join invoice
+on customer.customerid = invoice.invoiceid;
 
 --7.3
---Create a right join that joins album and artist specifying artist name and title
+select artist.name, album.title
+from album
+right join artist
+on album.artistid = artist.artistid;
 
 --7.4
---Create a cross join that joins album and artist and sorts by artist name in ascending order
+select artist.name
+from artist
+cross join album
+order by artist.name asc;
 
 --7.5
---Perform a self-join on the employee table, joining on the reportsto column
-
---7.6
---Createaninnerjoinbetweenalltablesinthechinookdatabase
-
---9
---Create a .bak file for the Chinook database
+select x.firstname, x.lastname
+from employee x, employee y
+where x.reportsto = y.reportsto
+order by lastname asc;
