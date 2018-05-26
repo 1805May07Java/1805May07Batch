@@ -1,0 +1,92 @@
+BASE REQUIREMENTS
+1) create a User object, should have basic information such as 
+    a) fn
+    b) ln
+    c) username/email(UNIQUE)
+    d) password
+    e) account balance
+2) As a user, I should be able to 
+    a) create an account
+    b) log in
+    c) log out
+    d) update my account balance
+3) user information should be persisted in a text file
+-----------------------------------------------------------------------------------------------
+User Object
+   String Username
+   String Password
+
+   String First Name
+   String Last Name
+   String Email
+
+   Double Amount
+
+   printAmount()
+       double temp = amount
+       while(temp > 1000
+   depositAmount(double in)
+       amount += in;
+   withdrawAmount(double out)
+       amount -= out;
+-----------------------------------------------------------------------------------------------
+Page 1 : Login Screen
+
+Welcome to _____ Bank!
+To Start, enter either your username or NEW ACCOUNT
+Username -> Go to Password
+Password -> CORRECT = Login successful, go to page 3
+	    INCORRECT = "Username/Password is not valid, please try again", loop back to start.
+NEW ACCOUNT -> Go to page 2
+------------------------------------------------------------------------------------------------
+Page 2 : New Account Creation Screen
+1) Username : [NO SPACES]
+2) Password : [NO SPACES]
+3) First name : [NO SPACES, LETTERS ONLY]
+4) Last Name : [NO SPACES, LETTERS ONLY]
+5) Email Registration : ???@???.??? format
+6) Initial Account Amount : Min Starting Balance = $500
+7) Register Account (Only able to do after all fields filled)
+
+On registration, print "USERNAME has been registered"
+Return to Page 1
+------------------------------------------------------------------------------------------------
+Page 2B : Account Save Screen
+1) Username
+2) Password
+3) First Name
+4) Last Name
+5) Email
+6) Save Changes
+------------------------------------------------------------------------------------------------
+Page 3
+Welcome to your Banking Account, INSERT NAME HERE
+
+What would you like to do?
+
+1) Account Value [Prints cash in account]
+      "You currently have [Cash amount in format $???,???.??]"
+2) Account Withdrawal [Account Amount--, max withdrawal amount, min amount]
+      "How much would you like to withdraw from your account? [Max $"max withdrawal amount]
+          CHECK: If - or not a number, "Invalid input"
+                 If causes account to have - value, "Insufficient Funds"
+                 If higher than max withdraw amount, "Unable to withdraw more than $'max' at a time"
+          If it passes, update account amount and print out success amount
+	  "Withdrawal successful, your account balance is now $..."
+3) Account Deposit [Account Amount++, max deposit amount, max amount]
+      "How much would you like to deposit into your account? [Max $Max Deposit Amount"]
+          CHECK: If - or not a number, "Invalid input"
+	         If causes account to have value above max amount, "Max Amount reached, unable to deposit more"
+		 If higher than max deposit amount, "Unable to deposit more than $'max' at a time"
+4) Save Changes [Page 2B]
+4) Log Out [return to page 1]
+--------------------------------------------------------------------------------------------------------
+
+COMPLETE
+
+Possible Future Updates
+
+1) Unique ID Numbers used for banking side
+2) Capacity to own more than one cash account / create more accounts for the same user (Would need to update the scan to prevent copys.
+   Might have it so that every line until a terminating character line is a different account.
+3) Unique Account Number (Even more varied than the ID numbers)

@@ -1,0 +1,61 @@
+<! DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+</head>
+
+<body>
+     <h1>Function Viewer</h1>
+	 <hr>
+	 <br>
+	 <h3>Fibonacci</h3>
+	 <input id="fib-n" type="number"/>
+	 <button id="doFib">Submit</button>
+	 <p id="output"></p>
+	 
+	 <br>
+	 
+	 <h3>Factorial</h3>
+	 <input id="fact-n" type="number"/>
+	 <button id="doFact">Submit</button>
+	 <p id="factOut"></p>
+	 
+	 <button id="add" class="btn bntn-primary">Add Book!</button>
+	 <hr>
+	 <table class="table table-sm table-hover table-bordered thead-light">
+	     <thead>
+		     <tr>
+			     <th scope="col">ID</th>
+				 <th scope="col">ISBN</th>
+			 </tr>
+		 </thead>
+		 <tbody>
+		 </tbody>
+	 </table>
+	 
+	 
+	 <script>
+		//addEventListener(event, function, [propagate])
+	 document.getElementById("doFib").addEventListener("click", runFib, false);
+	 
+	 function runFib(){
+		var n = document.getElementById("fib-n").value;
+		document.getElementById("output").innerHTML = fib(n);
+	 }
+	 
+	 function fib(n){
+	     if(n == 0) return 0;
+		 if(n == 1) return 1;
+		 return fib(n-1) + fib(n-2);
+		}
+	 </script>
+</body>
+</html>

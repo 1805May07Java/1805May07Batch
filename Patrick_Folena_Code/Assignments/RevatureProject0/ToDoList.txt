@@ -1,0 +1,11 @@
+TO DO
+
+a) Transaction History
+b) Account Summary Page
+c) Update Account Settings
+d) Joint Account Process & Fix Joint Password Issue
+e) Change "Credit" behavior (withdraw INCREASES amount to credit limit, deposit DECREASES amount to 0)
+f) Lock user row whenever a user is logged in
+g) Lock account row whenever an 'account' has been selected by a user
+
+#BromiumOwn&e2gs

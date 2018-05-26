@@ -1,0 +1,45 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "isbn": 9101231231,
+      "price": 10.99,
+      "title": "Game of Thrones",
+      "genre": 1
+    },
+    {
+      "id": 2,
+      "isbn": 9101231232,
+      "price": 5.99,
+      "title": "Goosebumps",
+      "genre": 2
+    },
+    {
+      "id": 3,
+      "isbn": 9101231233,
+      "price": 9.99,
+      "title": "TBD",
+      "genre": 3
+    }
+  ],
+
+  "genres": [
+    {
+      "id": 1,
+      "name": "Fantasy"
+    },
+    {
+      "id": 2,
+      "name": "Scary Stories 4 Kids"
+    },
+    {
+      "id": 3,
+      "name": "excellent question"
+    }
+    ],
+  
+  "authors": [
+  ]
+}
+
+

@@ -1,0 +1,6 @@
+pfolena:3376:Patrick:Folena:PFolena@vt.edu:256.29
+nothankyou:nothankyou:no:thank:you@gmail.com:1000000.0
+a:b:c:d:e@g.com:1000.0
+john:jacob:jingleheimer:schmidt:myName@too.com:2.0E8
+harrison_ford:Han_Solo:Harrison:Ford:FamousMovieStar@yolo.com:2.9999999990000004E8
+pfol:1234:Harry:Folena:PFolena@gmail.com:10000.0
