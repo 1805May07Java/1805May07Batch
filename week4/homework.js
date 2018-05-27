@@ -137,12 +137,12 @@ Example for printShape("Diamond", 5, "*");
 */
 
 function printShape(shape, height, character){
-    var i, i2;
+    var i, j;
     switch(shape){
         case "Square":
                 console.log("right after case square");////
-                for(i = 0; i < height; i++){
-                    for(i2 = 0; i2 < height; i2++){
+                for(i = 1; i <= height; i++){
+                    for(j = 0; j < height; j++){
                         console.log(character);
                     }
                     console.log("");
@@ -150,8 +150,8 @@ function printShape(shape, height, character){
                 break;
         case "Triangle":
                 console.log("Right after case triangle");////
-                for(i = 0; i < height; i++){
-                    for(i2 = 0; i2 < height; i2++){
+                for(i = 1; i <= height; i++){
+                    for(j = 0; j < i; j++){
                         console.log(character);
                     }
                     console.log("");
@@ -159,8 +159,25 @@ function printShape(shape, height, character){
                 break;
         case "Diamond":
                 console.log("Right after diamond");
-                for(i = 0; i < height; i++){
-                    for(i2 = 0; i2 < height; i2++){
+                //top half of diamond
+                var space = height;
+
+                for(i = 1; i <= height; i++){
+                    for(j = 1; j <= space; j++){
+                        console.log(" ");
+                    }
+                    space--;
+                    for(j = 1; j <= 2 * i -1; j++){
+                        console.log(character);
+                    }
+                }
+                space = 2;
+                for(i = 1; i <= height; i++){
+                    for(j = 1; j <= space; j++){
+                        console.log(" ");
+                    }
+                    space++;
+                    for(j = 1; j <= (2 * (height - i) - 1); j++){
                         console.log(character);
                     }
                     console.log("");
@@ -171,3 +188,90 @@ function printShape(shape, height, character){
     }
     return null;
 }
+
+/*
+9. Object literal
+Define function traverseObject(someObj)
+Print every property and it's value.
+*/
+var alphabet =
+{
+    a: 'value1',
+    b: 'value2',
+    c: 'value3',
+    d: 'value4'
+};
+
+function traverseObject(someObj){
+    for (var prop in someObj) {
+        console.log(someObj[prop]);
+    }
+    return;
+}
+
+/*
+10. Delete Element
+Define function deleteElement(someArr)
+Print length
+Delete the third element in the array.
+Print length
+The lengths should be the same.
+*/
+
+function deleteElement(someArr){
+    console.log(someArr.length);
+    delete someArr[2];
+    console.log(someArr.length);
+}
+
+/*
+11. Splice Element
+Define function spliceElement(someArr)
+Print length
+Splice the third element in the array.
+Print length
+The lengths should be one less than the original length.
+*/
+
+function spliceElement(someArr){
+    console.log(someArr.length);
+    someArr.splice(2,1);
+    console.log(someArr.length);
+}
+
+/*
+12. Defining an object using a constructor
+Define a function Person(name, age)
+The following line should set a Person object to the variable john:
+    var john = new Person("John", 30);
+*/
+
+function Person(name, age){
+    this.name = name;
+    this.age = age;
+}
+
+var john = new Person("John", 30);
+
+/*
+13. Defining an object using an object literal
+Define function getPerson(name, age)
+The following line should set a Person object to the variable john:
+    var john = getPerson("John", 30);
+*/
+
+function getPerson(name, age){
+    var Person = {
+        name : name,
+        age : age
+    };
+    return Person;
+}
+
+/*
+1. USA
+Define function getUSA()
+Find the html element that contains "USA".
+Print that element's contents.
+*/
+
