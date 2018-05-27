@@ -1,0 +1,11 @@
+package com.ex.dao;
+
+import java.util.List;
+
+public interface Dao<T> {
+	
+	List<T> getAllCustomers();
+	T addCustomer(T obj);
+	boolean isUnique(T obj);
+
+}

@@ -1,0 +1,29 @@
+package com.ex.service;
+
+import java.util.List;
+
+
+import com.ex.pojos.Customer;
+
+public class BankingService {
+	
+	
+	public boolean unique (String username) {
+		Customer dummy = new Customer();
+		dummy.setUsername(username);
+		
+		return false;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	
+}

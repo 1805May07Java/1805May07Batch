@@ -1,0 +1,51 @@
+package com;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Banking {
+
+	public static void main(String[] args) {
+		start();
+
+	}
+	
+	static void start() {
+		System.out.println("Welcome to Bank of Cayman Islands"
+				+ "\nWhat would you like to do"
+				+ "\nLogIn"
+				+ "\nSignUp");
+		
+		Scanner scan = new Scanner(System.in);
+		int op = 0;
+		op = Integer.parseInt(scan.nextLine());
+		
+		
+		switch(op) {
+		case 1: logIn(); break;
+		case 2: signUp(); break;
+		default: 
+		System.out.println("Sorry, that is not an option. Please try again!");
+		start();
+		}
+		scan.close();
+		
+	}
+	
+	static void logIn() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Welcome to LogIn. Please enter your username");
+		String username = in.nextLine();
+		
+		
+	}
+	
+	static void signUp() {
+		
+		
+	}
+	
+	
+	
+	
+}

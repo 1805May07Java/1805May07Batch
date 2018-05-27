@@ -1,0 +1,8 @@
+package com.ex.dao;
+
+public interface Dao<T> {
+	
+	T addCustomer(T obj);
+	boolean isUnique(T obj);
+
+}

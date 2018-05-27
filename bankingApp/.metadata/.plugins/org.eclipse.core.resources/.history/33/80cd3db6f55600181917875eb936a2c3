@@ -1,0 +1,18 @@
+package com;
+
+public class Customer {
+	
+	private firstname;
+	private lastname;
+	private username;
+	private password;
+	private balance;
+	
+	
+	
+	
+	
+	
+	
+	
+}

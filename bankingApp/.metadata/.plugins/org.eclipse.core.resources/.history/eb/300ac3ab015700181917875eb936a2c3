@@ -1,0 +1,37 @@
+package com;
+
+import java.util.ArrayList;
+import java.io.*;
+
+
+
+public class DAO {
+
+	final static String fileLocation = "C:\\Users\\Sharjeel Tahir\\Desktop\\src\\Banking\\src\\com\\users.txt";
+	
+	ArrayList<Customer> readCustomers(){
+		ArrayList<Customer> masterCustomerList =  new ArrayList<Customer>();
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(fileLocation));
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		String line = null;
+		try {
+			while ((line = br.readLine()) != null) {
+				String[] data = line.split("\t");
+				Customer temp = new Customer();
+				temp.setFirstname(data[0]);
+				temp.setLastname(data[1]);
+				temp.setUsername(data[2]);
+				temp.setPassword(data[3]);
+				temp.setBalance(Double.parseDouble(data[4]));
+				masterCustomerList.add(temp);
+			}
+		} catch (NumberFormatException | IOException e) {
+			e.printStackTrace();
+		}
+		return masterCustomerList;	
+	}
+}

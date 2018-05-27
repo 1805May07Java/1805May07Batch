@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ex</groupId>
+  <artifactId>bankingdbc</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Banking</name>
+  <description>Intro to Java Database Connectivity using the Banking DB</description>
+  
+  	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	
+	<!-- Oracle DB Driver -->
+	<!-- In a computer system, an adaptor program is required for
+	making a connection to another system of a different type. 
+	Similar to connecting a printer to a computer by using a printer
+	driver, a DBMS needs a DB driver that enables a DB connection 
+	in other systems. To connect with Oracle DB, we are using ojdbc
+	
+	in short, "A database driver is a computer program that implements
+	a protocol (JDBC) for a db connection"-->
+	<dependencies>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc7</artifactId>
+			<version>11.2.0</version>
+		</dependency>
+	</dependencies>
+  
+  
+  
+  
+</project>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.ex.dao.Dao"/>
+<fullyQualifiedTypeName name="com.ex.util.ConnectionFactory"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="com.ex.service.BankingService"/>
+<fullyQualifiedTypeName name="com.ex.dao.UserDaoImpl"/>
+<fullyQualifiedTypeName name="com.ex.dao.UserDao"/>
+<fullyQualifiedTypeName name="java.sql.Statement"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.ex.pojos.Customer"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="java.sql.CallableStatement"/>
+</qualifiedTypeNameHistroy>

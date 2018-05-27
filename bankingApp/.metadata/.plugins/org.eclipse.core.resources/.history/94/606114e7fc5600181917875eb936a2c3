@@ -1,0 +1,24 @@
+package com;
+
+import java.util.ArrayList;
+import java.io.*;
+
+
+
+public class DAO {
+
+	final static String fileLocation = "C:\\Users\\Sharjeel Tahir\\Desktop\\src\\Banking\\src\\com\\users.txt";
+	
+	ArrayList<Customer> readCustomers(){
+		ArrayList<Customer> =  new ArrayList<Customer>();
+		BufferedReader br = new BufferedReader(new FileReader(fileLocation));
+		String line = null;
+		while ((line = br.readLine()) != null) {
+			
+			
+		}
+				
+		
+	}
+	
+}

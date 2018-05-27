@@ -1,0 +1,23 @@
+package com;
+import java.util.ArrayList;
+
+public class BankingEngine {
+
+	
+	ArrayList<Customer> getAllCustomers() {
+		DAO readAccessObj = new DAO();
+		return readAccessObj.readCustomers();
+	}
+	
+	boolean exists (String username) {
+		ArrayList<Customer> customers = getAllCustomers();
+		return customers.stream().anyMatch( s -> s.getUsername().equalsIgnoreCase(username));
+	}
+	
+//	void addCustomer(Student s) {
+//		DAO writeAccessObject = new DAO();
+//		writeAccessObject.addCustomer();
+//		
+//	}
+
+}

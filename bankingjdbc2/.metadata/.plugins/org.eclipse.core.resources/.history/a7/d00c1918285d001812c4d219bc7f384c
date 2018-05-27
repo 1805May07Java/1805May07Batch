@@ -1,0 +1,107 @@
+package com.ex.main;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import com.ex.pojos.Customer;
+import com.ex.service.BankingService;
+
+public class App {
+
+	static BankingService bs = new BankingService();
+	
+	
+	public static void main(String[] args) {
+			
+		List<Customer> custs = bs.getAllCustomers();
+		for (Customer a : custs) {
+			
+			System.out.println(a.toString());
+		}
+		//System.out.println("Working");
+		start();
+	}
+	
+	
+	
+	static void start() {
+		System.out.println("Welcome to Bank of Cayman Islands"
+				+ "\nWhat would you like to do"
+				+ "\nFor LogIn, Press 1"
+				+ "\nFor SignUp, Press 2"
+				+ "\nTo deposite funds, Press 3");
+		
+		Scanner scan = new Scanner(System.in);
+		int op1 = 0;
+		op1 = Integer.parseInt(scan.nextLine());	
+		switch(op1) {
+		case 1: logIn(); break;
+		case 2: signUp(); break;
+		case 3: deposit(); break;
+		default: 
+		System.out.println("Sorry, that is not an option. Please try again!");
+		start();
+		}
+		scan.close();
+		return;
+		
+	}
+	
+	
+	static void logIn() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Welcome to LogIn. Please enter your username");
+		String username = in.nextLine();
+		if (bs.uniqueUsername(username)) {
+			System.out.println("Username found");
+			System.out.println("Please enter your password:");
+			String password = in.nextLine();
+			if(bs.uniquePassword(password)) {
+				System.out.println("password found");				
+			}
+		}
+		else {
+			int op2 = 0;
+			System.out.println("You are not a user. Would you like to sign up?"
+					+ "\n For SignUp, Press 1"
+					+ "\n Press 2 to exit");
+			op2 = Integer.parseInt(in.nextLine());
+			switch(op2) {
+			case 1: signUp(); break;
+			case 2:
+				System.out.println("We hope you will come back!");
+				break;
+			default: 
+				System.out.println("Sorry, this is not an option. Please try again!");
+			}
+		}
+		return;		
+	}
+	
+	
+	static void signUp() {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Please enter your username");
+		String username = scan.nextLine();
+		if(!bs.uniqueUsername(username)) {
+			System.out.println("Username is unique");
+			System.out.println("Please enter your password");
+			String password = scan.nextLine();
+			System.out.println("Please enter your First name");
+			String firstName = scan.nextLine();
+			System.out.println("Please enter your Last name");
+			String lastName =  scan.nextLine();
+			System.out.println("Please enter your zipcode");
+			int zipcode = Integer.parseInt(scan.nextLine());
+			Double balance = 0.0;
+			Customer newCustomer = new Customer();
+		}
+		
+	}
+	
+	static void deposit(){
+		
+	}
+	
+}

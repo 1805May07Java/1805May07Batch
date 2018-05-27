@@ -1,0 +1,12 @@
+package com.ex.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public interface UserDao<T> {
+	
+	ArrayList<T> getAllCustomers();
+	T addCustomer(T obj);
+	boolean isUnique(T obj);
+	
+}

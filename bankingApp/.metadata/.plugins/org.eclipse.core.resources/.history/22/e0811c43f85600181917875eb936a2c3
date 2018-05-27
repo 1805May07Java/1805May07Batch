@@ -1,0 +1,8 @@
+package com;
+
+public class DAO {
+
+	final static String fileLocation = "C:\\Users\\Sharjeel Tahir\\Desktop\\src\\Banking\\src\\com\\users.txt";
+	
+	
+}

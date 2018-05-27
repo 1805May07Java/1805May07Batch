@@ -1,0 +1,22 @@
+package com.ex.service;
+
+import com.ex.dao.Dao;
+import com.ex.pojos.Customer;
+
+public class BankingService implements Dao<Customer> {
+
+	@Override
+	public Customer addCustomer(Customer obj) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isUnique(Customer obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	
+}

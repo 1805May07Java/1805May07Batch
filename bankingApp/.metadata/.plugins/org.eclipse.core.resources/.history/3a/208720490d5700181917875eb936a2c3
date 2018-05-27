@@ -1,0 +1,72 @@
+package com;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Banking {
+	
+	static BankingEngine engine = new BankingEngine();
+	
+	public static void main(String[] args) {
+		
+		ArrayList<Customer> listOfCustomers = engine.getAllCustomers();
+		for (Customer s : listOfCustomers) {
+			System.out.println(s.toString());
+		}
+		
+		start();
+
+	}
+	
+	static void start() {
+		System.out.println("Welcome to Bank of Cayman Islands"
+				+ "\nWhat would you like to do"
+				+ "\nFor LogIn, Press 1"
+				+ "\nFor SignUp, Press 2");
+		
+		Scanner scan = new Scanner(System.in);
+		int op1 = 0;
+		op1 = Integer.parseInt(scan.nextLine());	
+		switch(op1) {
+		case 1: logIn(); break;
+		case 2: signUp(); break;
+		default: 
+		System.out.println("Sorry, that is not an option. Please try again!");
+		start();
+		}
+		scan.close();
+		
+	}
+	
+	static void logIn() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Welcome to LogIn. Please enter your username");
+		String username = in.nextLine();
+		if(engine.exists(username)) {
+			System.out.println("Username found");
+			
+		}
+		else {
+			System.out.println("Would like to sign up?"
+					+ "\n For SignUp, Press 1"
+					+ "\n Press 2 to exit");
+			int op2 = 0;
+			switch(op2) {
+			case 1: signUp();
+			case 2: return;
+			default: 
+				System.out.println("Sorry, this is not an option. Please try again!");
+			}
+		}
+		
+	}
+	
+	static void signUp() {
+		
+		
+	}
+	
+	
+	
+	
+}

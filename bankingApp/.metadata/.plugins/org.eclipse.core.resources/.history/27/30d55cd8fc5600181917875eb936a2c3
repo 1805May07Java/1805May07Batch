@@ -1,0 +1,20 @@
+package com;
+import java.util.ArrayList;
+
+public class BankingEngine {
+
+	
+	ArrayList<Customer> getAllCustomers() {
+		DAO accessObj = new DAO()
+		
+	}
+	
+	boolean exists (String username) {
+		ArrayList<Customer> customers = getAllCustomers();
+		
+		return true;
+	}
+	
+	
+
+}
