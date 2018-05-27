@@ -22,3 +22,33 @@ Use the bubble sort algorithm to sort the array.
 Return the sorted array.
 */
 
+function bubblesort(arr){
+    var done = false;
+    while(!done){
+        done = true;
+        for(var i = 1; i < arr.length; i++){
+            if(arr[i -1] > arr[i]){
+                done = false;
+                var temp = arr[i - 1];
+                arr[i - 1] = arr[i];
+                arr[i] = temp;
+            }
+        }
+    }
+    return arr;
+}
+
+/*
+3. Reverse String
+Define function: reverseStr(someStr)
+Reverse and return the String.
+*/
+
+function reverseStr(str) {
+    var i = str.length;
+    var rev = '';
+    while (i--){
+        rev += str[i];
+    }
+    return rev;
+}
