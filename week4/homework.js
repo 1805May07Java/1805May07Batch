@@ -275,3 +275,33 @@ Find the html element that contains "USA".
 Print that element's contents.
 */
 
+function getUSA(){
+    var usaElement = document.getElementsByTagName('span')[1];
+    console.log(usaElement.innerHTML);
+}
+
+/*
+2. Sales
+Define function getPeopleInSales()
+Print the names of all the people in the sales department.
+*/
+
+function getPeopleInSales(){
+    var salesPeople = document.querySelectorAll("tr > td.empName");
+    var sibs = getSiblings(salesPeople);
+    console.log(salesPeople);
+    return sibs;
+}
+
+//The following two assist getPeopleInSales()
+function getSiblings(el, filter) {
+    var siblings = [];
+    el = el.parentNode.firstChild;
+    do { if (!filter || filter(el)) siblings.push(el); } while (el = el.nextSibling);
+    return siblings;
+}
+
+// example filter function
+function exampleFilter(el) {
+    return elem.nodeName.toLowerCase() == 'a';
+}
