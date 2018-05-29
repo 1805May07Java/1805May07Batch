@@ -1,57 +1,100 @@
 {
-    "books": [
-        {
-            "id": 1,
-            "isbn": 9101231231,
-            "price": 10.99,
-            "title": "Game of Thrones",
-            "genre": 1
-        },
-        {
-            "id": 2,
-            "isbn": 9100031231,
-            "price": 12.99,
-            "title": "Goosebumps",
-            "genre": 3
-        },
-        {
-            "id": 3,
-            "isbn": 9121231231,
-            "price": 11.99,
-            "title": "TBD",
-            "genre": 2
-        },
-        {
-            "title": "OCA",
-            "isbn": 2101231231,
-            "price": 20.99,
-            "genre": 2,
-            "id": 4
-        }
-    ],
-    "genres": [
-        {
-            "id": 1,
-            "name": "Fiction"
-        },
-        {
-            "id": 2,
-            "name": "Non-Fiction"
-        },
-        {
-            "id": 3,
-            "name": "Romance"
-        }
-    ],
-    "authors": [
-        {
-            "id": 1,
-            "firstname" : "J.K",
-            "lastname": "Rowling",
-            "bio": "She is a phenomenal author"
-        }
-    ],
-    "book_authors": [
-        {"book_id": 1, "author_id":1}
-    ]
+  "books": [
+    {
+      "id": 1,
+      "isbn": 9101231231,
+      "price": 10.99,
+      "title": "Game of Thrones",
+      "genre": 1
+    },
+    {
+      "id": 2,
+      "isbn": 9100031231,
+      "price": 12.99,
+      "title": "Goosebumps",
+      "genre": 3
+    },
+    {
+      "id": 3,
+      "isbn": 9121231231,
+      "price": 11.99,
+      "title": "TBD",
+      "genre": 2
+    },
+    {
+      "title": "OCA",
+      "isbn": 2101231231,
+      "price": 20.99,
+      "genre": 2,
+      "id": 4
+    },
+    {
+      "isbn": "1111111111",
+      "title": "Where the red fern goes(?)",
+      "price": "100",
+      "genre": "3",
+      "id": 5
+    },
+    {
+      "title": "OCAiaufjiauh",
+      "author": "Testing12",
+      "genre": "2",
+      "id": 6
+    },
+    {
+      "isbn": "09283928392",
+      "title": "kjeuhgtlzuedhlui",
+      "price": "1",
+      "genre": "1",
+      "id": 7
+    },
+    {
+      "isbn": "627839450859",
+      "title": "test2",
+      "price": "2",
+      "genre": "3",
+      "id": 8
+    },
+    {
+      "isbn": "182387562",
+      "title": "t",
+      "price": "2",
+      "genre": "1",
+      "id": 9
+    }
+  ],
+  "genres": [
+    {
+      "id": 1,
+      "name": "Fiction"
+    },
+    {
+      "id": 2,
+      "name": "Non-Fiction"
+    },
+    {
+      "id": 3,
+      "name": "Romance"
+    },
+    {
+      "title": "OCAiaufjiauh",
+      "author": "Testing12",
+      "genre": "2",
+      "id": 4
+    }
+  ],
+  "authors": [
+    {
+      "id": 1,
+      "firstname": "J.K",
+      "lastname": "Rowling",
+      "bio": "She is a phenomenal author"
+    }
+  ],
+  "book_authors": [
+    {
+      "book_id": 1,
+      "author_id": 1
+    }
+  ]
 }
