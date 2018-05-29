@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Poke AJAX Example</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <style>
+        @font-face {
+            font-family: Pokemon;
+            src: url(fonts/PokemonSolid.ttf);
+        }
+
+        h3,
+        h1 {
+            font-family: Pokemon;
+            color: #F8D50A !important;
+        }
+
+        h1 {
+            letter-spacing: 4px;
+            -webkit-text-stroke-width: 5px;
+            -webkit-text-stroke-color: #36459A;
+            text-shadow: 2px 0 0 #36459A !important;
+        }
+
+      
+        .jumbotron {
+            background-image: url("https://vignette3.wikia.nocookie.net/youtubepoop/images/4/4c/Pokeball.png/revision/latest?cb=20150418234807") !important;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h3>Using</h3>
+            <h1> RESTful PoKéMoN </h1>
+            <h3>API</h3>
+        </div>
+
+        <div class="well">
+            <!-- User will enter a pokemon id -->
+            <input type="number" id="pokemonId" placeholder="Enter Pokémon ID">
+            <input type="submit" value="Get Pokémon Info" id="pokemonSubmit" class="btn btn-info" />
+        </div>
+
+        <div class="well">
+            <div class="text-center">
+                <!-- API will return pokemon information
+                            We will append that information to the page -->
+                <img id="pokemonImg" alt="" src="">
+                <h3 id="pokemonName"></h3>
+                <h3 id="pokemonWeight"></h3>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        var pokemon; //make pokemon global so that we can explore in console
+        window.onload = function () {
+            console.log("window loaded");
+            $('#pokemonSubmit').on('click', getPokemon
+            );
+        }
+
+        function getPokemon() {
+            var id = $('#pokemonId').val();
+            //BEGIN AJAX STEPS
+            //STEP 1
+            var xhttp = new XMLHttpRequest();
+            //STEP 2 - define function 
+            xhttp.onreadystatechange = function () {
+                console.log(Date() + " " + xhttp.readyState);
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    pokemon = JSON.parse(xhttp.responseText);
+                    setPokeValues(pokemon);
+                }
+            }
+            //STEP 3 - open 
+            xhttp.open("GET", `https://pokeapi.co/api/v2/pokemon/${id}/`, true);
+            //STEP 4 - send
+            xhttp.send();
+            //console.log(pokemon.name); //WILL NOT WORK. MUST BE INSIDE OF STEP 2's CALLBACK FUNCTION
+        }
+
+
+        function setPokeValues(poke) {
+            //manipulate DOM with response
+            $('#pokemonName').html(pokemon.name);
+            var image = $('#pokemonImg');
+            image.attr("src", pokemon.sprites.front_shiny);
+            image.attr("alt", pokemon.name);
+            $('#pokemonWeight').html(pokemon.weight);
+        }
+
+
+    </script>
+
+</body>
+
+</html>
