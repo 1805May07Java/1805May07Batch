@@ -24,10 +24,26 @@ public class HelloServlet extends GenericServlet{
 		 * the code that we write for the service method will be 
 		 * considered the definition for the process 
 		 */
+		System.out.println("IN GENERIC SERVLET SERVICE() METHOD");
 		
 		PrintWriter out = res.getWriter();
 		out.println("HELLO WORLD! WE COME IN PEACE FROM JAVA SERVLETS!");		
 		
+	}
+	
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		super.init();
+		System.out.println("INITIALIZING GENERIC SERVLET");
+	}
+	
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		super.destroy();
+		
+		System.out.println("DESTROYING GENERIC SERVLET");
 	}
 
 }
