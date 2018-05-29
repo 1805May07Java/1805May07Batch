@@ -29,5 +29,17 @@ public class UserService {
 		
 	}
 	
+	
+	public User login(String username, String password) {
+		User user = users.stream().
+				filter(u -> u.getUsername().equalsIgnoreCase(username)).findFirst().get();
+		if(user.getPassword().equals(password)) {
+			return user;
+		} else return null;
+	}
+	
+	
+	
+	
 
 }
