@@ -8,10 +8,21 @@
 	<servlet>
 		<servlet-name>hello</servlet-name>
 		<servlet-class>com.ex.servlets.HelloServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>hello</servlet-name>
 		<url-pattern>/hello</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>R</servlet-name>
+		<servlet-class>com.ex.servlets.RegisterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>R</servlet-name>
+		<url-pattern>/test</url-pattern>
 	</servlet-mapping>
 
 </web-app>
