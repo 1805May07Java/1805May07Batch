@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ex.pojos.User;
 import com.ex.service.UserService;
@@ -17,6 +18,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet{
+	static {
+		System.out.println("IN LOGIN SERVLET. CHANGE PLEASE");
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -43,6 +47,13 @@ public class LoginServlet extends HttpServlet{
 		UserService service = new UserService();
 		
 		u = service.login(u.getUsername(), u.getPassword());
+		if(u != null) { // if user exists, store them in session
+			HttpSession session = req.getSession();
+			session.setAttribute("user", u);
+			resp.sendRedirect("hello");
+		}
+		
+		
 		System.out.println(u);
 		
 		PrintWriter out = resp.getWriter();

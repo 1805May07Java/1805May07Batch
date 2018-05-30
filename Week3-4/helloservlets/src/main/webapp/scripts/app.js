@@ -22,8 +22,7 @@ function login(){
 				$('#message').html('Invalid Credentials');
 			}
 			else{
-				// load landing page;
-				
+				loadLandingView(user);
 			}
 		}
 	}
@@ -46,8 +45,22 @@ function loadRegisterView(){
 		}
 	}
 	
-	xhr.open("GET", "regView", true);
+	xhr.open("GET", "register.view", true);
 	xhr.send();
+}
+
+function loadLandingView(user){
+	console.log("loading register view");
 	
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status==200){
+			$('#view').html(xhr.responseText);
+			$('#name').html(user.username);
+		}
+	}
 	
+	xhr.open("GET", "landing.view", true);
+	xhr.send();
 }

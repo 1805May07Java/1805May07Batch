@@ -25,4 +25,15 @@
 		<url-pattern>/test</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>ViewLoader</servlet-name>
+		<servlet-class>com.ex.servlets.LoadViewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewLoader</servlet-name>
+		<url-pattern>*.view</url-pattern>
+	</servlet-mapping>
+
+
+
 </web-app>
