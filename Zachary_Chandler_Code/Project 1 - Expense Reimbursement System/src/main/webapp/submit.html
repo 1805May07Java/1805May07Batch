@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+	
+<link rel="icon" href="logo.png">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/ers/scripts/requireLogin.js"></script>
+<script src="/ers/scripts/submit.js"></script>
+<title>Ticket Submit</title>
+<link rel="shortcut icon" href="logo.ico" />
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="home.html"><img
+			style="height: 1em; width: 1em" src="logo.png"></a> <a
+			class="navbar-brand" href="home.html">Home</a> <a
+			class="navbar-brand" href="submit.html">Submit</a> <a
+			class="navbar-brand mr-auto" href="about.html">About</a> <a
+			class="navbar-brand" href="login.html">Login</a>
+	</nav>
+
+	<div class="container w-50 mx-auto">
+		<h1 class="mt-5 mb-3">Ticket Submission</h1>
+
+		<form id="submitForm">
+
+			<div class="form-group mx-auto">
+				<label for="ticketAmount">Amount</label>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">$</span>
+					</div>
+					<input type="number" class="form-control" min="0.01" step="0.01"
+						value="0.00" id="ticketAmount" />
+				</div>
+			</div>
+
+			<div class="form-group mx-auto">
+				<label for="ticketType">Expense type</label> <select
+					class="custom-select" id="ticketType">
+					<option selected>Lodging</option>
+					<option value="1">Travel</option>
+					<option value="2">Food</option>
+					<option value="3">Other</option>
+				</select>
+			</div>
+
+			<div class="form-group mx-auto">
+				<label for="ticketDescription">Expense description</label> <input
+					type="text" class="form-control" id="ticketDescription"
+					placeholder="Briefly describe the expense">
+			</div>
+
+			<button type="submit" class="btn btn-primary">Submit New
+				Ticket</button>
+		</form>
+
+	</div>
+</body>
+</html>

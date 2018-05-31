@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>ERS Home</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
+<link rel="icon" href="logo.png">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/ers/scripts/requireLogin.js"></script>
+<script src="/ers/scripts/resolveTicket.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="home.html"><img
+			style="height: 1em; width: 1em" src="logo.png"></a> <a
+			class="navbar-brand" href="home.html">Home</a> <a
+			class="navbar-brand" href="submit.html">Submit</a> <a
+			class="navbar-brand mr-auto" href="about.html">About</a> <a
+			class="navbar-brand" href="login.html">Login</a>
+	</nav>
+
+	<div class="pb-5 container">
+		<h1 class="mt-5 mb-5 mx-auto text-center">Expense Reimbursement
+			System</h1>
+
+		<div id="ticket" class="d-none">
+
+			<div class="row">
+				<div class="input-group mb-3 col">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon3">Full name</span>
+					</div>
+					<input id="name" type="text" disabled class="bg-white form-control"
+						aria-describedby="basic-addon3">
+				</div>
+
+				<div class="input-group mb-3 col">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon3">Submitted</span>
+					</div>
+					<input id="submitted" type="text" disabled
+						class="bg-white form-control" aria-describedby="basic-addon3">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="input-group mb-3 col">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon3">Amount</span>
+					</div>
+					<input id="amount" type="text" disabled
+						class="bg-white form-control" aria-describedby="basic-addon3">
+				</div>
+
+				<div class="input-group mb-3 col">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon3">Type</span>
+					</div>
+					<input id="type" type="text" disabled class="bg-white form-control"
+						aria-describedby="basic-addon3">
+				</div>
+
+				<div class="input-group mb-3 col">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon3">Status</span>
+					</div>
+					<input id="status" type="text" disabled
+						class="bg-white form-control" aria-describedby="basic-addon3">
+				</div>
+			</div>
+
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="basic-addon3">Description</span>
+				</div>
+				<input id="description" type="text" disabled
+					class="bg-white form-control" aria-describedby="basic-addon3">
+			</div>
+
+			<div class="row">
+				<div class="input-group mb-3 col">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon3">Resolved</span>
+					</div>
+					<input id="resolved" type="text" disabled
+						class="bg-white form-control" aria-describedby="basic-addon3">
+				</div>
+
+				<div class="input-group mb-3 col">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon3">Resolver</span>
+					</div>
+					<input id="resolver" type="text" disabled
+						class="bg-white form-control" aria-describedby="basic-addon3">
+				</div>
+			</div>
+
+			<div id="action" class="container text-center mt-5 d-none">
+				<button id="approve" class="btn-lg btn-primary">approve</button>
+				<span class="d-inline-block" style="width: 15px"></span>
+				<button id="deny" class="btn-lg btn-danger">deny</button>
+				<span class="d-inline-block" style="width: 30px"></span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

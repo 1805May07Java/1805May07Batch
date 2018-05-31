@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>ERS Home</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
+<link rel="icon" href="logo.png">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+<script src="/ers/scripts/requireLogin.js"></script>
+<script src="/ers/scripts/home.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="home.html"><img
+			style="height: 1em; width: 1em" src="logo.png"></a> <a
+			class="navbar-brand" href="home.html">Home</a> <a
+			class="navbar-brand" href="submit.html">Submit</a> <a
+			class="navbar-brand mr-auto" href="about.html">About</a> <a
+			class="navbar-brand" href="login.html">Login</a>
+	</nav>
+
+	<div class="pb-5 container">
+		<h1 class="mt-5 mb-5 mx-auto text-center">Expense Reimbursement System</h1>
+
+		<table style="cursor:pointer" class="table table-bordered table-hover text-center"
+			id="reimbursment-display">
+			
+			<thead>
+				<tr id="reimbursment-header">
+					<th>Amount</th>
+					<th>Employee</th>
+					<th>Type</th>
+					<th>Submitted</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody id="reimbursement-body">
+
+
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
