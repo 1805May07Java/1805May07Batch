@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SQL Concepts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <div class="padcol-lg-12">
+        <h1 align="center">SQL Concepts</h1>
+    </div>
+    <div class="row">
+        <div class="container">
+    <div margin="15px" class="col-lg-8">
+        <p> SQL can be broken down into 5 sublanguages</p>
+        <ul>
+            <li>
+                <a href="https://en.wikipedia.org/wiki/Data_manipulation_language">DML - Data Manipulation Language</a>
+            </li>
+            <li>
+                <a href="https://en.wikipedia.org/wiki/Data_definition_language">DDL - Data Definition Language</a>
+            </li>
+            <li>
+                <a href="https://en.wikipedia.org/wiki/Query_language">DQL - Data Query Language</a>
+            </li>
+            <li>
+                <a href="Data_control_language">DCL - Data Control Language</a>
+            </li>
+            <li>TCL - Transaction Control Language</li>
+        </ul>
+        <p> Here are some example commands of the different sublanguages</p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>DML</th>
+                    <th>DDL</th>
+                    <th>DQL</th>
+                    <th>DCL</th>
+                    <th>TCL</th>
+                </tr>
+            </thead>
+            <tobdy>
+                <tr>
+                    <td>
+                        <code>INSERT</code>
+                    </td>
+                    <td>
+                        <code>CREATE</code>
+                    </td>
+                    <td>
+                        <code>SELECT</code>
+                    </td>
+                    <td>
+                        <code>GRANT</code>
+                    </td>
+                    <td>
+                        <code>COMMIT</code>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <code>SELECT</code>
+                    </td>
+                    <td>
+                        <code>ALTER</code>
+                        <td></td>
+
+                        <td>
+                            <code>REVOKE</code>
+                        </td>
+                    </td>
+                    <td>
+                        <code>ROLLBACK</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>UPDATE</code>
+                    </td>
+                    <td>
+                        <code>DROP</code>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <code>SET SAVEPOINT</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>DELETE</code>
+                    </td>
+                    <td>
+                        <code>TRUNCATE</code>
+                    </td>
+                </tr>
+            </tobdy>
+        </table>
+        <hr />
+        <p>In computer science, <a href="https://en.wikipedia.org/wiki/ACID">ACID (Atomicity, Consistency, Isolation, Durability)</a> is a set of properties of database transactions intended to guarantee validity even in the event of errors, power failures, etc. In the context of databases, a sequence of database operations that satisfies the ACID properties, and thus can be perceived as a single logical operation on the data, is called a transaction. For example, a transfer of funds from one bank account to another, even involving multiple changes such as debiting one account and crediting another, is a single transaction.
+
+        </p>
+        <hr />
+        <p>Columns can have have certain constraints, which are rules that are enforced on tables or Columns
+            <ul>
+                <li><code>NOT NULL</code> - null elements are not permitted in the column</li>
+                <li><code>UNIQUE</code> - repeated elements are not permitted in the column</li>
+                <li><code>PRIMARY KEY</code> - entries in this column are uniquely identified by having this constraint</li>
+                <li><code>FOREIGN KEY</code> - links entries by creating a relationship in this column with another column in a different or same table</li>
+                <li><code>CHECK</code> - custom constraint can be defined</li>
+            </ul>
+        </p>
+    </div>
+    <div class="col-lg-3">
+        <img style="width:100%" src="https://www.microsoft.com/en-us/sql-server/developer-get-started/sql-devops/img/sqldevops.png" />
+    </div>
+    </div>
+    </div>
+</body>
+
+</html>
