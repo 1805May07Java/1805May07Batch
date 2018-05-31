@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet{
 		if(u != null) { // if user exists, store them in session
 			HttpSession session = req.getSession();
 			session.setAttribute("user", u);
-			resp.sendRedirect("hello");
+			//resp.sendRedirect("hello"); // testing redirects - calling /hello servlet
 		}
 		
 		
