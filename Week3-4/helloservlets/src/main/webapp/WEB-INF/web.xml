@@ -25,4 +25,39 @@
 		<url-pattern>/test</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>ViewLoader</servlet-name>
+		<servlet-class>com.ex.servlets.LoadViewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewLoader</servlet-name>
+		<url-pattern>*.view</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>Params</servlet-name>
+		<servlet-class>com.ex.servlets.ParameterServlet</servlet-class>
+		<init-param> <!-- init-param is how we add servlet-config -->
+			<param-name>title</param-name>
+			<param-value>Deadpool 2</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Params</servlet-name>
+		<url-pattern>/params</url-pattern>
+	</servlet-mapping>
+
+	<context-param>
+		<param-name>star</param-name>
+		<param-value>Ryan Reynolds</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>title</param-name>
+		<param-value>testing getInitParameter() method</param-value>
+	</context-param>
+
+
 </web-app>

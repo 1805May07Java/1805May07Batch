@@ -1,0 +1,65 @@
+<h3>Intro to Data Binding</h3>
+<p>Angular supports data binding, which is a mechanism for coordinating
+  parts of a template with parts of a component. There is both 
+  property and event binding 
+</p>
+
+<h4>Event Binding</h4>
+<button (click)="doCount()">Event Bind!</button>  {{ count }}
+<p>Event-binding is the process of linking actions to DOM events.
+   Recall that DOM events can be user interactions like mouse movements,
+    key presses or button clicks, as well as browser actions like load 
+    and unload. In Angular, we can bind component functions to these
+    actions using a special syntax referred to as event-binding. </p>
+
+<h1 [style.color]="color" >Property Binding</h1>
+<p>Elements on a page all have pre-defined properties. For example, an <img> element has a src property and input elements have a disabled property. 
+  That is actually a different construct. HTML controls and defines an element’s attribute. It is a one-time process. When the page is loaded the value is set. Now any changes to the value are actually controlled in the DOM space; the programmatic representation of the webpage. 
+  So when we bind to the property we can change/update the value freely using JavaScript. So, let’s look at an example. Say we have the following markup. Here you can see that the image element has a specified src attribute. Again, this is set once and through HTML code. 
+  </p>
+
+<input type="submit" value="TestBinding" [disabled]="val" class="form-control" />
+<button (click)="toggleDisabled()">Toggle</button>
+
+<h4>Two-Way Data Binding</h4>
+<input [(ngModel)]="name" placeholder="Change name" class="form-control"/>
+My name is {{ name }}
+
+<br>
+
+<input [(ngModel)]="color" class="form-control">
+
+<p>Two-Way Data binding uses a directive - ngModel</p>
+
+<hr>
+
+<h1>Directives</h1>
+<p>Angular Directives are special pre-built instructions that typically render HTML code or provide additional functionality. </p>
+<p>There are three types of directives</p>
+<ul>
+  <li>@Directive - Custom directive</li>
+  <li>Structural Directives</li>
+  <li>Attribute Directives</li>
+</ul>
+
+<h4>Structural Directive</h4>
+Genres:
+<ul>
+<li *ngFor="let genre of genres">{{genre}}</li>
+</ul>
+^ above, we see the use of *ngFor, which allows us to loop through some sort of collection 
+and manipulate the dom in some manner for each element
+
+
+<img *ngIf='val' [src]="imgSrc">
+
+<br>
+<div [ngStyle]="styles"> Experimenting with ngStyle </div>
+
+<hr>
+
+<h1>Pipes</h1> {{ currentTime | date:'medium' | uppercase }}
+<h4>Are entities in Angular that allow for data transformation.</h4>
+<input [(ngModel)]="lowerPipe" class="form-control">  = {{ lowerPipe | lowercase }}
+<br>
+Here we are demonstrating our custom pipe {{ 144 | sqrt }}

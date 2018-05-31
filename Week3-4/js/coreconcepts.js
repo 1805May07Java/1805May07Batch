@@ -162,7 +162,6 @@ function add(a, b){
 /*
  * Arrow notation
  * - Arrow functions make JS code more concise, and simplify function scoping and the this keyword
- * - 
  */
 //ES5:
 var multiply = function(x, y){ return x * y;};
