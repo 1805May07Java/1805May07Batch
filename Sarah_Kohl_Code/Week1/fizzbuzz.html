@@ -1,0 +1,52 @@
+<html>
+  <head>
+      <script>
+        function writeFizzBuzz (){
+            clearDiv();
+	var toWriteCount = document.getElementById("inputNumber").value;
+var theBody = document.getElementById("muhDiv");
+  
+  for(i=1; i <= toWriteCount ; i++){
+  var p = document.createElement('p');
+  	p.appendChild(document.createTextNode(isFizzBuzz(i)));
+    theBody.appendChild(p);
+  }
+   
+}
+function button(){
+    console.log("button works");
+}
+
+function isFizzBuzz(x){
+  	if(x%3 == 0 && x%5 == 0)
+    	return "fizzbuzz"
+     else if(x%5 == 0)
+     	return "buzz"
+      else if(x%3 == 0)
+      	return "fizz"
+       else
+       	return x;
+}
+
+function clearDiv(){
+    console.log("works");
+    document.getElementById("muhDiv").innerHTML = "";
+}
+
+    </script>
+  </head>
+  <body id="muhBody">
+      <h1>Fizz Buzz</h1>
+      <b>Enter a number</b>
+      <input type="number" id="inputNumber" min="1" value="1">
+      
+  <button onclick="writeFizzBuzz()">
+  Go
+  </button>
+  <button onclick="clearDiv()">Clear</button>
+      
+    <div id="muhDiv"></div>
+      
+      
+  </body>
+</html>
