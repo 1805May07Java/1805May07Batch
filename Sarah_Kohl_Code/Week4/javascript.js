@@ -15,15 +15,11 @@ function getUSA(){
 // 2. Sales
 // Define function getPeopleInSales()
 // Print the names of all the people in the sales department.
-//TODO
 function getPeopleInSales(){
 walkTheDOM(document.body, function(node){
-    if(node.text==="Sales")
+    if(node.innerText==="Sales")
     {
-        for (var e=0;e<parentNode.childNodes.length;e++)
-        {
-            console.log(node.parentNode.childNodes[e].innerText);
-        }
+        console.log(node.previousElementSibling.innerText);
     }
 }
 );
@@ -122,20 +118,27 @@ function changeColor(){
     prevColor = document.querySelector('input[name = "favoriteColor"]:checked');
 }
 
-// });
-
 // 9. Show/Hide Event
 // NOTE: Write unobtrusive Javascript
 // When user hovers over an employees name:
 // 	Hide the name if shown.
 // 	Show the name if hidden.
-//TODO
-document.querySelectorAll(".empName").forEach(
-element => {
-    element.addEventListener("mouseover",element => {element.setAttribute("style", "opacity: 0;");});
-    element.addEventListener("mouseout", element => {element.setAttribute("style", "opacity: 1;");});
+var emps = document.querySelectorAll(".empName");
+for(var e=0; e<emps.length;e++)
+{
+    attachListenerHide(emps[e]);
+    attachListenerShow(emps[e]);
 }
-);
+function attachListenerHide(e){
+    e.addEventListener("mouseover", function(){
+        e.setAttribute("style", "opacity: 0;");});
+};
+function attachListenerShow(e){
+    e.addEventListener("mouseout", function(){
+        e.setAttribute("style", "opacity: 1;");});
+};
+
+//);
 
 // 10. Current Time
 // Regarding this element:
