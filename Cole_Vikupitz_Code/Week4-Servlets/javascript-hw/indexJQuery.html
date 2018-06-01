@@ -1,10 +1,10 @@
 <!--
 
- indexJavascript.html
+ indexJQuery.html
  Modified by: Cole Vikupitz
 
  Solutions for section II of the JavaScript exercises in the 'Javascript_Homework.txt'
- handout. This version is done using JavaScript.
+ handout. This version is done using JQuery.
 
 -->
 
@@ -12,6 +12,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"></script>
 <title>DOM</title>
 </head>
 <body>
@@ -115,12 +117,13 @@
      * Print that element's contents.
      */
     function getUSA() {
-    
-        var usa = document.getElementsByTagName("span");
-        console.log(usa[2].innerHTML);
+
+      var usa = $('span');
+      console.log(usa[2].textContent);
     }
-
-
+    //getUSA();
+     
+     
     /*
      * 2. Sales
      * Define function getPeopleInSales()
@@ -128,16 +131,17 @@
      */
     function getPeopleInSales() {
     
-        var people = document.getElementsByTagName("td");
+        var people = $("td");
         var names = "";
 
         for (let i = 0; i < people.length; i += 2) {
-            names += people[i].innerHTML + "\n";
+            names += people[i].textContent + "\n";
         }
         console.log(names);
     }
-
-
+    //getPeopleInSales();
+     
+     
     /*
      * 3. Click Here
      * Define function getAnchorChildren()
@@ -145,19 +149,41 @@
      * Print the contents of <span>
      */
     function getAnchorChildren() {
-    
+      
+      /*var anchors = document.getElementsByTagName("a");
+      var content = "";
+      for (let i = 0; i < anchors.length; i++) {
+        if (anchors[i].children.length > 0) {
+          for (let j = 0; j < anchors[i].children.length; j++) {
+            if (anchors[i].children[j].localName === "span") {
+              content += anchors[i].children[j].innerHTML + "\n";
+            }
+          }
+        }
+      }
+      console.log(content);*/
     }
-
-
+    //getAnchorChildren();
+     
+     
     /*
      * 4. Hobbies
      * Define function getHobbies()
      * Find all checked options in the 'skills' select element.
      * Print the value and the contents.
      */
-    function getHobbies() {}
+    function getHobbies() {
 
-
+      /*var options = document.getElementsByName("skills");
+      var content = "";
+      for (let i = 0; i < options[0].length; i++) {
+        content += options[0][i].value + " = " + options[0][i].selected + "\n";
+      }
+      console.log(content);*/
+    }
+    //getHobbies();
+     
+     
     /*
      * 5. Custom Attribute
      * Define function getCustomAttribute()
@@ -165,7 +191,22 @@
      * Print the value of the attribute.
      * Print the element that has the attribute.
      */
-    function getCustomAttribute() {}
+    function getCustomAttribute() {
+
+      /*var tags = document.getElementsByTagName("*");
+      var content = "";
+      for (let i = 0; i < tags.length; i++) {
+        if (tags[i].attributes.length > 0) {
+          for (let j = 0; j < tags[i].attributes.length; j++) {
+            if (tags[i].attributes[j].name === "data-customattr") {
+              content += tags[i].localName + " : " + tags[i].attributes[j].value + "\n";
+            }
+          }
+        }
+      }
+      console.log(content);*/
+    }
+    //getCustomAttribute();
      
      
     /*
@@ -180,7 +221,6 @@
      * Put the sum in the <span> element.
      * If values cannot be added, put "Cannot add" in the <span> element
      */
-    
      
      
     /*
@@ -236,7 +276,7 @@
      * On each node, call func(node).
      */
      
-    
+     
   </script>
   
 </body>
