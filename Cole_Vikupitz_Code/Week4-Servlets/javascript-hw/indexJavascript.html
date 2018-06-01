@@ -172,10 +172,10 @@
      */
     function getHobbies() {
 
-      var options = document.getElementsByName("skills");
+      var options = document.getElementsByName("skills")[0];
       var content = "";
-      for (let i = 0; i < options[0].length; i++) {
-        content += options[0][i].value + " = " + options[0][i].selected + "\n";
+      for (let i = 0; i < options.length; i++) {
+        content += options[i].value + " = " + options[i].selected + "\n";
       }
       console.log(content);
     }
@@ -260,7 +260,6 @@
      * In this example, green is the new value and blue is the old value.
      * Make the background color (of all favoriteColor radio buttons) the newly selected favoriteColor
      */
-    
     function favColor() {
 
       alert("So you like " + this.value + " more than " + prev + " now?");
@@ -320,7 +319,7 @@
         var colors = ["red", "orange", "yellow", "green", "blue", "purple", "black"];
         var c = Math.floor( Math.random() * 6 );
         var hw = document.getElementById("helloWorld");
-        hw.innerHTML = "<span style='color:" + colors[c] + "'>Hello, World!</span>";
+        hw.style.color = colors[c];
       }, 3000);
     }
     document.getElementById("helloWorld").onclick = randomColor;
@@ -334,16 +333,15 @@
      */
      function walkTheDOM(node, func) {
 
+      func(node);
       for (let i = 0; i < node.childNodes.length; i++) {
         walkTheDOM(node.childNodes[i], func);
       }
-      func(node);
      }
 
      traverse = "";
      function func(x) { traverse += x.nodeName + "\n"; }
      var root = document.getElementsByTagName("html")[0];
-
      walkTheDOM(root, func);
      console.log(traverse);
      
