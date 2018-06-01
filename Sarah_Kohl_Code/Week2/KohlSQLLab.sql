@@ -45,21 +45,45 @@ DELETE customer WHERE firstname = 'Robert' AND lastname = 'Walter';
 
 --3.1--
 CREATE OR REPLACE FUNCTION get_time
+    RETURN VARCHAR2 
     IS
+    mytime varchar(8);
     BEGIN
-
-    SELECT current_time 
-    INTO my_time
-    FROM dual;
-
-    RETURN my_time;
+        SELECT TO_CHAR(LOCALTIMESTAMP, 'HH:MI:SS') INTO mytime FROM DUAL;
+        RETURN mytime;
     END;
     /
     
+CREATE OR REPLACE FUNCTION get_mediatype_length(myrow in NUMBER)
+    
+    RETURN NUMBER 
+    IS
+    mylength NUMBER(3);
+    BEGIN
+        SELECT LENGTH(name) INTO mylength FROM mediatype WHERE mediatypeid = myrow;
+        RETURN mylength;
+    END;
+/
+--BEGIN
+--DBMS_output.put_line(get_mediatype_length(1));
+--END;
+--/
+--3.2--
+CREATE OR REPLACE FUNCTION average_invoice_total 
+          RETURN NUMBER
+          IS
+              avginv NUMBER(10,2);
+          BEGIN
+              SELECT AVG(total) INTO avginv FROM invoice;
+              RETURN avginv;
+          END;      
+/
 
-
-
-
+BEGIN
+DBMS_output.put_line( average_invoice_total() );
+END;
+/
+--3.3--
 
 --7.1--
 SELECT CONCAT(CONCAT(customer.firstname, ' '), customer.lastname) AS "Customer Name", invoice.invoiceid AS "Invoice #" FROM customer INNER JOIN invoice ON customer.customerid = invoice.customerid ;
