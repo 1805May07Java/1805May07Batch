@@ -104,18 +104,24 @@ function changeSkill(){
 // Make the background color (of all favoriteColor radio buttons) the newly selected favoriteColor
 //TODO
 var prevColor;
-document.querySelectorAll("[name='favoriteColor']").forEach(
-    function(e){e.addEventListener("onchange", changeColor);}
-);
-function changeColor(){
-    var prevColorVal = document.querySelector('input[name = "favoriteColor"]:checked').value;
-    console.log("function call");
+var favColors = document.querySelectorAll("[name='favoriteColor']");
+for(var e = 0; e<favColors.length ; e++)
+{
+    addChangeColorEvent(favColors[e]);
+}
+
+function addChangeColorEvent(e){
+    e.addEventListener("change",function(){
+    
     if(prevColor)
     {
-        console.log("if block");
-        document.getElementById("firstForm").setAttribute("style", `background-color: ${prevColorVal}`);;
+        var prevColorVal = prevColor.value;
+        alert(`So you like ${e.value} better than ${prevColorVal} now?`);
     }
-    prevColor = document.querySelector('input[name = "favoriteColor"]:checked');
+    document.getElementById("firstForm").setAttribute("style", `background-color: ${prevColorVal}`);
+    prevColor = document.querySelector('input[name ="favoriteColor"]:checked');
+    }
+);
 }
 
 // 9. Show/Hide Event
