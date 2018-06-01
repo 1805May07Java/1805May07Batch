@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodoComponent implements OnInit {
 
-  newTask = '';
+  newTask: string;
+  items = [];
+  complete = [];
 
   constructor() { }
 
@@ -15,6 +17,12 @@ export class TodoComponent implements OnInit {
   }
 
   addItem() {
+    this.items.push(this.newTask);
+  }
+
+  markComplete(item) {
+    this.complete.push(item);
+    this.items = this.items.filter(i => i !== item);
 
   }
 
