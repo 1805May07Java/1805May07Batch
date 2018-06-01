@@ -112,9 +112,9 @@ $(function(){
                 
                 if(prevColor){
                     alert(`So you like ${$(this).val()} more than ${prevColor} now?`);
-                    $("#firstForm").css("background-color", `${$(this).val()}`);
+                    
                 }
-
+                $("#firstForm").css("background-color", `${$(this).val()}`);
                 prevColor = $(this).val();
             }
     );
