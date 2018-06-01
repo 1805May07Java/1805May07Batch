@@ -10,6 +10,10 @@ import { SquarerootPipe } from './pipes/squareroot.pipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MainComponent } from './components/main/main.component';
 import { TodoComponent } from './components/todo/todo.component';
+import { UserComponent } from './components/user/user.component';
+import { UserService } from './services/user.service';
+import { HttpClientModule } from '@angular/common/http';
+import { BooksComponent } from './components/books/books.component';
 
 
 @NgModule({
@@ -22,14 +26,17 @@ import { TodoComponent } from './components/todo/todo.component';
     SquarerootPipe,
     NavbarComponent,
     MainComponent,
-    TodoComponent
+    TodoComponent,
+    UserComponent,
+    BooksComponent
   ], // exports - classes that need to be accessible to the components of other modules
   imports: [ // modules whose classes are needed by the components of this module 
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [], // services
+  providers: [UserService], // services
   bootstrap: [AppComponent] // the root component which is the main view of the app
 })
 /*

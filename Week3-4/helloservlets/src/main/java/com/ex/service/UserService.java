@@ -8,14 +8,35 @@ import com.ex.pojos.User;
 public class UserService {
 
 	static ArrayList<User> users = new ArrayList<User>();
-	static int count = 2;
+	static int count = 3;
 	static {
 		users.add(new User(1, "test", "user"));
 		users.add(new User(2, "gb", "rev"));
+		users.add(new User(3, "more", "thantwothings"));
 	}
 
+	
 	public ArrayList<User> getAll(){
 		return users;
+	}
+	
+	public User getById(int id) {
+		Optional<User> user = users.stream().filter(u -> u.getId() == id).findFirst();
+		if(user.isPresent()) return user.get();
+		else return null;
+	}
+	// new info = 1, hi, bye // old=1, test, user
+	public User updateUser(User newInfo) {
+		Optional<User> oldUser = users.stream().filter(u -> u.getId() == newInfo.getId()).findFirst();
+
+		if(oldUser.isPresent()) {
+			User user = oldUser.get();
+			user.setUsername(newInfo.getUsername());
+			user.setPassword(newInfo.getPassword());
+			return user;
+			
+		}
+		else return null;
 	}
 
 	public boolean isUser(String username) {
