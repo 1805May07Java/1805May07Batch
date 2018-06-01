@@ -30,6 +30,7 @@
 **/.node_modules/**
 **/.e2e/**
 **/package.json
+**/package-lock.json 
 
 #Mac
 .DS_Store
