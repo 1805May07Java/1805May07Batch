@@ -31,7 +31,10 @@ public class LoginServlet extends HttpServlet{
 		//1. get received JSON data from request
 		BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
 		
-		String json = br.readLine();
+		String json = "";
+		while(br!=null) {
+			json += br.readLine();
+		}
 		System.out.println(json);
 		
 		//2. instantiate object mapper 
@@ -50,7 +53,7 @@ public class LoginServlet extends HttpServlet{
 		if(u != null) { // if user exists, store them in session
 			HttpSession session = req.getSession();
 			session.setAttribute("user", u);
-			resp.sendRedirect("hello");
+			//resp.sendRedirect("hello"); // testing redirects - calling /hello servlet
 		}
 		
 		

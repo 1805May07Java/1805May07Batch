@@ -26,6 +26,11 @@ public class HelloServlet extends GenericServlet{
 		 */
 		System.out.println("IN GENERIC SERVLET SERVICE() METHOD");
 		
+		System.out.println(getInitParameter("title"));
+		System.out.println(getServletContext().getInitParameter("star"));
+		System.out.println(getServletConfig().getInitParameter("title"));
+		
+		
 		PrintWriter out = res.getWriter();
 		out.println("HELLO WORLD! WE COME IN PEACE FROM JAVA SERVLETS!");		
 		
@@ -35,7 +40,7 @@ public class HelloServlet extends GenericServlet{
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		super.init();
-		System.out.println("INITIALIZING GENERIC SERVLET");
+		System.out.println("INITIALIZING HELLO SERVLET");
 	}
 	
 	@Override

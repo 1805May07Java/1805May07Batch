@@ -1,0 +1,21 @@
+<h1>Add to your to do List!</h1>
+<div class="jumbotron">
+  <input class="form-control col-6" [(ngModel)]="newTask" type="text">
+  <button class="btn btn-primary" (click)="addItem()">Add new!</button>
+
+  <div class="row">
+    <div class="col-6">
+      <h4>To Do:</h4>
+      <ul class="list-group">
+        <li class="list-group-item col-6" *ngFor="let item of items" 
+          (click)="markComplete(item)">{{item}}</li>
+      </ul>
+    </div>
+    <div class="col-6">
+      <h4>Complete:</h4>
+      <ul class="list-group">
+        <li class="list-group-item col-6" *ngFor="let item of complete">{{item}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

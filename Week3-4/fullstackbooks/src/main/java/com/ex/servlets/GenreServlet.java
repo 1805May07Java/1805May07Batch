@@ -27,8 +27,6 @@ public class GenreServlet extends HttpServlet{
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(genres);
-		resp.setHeader("Access-Control-Allow-Origin", "http://localhost:8081");
-		resp.setHeader("Access-Control-Allow-Methods", "GET");
 		PrintWriter out = resp.getWriter();
 		resp.setContentType("application/json");
 		out.write(json);
