@@ -24,7 +24,7 @@ function loadGenres(){
         }
     }
 
-    xhr.open("GET", "localhost:8081/booksjdbc/genres", true);
+    xhr.open("GET", "http://localhost:8083/store/genres", true);
     xhr.send();
 }
 
