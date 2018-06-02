@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+<style>
+#logo{
+  padding:25px;
+}
+table, th, td {
+   border: 2px solid black;
+}
+th{
+   font-style:italic;
+   text-indent:10px;
+}
+</style>
+</head>
+<body>
+<div id="root" style="padding:10px">
+<div id="view" align="Center">
+    <img id="logo" src="https://mv.force.com/revature/resource/147974939000/RevatureLogo" alt="Revature">
+    <p>
+    <b>Reimbursement Login Portal</b>
+    </p>
+    <p>Username <input type="text" placeholder="Enter username..." id="username"/> 
+    </p>
+    <p>Password <input type="password" id="password"/></p>
+    <br>
+    <h5><input type="submit" id="login" value="Log In"/></h5>
+    <div id="warnmessage" style="width:250px;background:#F9EECF;border:1px solid black;text-align:center;visibility:hidden">
+    <span class="danger">Invalid Username / Password</span>
+    </div>
+</div>
+</div>
+<script type='text/javascript' src="scripts/app.js"></script>
+</body>

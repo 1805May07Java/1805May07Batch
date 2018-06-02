@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>Revature Employee Reimbursement System</display-name>
+  <servlet>
+    <description></description>
+    <display-name>FinanceManagerView</display-name>
+    <servlet-name>FinanceManagerView</servlet-name>
+    <servlet-class>com.ex.servlets.FinanceManagerViewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FinanceManagerView</servlet-name>
+    <url-pattern>/FinanceManagerView</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmployeeView</display-name>
+    <servlet-name>EmployeeView</servlet-name>
+    <servlet-class>com.ex.servlets.EmployeeView</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeeView</servlet-name>
+    <url-pattern>/EmployeeView</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoadViewServlet</display-name>
+    <servlet-name>LoadViewServlet</servlet-name>
+    <servlet-class>com.ex.servlets.LoadViewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadViewServlet</servlet-name>
+    <url-pattern>/LoadViewServlet</url-pattern>
+  </servlet-mapping>
+</web-app>

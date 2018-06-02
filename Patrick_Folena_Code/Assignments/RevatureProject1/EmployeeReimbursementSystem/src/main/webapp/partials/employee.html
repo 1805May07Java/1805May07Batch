@@ -1,0 +1,49 @@
+<div id="view">
+    <div id="header" align="right">
+    	<img id="logo" src="https://mv.force.com/revature/resource/147974939000/RevatureLogo" alt="Revature" >
+    	<h5 align="left"> Finance Manager Web Portal <h5>
+    </div>
+ 
+    <hr style="height:4px;border:solid 1px;color:#333;background-color:darkorange;"/>
+     
+    <div id="page">
+    	<input type="button" id="UserList" value="Employee List"/>
+    	<input type="button" id="ReimbList" value="Reimbursements"/>
+    	<form action="/action_page.php" align="right">
+    	<p>Filter :
+    		<select name="filter">
+      			<option value="All">All</option>
+      			<option value="Pending">Pending</option>
+      			<option value="Approved">Approved</option>
+      			<option value="Denied">Denied</option>
+      		</select>
+   	 	</form>
+
+    	<form action="/action_page.php" align="right">
+    	<p>Sort By :
+    		<select name="sort">
+      			<option value="SubmissionDate">Submission Date</option>
+      			<option value="FirstName">First Name</option>
+      			<option value="LastName">Last Name</option>
+      			<option value="Amount">Amount</option>
+      		</select>
+    		<select name="ad">
+      			<option value="Asc">Asc</option>
+      			<option value="Desc">Desc</option>
+    		</select>
+    	</form>
+
+    	<table style="width:100%">
+    	<tr>
+    		<th>Submission Date</th>
+    		<th>Requester</th>
+    		<th>Amount</th>
+    		<th>Description</th>
+    		<th>Receipt</th>
+    		<th>Resolved on</th>
+    		<th>Resolved by</th>
+    		<th>Status</th>
+    	</tr>
+    </table>
+    </div>
+</div>
