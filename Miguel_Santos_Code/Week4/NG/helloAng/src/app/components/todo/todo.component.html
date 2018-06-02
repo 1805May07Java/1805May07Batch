@@ -1,0 +1,25 @@
+<div class="row justify-content-center">
+  <div style="text-align:center" class="col-4">
+    <h1>To-do List</h1>
+    <input #itemAdd (keyup.enter)="addToList(itemAdd.value); itemAdd.value=''" type="text" class="form-control" placeholder="Add item here" />
+    <br>
+    <button (click)="addToList(itemAdd.value); itemAdd.value=''" class="btn btn-primary btn-block">Add</button>
+    <br>
+    <div class="row">
+      <div class="col">
+        <h4>To Do:</h4>
+        <ul>
+          <li *ngFor="let item of items" (click)="transferItem(item)">{{item}}</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>Done:</h4>
+        <ul>
+          <li *ngFor = "let dones of done">{{dones}}</li>
+        </ul>
+      </div>
+    </div>
+
+
+  </div>
+</div>

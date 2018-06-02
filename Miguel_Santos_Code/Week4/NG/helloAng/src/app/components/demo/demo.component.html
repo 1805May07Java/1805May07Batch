@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+    <div style="text-align:center" class="col-3 ">
+        <h3>Intro to Data Binding</h3>
+
+        <button (click)="doCount()">Demo</button> {{count}}
+
+        <br>
+
+        <h1 [style.color]="color">Property binding</h1>
+        <h1 style.color="{{color2}}">Interpolation</h1>
+
+        <br>
+        <input type="submit" value="test" [disabled]='val' class="form-control" />
+        <button (click)="toggleDisable()">Toggle</button>
+        <br>
+        <h4>Two way data binding</h4>
+        <input [(ngModel)]="name" placeholder="change name" class="form-control" />
+        <h3>My name is
+            <small style.color="{{color3}}"> {{name}}</small>
+        </h3>
+        <input [(ngModel)]="color3" placeholder="type a color" class="form-control" />
+        <h3>Structural Directive</h3>
+        <h4 *ngFor="let genre of genres">{{genre}}</h4>
+        click 'Toggle' above to toggle picture
+        <br>
+        <img *ngIf='val' [src]="imgSrc">
+        <br>
+        <div [ngStyle]="styles">
+            <h2>Experimenting with ngStyle</h2>
+        </div>
+        <h1>Pipes</h1> {{currentTime | date:'medium' | uppercase}}
+        <br>
+        <input [(ngModel)]="lowerPipe" class="form-control" /> = {{ lowerPipe | lowercase }}
+        <br> demo of user defined pipe (sqrt) = {{ lowerPipe | sqrt}}
+    </div>
+</div>
