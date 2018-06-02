@@ -1,0 +1,336 @@
+<!--
+ indexJavascript.html
+ Modified by: Cole Vikupitz
+ Solutions for section II of the JavaScript exercises in the 'Javascript_Homework.txt'
+ handout. This version is done using JavaScript.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>DOM</title>
+</head>
+<body>
+  
+  <div>
+    <div>
+      <h3>Sum: <span id="sum"></span></h3>
+      <h5 id="currentTime"></h5>
+    </div>
+    <div>
+      <h1>United <span data-customAttr="USA">States</span> of America (<span>USA</span>)</h1>
+      <div><a>Click Here</a><a>Click Here</a><a>Click Here</a><a>Click Here</a><a>Click Here</a></div>
+      <a>Click Here</a>
+      <a>Click <span>Here1</span></a>
+      <a>Click Here</a>
+      <div>
+	  <select name="colors">
+	    <option value="green">Green</option>
+	    <option value="blue">Blue</option>
+	    <option value="red" selected="selected">Red</option>
+	    <option value="purple">Purple</option>
+	    <option value="yellow" selected="selected">Yellow</option>
+	  </select>
+      </div>
+    </div>
+    <p id="helloWorld">Hello, World!</p>
+    <div>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Department</th>
+        </tr>
+        <tr>
+          <td class="empName">John</td>
+          <td>Sales</td>
+        </tr>
+        <tr>
+          <td class="empName">Amy</td>
+          <td>Finance</td>
+        </tr>
+        <tr>
+          <td class="empName">Austin</td>
+          <td>Sales</td>
+        </tr>
+        <tr>
+          <td class="empName">Katie</td>
+          <td>Marketing</td>
+        </tr>
+        <tr>
+          <td class="empName" data-customAttr="court">Courtney</td>
+          <td>Sales</td>
+        </tr>
+        <tr>
+          <td class="empName">Scout</td>
+          <td>Sales</td>
+        </tr>
+      </table>
+    </div>
+    <form id="firstForm">
+      <a>Click <span>Here2</span></a>
+	  <input type="text" data-customAttr="7"/><br/>
+	  <input type="text" data-customAttr="24"/><br/>
+	  <input type="radio" name="favoriteAnimal" value="dog"/>Dog<br/>
+	  <input type="radio" name="favoriteColor" value="blue"/>Blue<br/>
+	  <input id="num1" class="nums" type="text"/><br/>
+	  <input type="radio" name="favoriteAnimal" value="cat"/>Cat<br/>
+	  <input type="radio" name="favoriteColor" value="red"/>Red<br/>
+	  <input type="radio" name="favoriteAnimal" value="horse"/>Horse<br/>
+	  <input type="radio" name="favoriteAnimal" value="dolphin"/>Dolphin<br/>
+	  <a>Click <span>Here</span></a><br/>
+	  <input type="radio" name="favoriteAnimal" value="eagle"/>Eagle<br/>
+	  <input type="radio" name="favoriteColor" value="green"/>Green<br/>
+	  <input type="radio" name="favoriteColor" value="orange"/>Orange<br/>
+	  <select name="hobbies">
+	    <option value="photography">Photography</option>
+	    <option value="football" selected="selected">Football</option>
+	    <option value="kayaking" selected="selected">Kayaking</option>
+	    <option value="hiking">Hiking</option>
+	    <option value="programming" selected="selected">Programming</option>
+	  </select>
+	  <input id="num2" class="nums" type="text"/>
+	  <select name="skills">
+	    <option value="java">Java</option>
+	    <option value="net">.NET</option>
+	    <option value="dom" selected="selected">DOM</option>
+	    <option value="html">HTML</option>
+	    <option value="css">CSS</option>
+	    <option value="javascript" selected="selected">Javascript</option>
+	  </select>
+    </form>
+  </div>
+  <a>Click Here</a>
+  <a>Click <span data-customAttr="500">Here3</span></a>
+  <a>Click Here</a>
+	  
+  <script type="text/javascript">
+    /*
+     * 1. USA
+     * Define function getUSA()
+     * Find the html element that contains "USA".
+     * Print that element's contents.
+     */
+    function getUSA() {
+    
+        var usa = document.getElementsByTagName("span");
+        console.log(usa[2].innerHTML);
+    }
+
+    getUSA();
+    /*
+     * 2. Sales
+     * Define function getPeopleInSales()
+     * Print the names of all the people in the sales department.
+     */
+    function getPeopleInSales() {
+    
+        var people = document.getElementsByTagName("td");
+        var names = "";
+
+        for (let i = 0; i < people.length; i += 2) {
+            names += people[i].innerHTML + "\n";
+        }
+
+        console.log(names);
+    }
+
+    getPeopleInSales();
+    /*
+     * 3. Click Here
+     * Define function getAnchorChildren()
+     * Find all anchor elements with a <span> child.
+     * Print the contents of <span>
+     */
+    function getAnchorChildren() {
+    
+      var anchors = document.getElementsByTagName("a");
+      var content = "";
+
+      for (let i = 0; i < anchors.length; i++) {
+        if (anchors[i].children.length > 0) {
+
+          for (let j = 0; j < anchors[i].children.length; j++) {
+            if (anchors[i].children[j].localName === "span") {
+              content += anchors[i].children[j].innerHTML + "\n";
+            }
+          }
+        }
+      }
+
+      console.log(content);
+    }
+
+    getAnchorChildren();
+    /*
+     * 4. Hobbies
+     * Define function getHobbies()
+     * Find all checked options in the 'skills' select element.
+     * Print the value and the contents.
+     */
+    function getHobbies() {
+
+      var options = document.getElementsByName("skills")[0];
+      var content = "";
+
+      for (let i = 0; i < options.length; i++) {
+        content += options[i].value + " = " + options[i].selected + "\n";
+      }
+
+      console.log(content);
+    }
+
+    getHobbies();
+    /*
+     * 5. Custom Attribute
+     * Define function getCustomAttribute()
+     * Find all elements with "data-customAttr" attribute
+     * Print the value of the attribute.
+     * Print the element that has the attribute.
+     */
+    function getCustomAttribute() {
+
+      var tags = document.getElementsByTagName("*");
+      var content = "";
+
+      for (let i = 0; i < tags.length; i++) {
+        if (tags[i].attributes.length > 0) {
+          for (let j = 0; j < tags[i].attributes.length; j++) {
+            if (tags[i].attributes[j].name === "data-customattr") {
+              content += tags[i].localName + " : " + tags[i].attributes[j].value + "\n";
+            }
+          }
+        }
+      }
+
+      console.log(content);
+    }
+
+    getCustomAttribute();
+     
+     
+    /*
+     * 6. Sum Event
+     * NOTE: Write unobtrusive Javascript
+     * Regarding these elements:
+     *      <input id="num1" class="nums" type="text"/>
+     *      <input id="num2" class="nums" type="text"/>
+     *      <h3>Sum: <span id="sum"></span></h3>
+     * Define onchange event handler.
+     * Add <input> element values.
+     * Put the sum in the <span> element.
+     * If values cannot be added, put "Cannot add" in the <span> element
+     */
+    function addTogether() {
+
+      var x = document.getElementById("num1").value;
+      var y = document.getElementById("num2").value;
+      var result = document.getElementById("sum");
+
+      if (x === "" || y === "" || (x, 10) == NaN || parseInt(y, 10) == NaN) {
+        result.innerHTML = "Cannot add";
+      } else {
+        result.innerHTML = parseInt(x, 10) + parseInt(y, 10);
+      }
+    }
+
+    document.getElementById("num1").onchange = addTogether;
+    document.getElementById("num2").onchange = addTogether;
+     
+     
+    /*
+     * 7. Skills Event
+     * NOTE: Write unobtrusive Javascript
+     * When user selects a skill, create an alert with a message similar to:
+     *      "Are you sure CSS is one of your skills?"
+     * NOTE: no alert should appear when user deselects a skill.
+     */
+    function areYouSure() {
+
+      var skill = document.getElementsByName("skills")[0].selectedOptions[0].innerHTML;
+      if (skill !== "")
+        alert("Are you sure " + skill + " is one of your skills?");
+    }
+
+    document.getElementsByName("skills")[0].onchange = areYouSure;
+     
+     
+    /*
+     * 8. Favorite Color Event
+     * NOTE: Write unobtrusive Javascript
+     * NOTE: This is regarding the favoriteColor radio buttons.
+     * When a user selects a color, create an alert with a message similar to:
+     *      "So you like green more than blue now?"
+     * In this example, green is the new value and blue is the old value.
+     * Make the background color (of all favoriteColor radio buttons) the newly selected favoriteColor
+     */
+    function favColor() {
+
+      alert("So you like " + this.value + " more than " + prev + " now?");
+      prev = this.value;
+    }
+
+    var colors = document.getElementsByName("favoriteColor");
+    var prev = document.getElementsByName("favoriteColor")[0].value;
+
+    for (let i = 0; i < colors.length; i++) {
+      colors[i].addEventListener('click', favColor, false);
+    }
+     
+    
+    /*
+     * 9. Show/Hide Event
+     * NOTE: Write unobtrusive Javascript
+     * When user hovers over an employees name:
+     *     Hide the name if shown.
+     *     Show the name if hidden.
+     */
+    function toggleVisibility() {
+
+      if (this.style.color == 'black') {
+        this.style.color = 'white';
+      } else {
+        this.style.color = 'black';
+      }
+    }
+
+    var emps = document.getElementsByClassName("empName");
+
+    for (let i = 0; i < emps.length; i++) {
+      emps[i].addEventListener('mouseover', toggleVisibility, false);
+    }
+      
+    /*
+     * 10. Current Time
+     * Regarding this element:
+     *      <h5 id="currentTime"></h5>
+     * Show the current time in this element in this format: 9:05:23 AM
+     * The time should be accurate to the second without having to reload the page.
+     */
+    setInterval(displayTime, 1000);
+
+    function displayTime() {
+      var d = new Date();
+      document.getElementById("currentTime").innerHTML = d.toLocaleTimeString();
+    }
+    
+    displayTime();
+
+        /*
+     * 11. Delay
+     * Regarding this element:
+     *      <p id="helloWorld">Hello, World!</p>
+     * Three seconds after a user clicks on this element, change the text to a random color.
+     */
+
+         /*
+     * 12. Walk the DOM
+     * Define function walkTheDOM(node, func)
+     * This function should traverse every node in the DOM. Use recursion.
+     * On each node, call func(node).
+     */
+
+     </script>
+  
+</body>
+</html>
