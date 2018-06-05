@@ -26,6 +26,18 @@ public class ErsUser
 		this.email = email;
 		this.roleId = roleId;
 	}
+	
+	public ErsUser(String userName, String password, String firstName, String lastName, String email,
+			int roleId) 
+	{
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.roleId = roleId;
+	}
 
 	//get and sets
 	public int getId() {

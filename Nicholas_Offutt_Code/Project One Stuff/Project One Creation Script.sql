@@ -1,4 +1,9 @@
 --Schema
+create user ProjectOne
+identified by finance;
+GRANT connect to ProjectOne;
+GRANT resource to ProjectOne;
+
 
 
 --Reimbursement status lookup table
@@ -44,7 +49,7 @@ create table ERS_REIMBURSEMENT
 	REIMB_SUBMITTED TIMESTAMP not null,
 	REIMB_RESOLVED TIMESTAMP,
 	REIMB_DESCRIPTION varchar2(250),
-	REIMB_RECEIPT BLOB,
+	--REIMB_RECEIPT BLOB,
 	REIMB_AUTHOR number not null,
 	REIMB_RESOLVER number not null,
 	REIMB_STATUS_ID number not null,
@@ -91,9 +96,42 @@ select reim_user.nextVal into :new.ERS_USER_ID from dual;
 end;
 /
 create or replace trigger incre_reims
-before insert on 
-for each row ERS_REIMBURSEMENT
+before insert on ERS_REIMBURSEMENT
+for each row 
 begin
 select reim_reims.nextVal into :new.REIMB_ID from dual;
 end;
 /
+
+create or replace trigger timeCreate
+before insert on ERS_REIMBURSEMENT
+for each row 
+begin
+ :NEW.REIMB_SUBMITTED := SYSDATE;
+end;
+/
+
+create or replace trigger timeResolve
+before update on ERS_REIMBURSEMENT
+for each row
+begin
+ :NEW.REIMB_RESOLVED := SYSDATE;
+ end;
+ /
+ 
+ create or replace procedure reimbUpdate
+ (
+	ID in number ,
+	AMOUNT in number,
+	DESCRIPTION in varchar2,
+	AUTHOR in number,
+	RESOLVER in number,
+	STATUS_ID in number,
+	TYPE_ID in number,
+ )
+ AS
+ begin
+	update ERS_REIMBURSEMENT set REIMB_AMOUNT = AMOUNT, REIMB_DESCRIPTION = DESCRIPTION, REIMB_AUTHOR = AUTHOR, REIMB_RESOLVER = RESOLVER, REIMB_STATUS_ID = STATUS_ID, REIMB_TYPE_ID = TYPE_ID where REIMB_ID = ID; 
+ end;
+ /
+ 

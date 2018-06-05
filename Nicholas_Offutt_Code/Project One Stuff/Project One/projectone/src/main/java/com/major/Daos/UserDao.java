@@ -6,6 +6,7 @@ import com.major.pojos.ErsUser;
 
 public interface UserDao 
 {
+	public ErsUser getByName(String userName);
 	public ErsUser getById(int id);
 	public ArrayList<ErsUser> getAllUsers();
 	public boolean isFree(String userName, String password);

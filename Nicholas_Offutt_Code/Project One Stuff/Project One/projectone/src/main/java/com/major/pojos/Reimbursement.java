@@ -1,15 +1,12 @@
 package com.major.pojos;
 
-import java.sql.Timestamp;
-
 public class Reimbursement 
 {
 	private int id;
 	private double amount;
-	private Timestamp  timeSubmitted; 
-	private Timestamp timeResolved; 
-	private String description; 
-	//REIMB_RECEIPT 
+	private String  timeSubmitted; 
+	private String timeResolved; 
+	private String description;  
 	private int requesterId; 
 	private int resolverId; 
 	private int statusId; 
@@ -36,19 +33,19 @@ public class Reimbursement
 		this.amount = amount;
 	}
 
-	public Timestamp getTimeSubmitted() {
+	public String getTimeSubmitted() {
 		return timeSubmitted;
 	}
 
-	public void setTimeSubmitted(Timestamp timeSubmitted) {
+	public void setTimeSubmitted(String timeSubmitted) {
 		this.timeSubmitted = timeSubmitted;
 	}
 
-	public Timestamp getTimeResolved() {
+	public String getTimeResolved() {
 		return timeResolved;
 	}
 
-	public void setTimeResolved(Timestamp timeResolved) {
+	public void setTimeResolved(String timeResolved) {
 		this.timeResolved = timeResolved;
 	}
 
