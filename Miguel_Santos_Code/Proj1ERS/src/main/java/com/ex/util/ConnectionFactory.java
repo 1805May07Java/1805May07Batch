@@ -24,12 +24,8 @@ public class ConnectionFactory {
 		Connection conn = null;
 		
         Properties prop = new Properties();
-        /*
-        *
-        *   ADD PROPER PATH BELOW *****************
-        *
-        */
-		String path = "G:/My Drive/Revature/Workspace-STS/Proj0Bank/src/main/resources/application.properties";   
+     
+		String path = "G:/My Drive/Revature/Workspace-STS-Servlets/Proj1ERS/src/main/resources/application.properties";   
 		try {
 			prop.load(new FileReader(path));
 			Class.forName(prop.getProperty("driver"));

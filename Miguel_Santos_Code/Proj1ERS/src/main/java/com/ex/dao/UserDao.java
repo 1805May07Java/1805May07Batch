@@ -65,7 +65,8 @@ public class UserDao {
         return ret;
     }
     public int validUnPw(String un, String pw) {
-		int ret = 0;
+    	System.out.println("in dao");
+    	int ret = 0;
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 			String query = "select count(*) from ers_users where username = ? and user_password = ?";
 

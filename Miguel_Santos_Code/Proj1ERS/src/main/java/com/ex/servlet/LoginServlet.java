@@ -1,9 +1,9 @@
 package com.ex.servlet;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,34 +16,45 @@ import com.ex.pojos.ERSUser;
 import com.ex.service.ERSUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-//@WebServlet("/login")
+@WebServlet(value="/login", loadOnStartup=1)
 public class LoginServlet extends HttpServlet{
+	static {
+		System.out.println("IN LOGIN SERVLET. CHANGE PLEASE");
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("IN DO GET");
+	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
 		System.out.println("In login Servlet");
-		BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
 		
-		String json = br.readLine();
+		Stream<String> text = req.getReader().lines(); 
+		String json = text.collect(Collectors.joining("")).toString();
+		
+		System.out.println(json);
 		
 		ObjectMapper mapper = new ObjectMapper();
-		
+
 		ERSUser u = mapper.readValue(json, ERSUser.class);
-		
+
 		ERSUserService us = new ERSUserService();
-		
+
 		u = us.validUnPw(u.getUsername(), u.getPassword());
 		if(u != null) {
 			HttpSession session = req.getSession();
 			session.setAttribute("userId", u.getId());
 			session.setAttribute("userRoleId", u.getRoleId());
 		}
-		
+
 		PrintWriter out = resp.getWriter();
 		resp.setContentType("application/json");
-		
+
 		String outJSON = mapper.writeValueAsString(u);
 		out.write(outJSON);
 	}
-	
+
 }

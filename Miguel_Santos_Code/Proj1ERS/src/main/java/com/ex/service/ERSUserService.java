@@ -7,6 +7,7 @@ public class ERSUserService {
 	UserDao udao = new UserDao();
 
 	public ERSUser validUnPw(String un, String pw) {
+		System.out.println("in user service");
 		if(udao.validUnPw(un, pw) == 1) {
 			return udao.getByUsername(un);
 		}
