@@ -54,11 +54,11 @@ public class LoginServlet extends HttpServlet{
 			session.setAttribute("user", u);
 			if(roles.getRoleByID(u.getRole()).equals("MANAGER"))
 			{
-				System.out.println("Logging in");
+				System.out.println("Logging in : Manager");
 			}
-			else
+			else if (roles.getRoleByID(u.getRole()).equals("EMPLOYEE"))
 			{
-				System.out.println("Not Implemented Yet");
+				System.out.println("Logging in : Employee");
 			}
 		}
 		

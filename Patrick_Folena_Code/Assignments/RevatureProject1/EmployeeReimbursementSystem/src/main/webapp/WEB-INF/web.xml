@@ -3,32 +3,32 @@
   <display-name>Revature Employee Reimbursement System</display-name>
   <servlet>
     <description></description>
-    <display-name>FinanceManagerView</display-name>
-    <servlet-name>FinanceManagerView</servlet-name>
-    <servlet-class>com.ex.servlets.FinanceManagerViewServlet</servlet-class>
+    <display-name>SubmitRequestServlet</display-name>
+    <servlet-name>SubmitRequestServlet</servlet-name>
+    <servlet-class>com.ex.servlets.SubmitRequestServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>FinanceManagerView</servlet-name>
-    <url-pattern>/FinanceManagerView</url-pattern>
+    <servlet-name>SubmitRequestServlet</servlet-name>
+    <url-pattern>/SubmitRequestServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>EmployeeView</display-name>
-    <servlet-name>EmployeeView</servlet-name>
-    <servlet-class>com.ex.servlets.EmployeeView</servlet-class>
+    <display-name>GetReimbursementsServlet</display-name>
+    <servlet-name>GetReimbursementsServlet</servlet-name>
+    <servlet-class>com.ex.servlets.GetReimbursementsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>EmployeeView</servlet-name>
-    <url-pattern>/EmployeeView</url-pattern>
+    <servlet-name>GetReimbursementsServlet</servlet-name>
+    <url-pattern>/GetReimbursementsServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>LoadViewServlet</display-name>
-    <servlet-name>LoadViewServlet</servlet-name>
-    <servlet-class>com.ex.servlets.LoadViewServlet</servlet-class>
+    <display-name>GetReimbursementsServletPartial</display-name>
+    <servlet-name>GetReimbursementsServletPartial</servlet-name>
+    <servlet-class>com.ex.servlets.GetReimbursementsServletPartial</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>LoadViewServlet</servlet-name>
-    <url-pattern>/LoadViewServlet</url-pattern>
+    <servlet-name>GetReimbursementsServletPartial</servlet-name>
+    <url-pattern>/GetReimbursementsServletPartial</url-pattern>
   </servlet-mapping>
 </web-app>

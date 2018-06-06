@@ -1,0 +1,23 @@
+<br>
+<p> Reimbursement Request Form </p>
+<p> Requested Amount :
+	<input id="amount" type="number"></input>
+</p>
+<p> Type of Reimbursement: 
+	<select id="typelist">
+		<option value=1>Lodging</option>
+		<option value=2>Travel</option>
+		<option value=3>Food</option>
+		<option value=4>Other</option>
+	</select>
+</p>
+<p>Description of Reimbursement<br>(400 characters or less)</p>
+<p>
+	<textarea id="description" rows="10" cols="40" maxlength="400"></textarea>
+</p>
+<p>
+	<input type="button" value="Submit Form" onclick = "return submitRequestForm();"></input>
+</p>
+<p>
+	<text name="Error Message"></text>
+</p>

@@ -1,14 +1,22 @@
 package com.ex.pojos;
 
 import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.Base64;
+import java.util.Date;
+
+import com.ex.service.ReimbStatusService;
+import com.ex.service.ReimbTypeService;
+import com.ex.service.ReimbursementService;
+import com.ex.service.UserService;
 
 public class Reimbursement {
 	int ID;
-	int amount;
-	String submitTime;
-	String resolveTime;
+	double amount;
+	Date submitTime;
+	Date resolveTime;
 	String description;
-	Blob reciept;
+	String reciept_64;
 	int author;
 	int resolver;
 	int status;
@@ -25,22 +33,22 @@ public class Reimbursement {
 	public void setID(int iD) {
 		ID = iD;
 	}
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setAmount(double d) {
+		this.amount = d;
 	}
-	public String getSubmitTime() {
+	public Date getSubmitTime() {
 		return submitTime;
 	}
-	public void setSubmitTime(String submitTime) {
-		this.submitTime = submitTime;
+	public void setSubmitTime(Date date) {
+		this.submitTime = date;
 	}
-	public String getResolveTime() {
+	public Date getResolveTime() {
 		return resolveTime;
 	}
-	public void setResolveTime(String resolveTime) {
+	public void setResolveTime(Date resolveTime) {
 		this.resolveTime = resolveTime;
 	}
 	public String getDescription() {
@@ -49,11 +57,17 @@ public class Reimbursement {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Blob getReciept() {
-		return reciept;
+	public String getReciept() {
+		return reciept_64;
 	}
 	public void setReciept(Blob reciept) {
-		this.reciept = reciept;
+		if(reciept == null) reciept_64 = "";
+		else try {
+			reciept_64 = Base64.getEncoder().encodeToString(reciept.getBytes(1, (int)reciept.length()));
+		} catch (SQLException e) {
+			System.out.println("Unable to encode incoming Blob object");
+			reciept_64 = "";
+		}
 	}
 	public int getAuthor() {
 		return author;
@@ -79,5 +93,4 @@ public class Reimbursement {
 	public void setType(int type) {
 		this.type = type;
 	}
-	
 }

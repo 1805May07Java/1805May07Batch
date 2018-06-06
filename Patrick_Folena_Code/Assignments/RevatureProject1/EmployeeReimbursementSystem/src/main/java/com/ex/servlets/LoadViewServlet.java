@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("*.view")
 public class LoadViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("doGet Servlet View");
 		String url = process(req, resp);
 		req.getRequestDispatcher(url).forward(req, resp);
 	}
@@ -26,10 +28,24 @@ public class LoadViewServlet extends HttpServlet {
 		System.out.println("IN HELPER METHOD");
 		switch(req.getServletPath()) {
 		case "/1.view" :{
-			return "partials/employee.html";
+			System.out.println("Returning view 1");
+			return "partials/manager.html";
 		}
 		case "/2.view" :{
-			return "partials/managerReimbursementListView.html";
+			System.out.println("Returning view 2");
+			return "partials/employee.html";
+		}
+		case "/21.view" :{
+			System.out.println("Returning view 21");
+			return "partials/employeeTabs/newRequestTab.html";
+		}
+		case "/22.view" :{
+			System.out.println("Returning view 22");
+			return "partials/employeeTabs/currentRequests.html";
+		}
+		case "/23.view" :{
+			System.out.println("Returning view 23");
+			return "partials/employeeTabs/requestHistory.html";
 		}
 		}
 		return null;

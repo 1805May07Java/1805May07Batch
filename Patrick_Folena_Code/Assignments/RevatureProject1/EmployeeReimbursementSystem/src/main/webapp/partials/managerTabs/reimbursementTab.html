@@ -1,0 +1,28 @@
+//Manager Page - Reimbursement List
+
+<div align="right">
+    <p>Filter :
+    <select name="filter">
+      	<option value="All">All</option>
+      	<option value="Pending">Pending</option>
+      	<option value="Approved">Approved</option>
+      	<option value="Denied">Denied</option>
+    </select>
+</div>
+
+<table style="width:100%" id="reimbList">
+	<tr>
+    	<th>Submission Date</th>
+   		<th>Requester</th>
+   		<th>Amount</th>
+   		<th>Description</th>
+   		<th>Receipt</th>
+   		<th>Resolved on</th>
+   		<th>Resolved by</th>
+   		<th>Status</th>
+	</tr>
+</table>
+
+<script>
+	loadAllRequest(0);
+</script>

@@ -1,0 +1,26 @@
+<p>Past Requests</p>
+
+<div align="right">
+    <p>Filter :
+    <select name="filter" onchange="setStatusVisibility(this.options[this.selectedIndex].value)">
+      	<option value="0">All</option>
+      	<option value="1">Pending</option>
+      	<option value="2">Approved</option>
+      	<option value="3">Denied</option>
+    </select>
+</div>
+
+<table style="width:100%" id="reimbList">
+	<tr>
+    	<th>Submission Date</th>
+   		<th>Amount</th>
+   		<th>Description</th>
+   		<th>Resolved on</th>
+   		<th>Resolved by</th>
+   		<th>Status</th>
+	</tr>
+</table>
+
+<script>
+   loadAllRequest(2);
+</script>
