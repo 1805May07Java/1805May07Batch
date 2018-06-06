@@ -17,12 +17,12 @@ public class ReimbursementService {
 	
 	public List<Reimbursement> getReimbursementByUser(User user)
 	{
-		return rdao.findByUserID(user.getID());
+		return rdao.findByUserID(user.getUserID());
 	}
 	
-	public Reimbursement findReimbByID(int id)
+	public Reimbursement getReimbByID(int id)
 	{
-		return rdao.findOne(Integer.toString(id));	
+		return rdao.findOne(id);	
 	}
 	
 	public Reimbursement addReimbursement(Reimbursement request)
@@ -30,5 +30,9 @@ public class ReimbursementService {
 		request.setStatus(0);
 		request.setSubmitTime(new Date());
 		return rdao.save(request);
+	}
+
+	public Reimbursement updateReimbursement(Reimbursement rNew) {
+		return rdao.update(rNew);
 	}
 }

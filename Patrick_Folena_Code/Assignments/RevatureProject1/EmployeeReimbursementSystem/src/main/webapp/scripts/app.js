@@ -1,13 +1,8 @@
 window.onload = function(){
 	$('#login').on('click', login);
-	$('#NewRequest').on('click', test);
 	//$('#InProgress').on('click', loadInternalView('22'));
 	//$('#ReimbList').on('click', loadInternalView('23'));
 	console.log("loaded");
-}
-
-function test(){
-	console.log("TESTING");
 }
 
 function login(){
@@ -15,7 +10,7 @@ function login(){
 	var username = $('#username').val();
 	var password = $('#password').val();
 	var user = {
-			id : 0,
+			userID : 0,
 			username : username,
 			password : password
 	};
@@ -113,7 +108,7 @@ function submitRequestForm(){
 	xhr.send(json);
 }
 
-function loadAllRequest(role){
+function loadAllRequest(page){
 	$(".topButton").attr("disabled", true);
 
 	console.log("RUNNING loadAllRequest")
@@ -123,8 +118,8 @@ function loadAllRequest(role){
 			console.log("loadAllRequest successful")
 			if(xhr.status >= 200 && xhr.status <= 299){
 				var list = JSON.parse(xhr.responseText);
-				if(role >= 1){
-					if (role == 1){
+				if(page == 11 || page == 12){
+					if (page == 11){
 						var xtraCol = '<td> N/I</td>';
 					}
 					
@@ -139,12 +134,24 @@ function loadAllRequest(role){
 								'<td>' + (list.reimlist[obj].Status) + '</td>' +
 								xtraCol +
 								'</tr>');
-					console.log(list.reimlist[obj].Requester);
 					}
 				}
-				else
+				else if (page == 0)
 				{
-					
+					for(var obj in list.reimlist){
+						$('#reimbList').append(
+								'<tr name="hello" data-id=\'' + (list.reimlist[obj].ID) + '\' class=\'' + (list.reimlist[obj].Status) + '\'>' +
+								'<td>' + (list.reimlist[obj].Submission) + '</td>' +
+								'<td>' + (list.reimlist[obj].Requester) + '</td>' +
+								'<td>' + (list.reimlist[obj].Amount) + '</td>' +
+								'<td><span id=\'desc\'>' + (list.reimlist[obj].Description) + '</span></td>' +
+								'<td>' + (list.reimlist[obj].Resolved) + '</td>' +
+								'<td>' + (list.reimlist[obj].Resolver) + '</td>' +
+								'<td>' + (list.reimlist[obj].Status) + '</td>' +
+								'<td><input type="button" value="Approve" onClick = "updateTable(this, 2, 0)"/></td>' +
+								'<td><input type="button" value="Deny" onClick = "updateTable(this, 1, 0)"/></td>' +
+								'</tr>');
+					}
 				}
 				
 			}
@@ -158,11 +165,10 @@ function loadAllRequest(role){
 	xhr.open("GET", "getReimb", true);
 	xhr.send();
 }
-function setStatusVisibility(stat){
-	console.log(stat);
-	switch(stat){
+
+function setStatusVisibility(status){
+	switch(status){
 	case '0':
-		console.log("WHEE");
 		$(".Pending").css("display", "table-row");
 		$(".Approved").css("display", "table-row");
 		$(".Denied").css("display", "table-row");
@@ -174,13 +180,73 @@ function setStatusVisibility(stat){
 		break;
 	case '2':
 		$(".Pending").css("display", "none");
-		$(".Denied").css("display", "table-row");
-		$(".Approved").css("display", "none");
+		$(".Approved").css("display", "table-row");
+		$(".Denied").css("display", "none");
 		break;
 	case '3':
 		$(".Pending").css("display", "none");
-		$(".Denied").css("display", "none");
-		$(".Approved").css("display", "table-row");
+		$(".Approved").css("display", "none");
+		$(".Denied").css("display", "table-row");
 		break;
 	}
+}
+
+function updateTable(elem, status, page){
+	var row = elem.parentNode.parentNode.getAttribute("data-id");
+	console.log(row);
+	var reimInfo = {
+		id: row,
+		status: status
+	};
+	
+	var json = JSON.stringify(reimInfo);
+	
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status >= 200 && xhr.status <= 299){
+			refreshTable(page);
+		}
+	};
+	xhr.open("POST", "updateReimbursement", true);
+	xhr.send(json);
+}
+
+function refreshTable(page)
+{
+	if(page == 0){
+		$('#reimbList > tbody').html('<tr>' +
+			'<th>Submission Date</th>' +
+			'<th>Requester</th>' +
+			'<th>Amount</th>' +
+			'<th>Description</th>' +
+			'<th>Resolved on</th>' +
+			'<th>Resolved by</th>' +
+			'<th>Status</th>' +
+			'<th>Accept</th>' +
+			'<th>Decline</th>' +
+			'</tr>')
+	}
+	else if (page == 11){
+		$('#reimbList > tbody').html('<tr>' +
+		'<th>Submission Date</th>' +
+		'<th>Amount</th>' +
+		'<th>Description</th>' +
+		'<th>Resolved on</th>' +
+		'<th>Resolved by</th>' +
+		'<th>Status</th>' +
+		'<th>Remove?</th>' +
+		'</tr>')
+	}
+	else if (page == 12){
+		$('#reimbList > tbody').html('<tr>' +
+		'<th>Submission Date</th>' +
+		'<th>Amount</th>' +
+		'<th>Description</th>' +
+		'<th>Resolved on</th>' +
+		'<th>Resolved by</th>' +
+		'<th>Status</th>' +
+		'</tr>')
+	}
+		
+	loadAllRequest(page);
 }

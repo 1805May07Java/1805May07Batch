@@ -1,7 +1,7 @@
 package com.ex.pojos;
 
 public class User {
-	int ID;
+	int userID;
 	String username;
 	String password;
 	String fn;
@@ -13,11 +13,11 @@ public class User {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public int getID() {
-		return ID;
+	public int getUserID() {
+		return userID;
 	}
-	public void setID(int iD) {
-		ID = iD;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 	public String getUsername() {
 		return username;

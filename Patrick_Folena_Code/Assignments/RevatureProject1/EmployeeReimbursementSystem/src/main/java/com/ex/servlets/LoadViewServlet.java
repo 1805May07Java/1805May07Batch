@@ -31,6 +31,18 @@ public class LoadViewServlet extends HttpServlet {
 			System.out.println("Returning view 1");
 			return "partials/manager.html";
 		}
+		case "/11.view" :{
+			System.out.println("Returning view 11");
+			return "partials/managerTabs/userListTab.html";
+		}
+		case "/12.view" :{
+			System.out.println("Returning view 12");
+			return "partials/managerTabs/reimbursementTab.html";
+		}
+		case "/13.view" :{
+			System.out.println("Returning view 13");;
+			return "partials/managerTabs/newUser.html";
+		}
 		case "/2.view" :{
 			System.out.println("Returning view 2");
 			return "partials/employee.html";

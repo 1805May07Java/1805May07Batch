@@ -48,8 +48,8 @@ public class Reimbursement {
 	public Date getResolveTime() {
 		return resolveTime;
 	}
-	public void setResolveTime(Date resolveTime) {
-		this.resolveTime = resolveTime;
+	public void setResolveTime(Date date) {
+		this.resolveTime = date;
 	}
 	public String getDescription() {
 		return description;

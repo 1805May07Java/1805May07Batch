@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,10 +17,12 @@ import com.ex.pojos.User;
 import com.ex.service.ReimbursementService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebServlet("/submitRequest")
-public class SubmitRequestServlet extends HttpServlet {
+/**
+ * Servlet implementation class UpdateReimbursementServlet
+ */
+@WebServlet("/updateReimbursement")
+public class UpdateReimbursementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -31,9 +34,9 @@ public class SubmitRequestServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		System.out.println("-- SUBMITTING REQUEST --");
+	protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+
+		System.out.println("-- UPDATING REQUEST --");
 		
 		//1. get received JSON data from request
 		BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
@@ -45,25 +48,29 @@ public class SubmitRequestServlet extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		
 		//3. convert json string to object
-		Reimbursement r = mapper.readValue(json, Reimbursement.class);
+		Reimbursement rData = mapper.readValue(json, Reimbursement.class);
 		
 		//now that we have our request info, let's talk to our backend 
 		//using none other than our service aka business logic layer
 		ReimbursementService service = new ReimbursementService();
+		Reimbursement rNew = service.getReimbByID(rData.getID());
+		
 		User currUser = (User) req.getSession(false).getAttribute("CurLoginUser");
-		System.out.println("USER ID = " + currUser.getUserID());
 		
-		r.setAuthor(currUser.getUserID());
+		rNew.setResolver(currUser.getUserID());
+		rNew.setResolveTime(new Date());
+		rNew.setStatus(rData.getStatus());
 		
-		service.addReimbursement(r);
+		System.out.println(rNew.getStatus());
 		
-		System.out.println(r);
+		service.updateReimbursement(rNew);
 		
-		PrintWriter out = resp.getWriter();
-		resp.setContentType("application/json");
+		System.out.println(rNew);
 		
-		String outJSON = mapper.writeValueAsString(r);
+		PrintWriter out = response.getWriter();
+		response.setContentType("application/json");
+		
+		String outJSON = mapper.writeValueAsString(rNew);
 		out.write(outJSON);
 	}
-
 }

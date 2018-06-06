@@ -13,7 +13,7 @@ import com.ex.pojos.Reimbursement;
 import com.ex.pojos.User;
 import com.ex.util.ConnectionFactory;
 
-public class ReimbDao implements Dao<Reimbursement, String>{
+public class ReimbDao implements Dao<Reimbursement, Integer>{
 
 	@Override
 	public List<Reimbursement> getAll() {
@@ -46,9 +46,32 @@ public class ReimbDao implements Dao<Reimbursement, String>{
 	}
 
 	@Override
-	public Reimbursement findOne(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Reimbursement findOne(Integer id) {
+		
+		Reimbursement reim = new Reimbursement();
+		
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, (int)id);
+			ResultSet info = ps.executeQuery();
+			
+			if(!info.next()) return null;
+			
+			reim.setID(info.getInt(1));
+			reim.setAmount(info.getDouble(2));
+			reim.setSubmitTime(info.getDate(3));
+			reim.setResolveTime(info.getDate(4));
+			reim.setDescription(info.getString(5));
+			reim.setReciept(info.getBlob(6));
+			reim.setAuthor(info.getInt(7));
+			reim.setResolver(info.getInt(8));
+			reim.setStatus(info.getInt(9));
+			reim.setType(info.getInt(10));
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return reim;
 	}
 	
 	public List<Reimbursement> findByUserID(int user){
@@ -126,8 +149,24 @@ public class ReimbDao implements Dao<Reimbursement, String>{
 
 	@Override
 	public Reimbursement update(Reimbursement obj) {
-		// TODO Auto-generated method stub
-		return null;
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			conn.setAutoCommit(false);
+			String sql = "UPDATE ers_reimbursement "
+					+ "SET REIMB_RESOLVED = ?, REIMB_RESOLVER = ?, REIMB_STATUS_ID = ? "
+					+ "WHERE REIMB_ID = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setDate(1, new java.sql.Date(obj.getResolveTime().getTime()));
+			ps.setInt(2, obj.getResolver());
+			ps.setInt(3, obj.getStatus());
+			ps.setInt(4, obj.getID());
+			ps.executeUpdate();
+			conn.commit();
+		}  catch (SQLException e) {
+			e.printStackTrace();
+		};
+		
+		return obj;
 	}
 
 	@Override

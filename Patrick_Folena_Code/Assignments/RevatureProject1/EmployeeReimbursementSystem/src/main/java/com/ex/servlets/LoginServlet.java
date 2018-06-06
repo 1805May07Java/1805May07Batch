@@ -51,7 +51,11 @@ public class LoginServlet extends HttpServlet{
 		if(u != null) { // if user exists, store them in session
 			System.out.println("Saving User to Current Session");
 			HttpSession session = req.getSession();
-			session.setAttribute("user", u);
+			session.setAttribute("CurLoginUser", u);
+			System.out.println("user id = " + u.getUserID());
+			User user = (User)req.getSession(false).getAttribute("CurLoginUser");
+			System.out.println(user.getUserID());
+			
 			if(roles.getRoleByID(u.getRole()).equals("MANAGER"))
 			{
 				System.out.println("Logging in : Manager");

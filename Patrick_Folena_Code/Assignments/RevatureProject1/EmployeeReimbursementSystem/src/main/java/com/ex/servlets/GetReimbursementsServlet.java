@@ -49,8 +49,9 @@ public class GetReimbursementsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("Entering getReimb doGet");
+		
 		User currUser;
-		if((currUser = (User) request.getSession(false).getAttribute("user")) == null) {
+		if((currUser = (User) request.getSession(false).getAttribute("CurLoginUser")) == null) {
 			return;
 		}
 		System.out.println("currUser has been retrieved");

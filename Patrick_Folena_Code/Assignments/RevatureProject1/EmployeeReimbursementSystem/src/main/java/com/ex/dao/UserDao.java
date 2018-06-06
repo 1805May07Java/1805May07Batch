@@ -26,7 +26,7 @@ public class UserDao implements Dao {
 			while(info.next())
 			{
 				User user = new User();
-				user.setID(info.getInt(1));
+				user.setUserID(info.getInt(1));
 				user.setUsername(info.getString(2));
 				user.setPassword(info.getString(3));
 				user.setFn(info.getString(4));
@@ -54,7 +54,7 @@ public class UserDao implements Dao {
 			
 			if(!info.next()) return null;
 			
-			user.setID(info.getInt(1));
+			user.setUserID(info.getInt(1));
 			user.setUsername(info.getString(2));
 			user.setPassword(info.getString(3));
 			user.setFn(info.getString(4));
@@ -79,7 +79,7 @@ public class UserDao implements Dao {
 			
 			if(!info.next()) return null;
 			
-			user.setID(info.getInt(1));
+			user.setUserID(info.getInt(1));
 			user.setUsername(info.getString(2));
 			user.setPassword(info.getString(3));
 			user.setFn(info.getString(4));

@@ -1,34 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>Revature Employee Reimbursement System</display-name>
-  <servlet>
-    <description></description>
-    <display-name>SubmitRequestServlet</display-name>
-    <servlet-name>SubmitRequestServlet</servlet-name>
-    <servlet-class>com.ex.servlets.SubmitRequestServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SubmitRequestServlet</servlet-name>
-    <url-pattern>/SubmitRequestServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>GetReimbursementsServlet</display-name>
-    <servlet-name>GetReimbursementsServlet</servlet-name>
-    <servlet-class>com.ex.servlets.GetReimbursementsServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetReimbursementsServlet</servlet-name>
-    <url-pattern>/GetReimbursementsServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>GetReimbursementsServletPartial</display-name>
-    <servlet-name>GetReimbursementsServletPartial</servlet-name>
-    <servlet-class>com.ex.servlets.GetReimbursementsServletPartial</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetReimbursementsServletPartial</servlet-name>
-    <url-pattern>/GetReimbursementsServletPartial</url-pattern>
-  </servlet-mapping>
 </web-app>
