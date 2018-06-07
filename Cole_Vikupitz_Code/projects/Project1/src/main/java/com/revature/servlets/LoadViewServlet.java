@@ -41,8 +41,8 @@ public class LoadViewServlet extends HttpServlet {
 				return "partials/login-view.html";
 			case "/create.view":
 				return "partials/create-account-view.html";
-			case "/submitted.view":
-				return "partials/submitted-view.html";
+			case "/resolved.view":
+				return "partials/resolved-view.html";
 			case "/pending.view":
 				return "partials/pending-view.html";
 			case "/new-request.view":

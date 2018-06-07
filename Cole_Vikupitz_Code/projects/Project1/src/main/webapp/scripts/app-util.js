@@ -2,14 +2,13 @@
  * app.js
  * Author: Cole Vikupitz
  * 
- *
  */
 
 
 window.onload = function() {
 	$('#login').on('click', authenticate);
     $('#createAccount').on('click', loadCreateUserView);
-    $('#id-error').css("color", "red");
+    $('#form-error').css("color", "red");
 }
 
 
@@ -21,7 +20,7 @@ function loadLoginView() {
             $('#view').html(xhr.responseText);
             $('#login').on('click', authenticate);
             $('#createAccount').on('click', loadCreateUserView);
-            $('#id-error').css("color", "red");
+            $('#form-error').css("color", "red");
         }
     }
 
@@ -30,22 +29,7 @@ function loadLoginView() {
 }
 
 
-function loadCreateUserView() {
-
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            $('#view').html(xhr.responseText);
-            $('#backToLogin').on('click', loadLoginView);
-        }
-    }
-
-    xhr.open("GET", "create.view", true);
-    xhr.send();
-}
-
-
-function loadSubmittedView() {
+function loadResolvedView() {
 
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
@@ -54,7 +38,7 @@ function loadSubmittedView() {
         }
     }
 
-    xhr.open("GET", "submitted.view", true);
+    xhr.open("GET", "resolved.view", true);
     xhr.send();
 }
 
@@ -79,6 +63,7 @@ function loadNewRequestView() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
             $('#view').html(xhr.responseText);
+            $('#form-error').css("color", "red");
         }
     }
 
@@ -93,13 +78,13 @@ function authenticate() {
 	var email = $('#email').val();
 	var password = $('#password').val();
 	if (email == "" || password == "") {
-		$('#id-error').html("Please provide both your email and password");
+		$('#id-error').html("** Please provide both your email and password **");
 		return;
 	}
 	
 	var user = {
-			email : email, 
-			password : password
+		email : email, 
+		password : password
 	};
 	var json = JSON.stringify(user);
 	var xhr = new XMLHttpRequest();
@@ -107,17 +92,32 @@ function authenticate() {
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200) {
 			var user = JSON.parse(xhr.responseText);
-			console.log(user);
 			if (user == null) {
-				$('#id-error').html("Invalid username and/or password");
+				$('#id-error').html("** Invalid login credentials **");
 			} else {
-				loadDashboardView();
+				loadResolvedView();
 			}
 		}
 	}
 	
 	xhr.open("POST", "login", true);
 	xhr.send(json);
+}
+
+
+function submitNewRequest() {
+	
+	$('#form-error').html('');
+	var amount = $('#amount').val();
+	var type = $('#type').val();
+	var desc = $('#description').val();
+	
+	if (amount == "" || type == "") {
+		$('#form-error').html("** Please specify the amount and type **");
+		return;
+	}
+	
+	///FIXME
 }
 
 
@@ -132,17 +132,42 @@ function togglePassword() {
 }
 
 
-function togglePasswords() {
-
-    var entry1 = document.getElementById('password');
-    var entry2 = document.getElementById('password2');
-    if (entry1.type === "password") {
-        entry1.type = "text";
-        entry2.type = "text";
-    } else {
-        entry1.type = "password";
-        entry2.type = "password";
+function logout() {
+	
+	var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+        	loadLoginView();
+        }
     }
+
+    xhr.open("GET", "logout", true);
+    xhr.send();
+	
+}
+
+
+
+
+
+
+
+
+
+
+/*
+function loadCreateUserView() {
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            $('#view').html(xhr.responseText);
+            $('#backToLogin').on('click', loadLoginView);
+        }
+    }
+
+    xhr.open("GET", "create.view", true);
+    xhr.send();
 }
 
 
@@ -170,31 +195,18 @@ function comparePasswords() {
 }
 
 
-function loadDashboardView() {
-	
-	var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            $('#view').html(xhr.responseText);
-        }
+function togglePasswords() {
+
+    var entry1 = document.getElementById('password');
+    var entry2 = document.getElementById('password2');
+    if (entry1.type === "password") {
+        entry1.type = "text";
+        entry2.type = "text";
+    } else {
+        entry1.type = "password";
+        entry2.type = "password";
     }
-
-    xhr.open("GET", "submitted.view", true);
-    xhr.send();
 }
+*/
 
-
-function logout() {
-	
-	var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-        	loadLoginView();
-        }
-    }
-
-    xhr.open("GET", "logout", true);
-    xhr.send();
-	
-}
 
