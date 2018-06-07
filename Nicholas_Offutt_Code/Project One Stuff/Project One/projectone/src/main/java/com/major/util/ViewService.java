@@ -20,16 +20,23 @@ public class ViewService
 		out.setAmount(claim.getAmount());
 		out.setDescription(claim.getDescription());
 		out.setSubmit(claim.getTimeSubmitted());
-		if(claim.getTimeResolved()!=null) {
-		out.setResolved(claim.getTimeResolved());
-		}else{out.setResolved("");}
+		
+		if(claim.getTimeResolved()!=null)
+		{
+			out.setResolved(claim.getTimeResolved());
+		}
+		else
+		{
+			out.setResolved("");
+		}
 		out.setType(looker.getType(claim.getTypeId()).getType());
 		out.setStatus(looker.getStatus(claim.getStatusId()).getStatus());
+		
 		if(resolver.getFirstName()!=null) 
 		{
-		out.setResolverFirst(resolver.getFirstName());
-		out.setResolverLast(resolver.getLastName());
-		out.setResolvId(resolver.getId());
+			out.setResolverFirst(resolver.getFirstName());
+			out.setResolverLast(resolver.getLastName());
+			out.setResolvId(resolver.getId());
 		}
 		else 
 		{
@@ -90,7 +97,16 @@ public class ViewService
 	public ErsUser disassembleFullViewResolver(FullView view) 
 	{
 		ErsUser out = new ErsUser();
+		if(view.getResolvId()==0) 
+		{
+			out.setId(0);
+			out.setFirstName("");
+			out.setLastName("");
+		}
+		else 
+		{
 		out = useServe.getById(view.getResolvId());
+		}
 		return out;
 	}
 	

@@ -22,8 +22,23 @@
    -->
     
 </head>
+<h1>This is a title.</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <button class="nav-item nav-link active">View All Claims<span class="sr-only">(current)</span></button>
+      <button class="nav-item nav-link">Submit a Claim</button>
+    </div>
+  </div>
+</nav>
+<br>
+<br>
+
 <body>
-    <div id = "mainview" class = "jumbotron">
+    <div id = "logger" >
         <input type = "text "id = "username"/>
         <br>
         <input type = "password" id = "passcode"/>
@@ -33,40 +48,49 @@
         <button id = "logAdmin">Login as Manager</button>
         <br>
         <button id = "register">Register as New User</button>
-
+		
     </div> 
 	<br>
 	<hr>
 	<br>
 
-    <table id = "tableview" class = "display">
-        <thead>
-                <tr>
-                    <th>Column One</th>
-                    <th>Column Two</th>
-                    <th>Column Three</th>
-                </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Data Field One</td>
-                <td>Data Field Two</td>
-                <td>Data Field Three</td>
-            </tr>
-            <tr>
-                <td>Data Field One</td>
-                <td>Data Field Two</td>
-                <td>Data Field Three</td>
-            </tr>
-            <tr>
-                <td>Data Field One</td>
-                <td>Data Field Two</td>
-                <td>Data Field Three</td>
-            </tr>
-        </tbody>
-    </table>
+    <table id = "fulltableview" class = "display">
+	        <thead>
+	                <tr>
+	                    <th>Claim Id</th>
+	                    <th>First Name Requester</th>
+	                    <th>Last Name Requester</th>
+	                 	<th>Amount</th>
+	                 	<th>Description</th>
+	                 	<th>Submission Time</th>
+	                 	<th>Resolution Time</th>
+	                 	<th>Type</th>
+	                 	<th>Status</th>
+	                 	<th>First Name Resolver</th>
+	                 	<th>Last Name Resolver</th>
+	                 	<th>Requester Id</th>
+	                 	<th>Resolver Id</th> 	
+	                </tr>
+	        </thead>
+	        <tbody>
+					<td>Claim Id</td>
+	                    <th>First Name Requester</td>
+	                    <td>Last Name Requester</td>
+	                 	<td>Amount</td>
+	                 	<td>Description</td>
+	                 	<td>Submission Time</td>
+	                 	<td>Resolution Time</td>
+	                 	<td>Type</td>
+	                 	<td>Status</td>
+	                 	<td>First Name Resolver</td>
+	                 	<td>Last Name Resolver</td>
+	                 	<td>Requester Id</td>
+	                 	<td>Resolver Id</td> 
+	        </tbody>
+	    </table>
+		<button id = "logout">Log Out</button>
     <script>$(document).ready( function () {
-        $('#tableview').DataTable();
+        $('#fulltableview').DataTable();
     } );</script>
 </body>
 </html>

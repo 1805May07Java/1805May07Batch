@@ -81,18 +81,18 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public boolean isFree(String userName, String password) {
+	public boolean isFree(String userName, String email) {
 
 		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
 			
 			String sql1 = "select * from ERS_USER where ERS_USER_NAME = ?";
-			String sql2 = "select * from ERS_USER where ERS_PASSWORD = ?";
+			String sql2 = "select * from ERS_USER where USER_EMAIL = ?";
 			PreparedStatement ps1 = conn.prepareStatement(sql1);
 			ps1.setString(1, userName);
 			PreparedStatement ps2 = conn.prepareStatement(sql2);
-			ps2.setString(1, password);
+			ps2.setString(1, email);
 			
 			ResultSet rs1 = ps1.executeQuery();
 			

@@ -47,8 +47,8 @@ public class UserService
 		return UseDAO.getAllUsers();
 	}
 	
-	public boolean available(String userName, String password) 
+	public boolean available(String userName, String email) 
 	{
-		return UseDAO.isFree(userName, password);
+		return UseDAO.isFree(userName, email);
 	}
 }

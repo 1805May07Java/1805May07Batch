@@ -267,7 +267,13 @@ inner join employee emp on emp.employeeid = cus.supportrepid;
 
 
 
-
+/*
+	try(Session session = ConnectionUtil.getSession())
+	{
+		Query query = session.createQuery("from Author where lower(first_name) like :param and lower(last_name) like :param2");
+		
+	}
+*/
 
 
 

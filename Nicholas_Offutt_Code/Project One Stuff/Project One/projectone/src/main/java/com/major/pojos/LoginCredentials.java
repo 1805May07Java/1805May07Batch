@@ -1,5 +1,7 @@
 package com.major.pojos;
 
+
+
 public class LoginCredentials 
 {
 	private String userName;

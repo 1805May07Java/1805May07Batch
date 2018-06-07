@@ -14,8 +14,16 @@ br
 {
     color: rgb(66, 32, 100);
 }
-p
+p,h2
 {
     text-align: center;
 }
 
+#logger
+{
+	text-align: center;
+}
+nav
+{
+	 background-color: rgb(66, 32, 100);
+}

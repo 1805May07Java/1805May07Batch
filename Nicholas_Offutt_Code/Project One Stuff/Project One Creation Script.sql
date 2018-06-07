@@ -1,29 +1,30 @@
+--'HeadAdmin', 'financewizard',
 --Schema
-create user ProjectOne
+create user projectone
 identified by finance;
-GRANT connect to ProjectOne;
-GRANT resource to ProjectOne;
+GRANT connect to projectone;
+GRANT resource to projectone;
 
 
 
 --Reimbursement status lookup table
 create table ERS_REIMBURSEMENT_STATUS
 (
-	REIMB_STATUS_ID number primary key,
+	REIMB_STATUS_ID number(20) primary key,
 	REIMB_STATUS varchar2(10) not null
 );
 
 --Reimbursement type lookup table
 create table ERS_REIMBURSMENT_TYPE
 (
-	REIMB_TYPE_ID number primary key,
+	REIMB_TYPE_ID number(20) primary key,
 	REIMB_TYPE varchar2(10) not null
 );
 
 --role lookup table
 create table ERS_USER_ROLES
 (
-	USER_ROLE_ID number primary key,
+	USER_ROLE_ID number(20) primary key,
 	USER_ROLE varchar2(10) not null
 );
 
@@ -31,33 +32,32 @@ create table ERS_USER_ROLES
 --USER TABLE
 create table ERS_USER
 (
-	ERS_USER_ID number primary key,
+	ERS_USER_ID number(20) primary key,
 	ERS_USER_NAME varchar2(50) unique,
 	ERS_PASSWORD varchar2(50) not null,
 	FIRST_NAME varchar2(100) not null,
 	LAST_NAME varchar2(100) not null,
 	USER_EMAIL varchar2(150) unique not null,
-	USER_ROLE_ID number not null,
-	constraint USER_ROLE_ID foreign key (ERS_USER_ROLES) references ERS_USER_ROLES(USER_ROLE_ID)
+	USER_ROLE_ID number(20) not null,
+	constraint USER_ROLE_ID foreign key (USER_ROLE_ID) references ERS_USER_ROLES(USER_ROLE_ID)
 );
 
 --table fro the reimbursements themselves
 create table ERS_REIMBURSEMENT
 (
-	REIMB_ID number primary key not null,
-	REIMB_AMOUNT number not null,
+	REIMB_ID number(20) primary key not null,
+	REIMB_AMOUNT number(20) not null,
 	REIMB_SUBMITTED TIMESTAMP not null,
 	REIMB_RESOLVED TIMESTAMP,
 	REIMB_DESCRIPTION varchar2(250),
-	--REIMB_RECEIPT BLOB,
-	REIMB_AUTHOR number not null,
-	REIMB_RESOLVER number not null,
-	REIMB_STATUS_ID number not null,
-	REIMB_TYPE_ID number not null,
-	constraint REIMB_AUTHOR foreign key (ERS_USER) references ERS_USER(ERS_USER_ID),
-	REIMB_RESOLVER foreign key (ERS_USER) references ERS_USER(ERS_USER_ID),
-	REIMB_STATUS_ID foreign key (ERS_REIMBURSEMENT_STATUS) references ERS_REIMBURSEMENT_STATUS(REIMB_STATUS_ID),
-	REIMB_TYPE_ID foreign key (ERS_REIMBURSMENT_TYPE) references ERS_REIMBURSMENT_TYPE(REIMB_TYPE_ID)
+	REIMB_AUTHOR number(20) not null,
+	REIMB_RESOLVER number(20) not null,
+	REIMB_STATUS_ID number(20) not null,
+	REIMB_TYPE_ID number(20) not null,
+	constraint REIMB_AUTHOR foreign key (REIMB_AUTHOR) references ERS_USER(ERS_USER_ID),
+	constraint REIMB_RESOLVER foreign key (REIMB_RESOLVER) references ERS_USER(ERS_USER_ID),
+	constraint REIMB_STATUS_ID foreign key (REIMB_STATUS_ID) references ERS_REIMBURSEMENT_STATUS(REIMB_STATUS_ID),
+	constraint REIMB_TYPE_ID foreign key (REIMB_TYPE_ID) references ERS_REIMBURSMENT_TYPE(REIMB_TYPE_ID)
 );
 
 
@@ -127,11 +127,10 @@ begin
 	AUTHOR in number,
 	RESOLVER in number,
 	STATUS_ID in number,
-	TYPE_ID in number,
+	TYPE_ID in number
  )
  AS
  begin
 	update ERS_REIMBURSEMENT set REIMB_AMOUNT = AMOUNT, REIMB_DESCRIPTION = DESCRIPTION, REIMB_AUTHOR = AUTHOR, REIMB_RESOLVER = RESOLVER, REIMB_STATUS_ID = STATUS_ID, REIMB_TYPE_ID = TYPE_ID where REIMB_ID = ID; 
  end;
  /
- 

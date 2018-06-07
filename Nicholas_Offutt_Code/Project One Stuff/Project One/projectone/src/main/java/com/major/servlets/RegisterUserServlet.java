@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.major.pojos.ErsUser;
-import com.major.pojos.UserView;
 import com.major.util.UserService;
-import com.major.util.ViewService;
 
 @WebServlet("/register")
 public class RegisterUserServlet extends HttpServlet
@@ -24,7 +22,7 @@ public class RegisterUserServlet extends HttpServlet
 	{
 		//services
 		UserService useServe = new UserService();
-		ViewService viewServe = new ViewService();
+		
 		//get a reader
 		BufferedReader br = req.getReader();
 		//sanitize input
@@ -36,8 +34,8 @@ public class RegisterUserServlet extends HttpServlet
 		
 		//get an object mapper
 		ObjectMapper mapper = new ObjectMapper();
-		UserView input = mapper.readValue(json, UserView.class);
-		ErsUser created = viewServe.disassembleUserView(input);
+		ErsUser created = mapper.readValue(json, ErsUser.class);
+		
 		ErsUser out = useServe.create(created);
 		
 		String outJSON = "";

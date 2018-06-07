@@ -139,7 +139,7 @@ public class ReimbDaoImpl implements ReimbDao {
 			keys[0] = "REIMB_ID";
 			keys[1] = "REIMB_SUBMITTED";
 			String sql = "insert into ERS_REIMBURSEMENT (REIMB_AMOUNT, REIMB_DESCRIPTION, REIMB_AUTHOR, REIMB_STATUS_ID, "
-					+ "REIMB_TYPE_ID) values (?,?,?,?,?)";
+					+ "REIMB_TYPE_ID, REIMBRESOLVER) values (?,?,?,?,?,0)";
 			PreparedStatement ps = conn.prepareStatement(sql, keys);
 			ps.setDouble(1, reimbCreate.getAmount());
 			ps.setString(2, reimbCreate.getDescription());
@@ -198,6 +198,78 @@ public class ReimbDaoImpl implements ReimbDao {
 		
 		
 		return reimbUpdate;
+	}
+
+	@Override
+	public ArrayList<Reimbursement> getByType(int statusId) {
+		ArrayList<Reimbursement> output = new ArrayList<Reimbursement>();
+		Reimbursement temp = new Reimbursement();
+		
+		try(Connection conn = ConnectionFactory.getInstance().getConnection())
+		{
+			//set up the query
+			String sql = "select * from ERS_REIMBURSEMENT where REIMB_STATUS_ID = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, statusId);
+			ResultSet rows = ps.executeQuery();
+			
+			
+			while(rows.next()) 
+			{
+				temp.setId(rows.getInt("REIMB_ID"));
+				temp.setAmount(rows.getDouble("REIMB_AMOUNT"));
+				temp.setTimeSubmitted(rows.getTimestamp("REIMB_SUBMITTED").toString());
+				temp.setTimeResolved(rows.getTimestamp("REIMB_RESOLVED").toString());
+				temp.setDescription(rows.getString("REIMB_DESCRIPTION"));
+				temp.setRequesterId(rows.getInt("REIMB_AUTHOR"));
+				temp.setResolverId(rows.getInt("REIMB_RESOLVER"));
+				temp.setStatusId(rows.getInt("REIMB_STATUS_ID"));
+				temp.setTypeId(rows.getInt("REIMB_TYPE_ID"));
+				
+				output.add(temp);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			logger.debug("Reimbursement DAO issue", e);
+		}
+		return output;
+	}
+
+	@Override
+	public ArrayList<Reimbursement> getAll() {
+		ArrayList<Reimbursement> output = new ArrayList<Reimbursement>();
+		Reimbursement temp = new Reimbursement();
+		
+		try(Connection conn = ConnectionFactory.getInstance().getConnection())
+		{
+			//set up the query
+			String sql = "select * from ERS_REIMBURSEMENT";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rows = ps.executeQuery();
+			
+			
+			while(rows.next()) 
+			{
+				temp.setId(rows.getInt("REIMB_ID"));
+				temp.setAmount(rows.getDouble("REIMB_AMOUNT"));
+				temp.setTimeSubmitted(rows.getTimestamp("REIMB_SUBMITTED").toString());
+				temp.setTimeResolved(rows.getTimestamp("REIMB_RESOLVED").toString());
+				temp.setDescription(rows.getString("REIMB_DESCRIPTION"));
+				temp.setRequesterId(rows.getInt("REIMB_AUTHOR"));
+				temp.setResolverId(rows.getInt("REIMB_RESOLVER"));
+				temp.setStatusId(rows.getInt("REIMB_STATUS_ID"));
+				temp.setTypeId(rows.getInt("REIMB_TYPE_ID"));
+				
+				output.add(temp);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			logger.debug("Reimbursement DAO issue", e);
+		}
+		
+		return output;
 	}
 
 }

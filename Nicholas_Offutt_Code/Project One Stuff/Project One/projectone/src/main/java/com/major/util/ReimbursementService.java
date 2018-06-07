@@ -35,5 +35,8 @@ public class ReimbursementService
 		return ReimbDAO.updateReimb(entry);
 	}
 	
-	
+	public ArrayList<Reimbursement> getAll()
+	{
+		return ReimbDAO.getAll();
+	}
 }

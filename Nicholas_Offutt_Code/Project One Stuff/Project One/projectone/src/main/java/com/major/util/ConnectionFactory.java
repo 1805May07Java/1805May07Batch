@@ -46,7 +46,7 @@ public class ConnectionFactory
 		Connection conn = null;
 		
 		Properties prop = new Properties();
-		String path = "C:/Users/nicho/Documents/WorkspaceWeek2/projzero/src/main/resources/application.properties";
+		String path = "C:/Users/nicho/my_git_repos/1805May07Batch/Nicholas_Offutt_Code/Project One Stuff/Project One/projectone/src/main/resources/application.properties";
 		
 		
 		//being risky
