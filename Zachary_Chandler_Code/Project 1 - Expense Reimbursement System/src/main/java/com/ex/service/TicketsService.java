@@ -39,7 +39,7 @@ public class TicketsService {
 			ticket = null;
 		}
 		
-		logger.info(String.format("%S has attempted to poll a ticket, ID:%s.", u.getUsername(), Long.toString(id)));
+		logger.info(String.format("%S has polled a ticket, ID:%s.", u.getUsername(), Long.toString(id)));
 		return ticket;
 	}
 

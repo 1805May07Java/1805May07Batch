@@ -1,5 +1,6 @@
 package com.ex.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,14 +17,14 @@ public class UserDAOImpl implements UserDAO {
 		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection();) {
 			
-			PreparedStatement st = conn.prepareStatement("select * from ers_users where ers_username=? and ers_password=?");
+			CallableStatement st = conn.prepareCall("{call checkUserCredentials(?, ?, ?)}");
 			st.setString(1, username);
 			st.setString(2, password);
-			ResultSet rs = st.executeQuery();
+			st.registerOutParameter(3, java.sql.Types.NUMERIC);
+			st.executeQuery();
 
-			if (rs.next()) {
-				user = new User();
-				user = loadUser(rs);
+			if (st.getLong(3) != 0) {
+				user = get(username);
 			}
 			
 		} catch (SQLException e) {
@@ -80,6 +81,28 @@ public class UserDAOImpl implements UserDAO {
 		return user;
 	}
 
+	public User get(long userID, Connection conn) {
+
+		User user = null;
+		
+		try {
+			
+			PreparedStatement st = conn.prepareStatement("select * from ers_users where ers_users_id=?");
+			st.setLong(1, userID);
+			ResultSet rs = st.executeQuery();
+			
+			if (rs.next()) {
+				user = loadUser(rs);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			user = null;
+		}
+		
+		return user;
+	}
+
 	private User loadUser(ResultSet rs) throws SQLException {
 		User user = new User();
 		
@@ -93,6 +116,7 @@ public class UserDAOImpl implements UserDAO {
 		
 		return user;
 	}
+
 
 
 }

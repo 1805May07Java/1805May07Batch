@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class TicketsDAOImpl implements TicketsDAO {
 			ResultSet rs = st.executeQuery();
 			
 			while (rs.next()) {
-				tickets.add(getTicket(rs));
+				tickets.add(getTicket(rs, conn));
 			}
 			
 		} catch (SQLException e) {
@@ -65,14 +66,12 @@ public class TicketsDAOImpl implements TicketsDAO {
 		List<Ticket> tickets = new LinkedList<>();
 		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection();) {
-
 			
-//			CallableStatement st = conn.prepareCall("select * from ers_reimbursement");
-			PreparedStatement st = conn.prepareStatement("select * from ers_reimbursement");
-			ResultSet rs = st.executeQuery();
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery("select * from ers_reimbursement");
 			
 			while (rs.next()) {
-				tickets.add(getTicket(rs));
+				tickets.add(getTicket(rs, conn));
 			}
 			
 		} catch (SQLException e) {
@@ -95,7 +94,7 @@ public class TicketsDAOImpl implements TicketsDAO {
 			ResultSet rs = st.executeQuery();
 			
 			while (rs.next()) {
-				tickets.add(getTicket(rs));
+				tickets.add(getTicket(rs, conn));
 			}
 			
 		} catch (SQLException e) {
@@ -144,7 +143,7 @@ public class TicketsDAOImpl implements TicketsDAO {
 			ResultSet rs = st.executeQuery();
 			
 			if (rs.next()) {
-				t = getTicket(rs);
+				t = getTicket(rs, conn);
 			}
 			
 		} catch (SQLException e) {
@@ -155,7 +154,7 @@ public class TicketsDAOImpl implements TicketsDAO {
 		return t;
 	}
 	
-	public static Ticket getTicket(ResultSet rs) throws SQLException {
+	public static Ticket getTicket(ResultSet rs, Connection conn) throws SQLException {
 		Ticket t = new Ticket();
 
 		t.setId(rs.getLong(1));
@@ -167,13 +166,13 @@ public class TicketsDAOImpl implements TicketsDAO {
 		long user = rs.getLong(7);
 		
 		if (user != 0) {
-			t.setAuthor(new UserDAOImpl().get(user));
+			t.setAuthor(new UserDAOImpl().get(user, conn));
 		}
 		
 		user = rs.getLong(8);
 		
 		if (user != 0) {
-			t.setResolver(new UserDAOImpl().get(user));
+			t.setResolver(new UserDAOImpl().get(user, conn));
 		}
 		
 		t.setStatus(Ticket.Status.translate(rs.getInt(9)));
