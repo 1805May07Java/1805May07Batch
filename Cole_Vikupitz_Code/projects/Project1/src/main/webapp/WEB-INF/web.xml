@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>ERS</display-name>
+  <servlet>
+    <description></description>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.revature.servlets.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/LogoutServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReimbTypeServlet</display-name>
+    <servlet-name>ReimbTypeServlet</servlet-name>
+    <servlet-class>com.revature.servlets.ReimbTypeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReimbTypeServlet</servlet-name>
+    <url-pattern>/ReimbTypeServlet</url-pattern>
+  </servlet-mapping>
+</web-app>

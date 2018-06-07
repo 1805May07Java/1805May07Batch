@@ -1,0 +1,52 @@
+<div class="col-9 form-control" style="background-color: rgb(233, 233, 233)">
+    <img src="static/revature-logo-large.png" alt="Revature Logo">
+    <br><br>
+    <h4><i>Expense Reimbursement Portal</i></h4>
+    <hr>
+
+    <h6>Create an account by entering the following information below.</h6><br>
+    <strong>User Information</strong>
+    <form action="create-user" method="get">
+        <input type="text" id="firstName" class="col-4 form-control"
+            placeholder="First Name" maxlength="32"
+            style="padding-left: 42px; border: 1px solid black; background: url('static/name-icon.png') no-repeat left center; background-color: white;"
+            required/>
+        <br>
+        <input type="text" id="lastName" class="col-4 form-control"
+            placeholder="Last Name" maxlength="32"
+            style="padding-left: 42px; border: 1px solid black; background: url('static/name-icon.png') no-repeat left center; background-color: white;"
+            required/>
+        <br><br>
+
+        <strong>Login Credentials</strong>
+        <br>
+        <input type="email" id="email" class="col-4 form-control"
+            placeholder="Email" maxlength="128"
+            style="padding-left: 36px; border: 1px solid black; background: url('static/user-icon.png') no-repeat left center; background-color: white;"
+            required/>
+        <br>
+        <input type="password" id="password" class="col-4 form-control"
+            placeholder="Password" maxlength="32" oninput="comparePasswords()"
+            style="padding-left: 36px; border: 1px solid black; background: url('static/password-icon.png') no-repeat left center; background-color: white;"
+            required /> 
+        <br>
+        <input type="password" id="password2" class="col-4 form-control"
+            placeholder="Confirm Password" maxlength="32" oninput="comparePasswords()"
+            style="padding-left: 36px; border: 1px solid black; background: url('static/password-icon.png') no-repeat left center; background-color: white;"
+            required/>
+        <strong id="pw-error"></strong>
+        <br>
+        <input type="checkbox" id="hidePasswords" onclick="togglePasswords()">
+        <label for="hidePasswords">Show Passwords</label>
+        <br>
+
+        <input type="submit" id="submit-button" value="Create Account" class="col-2 form-control"
+            style="background-color:rgb(152, 255, 131); border: 1px solid black; color: black" />
+    </form>
+    <br>
+    <button id="backToLogin" class="col-2 form-control"
+        style="background-color:rgb(255, 131, 168); border: 1px solid black; color: black;">
+        Return to Login
+    </button>
+    <br>
+</div>
