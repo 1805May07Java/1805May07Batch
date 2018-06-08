@@ -1,5 +1,6 @@
 package com.major.servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -34,8 +35,8 @@ public class ClaimsByUserServlet extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("attempting to obtain user records by id");
-		HttpSession session = req.getSession(false);
-		if(session == null) 
+		HttpSession session = req.getSession();
+		if(session.getAttribute("user") == null) 
 		{
 			resp.sendRedirect("index.html");
 		}
@@ -51,10 +52,19 @@ public class ClaimsByUserServlet extends HttpServlet
 			dummyRes.setFirstName("");
 			dummyRes.setLastName("");
 			
+			//get a reader
+			BufferedReader br = req.getReader();
+			ViewService viewServe = new ViewService();
+			//sanitize input
+			String json = "";
 			
+		
+
+			json = br.readLine();
+
 			
 			ObjectMapper mapper = new ObjectMapper();
-			id = mapper.readValue("json", IdHolder.class);
+			id = mapper.readValue(json, IdHolder.class);
 			int x = id.getId();
 			
 			ErsUser emp = useServe.getById(x);

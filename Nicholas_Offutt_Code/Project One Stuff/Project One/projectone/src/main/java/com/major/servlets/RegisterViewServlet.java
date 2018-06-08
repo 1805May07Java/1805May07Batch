@@ -20,14 +20,7 @@ private static Logger logger = Logger.getLogger(RegisterViewServlet.class);
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 				
 		logger.info("attempting to depoly registration view");
-		HttpSession session = req.getSession(false);
-		if(session == null) 
-		{
-			resp.sendRedirect("index.html");
-		}
-		else
-		{
-			req.getRequestDispatcher("partials/registerview.html").forward(req,resp);
-		}
+		req.getRequestDispatcher("partials/registerview.html").forward(req,resp);
+		
 	}
 }

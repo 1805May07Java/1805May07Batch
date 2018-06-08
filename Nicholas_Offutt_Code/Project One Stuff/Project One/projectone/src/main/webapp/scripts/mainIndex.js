@@ -1,40 +1,18 @@
- //onload event listeners
- $('#logUser').on('click', userLogIn);
- $('#logAdmin').on('click', adminLogIn);
- $('#newregister').on('click', loadRegisterView);
+window.onload =  function(){
+    $('#logUser').on('click', userLogIn);
+    $('#logAdmin').on('click', adminLogIn);
+    $('#newregister').on('click', loadRegisterView);
 
- //admin navigation
- $('#adminhome').on('click', loadAdminView);
- $('#statuslink').on('click', loadStatusView);
- $('#approval').on('click', loadApprovalView);
- $('#employ').on('click', loadClaimsByUserView);
- 
- //handlers for submission
- $('#submit').on('click', submitClaim);
- $('#amount').on('blur',validateAmount);
- $('#desc').on('blur',validateDesc);
+};
 
- //user navigation
- $('#userhome').on('click', loadUserView);
- $("#linksubmit").on('click', loadSubmissionView);
- 
-//handle approve/deny 
-$('#approve').on('click', approveClaim);
-$('#deny').on('click', denyClaim);
+function indexHandlers()
+{
+    //onload event listeners
+    $('#logUser').on('click', userLogIn);
+    $('#logAdmin').on('click', adminLogIn);
+    $('#newregister').on('click', loadRegisterView);
+}
 
- //handler for status view
- $('#selection').on('click', function(){getClaimsByStatus($('#selection').val())})
-
- //handler for claims by id view
-$('#find').on('click', function(){getClaimsByUser($('#userid').val())})
-
-//handlers for the registration form
-$('#firstname').on('blur',validateName);
-$('#lastname').on('blur',validateName);
-$('#userName').on('blur',validateName);
-$('#email').on('blur',validateName);
-$('#userName').on('blur',validateName);
-$('#register').on('click', registerUser)
 
 // basic user login sequence
 //step one verify
@@ -85,7 +63,11 @@ function userLogIn()
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             $('#mainview').html(xhr.responseText);
-            getUserClaims();
+            window.onload =  function(){
+            //user navigation
+            $('#userhome').on('click', loadUserView);
+            $("#linksubmit").on('click', loadSubmissionView);
+            getUserClaims();}
         }
     }
 
@@ -220,7 +202,14 @@ function loadAdminView()
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             $('#mainview').html(xhr.responseText);
+            window.onload =  function(){
+            //admin navigation
+            $('#adminhome').on('click', loadAdminView);
+            $('#statuslink').on('click', loadStatusView);
+            $('#approval').on('click', loadApprovalView);
+            $('#employ').on('click', loadClaimsByUserView);
             getAllClaims();
+            }
         }
     }
 
@@ -311,6 +300,9 @@ function loadStatusView()
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             $('#mainview').html(xhr.responseText);
+             //handler for status view
+            $('#selection').on('click', function(){getClaimsByStatus($('#selection').val())})
+           
         }
     }
 
@@ -319,7 +311,7 @@ function loadStatusView()
 	xhr.send(out);
 }
 
-
+ 
 //load claims by Status into the table
 function getClaimsByStatus(stat)
 {
@@ -401,6 +393,8 @@ function loadClaimsByUserView()
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             $('#mainview').html(xhr.responseText);
+            //handler for claims by id view
+            $('#find').on('click', function(){getClaimsByUser($('#userid').val())})
             
         }
     }
@@ -490,7 +484,15 @@ function loadRegisterView()
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             $('#mainview').html(xhr.responseText);
-            
+          
+            $('#firstname').on('blur',validateName);
+            $('#lastname').on('blur',validateName);
+            $('#userName').on('blur',validateName);
+            $('#email').on('blur',validateName);
+            $('passcode').on('blur', validateName);
+            $('#userName').on('blur',validateName);
+            $('#register').on('click', registerUser);
+        
         }
     }
 
@@ -502,6 +504,7 @@ function loadRegisterView()
 //register a user
 function registerUser()
 {
+    console.log("attempting registtartion");
     var inOne = $('#firstname').val();
     var inTwo = $('#lastname').val();
     var inThree = $('#userName').val();
@@ -517,7 +520,7 @@ function registerUser()
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             var check = JSON.parse(xhr.responseText);
-            if(check == null)
+            if(check.id === 0)
             {
                 $('#errorbox').html('Error could not complete. Please retry, User Name or Email may already be in use.');
             }
@@ -543,6 +546,11 @@ function loadSubmissionView()
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             $('#mainview').html(xhr.responseText);
+             //handlers for submission
+             $('#submit').on('click', submitClaim);
+             $('#amount').on('blur',validateAmount);
+             $('#desc').on('blur',validateDesc);
+
             loadTypes();
         }
     }
@@ -567,7 +575,7 @@ function loadTypes()
             {
                 var elem = document.createElement('option');
                 elem.value = arrType[i].type;
-                elem.innerHTML = arrType[].type;
+                elem.innerHTML = arrType[i].type;
                 $('#type').append(elem);
             }
         }
@@ -588,6 +596,9 @@ function loadApprovalView()
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             $('#mainview').html(xhr.responseText);
+            //handle approve/deny 
+            $('#approve').on('click', approveClaim);
+            $('#deny').on('click', denyClaim);
         }
     }
 
@@ -609,7 +620,7 @@ function approveClaim()
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             var check = JSON.parse(xhr.responseText);
-            if(check == null)
+            if(check.id === 0)
             {
                 $('#infofield').html('Error could not complete. Either connection failed or claim already resolved.');
             }
@@ -638,7 +649,7 @@ function denyClaim()
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             var check = JSON.parse(xhr.responseText);
-            if(check == null)
+            if(check.id === 0)
             {
                 $('#infofield').html('Error could not complete. Either connection failed or claim already resolved.');
             }
@@ -672,7 +683,7 @@ function submitClaim()
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             var check = JSON.parse(xhr.responseText);
-            if(check != null)
+            if(check.id < 0)
             {
                 $('#errorbox').val('Success');
             }

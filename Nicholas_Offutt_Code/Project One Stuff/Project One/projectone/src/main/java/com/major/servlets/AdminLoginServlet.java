@@ -31,10 +31,9 @@ public class AdminLoginServlet extends HttpServlet
 		
 		//sanitize input
 		String json = "";
-		while(br!=null)
-		{
-			json += br.readLine();
-		}
+	
+		json = br.readLine();
+	
 		
 		//get an object mapper
 		ObjectMapper mapper = new ObjectMapper();
@@ -48,7 +47,7 @@ public class AdminLoginServlet extends HttpServlet
 				if(log.getRoleId() == 2) 
 				{
 					HttpSession session = req.getSession();
-					session.setAttribute(ses.getUserName(), ses);
+					session.setAttribute("user", ses);
 				}
 			}
 		}

@@ -31,11 +31,11 @@ public class NormalLoginServelet extends HttpServlet
 		ViewService viewServe = new ViewService();
 		//sanitize input
 		String json = "";
-		while(br!=null) {
+	
 
-			json += br.readLine();
+		json = br.readLine();
 
-		}
+	
 		
 		//get an object mapper
 		ObjectMapper mapper = new ObjectMapper();
@@ -48,7 +48,7 @@ public class NormalLoginServelet extends HttpServlet
 			if(useServe.validate(log.getUserName(), log.getPassword()))
 			{
 				HttpSession session = req.getSession();
-				session.setAttribute(ses.getUserName(), ses);
+				session.setAttribute("user", ses);
 			}
 		}
 		

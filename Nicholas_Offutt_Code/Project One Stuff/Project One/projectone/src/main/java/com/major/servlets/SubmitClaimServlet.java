@@ -1,5 +1,6 @@
 package com.major.servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -18,6 +19,7 @@ import com.major.pojos.ErsUser;
 import com.major.pojos.Reimbursement;
 import com.major.util.LookupService;
 import com.major.util.ReimbursementService;
+import com.major.util.ViewService;
 
 @WebServlet("/submitclaim")
 public class SubmitClaimServlet extends HttpServlet
@@ -28,17 +30,25 @@ public class SubmitClaimServlet extends HttpServlet
 		@Override
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 				
-			HttpSession session = req.getSession(false);
-			if(session == null) 
+			HttpSession session = req.getSession();
+			if(session.getAttribute("user") == null) 
 			{
 				resp.sendRedirect("index.html");
 			}
 			else 
 			{
 				logger.info("Submitting claim");
+				//get a reader
+				BufferedReader br = req.getReader();
+				ViewService viewServe = new ViewService();
+				//sanitize input
+				String json = "";
+				
+				json = br.readLine();
+				
 				ObjectMapper mapper = new ObjectMapper();
 				ErsUser user = (ErsUser) session.getAttribute("user");
-				ClaimData claim = mapper.readValue("json", ClaimData.class);
+				ClaimData claim = mapper.readValue(json, ClaimData.class);
 				Reimbursement entry = new Reimbursement();
 				
 				entry.setAmount(claim.getAmount());
@@ -53,6 +63,7 @@ public class SubmitClaimServlet extends HttpServlet
 				PrintWriter write = resp.getWriter();
 				resp.setContentType("application/json");
 				write.write(outJSON);
+			
 			}
 			
 			

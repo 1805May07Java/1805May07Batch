@@ -18,8 +18,8 @@ public class ApprovalViewServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 				
 		logger.info("attempting to depoly approval view");
-		HttpSession session = req.getSession(false);
-		if(session == null) 
+		HttpSession session = req.getSession();
+		if(session.getAttribute("user") == null) 
 		{
 			resp.sendRedirect("index.html");
 		}

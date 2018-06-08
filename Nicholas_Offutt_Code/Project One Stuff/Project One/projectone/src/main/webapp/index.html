@@ -13,10 +13,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" type="text/css" media="screen" href="Practice.css">
+<link rel="stylesheet" type="text/css" media="screen" href="Ers.css">
    
    <!-- Reference to our Javascript File -->
-<script src="scripts/mainIndex.js"></script>  
+<script type = "text/javascript" src="scripts/mainIndex.js"></script>  
    
    
 </head>
@@ -24,8 +24,12 @@
 	<h1>Welcome to the Employee Reimbursement System</h1>
 	<div id = "mainview">
 	    <div id = "logger" class = "jumbotron">
+			<p>User Name</p>
+			<br>
 	        <input type = "text" id = "username"/>
-	        <br>
+			<br>
+			<p>Password</p>
+			<br>
 	        <input type = "password" id = "passcode"/>
 	        <br>
 	        <button id = "logUser">Login as User</button>
@@ -33,7 +37,8 @@
 	        <button id = "logAdmin">Login as Manager</button>
 	        <br>
 	        <button id = "newregister">Register as New User</button>
-	    </div> 
+		</div> 
+		<p id = 'message'></p>
 	</div>
 	<button id = "logout">Log Out</button>
 </body>
