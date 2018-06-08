@@ -1,0 +1,51 @@
+<div class="jumbotron">
+  <h1 class="display-4">Welcome to the Employee Reimbursement System, <span id = "name"></span>!</h1>
+  <p class="lead">This table lists all the open reimbursements and their status.</p>
+  <hr class="my-4">
+  <p>To add a reimbursement click fill out the form and click the button below.</p>
+ <form>
+  <div class="row">
+    <div class="col-md-8">
+      <input type="text" class="form-control" id="description" placeholder="Enter description here..">
+    </div>
+    <div class="col-md-2">
+    <input type="number" class="form-control" id="amount" placeholder="Enter Amount here..">
+    </div>
+    <div class="col-md-2">
+		<div class="form-group">
+      		<select id="reimbType" class="form-control">
+        		<option value="Other">Other</option>
+        		<option value="Lodging">Lodging</option>
+        		<option value="Travel">Travel</option>
+        		<option value="Food">Food</option>
+     		 </select>
+    	</div>
+    </div> 
+  </div>
+  
+  <input type="button" id="addReimb" class="btn btn-primary" value="Submit"/>
+</form>
+</div>
+
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Reimb ID</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Submitted</th>
+      <th scope="col">Resolved</th>
+      <th scope="col">Description</th>
+      <th scope="col">Author ID</th>
+      <th scope="col">Resolver ID</th>
+      <th scope="col">Status</th>
+      <th scope="col">Reimb Type</th>
+    </tr>
+  </thead>
+  <tbody id = "ReimbTable">
+
+  </tbody>
+</table>
+
+

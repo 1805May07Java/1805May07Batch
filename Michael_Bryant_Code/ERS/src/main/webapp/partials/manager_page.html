@@ -1,0 +1,61 @@
+<div class="jumbotron">
+  <h1 class="display-4">Welcome to the Admin page, <span id= "name"></span>!</h1>
+  <p class="lead">This table lists all the employees with open reimbursements.</p>
+  <hr class="my-4">
+  <p>To change the status of a reimbursement, remember the id and click the button below.</p>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reimbModal">
+  Edit Reimbursement
+</button>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="reimbModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Reimbursement</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <br>
+              <p style="text-align:center">Enter the Reimbursement Id and select the status.</p>
+      <div class="row" style = "margin: 1px">
+      <div class="col-md-6">
+      <input type="number" id="reimbIdInput" class="form-control"/>
+      </div>
+      <div class ="col-md-6">
+      <select id="reimbType" class="form-control">
+        		<option value="Approved">Approved</option>
+        		<option value="Declined">Declined</option>
+     		 </select>
+      
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Reimb ID</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Submitted</th>
+      <th scope="col">Resolved</th>
+      <th scope="col">Description</th>
+      <th scope="col">Author ID</th>
+      <th scope="col">Resolver ID</th>
+      <th scope="col">Status</th>
+      <th scope="col">Reimb Type</th>
+    </tr>
+  </thead>
+  <tbody id = "ReimbTable">
+
+  </tbody>
+</table>

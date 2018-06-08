@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>ERS</display-name>
+  <servlet>
+    <description></description>
+    <display-name>loadingViewServlet</display-name>
+    <servlet-name>loadingViewServlet</servlet-name>
+    <servlet-class>com.Project1.servlet.loadingViewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>loadingViewServlet</servlet-name>
+    <url-pattern>/loadingViewServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>reimbServlet</display-name>
+    <servlet-name>reimbServlet</servlet-name>
+    <servlet-class>com.Project1.servlet.reimbServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>reimbServlet</servlet-name>
+    <url-pattern>/reimbServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReimbModServlet</display-name>
+    <servlet-name>ReimbModServlet</servlet-name>
+    <servlet-class>com.Project1.servlet.ReimbModServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReimbModServlet</servlet-name>
+    <url-pattern>/ReimbModServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
