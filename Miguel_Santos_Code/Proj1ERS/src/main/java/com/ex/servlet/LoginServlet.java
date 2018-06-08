@@ -25,6 +25,8 @@ public class LoginServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("IN DO GET");
+		HttpSession session = req.getSession(false);
+		session.invalidate();
 	}
 	
 	@Override
@@ -45,7 +47,7 @@ public class LoginServlet extends HttpServlet{
 
 		u = us.validUnPw(u.getUsername(), u.getPassword());
 		if(u != null) {
-			HttpSession session = req.getSession();
+			HttpSession session = req.getSession(true);
 			session.setAttribute("userId", u.getId());
 			session.setAttribute("userRoleId", u.getRoleId());
 		}

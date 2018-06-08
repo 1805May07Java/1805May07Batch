@@ -1,0 +1,40 @@
+<div class="modal-dialog">
+	<div class="modal-content" style="width: 450px">
+
+		<!-- Modal Header -->
+		<div class="modal-header">
+			<h4 class="modal-title">Add Reimbursement Request</h4>
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+
+		<!-- Modal body -->
+		<div class="modal-body mx-auto">
+			<form>
+				<div class="form-group">
+					<label for="description">Description:</label>
+					<textarea class="form-control" rows="3" id="description"></textarea>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputType">Type:</label> <select id="inputType"
+							class="form-control">
+							<option value="1" selected>Choose...</option>
+							<option value="2">...</option>
+						</select>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputAmount">Amount:</label> <input
+							type="number" class="form-control" id="inputAmount"
+							placeholder="Amount..." pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$">
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<!-- Modal footer -->
+		<div class="modal-footer">
+			<button id="confirmER" type="button" class="btn btn-primary">Add</button>
+		</div>
+
+	</div>
+</div>
