@@ -31,7 +31,7 @@ public class RegisterUserServlet extends HttpServlet
 		{
 			json += br.readLine();
 		}
-		
+	
 		//get an object mapper
 		ObjectMapper mapper = new ObjectMapper();
 		ErsUser created = mapper.readValue(json, ErsUser.class);

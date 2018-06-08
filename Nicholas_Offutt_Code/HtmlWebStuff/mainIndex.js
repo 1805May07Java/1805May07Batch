@@ -1,15 +1,13 @@
-
-
-
  //onload event listeners
  $('#logUser').on('click', userLogIn);
  $('#logAdmin').on('click', adminLogIn);
- $('#register').on('click', newRegister);
+ $('#newregister').on('click', loadRegisterView);
 
  //admin navigation
  $('#adminhome').on('click', loadAdminView);
  $('#statuslink').on('click', loadStatusView);
- $('#approval').on('click', loadApproval);
+ $('#approval').on('click', loadApprovalView);
+ $('#employ').on('click', loadClaimsByUserView);
  
  //handlers for submission
  $('#submit').on('click', submitClaim);
@@ -26,6 +24,12 @@
  //handler for claims by id view
 $('#find').on('click', function(){getClaimsByUser($('#userid').val())})
 
+//handlers for the registration form
+$('#firstname').on('blur',validateName);
+$('#lastname').on('blur',validateName);
+$('#userName').on('blur',validateName);
+$('#email').on('blur',validateName);
+$('#userName').on('blur',validateName);
 
 // basic user login sequence
 //step one verify
@@ -67,7 +71,7 @@ function userLogIn()
 }
 
 //step two load the user view 
- loadUserView()
+ function loadUserView()
  {
     console.log("loading user view");
     var xhr = new XMLHttpRequest();
@@ -202,7 +206,7 @@ function adminLogIn()
 
 
 //step two for the admin loading his view
-loadAdminView()
+function loadAdminView()
 {
     console.log("loading admin view");
     var xhr = new XMLHttpRequest();
@@ -471,6 +475,24 @@ function getClaimsByUser(userId)
 
 }
 
+//load the register view
+function loadRegisterView()
+{
+    console.log("loading register user view");
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
+        {
+            $('#mainview').html(xhr.responseText);
+            
+        }
+    }
+
+    xhr.open("GET", "viewregister", true);
+
+	xhr.send();
+}
 
 //register a user
 function registerUser()
@@ -493,7 +515,7 @@ function loadSubmissionView()
         }
     }
 
-    xhr.open("GET", "viewuser", true);
+    xhr.open("GET", "viewsubmit", true);
 
 	xhr.send();
 }
@@ -524,5 +546,118 @@ function loadTypes()
 	xhr.send();
 }
 
+//loads up the approval view
+function loadApprovalView()
+{
+    console.log("loading approval view");
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
+        {
+            $('#mainview').html(xhr.responseText);
+        }
+    }
+
+    xhr.open("GET", "viewapproval", true);
+
+	xhr.send();
+}
+
+function approveClaim()
+{
+    
+}
+
+//submit a new claim
+function submitClaim()
+{
+    var money = $('#amount').val();
+    var info = $('#desc').val();
+    var type = $('#type').val();
+
+    var claim = {amount: money, description: info, claimtype: type};
+    var out = JSON.stringify(claim);
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
+        {
+            var check = JSON.parse(xhr.responseText);
+            if(check != null)
+            {
+                $('#errorbox').val('Success');
+            }
+            else
+            {
+                $('#errorbox').val('Failure');
+            }
+        }
+    }
+    xhr.open("POST", "submitclaim", true);
+
+	xhr.send(out);
+}
 
 //validators
+function validateAmount()
+{
+    var regex = /^\d+\.\d\d$/;
+    var error = 'Invalid Amount, you must input a valid Currency amount such as 1.01.';
+    var clear = '';
+    if(regex.test($('#amount').val()))
+    {
+        $('#amount').prop('disabled', true);
+        $('#errorbox').val(error);
+    }
+    else
+    {
+        $('#amount').prop('disabled', false);
+        $('#errorbox').val(clear);
+    }
+}
+
+function validateDesc()
+{
+    var regex = /.+/;
+    var error = 'Invalid Description, you must input a description.';
+    var clear = '';
+    if(regex.test($('#desc').val()))
+    {
+        $('#desc').prop('disabled', true);
+        $('#errorbox').val(error);
+    }
+    else
+    {
+        $('#desc').prop('disabled', false);
+        $('#errorbox').val(clear);
+    }
+}
+
+function validateName()
+{
+    var regex = /.+/;
+    var error = 'Invalid, all fields must be filled.';
+    var clear = '';
+    if(regex.test($('#desc').val()))
+    {
+        $('#desc').prop('disabled', true);
+        $('#errorbox').val(error);
+    }
+    else
+    {
+        $('#desc').prop('disabled', false);
+        $('#errorbox').val(clear);
+    }
+}
+
+function validateEmail()
+{
+
+}
+
+function validatePassword()
+{
+
+}

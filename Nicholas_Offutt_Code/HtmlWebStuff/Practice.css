@@ -1,18 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 body 
 {
-    background-color: rgb(110, 255, 110);
+    background-color: rgb(104, 236, 104);
 }
 
 h1
 {
-    color: rgb(66, 32, 100);
+    color: rgb(51, 27, 75);
     font-size: 40px;
     text-align: center;
 }
 br
 {
-    color: rgb(66, 32, 100);
+    color: rgb(51, 27, 75);
 }
 p,h2
 {

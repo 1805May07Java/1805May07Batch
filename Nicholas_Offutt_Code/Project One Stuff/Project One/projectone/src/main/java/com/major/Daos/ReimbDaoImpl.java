@@ -139,7 +139,7 @@ public class ReimbDaoImpl implements ReimbDao {
 			keys[0] = "REIMB_ID";
 			keys[1] = "REIMB_SUBMITTED";
 			String sql = "insert into ERS_REIMBURSEMENT (REIMB_AMOUNT, REIMB_DESCRIPTION, REIMB_AUTHOR, REIMB_STATUS_ID, "
-					+ "REIMB_TYPE_ID, REIMBRESOLVER) values (?,?,?,?,?,0)";
+					+ "REIMB_TYPE_ID, REIMBRESOLVER) values (?,?,?,1,?,0)";
 			PreparedStatement ps = conn.prepareStatement(sql, keys);
 			ps.setDouble(1, reimbCreate.getAmount());
 			ps.setString(2, reimbCreate.getDescription());
