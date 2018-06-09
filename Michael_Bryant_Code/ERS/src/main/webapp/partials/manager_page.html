@@ -2,10 +2,8 @@
   <h1 class="display-4">Welcome to the Admin page, <span id= "name"></span>!</h1>
   <p class="lead">This table lists all the employees with open reimbursements.</p>
   <hr class="my-4">
-  <p>To change the status of a reimbursement, remember the id and click the button below.</p>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reimbModal">
-  Edit Reimbursement
-</button>
+  <p>To change the status of a reimbursement, remember the id and click the line you'd like to change below.</p>
+  
 </div>
 
 <div class="modal" tabindex="-1" role="dialog" id="reimbModal">
@@ -31,16 +29,24 @@
       
       </div>
       </div>
+      <span id="invalidIn"></span>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+        <button type="button" id="editReimb" class="btn btn-primary" data-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>
 </div>
-
-
-<table class="table">
+<hr>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" id="myInput" placeholder="Search by Reimb Id.." aria-label="Search" onkeyup="searchId()">
+    <input class="form-control mr-sm-2" type="search" id="myInputA" placeholder="Search by Author Id.." aria-label="Search" onkeyup="searchAuthor()">
+    <input class="form-control mr-sm-2" type="search" id="myInputS" placeholder="Search by Status.." aria-label="Search" onkeyup="searchStatus()">
+     <input class="form-control mr-sm-2" type="search" id="myInputT" placeholder="Search by Reimb Type.." aria-label="Search" onkeyup="searchType()">
+  </form>
+  <br>
+ 
+<table class="table table-striped table-hover">
   <thead class="thead-dark">
     <tr>
       <th scope="col"></th>

@@ -31,4 +31,7 @@ public class ReimbServices {
 		return temp;
 	}	
 
+	public Reimb getByReimbId(int id) {
+		return ReimbDao.getByReimbId(id);
+	}
 }

@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ReimbModServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("in .mod servlet");
 		String path = request.getServletPath();
 		
 		switch(path){
@@ -57,7 +58,9 @@ public class ReimbModServlet extends HttpServlet {
 		
 		System.out.println("r author: " +r.getAuthor());
 		ReimbServices rs = new ReimbServices();
+		
 		System.out.println("User id: "+u.getUserId());
+		
 		r = rs.addReimb(r);
 		System.out.println(r);
 		
@@ -76,8 +79,40 @@ public class ReimbModServlet extends HttpServlet {
 		
 	}
 	
-	protected void editReimb(HttpServletRequest request, HttpServletResponse response) {
+	protected void editReimb(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		System.out.println("in editReimb");
+		ReimbServices rs = new ReimbServices();
+		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
 		
+		String json = "";
+	
+			json+= br.readLine();
+		
+		System.out.println(json);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		Reimb r = mapper.readValue(json, Reimb.class);
+		
+		Reimb temp = rs.getByReimbId(r.getId());
+		temp.setStatusId(r.getStatusId());
+		
+		
+		HttpSession hs = request.getSession();
+		User u = (User) hs.getAttribute("user");
+		System.out.println(u);
+		
+		//
+		temp.setResolver(u.getUserId());
+		rs.update(temp);
+		//
+		
+		
+		PrintWriter out = response.getWriter();
+		response.setContentType("application/json");
+		
+		String outJSON = mapper.writeValueAsString(u);
+		out.write(outJSON);
 	}
 
 }

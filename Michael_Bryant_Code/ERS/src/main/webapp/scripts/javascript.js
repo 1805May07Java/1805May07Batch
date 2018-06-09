@@ -3,10 +3,12 @@ window.onload = function(){
 		$(this).is(':checked') ? $('#passwordIn').attr('type', 'text') : $('#passwordIn').attr('type', 'password');
 	});
 	$('#login').on('click', login);
+	$('#logout').on('click', logout);
 	$('#register').on('click', register);
 	
-	
 }
+
+
 
 function register(){
 	console.log("register");
@@ -46,8 +48,6 @@ function login(){
     
 	var username = $('#username').val();
     var pass = $('#passwordIn').val();
-    console.log(username);
-    console.log(pass);
     
 	var user = {
 			username : username, 
@@ -72,7 +72,19 @@ function login(){
 	xhr.send(json);
 	 
 }
+function logout(){
+	var xhr = new XMLHttpRequest();
+console.log("logging out");
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			
 
+		}
+	}
+
+	xhr.open("GET", "logout", true);
+	xhr.send();
+}
 function loadUserView(user){
 	console.log("loading user view");
 	
@@ -86,6 +98,8 @@ function loadUserView(user){
 			if(user != null){
 			$('#name').html(user.firstName);
 			loadReimbTable(user);
+			$('#editReimb').on('click', editReimb);
+		
 			}
 			
 			console.log(user);
@@ -133,7 +147,7 @@ function createTable(list){
 		var statusId="";
 		var reimbType ="";
 		var resolved = "";
-		var resolver= list[i].resolved;
+		var resolver= list[i].resolver;
 		(list[i].resolver > 0) ? resolver : resolver = "N/A";
 		
 		switch(list[i].statusId){
@@ -156,7 +170,7 @@ function createTable(list){
 			}
 		
 		
-		insert += "<tr>" +"<th scope=\"row\">" +row +"</th>";
+		insert += "<tr class=\"reimbRow\" value=\""+list[i].id +"\""  +">" +"<th scope=\"row\">" +row +"</th>";
 		insert += "<td>" + list[i].id +"</td>";
 		insert += "<td>$" + list[i].amount +"</td>";
 		insert += "<td>" + list[i].submitted +"</td>";
@@ -172,9 +186,97 @@ function createTable(list){
 	}
 	
 	$('#ReimbTable').html(insert);
+	$('.reimbRow').click(function(){
+		$('#reimbIdInput').val($(this).attr('value'));
+		$('#reimbModal').modal('toggle');
+	});
 
 }
+function searchId() {
+	console.log("Right hurr");
+	  // Declare variables 
+	  var input, filter, table, tr, td, i;
+	  input = document.getElementById("myInput");
+	  filter = input.value.toUpperCase();
+	  table = document.getElementById("ReimbTable");
+	  tr = table.getElementsByClassName("reimbRow");
 
+	  // Loop through all table rows, and hide those who don't match the search query
+	  for (i = 0; i < tr.length; i++) {
+	    td = tr[i].getElementsByTagName("td")[0];
+	    if (td) {
+	      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+	        tr[i].style.display = "";
+	      } else {
+	        tr[i].style.display = "none";
+	      }
+	    } 
+	  }
+	}
+function searchAuthor() {
+	console.log("Right hurr");
+	  // Declare variables 
+	  var input, filter, table, tr, td, i;
+	  input = document.getElementById("myInputA");
+	  filter = input.value.toUpperCase();
+	  table = document.getElementById("ReimbTable");
+	  tr = table.getElementsByClassName("reimbRow");
+
+	  // Loop through all table rows, and hide those who don't match the search query
+	  for (i = 0; i < tr.length; i++) {
+	    td = tr[i].getElementsByTagName("td")[5];
+	    if (td) {
+	      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+	        tr[i].style.display = "";
+	      } else {
+	        tr[i].style.display = "none";
+	      }
+	    } 
+	  }
+	}
+
+function searchStatus() {
+	console.log("Right hurr");
+	  // Declare variables 
+	  var input, filter, table, tr, td, i;
+	  input = document.getElementById("myInputS");
+	  filter = input.value.toUpperCase();
+	  table = document.getElementById("ReimbTable");
+	  tr = table.getElementsByClassName("reimbRow");
+
+	  // Loop through all table rows, and hide those who don't match the search query
+	  for (i = 0; i < tr.length; i++) {
+	    td = tr[i].getElementsByTagName("td")[7];
+	    if (td) {
+	      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+	        tr[i].style.display = "";
+	      } else {
+	        tr[i].style.display = "none";
+	      }
+	    } 
+	  }
+	}
+function searchType() {
+	console.log("Right hurr");
+	  // Declare variables 
+	  var input, filter, table, tr, td, i;
+	  input = document.getElementById("myInputT");
+	  filter = input.value.toUpperCase();
+	  table = document.getElementById("ReimbTable");
+	  tr = table.getElementsByClassName("reimbRow");
+
+	  // Loop through all table rows, and hide those who don't match the search query
+	  for (i = 0; i < tr.length; i++) {
+	    td = tr[i].getElementsByTagName("td")[8];
+	    if (td) {
+	      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+	        tr[i].style.display = "";
+	      } else {
+	        tr[i].style.display = "none";
+	      }
+	    } 
+	  }
+	}
 
 function addReimb(){
 	var amount = $("#amount").val();
@@ -212,4 +314,50 @@ function addReimb(){
 	xhr.send(json);
 	 
 }
+
+function editReimb(){
+	
+	var reimbStatus = 0;
+	
+	var reimbId = $('#reimbIdInput').val();
+	if(reimbId != 0){
+	
+	console.log("reimb id: "+ reimbId);
+		if($('#reimbType option:selected').val()== "Approved"){
+			 reimbStatus = 1;
+		} else {
+			 reimbStatus = 2;
+		}
+			
+		console.log(reimbStatus +" reimb status");
+	
+	var reimb ={
+			id : reimbId,
+			statusId : reimbStatus
+	}
+	
+	var json = JSON.stringify(reimb);
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			
+			var user = JSON.parse(xhr.responseText);
+			loadReimbTable(user);
+			$('#reimbIdInput').val("");
+			$("#reimbType option:selected").val("");
+			
+		}
+	}
+	
+	xhr.open("POST", "editReimb.mod", true);
+	xhr.send(json)
+	
+	} else {
+		alert('Enter An Id!');
+	}
+	
+}
+
+
+
 

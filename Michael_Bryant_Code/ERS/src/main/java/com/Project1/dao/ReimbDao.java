@@ -99,26 +99,45 @@ public class ReimbDao {
 		
 		return reimb;
 	}
+	
+	public Reimb getByReimbId(int id) {
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String query = "Select * from ERS_REIMBURSEMENT where REIMB_ID = ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			
+			Reimb reimb = new Reimb(rs.getInt(1),rs.getDouble(2), rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(7),rs.getInt(8), rs.getInt(9), rs.getInt(10));
+			
+			return reimb;
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 	public void update(Reimb obj) {
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 			conn.setAutoCommit(false);
-			String query = "update ERS_REIMBURSEMENT set REIMB_AMOUNT= ?, REIMB_SUBMITTED=?, REIMB_RESOLVED=?, REIMB_DESCRIPTION=?, REIMB_AUTHOR=?, REIMB_RESOLVER=?, REIMB_STATUS_ID=?, REIMB_TYPE_ID=? WHERE REIMB_ID = ?";
+			String query = "update ERS_REIMBURSEMENT set REIMB_RESOLVED= SYSDATE, REIMB_RESOLVER=?, REIMB_STATUS_ID=? WHERE REIMB_ID = ?";
 			PreparedStatement ps = conn.prepareStatement(query);
-			ps.setDouble(1, obj.getAmount());
-			ps.setString(2, obj.getSubmitted());
-			ps.setString(3, obj.getResolved());
-			ps.setString(4, obj.getDescription());
-			ps.setInt(5, obj.getAuthor());	
-			ps.setInt(6, obj.getResolver());
-			ps.setInt(7, obj.getStatusId());
-			ps.setInt(8, obj.getReimbType());
+		
+			
+			
+			ps.setInt(1, obj.getResolver());
+			ps.setInt(2, obj.getStatusId());
+			ps.setInt(3, obj.getId());
 			
 			ResultSet rs = ps.executeQuery();
 			
 			conn.commit();
-			
-			
+			System.out.println("updated Reimb dao");
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
