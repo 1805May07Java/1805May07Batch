@@ -13,26 +13,26 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.major.pojos.ReimbType;
+import com.major.pojos.ReimbStatus;
+
 import com.major.util.LookupService;
 
-@WebServlet("/loadtypes")
-public class TypeLoaderServlet extends HttpServlet
+@WebServlet("/loadstatuses")
+public class StatusLoaderServlet extends HttpServlet
 {
 	static LookupService looker = new LookupService();
-	private static Logger logger = Logger.getLogger(TypeLoaderServlet.class);
+	private static Logger logger = Logger.getLogger(StatusLoaderServlet.class);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		logger.info("Attempting to return all statuses");
-		ArrayList<ReimbType> types = looker.getAllTypes();
+		ArrayList<ReimbStatus> statuses = looker.getAllStatuses();
 		String outJSON = "";
 		ObjectMapper mapper = new ObjectMapper();
-		outJSON = mapper.writeValueAsString(types);
+		outJSON = mapper.writeValueAsString(statuses);
 		PrintWriter write = resp.getWriter();
 		resp.setContentType("application/json");
 		write.write(outJSON);
 	}
-	
 }

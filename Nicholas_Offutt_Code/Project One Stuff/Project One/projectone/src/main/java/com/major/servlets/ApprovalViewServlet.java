@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.major.pojos.ErsUser;
+
 @WebServlet("/viewapproval")
 public class ApprovalViewServlet extends HttpServlet{
 	private static Logger logger = Logger.getLogger(ApprovalViewServlet.class);

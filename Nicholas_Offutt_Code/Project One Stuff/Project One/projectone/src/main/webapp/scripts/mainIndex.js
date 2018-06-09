@@ -2,7 +2,7 @@ window.onload =  function(){
     $('#logUser').on('click', userLogIn);
     $('#logAdmin').on('click', adminLogIn);
     $('#newregister').on('click', loadRegisterView);
-
+    $('#logout').on('click', logOut);
 };
 
 function indexHandlers()
@@ -11,8 +11,9 @@ function indexHandlers()
     $('#logUser').on('click', userLogIn);
     $('#logAdmin').on('click', adminLogIn);
     $('#newregister').on('click', loadRegisterView);
+    $('#logout').on('click', logOut);
 }
-
+ 
 
 // basic user login sequence
 //step one verify
@@ -20,13 +21,17 @@ function userLogIn()
 {
     console.log("in user login");
 
-    var username = $('#userName').val();
-    var pass = $('#password').val();
+    var username = $('#username').val();
+    var pass = $('#passcode').val();
+
+
     var credentials = {
         userName : username,
         password : pass
-    };
-
+    };    
+    console.log(username);
+    console.log(pass);
+    console.log(credentials);
     var json = JSON.stringify(credentials);
     var xhr = new XMLHttpRequest();
     
@@ -36,13 +41,13 @@ function userLogIn()
         {
 			console.log(xhr.responseText);
             var views = JSON.parse(xhr.responseText);
-            if(views == null)
+            if(views.id == 0)
             {
 				$('#message').html('Invalid Credentials');
             }
             else
             {
-				loadUserView();
+				loadUserLanding();
 			}
 		}
 	}
@@ -51,6 +56,28 @@ function userLogIn()
 
 	xhr.send(json);
 
+}
+
+
+function loadUserLanding()
+{
+    console.log("loading user landing view");
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
+        {
+            $('#mainview').html(xhr.responseText);
+            //user navigation
+            $('#userhome').on('click', loadUserView);
+            $("#linksubmit").on('click', loadSubmissionView);
+            $('#logout').on('click', logOut);
+        }
+    }
+
+    xhr.open("GET", "userland", true);
+
+	xhr.send();
 }
 
 //step two load the user view 
@@ -63,15 +90,17 @@ function userLogIn()
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             $('#mainview').html(xhr.responseText);
-            window.onload =  function(){
+           
             //user navigation
             $('#userhome').on('click', loadUserView);
             $("#linksubmit").on('click', loadSubmissionView);
-            getUserClaims();}
+            $('#logout').on('click', logOut);
+            getUserClaims();
+            
         }
     }
 
-    xhr.open("GET", "viewuser", true);
+    xhr.open("GET", "userviewland", true);
 
 	xhr.send();
 
@@ -86,8 +115,11 @@ function getUserClaims()
     {
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
+            console.log(xhr.responseText);
             arrViews = JSON.parse(xhr.responseText);
 
+            for(let i = 0; i< arrViews.length; i++)
+            {
                 var cell1 = document.createElement("td");
                 var cell2 = document.createElement("td");
                 var cell3 = document.createElement("td");
@@ -101,9 +133,6 @@ function getUserClaims()
                 var cell11 = document.createElement("td");
                 var cell12 = document.createElement("td");
                 var cell13 = document.createElement("td");
-
-            for(let i = 0; i< arrViews.length; i++)
-            {
                 var row = document.createElement("tr");
                 
                 cell1.innerHTML = arrViews[i].id;
@@ -149,6 +178,7 @@ function getUserClaims()
 //call to make our table look good
 function fancyTables()
 {
+
     console.log("were fancy!");
     $('#tableview').DataTable();
 };
@@ -159,8 +189,8 @@ function fancyTables()
 function adminLogIn()
 {
     console.log("in admin login");
-    var username = $('#userName').val();
-    var pass = $('#password').val();
+    var username = $('#username').val();
+    var pass = $('#passcode').val();
     var credentials = {
         userName : username,
         password : pass
@@ -175,13 +205,13 @@ function adminLogIn()
         {
 			console.log(xhr.responseText);
             var views = JSON.parse(xhr.responseText);
-            if(views == null)
+            if(views.id === 0)
             {
 				$('#message').html('Invalid Credentials For Admin');
             }
             else
             {
-				loadAdminView();
+				loadAdminLanding();
 			}
 		}
 	}
@@ -191,6 +221,31 @@ function adminLogIn()
 	xhr.send(json);
 }
 
+
+function loadAdminLanding()
+{
+    console.log("loading admin landing view");
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
+        {
+            $('#mainview').html(xhr.responseText);
+            
+            //admin navigation
+            $('#adminhome').on('click', loadAdminView);
+            $('#statuslink').on('click', loadStatusView);
+            $('#approval').on('click', loadApprovalView);
+            $('#employ').on('click', loadClaimsByUserView);
+            $('#logout').on('click', logOut);
+            
+        }
+    }
+
+    xhr.open("GET", "adminland", true);
+
+	xhr.send();
+}
 
 //step two for the admin loading his view
 function loadAdminView()
@@ -202,14 +257,15 @@ function loadAdminView()
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             $('#mainview').html(xhr.responseText);
-            window.onload =  function(){
+          
             //admin navigation
             $('#adminhome').on('click', loadAdminView);
             $('#statuslink').on('click', loadStatusView);
             $('#approval').on('click', loadApprovalView);
             $('#employ').on('click', loadClaimsByUserView);
+            $('#logout').on('click', logOut);
             getAllClaims();
-            }
+            
         }
     }
 
@@ -229,8 +285,14 @@ function getAllClaims()
     {
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
-            arrViews = JSON.parse(xhr.responseText);
 
+            arrViews = JSON.parse(xhr.responseText);
+            console.log(xhr.responseText);
+                
+
+            for(let i = 0; i< arrViews.length; i++)
+            {
+                var row = document.createElement("tr");
                 var cell1 = document.createElement("td");
                 var cell2 = document.createElement("td");
                 var cell3 = document.createElement("td");
@@ -245,10 +307,6 @@ function getAllClaims()
                 var cell12 = document.createElement("td");
                 var cell13 = document.createElement("td");
 
-            for(let i = 0; i< arrViews.length; i++)
-            {
-                var row = document.createElement("tr");
-                
                 cell1.innerHTML = arrViews[i].id;
                 cell2.innerHTML = arrViews[i].authorFirst;
                 cell3.innerHTML = arrViews[i].authorLast;
@@ -293,30 +351,62 @@ function getAllClaims()
 //load the status view
 function loadStatusView()
 {
-    onsole.log("populating tables by status");
+    console.log("populating tables by status");
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function()
     {
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             $('#mainview').html(xhr.responseText);
-             //handler for status view
-            $('#selection').on('click', function(){getClaimsByStatus($('#selection').val())})
-           
+            //handler for status view
+            $('#adminhome').on('click', loadAdminView);
+            $('#statuslink').on('click', loadStatusView);
+            $('#approval').on('click', loadApprovalView);
+            $('#employ').on('click', loadClaimsByUserView);
+            $('#logout').on('click', logOut);
+            $('#selection').on('click', getClaimsByStatus);
+            loadStatuses();
         }
     }
 
     xhr.open("GET", "viewstatus", true);
 
-	xhr.send(out);
+	xhr.send();
+}
+
+//load up the statuses
+function loadStatuses()
+{
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
+        {
+            console.log(xhr.responseText);
+            var arrType = JSON.parse(xhr.responseText);
+            console.log(xhr.arrType);
+            for(let i = 0; i<arrType.length; i++)
+            {
+                var elem = document.createElement('option');
+                elem.value = arrType[i].status;
+                elem.innerHTML = arrType[i].status;
+                $('#status').append(elem);
+            }
+        }
+    }
+
+    xhr.open("GET", "loadstatuses", true);
+
+	xhr.send();
 }
 
  
 //load claims by Status into the table
-function getClaimsByStatus(stat)
+function getClaimsByStatus()
 {
-    var status = {status:stat};
-    var out = JSON.stringify(stat);
+    var stat = $('#status').val();
+    var status = {id:0, status:stat};
+    var out = JSON.stringify(status);
     console.log("populating tables by status");
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function()
@@ -325,6 +415,9 @@ function getClaimsByStatus(stat)
         {
             arrViews = JSON.parse(xhr.responseText);
 
+            for(let i = 0; i< arrViews.length; i++)
+            {
+                var row = document.createElement("tr");
                 var cell1 = document.createElement("td");
                 var cell2 = document.createElement("td");
                 var cell3 = document.createElement("td");
@@ -339,10 +432,6 @@ function getClaimsByStatus(stat)
                 var cell12 = document.createElement("td");
                 var cell13 = document.createElement("td");
 
-            for(let i = 0; i< arrViews.length; i++)
-            {
-                var row = document.createElement("tr");
-                
                 cell1.innerHTML = arrViews[i].id;
                 cell2.innerHTML = arrViews[i].authorFirst;
                 cell3.innerHTML = arrViews[i].authorLast;
@@ -377,7 +466,7 @@ function getClaimsByStatus(stat)
         }
     }
 
-    xhr.open("GET", "getallviews", true);
+    xhr.open("POST", "claimsbystatuses", true);
 
 	xhr.send(out);
 }
@@ -394,7 +483,12 @@ function loadClaimsByUserView()
         {
             $('#mainview').html(xhr.responseText);
             //handler for claims by id view
-            $('#find').on('click', function(){getClaimsByUser($('#userid').val())})
+            $('#adminhome').on('click', loadAdminView);
+            $('#statuslink').on('click', loadStatusView);
+            $('#approval').on('click', loadApprovalView);
+            $('#employ').on('click', loadClaimsByUserView);
+            $('#logout').on('click', logOut);
+            $('#find').on('click', getClaimsByUser);
             
         }
     }
@@ -405,8 +499,9 @@ function loadClaimsByUserView()
 }
 
 //get claims by user
-function getClaimsByUser(userId)
+function getClaimsByUser()
 {
+    userId = $('#userid').val();
     console.log("getting claims by user.");
     var int = {id:userId};
     var out = JSON.stringify(int);
@@ -416,24 +511,25 @@ function getClaimsByUser(userId)
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
            var arr = JSON.parse(xhr.responseText);
-           var cell1 = document.createElement("td");
-           var cell2 = document.createElement("td");
-           var cell3 = document.createElement("td");
-           var cell4 = document.createElement("td");
-           var cell5 = document.createElement("td");
-           var cell6 = document.createElement("td");
-           var cell7 = document.createElement("td");
-           var cell8 = document.createElement("td");
-           var cell9 = document.createElement("td");
-           var cell10 = document.createElement("td");
-           var cell11 = document.createElement("td");
-           var cell12 = document.createElement("td");
-           var cell13 = document.createElement("td");
+           
 
             for(let i = 0; i< arrViews.length; i++)
             {
                 var row = document.createElement("tr");
-                
+                var cell1 = document.createElement("td");
+                var cell2 = document.createElement("td");
+                var cell3 = document.createElement("td");
+                var cell4 = document.createElement("td");
+                var cell5 = document.createElement("td");
+                var cell6 = document.createElement("td");
+                var cell7 = document.createElement("td");
+                var cell8 = document.createElement("td");
+                var cell9 = document.createElement("td");
+                var cell10 = document.createElement("td");
+                var cell11 = document.createElement("td");
+                var cell12 = document.createElement("td");
+                var cell13 = document.createElement("td");
+
                 cell1.innerHTML = arrViews[i].id;
                 cell2.innerHTML = arrViews[i].authorFirst;
                 cell3.innerHTML = arrViews[i].authorLast;
@@ -547,10 +643,12 @@ function loadSubmissionView()
         {
             $('#mainview').html(xhr.responseText);
              //handlers for submission
-             $('#submit').on('click', submitClaim);
+             $('#userhome').on('click', loadUserView);
+             $("#linksubmit").on('click', loadSubmissionView);
              $('#amount').on('blur',validateAmount);
              $('#desc').on('blur',validateDesc);
-
+             $('#logout').on('click', logOut);
+             $('#submit').on('click', submitClaim);
             loadTypes();
         }
     }
@@ -569,8 +667,9 @@ function loadTypes()
     {
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
+            console.log(xhr.responseText);
             var arrType = JSON.parse(xhr.responseText);
-
+            console.log(xhr.arrType);
             for(let i = 0; i<arrType.length; i++)
             {
                 var elem = document.createElement('option');
@@ -596,6 +695,11 @@ function loadApprovalView()
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
             $('#mainview').html(xhr.responseText);
+            $('#adminhome').on('click', loadAdminView);
+            $('#statuslink').on('click', loadStatusView);
+            $('#approval').on('click', loadApprovalView);
+            $('#employ').on('click', loadClaimsByUserView);
+            $('#logout').on('click', logOut);
             //handle approve/deny 
             $('#approve').on('click', approveClaim);
             $('#deny').on('click', denyClaim);
@@ -612,7 +716,7 @@ function approveClaim()
     console.log("Attempting to approve claim.");
     var employee = $('#employeeid').val();
     var approve = 'Approved'
-    var obj = {id: empolyee, decision: approve};
+    var obj = {id: employee, decision: approve};
     var xhr = new XMLHttpRequest();
     var out = JSON.stringify(obj);
     xhr.onreadystatechange = function()
@@ -665,16 +769,15 @@ function denyClaim()
 	xhr.send(out);
 }
 
-
-
 //submit a new claim
 function submitClaim()
 {
+    console.log('attempting submit');
     var money = $('#amount').val();
     var info = $('#desc').val();
-    var type = $('#type').val();
+    var claimtype = $('#type').val();
 
-    var claim = {amount: money, description: info, claimtype: type};
+    var claim = {amount: money, description: info, type: claimtype};
     var out = JSON.stringify(claim);
 
     var xhr = new XMLHttpRequest();
@@ -682,6 +785,7 @@ function submitClaim()
     {
         if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
         {
+            console.log(xhr.responseText);
             var check = JSON.parse(xhr.responseText);
             if(check.id < 0)
             {
@@ -698,20 +802,36 @@ function submitClaim()
 	xhr.send(out);
 }
 
+function logOut()
+{
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if(xhr.readyState == 4 && (xhr.status >= 200 && xhr.status<300))
+        { 
+            $('#mainview').html(xhr.responseText);
+            indexHandlers();
+        }
+    }
+    xhr.open("GET", "logout", true);
+
+	xhr.send();
+}
+
 //validators
 function validateAmount()
 {
     var regex = /^\d+\.\d\d$/;
     var error = 'Invalid Amount, you must input a valid Currency amount such as 1.01.';
     var clear = '';
-    if(regex.test($('#amount').val()))
+    if(!regex.test($('#amount').val()))
     {
-        $('#amount').prop('disabled', true);
+        $('#submit').prop('disabled', true);
         $('#errorbox').val(error);
     }
     else
     {
-        $('#amount').prop('disabled', false);
+        $('#submit').prop('disabled', false);
         $('#errorbox').val(clear);
     }
 }
@@ -721,14 +841,14 @@ function validateDesc()
     var regex = /.+/;
     var error = 'Invalid Description, you must input a description.';
     var clear = '';
-    if(regex.test($('#desc').val()))
+    if(!regex.test($('#desc').val()))
     {
-        $('#desc').prop('disabled', true);
+        $('#submit').prop('disabled', true);
         $('#errorbox').val(error);
     }
     else
     {
-        $('#desc').prop('disabled', false);
+        $('#submit').prop('disabled', false);
         $('#errorbox').val(clear);
     }
 }

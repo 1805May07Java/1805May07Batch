@@ -31,7 +31,7 @@ public class UserDaoImpl implements UserDao {
 			if(rs.next()) 
 			{
 				temp.setId(rs.getInt("ERS_USER_ID"));
-				temp.setUserName(rs.getString(userName));
+				temp.setUserName(rs.getString("ERS_USER_NAME"));
 				temp.setPassword(rs.getString("ERS_PASSWORD"));
 				temp.setFirstName(rs.getString("FIRST_NAME"));
 				temp.setLastName(rs.getString("LAST_NAME"));
@@ -39,10 +39,10 @@ public class UserDaoImpl implements UserDao {
 				temp.setRoleId(rs.getInt("USER_ROLE_ID"));
 			}
 			
-			
 		}
 		catch (SQLException e) 
 		{
+			e.printStackTrace();
 			logger.debug("User DAO issue", e);
 		}
 		
@@ -54,7 +54,7 @@ public class UserDaoImpl implements UserDao {
 	public ArrayList<ErsUser> getAllUsers() 
 	{
 		ArrayList<ErsUser> output = new ArrayList<ErsUser>();
-		ErsUser temp = new ErsUser();
+		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
 			String sql = "select * from ERS_USER";
@@ -62,6 +62,7 @@ public class UserDaoImpl implements UserDao {
 			ResultSet rs = ps.executeQuery(sql);
 			while(rs.next()) 
 			{
+				ErsUser temp = new ErsUser();
 				temp.setId(rs.getInt("ERS_USER_ID"));
 				temp.setUserName(rs.getString("ERS_USER_NAME"));
 				temp.setPassword("dummy");
@@ -118,6 +119,7 @@ public class UserDaoImpl implements UserDao {
 		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
+			conn.setAutoCommit(false);
 			String[] keys = new String[1];
 			keys[0] = "ERS_USER_ID";
 			String sql = "insert into ERS_USER (ERS_USER_NAME, ERS_PASSWORD, FIRST_NAME, "
@@ -135,9 +137,10 @@ public class UserDaoImpl implements UserDao {
 				ResultSet rs = ps.getGeneratedKeys();
 				obj.setId(rs.getInt(1));
 			}
-			
+			conn.commit();
 		} catch (SQLException e) 
 		{
+			
 			logger.debug("User DAO issue", e);
 		}
 		
@@ -149,7 +152,7 @@ public class UserDaoImpl implements UserDao {
 	public ErsUser updateUser(ErsUser obj) {
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
-			
+			conn.setAutoCommit(false);
 			String sql = "update ERS_USER set ERS_USER_NAME = ?, ERS_PASSWORD = ?, FIRST_NAME = ?, "
 					+ "LAST_NAME = ?, USER_EMAIL = ?, USER_ROLE_ID = ? where ERS_USER_ID = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -165,6 +168,7 @@ public class UserDaoImpl implements UserDao {
 			{
 				return obj;
 			}
+			conn.commit();
 		} catch (SQLException e) 
 		{
 			logger.debug("User DAO issue", e);
@@ -187,9 +191,9 @@ public class UserDaoImpl implements UserDao {
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			
-			if(rs.next()) 
+			while(rs.next()) 
 			{
-				temp.setId(rs.getInt(id));
+				temp.setId(rs.getInt("ERS_USER_ID"));
 				temp.setUserName(rs.getString("ERS_USER_NAME"));
 				temp.setPassword(rs.getString("ERS_PASSWORD"));
 				temp.setFirstName(rs.getString("FIRST_NAME"));
@@ -202,6 +206,7 @@ public class UserDaoImpl implements UserDao {
 		}
 		catch (SQLException e) 
 		{
+			e.printStackTrace();
 			logger.debug("User DAO issue", e);
 		}
 		

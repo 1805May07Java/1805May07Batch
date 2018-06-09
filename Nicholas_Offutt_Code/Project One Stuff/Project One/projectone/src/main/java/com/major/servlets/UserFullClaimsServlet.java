@@ -11,24 +11,24 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import com.major.pojos.ErsUser;
-
-@WebServlet("/viewstatus")
-public class StatusViewServlet extends HttpServlet
+@WebServlet("/userviewland")
+public class UserFullClaimsServlet extends HttpServlet
 {
-	private static Logger logger = Logger.getLogger(StatusViewServlet.class);
+	private static Logger logger = Logger.getLogger(UserFullClaimsServlet.class);
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+	{
 				
-		logger.info("attempting to depoly status view");
-		HttpSession session = req.getSession();
+		logger.info("attempting to depoly user full view");
+		HttpSession session = req.getSession(true);
+		
 		if(session.getAttribute("user") == null) 
 		{
 			resp.sendRedirect("index.html");
 		}
 		else
 		{
-			req.getRequestDispatcher("partials/statusview.html").forward(req,resp);
+			req.getRequestDispatcher("partials/userview.html").forward(req,resp);
 		}
 	}
 }

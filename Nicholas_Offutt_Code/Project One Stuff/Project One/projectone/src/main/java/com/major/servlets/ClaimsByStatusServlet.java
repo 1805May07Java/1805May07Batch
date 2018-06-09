@@ -19,18 +19,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.major.pojos.ErsUser;
 import com.major.pojos.FullView;
 import com.major.pojos.IdHolder;
+import com.major.pojos.ReimbStatus;
 import com.major.pojos.Reimbursement;
 import com.major.util.LookupService;
 import com.major.util.ReimbursementService;
 import com.major.util.UserService;
 import com.major.util.ViewService;
 
-@WebServlet("/claimsbyid")
-public class ClaimsByUserServlet extends HttpServlet
+@WebServlet("/claimsbystatuses")
+public class ClaimsByStatusServlet extends HttpServlet 
 {
 	private static Logger logger = Logger.getLogger(ClaimsByUserServlet.class);
 	static UserService useServe = new UserService();
 	static ReimbursementService ReimbServe = new ReimbursementService();
+	static LookupService looker = new LookupService();
 	static ViewService viewServe = new ViewService();
 	
 	@Override
@@ -45,7 +47,7 @@ public class ClaimsByUserServlet extends HttpServlet
 		{
 			ArrayList<FullView>  outList = new ArrayList<FullView>();
 			
-			IdHolder id = new IdHolder();
+			ReimbStatus stat = new ReimbStatus();
 			
 			//get a reader
 			BufferedReader br = req.getReader();
@@ -56,12 +58,12 @@ public class ClaimsByUserServlet extends HttpServlet
 			json = br.readLine();
 
 			ObjectMapper mapper = new ObjectMapper();
-			id = mapper.readValue(json, IdHolder.class);
-			int x = id.getId();
+			stat = mapper.readValue(json, ReimbStatus.class);
+			int x = looker.getStatusId(stat.getStatus());
 			
-			ErsUser emp = useServe.getById(x);
 			
-			List<Reimbursement> full = ReimbServe.getByAuthor(emp);
+			
+			ArrayList<Reimbursement> full = ReimbServe.getByStatus(x);
 			for(Reimbursement r : full) 
 			{
 				FullView temp = new FullView();

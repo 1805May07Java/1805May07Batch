@@ -9,26 +9,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
-
 import com.major.pojos.ErsUser;
 
-@WebServlet("/viewstatus")
-public class StatusViewServlet extends HttpServlet
+@WebServlet("/logout")
+public class LogOutServlet extends HttpServlet
 {
-	private static Logger logger = Logger.getLogger(StatusViewServlet.class);
 	@Override
+
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-				
-		logger.info("attempting to depoly status view");
+
+		System.out.println("Logging user out");
 		HttpSession session = req.getSession();
-		if(session.getAttribute("user") == null) 
+
+		if(session.getAttribute("user") == null)
 		{
+			//redirect to homepage if there is no session
 			resp.sendRedirect("index.html");
 		}
+
 		else
 		{
-			req.getRequestDispatcher("partials/statusview.html").forward(req,resp);
+			session.removeAttribute("user");
+			session.invalidate();
+			req.getRequestDispatcher("partials/logout.html").forward(req,resp);
 		}
+
+		
+
 	}
 }

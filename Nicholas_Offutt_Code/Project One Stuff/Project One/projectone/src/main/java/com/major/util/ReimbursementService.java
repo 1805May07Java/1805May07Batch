@@ -39,4 +39,9 @@ public class ReimbursementService
 	{
 		return ReimbDAO.getAll();
 	}
+	
+	public ArrayList<Reimbursement> getByStatus(int id)
+	{
+		return ReimbDAO.getByType(id);
+	}
 }

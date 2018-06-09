@@ -31,12 +31,14 @@ public class SubmitClaimServlet extends HttpServlet
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 				
 			HttpSession session = req.getSession();
+			logger.info("Submitting claim");
 			if(session.getAttribute("user") == null) 
 			{
 				resp.sendRedirect("index.html");
 			}
 			else 
 			{
+				System.out.println("We have a session");
 				logger.info("Submitting claim");
 				//get a reader
 				BufferedReader br = req.getReader();
@@ -45,10 +47,11 @@ public class SubmitClaimServlet extends HttpServlet
 				String json = "";
 				
 				json = br.readLine();
-				
+				System.out.println("Read json");
 				ObjectMapper mapper = new ObjectMapper();
 				ErsUser user = (ErsUser) session.getAttribute("user");
 				ClaimData claim = mapper.readValue(json, ClaimData.class);
+				
 				Reimbursement entry = new Reimbursement();
 				
 				entry.setAmount(claim.getAmount());
@@ -56,6 +59,7 @@ public class SubmitClaimServlet extends HttpServlet
 				entry.setRequesterId(user.getId());
 				entry.setTypeId(looker.getTypeId(claim.getType()));
 				
+				System.out.println("create entry");
 				Reimbursement out = ReimbServe.create(entry);
 				
 				String outJSON = "";
@@ -63,7 +67,8 @@ public class SubmitClaimServlet extends HttpServlet
 				PrintWriter write = resp.getWriter();
 				resp.setContentType("application/json");
 				write.write(outJSON);
-			
+				
+				System.out.println("We are at the end");
 			}
 			
 			

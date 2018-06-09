@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.major.pojos.ErsUser;
+
 @WebServlet("/viewsubmit")
 public class SubmissionViewServlet extends HttpServlet
 {
@@ -27,7 +29,7 @@ public class SubmissionViewServlet extends HttpServlet
 		}
 		else
 		{
-			req.getRequestDispatcher("partials/statusview.html").forward(req,resp);
+			req.getRequestDispatcher("partials/submissionview.html").forward(req,resp);
 		}
 	}
 }

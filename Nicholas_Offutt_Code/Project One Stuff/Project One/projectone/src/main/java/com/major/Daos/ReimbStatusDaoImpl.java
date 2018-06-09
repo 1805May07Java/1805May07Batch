@@ -54,6 +54,7 @@ public class ReimbStatusDaoImpl implements ReimbStatusDao
 			{
 				out = rs.getInt("REIMB_STATUS_ID");
 			}
+			
 		} 
 		catch (SQLException e) 
 		{
@@ -66,7 +67,7 @@ public class ReimbStatusDaoImpl implements ReimbStatusDao
 	public ArrayList<ReimbStatus> getAllStatuses() 
 	{
 		ArrayList<ReimbStatus> output = new ArrayList<ReimbStatus>();
-		ReimbStatus temp = new ReimbStatus();
+		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
 			String sql = "select * from ERS_REIMBURSEMENT_STATUS";
@@ -74,6 +75,7 @@ public class ReimbStatusDaoImpl implements ReimbStatusDao
 			ResultSet rs = ps.executeQuery(sql);
 			while(rs.next()) 
 			{
+				ReimbStatus temp = new ReimbStatus();
 				temp.setId(rs.getInt("REIMB_STATUS_ID"));
 				temp.setStatus(rs.getString("REIMB_STATUS"));
 				output.add(temp);

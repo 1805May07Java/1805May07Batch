@@ -11,16 +11,24 @@
     </div>
   </div>
 </nav>
+		<h1>Welcome to the Employee Reimbursement System</h1>
 		<h2>Please fill out and submit </h2>
 		<div id = "submission">
-	        <input type = "text" id = "amount" class="col-4 form-control"/>
-	        <br>
-	        <input type = "text" id = "desc" class="col-4 form-control"/>
-	        <br>
-        	<select id="type" class="col-4 form-control">
+					<p>Amount</p>
+					<br>
+	        <input type = "text" id = "amount"/>
+					<br>
+					<p>Description</p>
+					<br>
+	        <input type = "text" id = "desc"/>
+					<br>
+					<p>Reimbursement Type</p>
+					<br>
+        	<select id="type">
         	</select>
         	<br>
-	        <button id = "submit" class="col-4 form-control">Submit Claim</button>
+	        <button id = "submit">Submit Claim</button>
 	        <br>
 	        <p id = "errorbox"></p>
-	    </div> 
+			</div> 
+			<button id = "logout">Log Out</button>

@@ -13,22 +13,24 @@ import org.apache.log4j.Logger;
 
 import com.major.pojos.ErsUser;
 
-@WebServlet("/viewstatus")
-public class StatusViewServlet extends HttpServlet
+@WebServlet("/userland")
+public class UserLandingServlet extends HttpServlet
 {
-	private static Logger logger = Logger.getLogger(StatusViewServlet.class);
+	private static Logger logger = Logger.getLogger(UserLandingServlet.class);
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+	{
 				
-		logger.info("attempting to depoly status view");
-		HttpSession session = req.getSession();
+		logger.info("attempting to depoly user landing view");
+		HttpSession session = req.getSession(true);
+		
 		if(session.getAttribute("user") == null) 
 		{
 			resp.sendRedirect("index.html");
 		}
 		else
 		{
-			req.getRequestDispatcher("partials/statusview.html").forward(req,resp);
+			req.getRequestDispatcher("partials/userlanding.html").forward(req,resp);
 		}
 	}
 }

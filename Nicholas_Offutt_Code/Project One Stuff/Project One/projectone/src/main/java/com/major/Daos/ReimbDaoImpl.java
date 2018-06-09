@@ -35,13 +35,21 @@ public class ReimbDaoImpl implements ReimbDao {
 				output.setId(id);
 				output.setAmount(rows.getDouble("REIMB_AMOUNT"));
 				output.setTimeSubmitted(rows.getTimestamp("REIMB_SUBMITTED").toString());
-				output.setTimeResolved(rows.getTimestamp("REIMB_RESOLVED").toString());
+				if(rows.getTimestamp("REIMB_RESOLVED")!=null) 
+				{
+					output.setTimeResolved(rows.getTimestamp("REIMB_RESOLVED").toString());
+				}
+				else
+				{
+					output.setTimeResolved("");
+				}
 				output.setDescription(rows.getString("REIMB_DESCRIPTION"));
 				output.setRequesterId(rows.getInt("REIMB_AUTHOR"));
 				output.setResolverId(rows.getInt("REIMB_RESOLVER"));
 				output.setStatusId(rows.getInt("REIMB_STATUS_ID"));
 				output.setTypeId(rows.getInt("REIMB_TYPE_ID"));
 			}
+			
 		} 
 		catch (SQLException e) 
 		{
@@ -57,12 +65,11 @@ public class ReimbDaoImpl implements ReimbDao {
 		
 		
 		ArrayList<Reimbursement> output = new ArrayList<Reimbursement>();
-		Reimbursement temp = new Reimbursement();
 		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
 			//set up the query
-			String sql = "select * from ERS_REIMBURSEMENT where REIMB_RESOLVER = ?";
+			String sql = "select * from ERS_REIMBURSEMENT where REIMB_AUTHOR = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, requester.getId());
 			ResultSet rows = ps.executeQuery();
@@ -70,10 +77,18 @@ public class ReimbDaoImpl implements ReimbDao {
 			
 			while(rows.next()) 
 			{
+				Reimbursement temp = new Reimbursement();
 				temp.setId(rows.getInt("REIMB_ID"));
 				temp.setAmount(rows.getDouble("REIMB_AMOUNT"));
 				temp.setTimeSubmitted(rows.getTimestamp("REIMB_SUBMITTED").toString());
-				temp.setTimeResolved(rows.getTimestamp("REIMB_RESOLVED").toString());
+				if(rows.getTimestamp("REIMB_RESOLVED")!=null) 
+				{
+					temp.setTimeResolved(rows.getTimestamp("REIMB_RESOLVED").toString());
+				}
+				else
+				{
+					temp.setTimeResolved("");
+				}
 				temp.setDescription(rows.getString("REIMB_DESCRIPTION"));
 				temp.setRequesterId(rows.getInt("REIMB_AUTHOR"));
 				temp.setResolverId(rows.getInt("REIMB_RESOLVER"));
@@ -82,9 +97,11 @@ public class ReimbDaoImpl implements ReimbDao {
 				
 				output.add(temp);
 			}
+		
 		} 
 		catch (SQLException e) 
 		{
+			e.printStackTrace();
 			logger.debug("Reimbursement DAO issue", e);
 		}
 		
@@ -95,12 +112,11 @@ public class ReimbDaoImpl implements ReimbDao {
 	public ArrayList<Reimbursement> getByResolver(ErsUser resolver) {
 
 		ArrayList<Reimbursement> output = new ArrayList<Reimbursement>();
-		Reimbursement temp = new Reimbursement();
 		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
 			//set up the query
-			String sql = "select * from ERS_REIMBURSEMENT where REIMB_AUTHOR = ?";
+			String sql = "select * from ERS_REIMBURSEMENT where REIMB_RESOLVER = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, resolver.getId());
 			ResultSet rows = ps.executeQuery();
@@ -108,6 +124,7 @@ public class ReimbDaoImpl implements ReimbDao {
 			
 			while(rows.next()) 
 			{
+				Reimbursement temp = new Reimbursement();
 				temp.setId(rows.getInt("REIMB_ID"));
 				temp.setAmount(rows.getDouble("REIMB_AMOUNT"));
 				temp.setTimeSubmitted(rows.getTimestamp("REIMB_SUBMITTED").toString());
@@ -120,6 +137,7 @@ public class ReimbDaoImpl implements ReimbDao {
 				
 				output.add(temp);
 			}
+		
 		} 
 		catch (SQLException e) 
 		{
@@ -133,32 +151,36 @@ public class ReimbDaoImpl implements ReimbDao {
 	@Override
 	public Reimbursement createReimb(Reimbursement reimbCreate) 
 	{
+		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
-			String[] keys = new String[2];
+			conn.setAutoCommit(false);
+			String[] keys = new String[1];
 			keys[0] = "REIMB_ID";
-			keys[1] = "REIMB_SUBMITTED";
 			String sql = "insert into ERS_REIMBURSEMENT (REIMB_AMOUNT, REIMB_DESCRIPTION, REIMB_AUTHOR, REIMB_STATUS_ID, "
-					+ "REIMB_TYPE_ID, REIMBRESOLVER) values (?,?,?,1,?,0)";
+					+ "REIMB_TYPE_ID, REIMB_RESOLVER) values (?,?,?,?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql, keys);
 			ps.setDouble(1, reimbCreate.getAmount());
 			ps.setString(2, reimbCreate.getDescription());
 			ps.setInt(3, reimbCreate.getRequesterId());
-			ps.setInt(4, reimbCreate.getStatusId());
+			ps.setInt(4, 1);
 			ps.setInt(5, reimbCreate.getTypeId());
+			ps.setInt(6, 43);
+			
 			int rows = ps.executeUpdate();
 			if(rows!=0) 
 			{
 				ResultSet rs = ps.getGeneratedKeys();
 				while(rs.next()) 
 				{
-					reimbCreate.setId(rs.getInt("REIMB_ID"));
-					reimbCreate.setTimeSubmitted(rs.getTimestamp("REIMB_SUBMITTED").toString());
+					reimbCreate.setId(rs.getInt(1));
 				}
 			}
+			conn.commit();
 		} 
 		catch (SQLException e) 
 		{
+			e.printStackTrace();
 			logger.debug("Reimbursement DAO issue", e);
 		}
 		
@@ -171,6 +193,7 @@ public class ReimbDaoImpl implements ReimbDao {
 		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
+			conn.setAutoCommit(false);
 			String[] keys = new String[1];
 			keys[0] = "REIMB_RESOLVED";
 			String sql = "{call reimbUpdate(?,?,?,?,?,?,?)";
@@ -189,6 +212,7 @@ public class ReimbDaoImpl implements ReimbDao {
 				ResultSet rs = call.getGeneratedKeys();
 				reimbUpdate.setTimeResolved(rs.getTimestamp(1).toString());
 			}
+			conn.commit();
 		} 
 		catch (SQLException e) 
 		{
@@ -203,7 +227,7 @@ public class ReimbDaoImpl implements ReimbDao {
 	@Override
 	public ArrayList<Reimbursement> getByType(int statusId) {
 		ArrayList<Reimbursement> output = new ArrayList<Reimbursement>();
-		Reimbursement temp = new Reimbursement();
+		
 		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
@@ -216,10 +240,18 @@ public class ReimbDaoImpl implements ReimbDao {
 			
 			while(rows.next()) 
 			{
+				Reimbursement temp = new Reimbursement();
 				temp.setId(rows.getInt("REIMB_ID"));
 				temp.setAmount(rows.getDouble("REIMB_AMOUNT"));
 				temp.setTimeSubmitted(rows.getTimestamp("REIMB_SUBMITTED").toString());
-				temp.setTimeResolved(rows.getTimestamp("REIMB_RESOLVED").toString());
+				if(rows.getTimestamp("REIMB_RESOLVED")!=null) 
+				{
+					temp.setTimeResolved(rows.getTimestamp("REIMB_RESOLVED").toString());
+				}
+				else
+				{
+					temp.setTimeResolved("");
+				}
 				temp.setDescription(rows.getString("REIMB_DESCRIPTION"));
 				temp.setRequesterId(rows.getInt("REIMB_AUTHOR"));
 				temp.setResolverId(rows.getInt("REIMB_RESOLVER"));
@@ -228,6 +260,7 @@ public class ReimbDaoImpl implements ReimbDao {
 				
 				output.add(temp);
 			}
+			conn.commit();
 		} 
 		catch (SQLException e) 
 		{
@@ -239,10 +272,11 @@ public class ReimbDaoImpl implements ReimbDao {
 	@Override
 	public ArrayList<Reimbursement> getAll() {
 		ArrayList<Reimbursement> output = new ArrayList<Reimbursement>();
-		Reimbursement temp = new Reimbursement();
+		
 		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
+			conn.setAutoCommit(false);
 			//set up the query
 			String sql = "select * from ERS_REIMBURSEMENT";
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -251,10 +285,18 @@ public class ReimbDaoImpl implements ReimbDao {
 			
 			while(rows.next()) 
 			{
+				Reimbursement temp = new Reimbursement();
 				temp.setId(rows.getInt("REIMB_ID"));
 				temp.setAmount(rows.getDouble("REIMB_AMOUNT"));
 				temp.setTimeSubmitted(rows.getTimestamp("REIMB_SUBMITTED").toString());
-				temp.setTimeResolved(rows.getTimestamp("REIMB_RESOLVED").toString());
+				if(rows.getTimestamp("REIMB_RESOLVED")!=null) 
+				{
+					temp.setTimeResolved(rows.getTimestamp("REIMB_RESOLVED").toString());
+				}
+				else
+				{
+					temp.setTimeResolved("");
+				}
 				temp.setDescription(rows.getString("REIMB_DESCRIPTION"));
 				temp.setRequesterId(rows.getInt("REIMB_AUTHOR"));
 				temp.setResolverId(rows.getInt("REIMB_RESOLVER"));
@@ -263,9 +305,11 @@ public class ReimbDaoImpl implements ReimbDao {
 				
 				output.add(temp);
 			}
+			conn.commit();
 		} 
 		catch (SQLException e) 
 		{
+			e.printStackTrace();
 			logger.debug("Reimbursement DAO issue", e);
 		}
 		

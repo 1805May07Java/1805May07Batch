@@ -41,30 +41,13 @@ public class UserTableLoader extends HttpServlet
 		}
 		else 
 		{
-			
-			ArrayList<FullView>  outList = new ArrayList<FullView>();
-			FullView temp = new FullView();
-			ErsUser check = (ErsUser) session.getAttribute("user");
-			//set up a dummy
-			ErsUser dummyRes = new ErsUser();
-			dummyRes.setId(0);
-			dummyRes.setFirstName("");
-			dummyRes.setLastName("");
-			
-			if(check.getRoleId() == 2) 
-			{
-				List<Reimbursement> full = ReimbServe.getByAuthor((ErsUser)session.getAttribute("user"));
-			
+				
+				ArrayList<FullView>  outList = new ArrayList<FullView>();
+				ArrayList<Reimbursement> full = ReimbServe.getByAuthor((ErsUser)session.getAttribute("user"));
 				for(Reimbursement r : full) 
 				{
-					if(r.getResolverId()==0)
-					{
-						temp = viewServe.assembleFullView(useServe.getById(r.getRequesterId()), dummyRes, r);
-					}
-					else 
-					{
-						temp = viewServe.assembleFullView(useServe.getById(r.getRequesterId()), useServe.getById(r.getResolverId()), r);
-					}
+					FullView temp = new FullView();
+					temp = viewServe.assembleFullView(useServe.getById(r.getRequesterId()), useServe.getById(r.getResolverId()), r);
 					outList.add(temp);
 				}
 				
@@ -75,9 +58,6 @@ public class UserTableLoader extends HttpServlet
 				resp.setContentType("application/json");
 				write.write(outJSON);
 			}
-		
 			
-		}
-	
 	}
 }

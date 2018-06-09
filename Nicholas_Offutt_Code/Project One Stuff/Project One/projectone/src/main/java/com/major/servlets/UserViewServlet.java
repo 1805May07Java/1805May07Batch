@@ -11,9 +11,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.major.pojos.ErsUser;
+
 @WebServlet("/viewuser")
 public class UserViewServlet extends HttpServlet
 {
+	
 	private static Logger logger = Logger.getLogger(UserViewServlet.class);
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,7 +29,7 @@ public class UserViewServlet extends HttpServlet
 		}
 		else
 		{
-			req.getRequestDispatcher("partials/userview.html").forward(req,resp);
+			req.getRequestDispatcher("partials/claimsbyidview.html").forward(req,resp);
 		}
 	}
 }

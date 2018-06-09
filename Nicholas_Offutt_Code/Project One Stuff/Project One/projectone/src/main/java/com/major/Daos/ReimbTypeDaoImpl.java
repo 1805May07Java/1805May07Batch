@@ -53,6 +53,7 @@ public class ReimbTypeDaoImpl implements ReimbTypeDao {
 			{
 				out = rs.getInt("REIMB_TYPE_ID");
 			}
+			
 		} 
 		catch (SQLException e) 
 		{
@@ -64,7 +65,7 @@ public class ReimbTypeDaoImpl implements ReimbTypeDao {
 	@Override
 	public ArrayList<ReimbType> getAllTypes() {
 		ArrayList<ReimbType> output = new ArrayList<ReimbType>();
-		ReimbType temp = new ReimbType();
+		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
 			String sql = "select * from ERS_REIMBURSMENT_TYPE";
@@ -72,6 +73,7 @@ public class ReimbTypeDaoImpl implements ReimbTypeDao {
 			ResultSet rs = ps.executeQuery(sql);
 			while(rs.next()) 
 			{
+				ReimbType temp = new ReimbType();
 				temp.setId(rs.getInt("REIMB_TYPE_ID"));
 				temp.setType(rs.getString("REIMB_TYPE"));
 				output.add(temp);

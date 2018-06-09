@@ -11,7 +11,7 @@ public class ViewService
 	static UserService useServe = new UserService();
 	static ReimbursementService ReimbServe = new ReimbursementService();
 	
-	public FullView assembleFullView(ErsUser author, ErsUser resolver,Reimbursement claim)
+	public FullView assembleFullView(ErsUser author, ErsUser resolver, Reimbursement claim)
 	{
 		FullView out = new FullView();
 		out.setId(claim.getId());
@@ -29,21 +29,16 @@ public class ViewService
 		{
 			out.setResolved("");
 		}
+		
 		out.setType(looker.getType(claim.getTypeId()).getType());
 		out.setStatus(looker.getStatus(claim.getStatusId()).getStatus());
 		
-		if(resolver.getFirstName()!=null) 
-		{
-			out.setResolverFirst(resolver.getFirstName());
-			out.setResolverLast(resolver.getLastName());
-			out.setResolvId(resolver.getId());
-		}
-		else 
-		{
-			out.setResolverFirst("");
-			out.setResolverLast("");
-			out.setResolvId(0);
-		}
+	
+		out.setResolverFirst(resolver.getFirstName());
+		out.setResolverLast(resolver.getLastName());
+		out.setResolvId(resolver.getId());
+	
+		
 		out.setReqId(author.getId());
 		
 		
@@ -74,16 +69,11 @@ public class ViewService
 		out.setStatusId(looker.getStatusId(view.getStatus()));
 		out.setTimeSubmitted(view.getSubmit());
 		out.setTypeId(looker.getTypeId(view.getType()));	
-		if(view.getResolverFirst()!=null) 
-		{
+		
+		
 		out.setResolverId(view.getResolvId());
 		out.setTimeResolved(view.getResolved());
-		}
-		else 
-		{
-			out.setResolverId(0);
-			out.setTimeResolved("");
-		}
+	
 		return out;
 	}
 	
@@ -97,7 +87,7 @@ public class ViewService
 	public ErsUser disassembleFullViewResolver(FullView view) 
 	{
 		ErsUser out = new ErsUser();
-		if(view.getResolvId()==0) 
+		if(view.getResolvId()==43) 
 		{
 			out.setId(0);
 			out.setFirstName("");
@@ -105,7 +95,7 @@ public class ViewService
 		}
 		else 
 		{
-		out = useServe.getById(view.getResolvId());
+			out = useServe.getById(view.getResolvId());
 		}
 		return out;
 	}
@@ -115,10 +105,7 @@ public class ViewService
 		ErsUser out = new ErsUser();
 		out.setEmail(view.getEmail());
 		out.setFirstName(view.getFirstName());
-		if(view.getId()!=0) 
-		{
 		out.setId(view.getId());
-		}
 		out.setLastName(view.getLastName());
 		out.setPassword(view.getPassword());
 		out.setRoleId(looker.getRoleId(view.getRole()));

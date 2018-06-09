@@ -14,9 +14,9 @@ import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.major.pojos.ErsUser;
 import com.major.pojos.LoginCredentials;
-import com.major.pojos.UserView;
+
 import com.major.util.UserService;
-import com.major.util.ViewService;
+
 
 @WebServlet("/userlogin")
 public class NormalLoginServelet extends HttpServlet
@@ -28,40 +28,28 @@ public class NormalLoginServelet extends HttpServlet
 		
 		//get a reader
 		BufferedReader br = req.getReader();
-		ViewService viewServe = new ViewService();
-		//sanitize input
+		
 		String json = "";
-	
-
 		json = br.readLine();
-
-	
 		
 		//get an object mapper
 		ObjectMapper mapper = new ObjectMapper();
-		
 		LoginCredentials cred = mapper.readValue(json, LoginCredentials.class);
 		ErsUser log = useServe.getUserByName(cred.getUserName());
-		UserView ses = viewServe.assembleUserView(log);
+		//validating credentials
 		if(log.getUserName() != null)
 		{
+			System.out.println("User name is not null.");
 			if(useServe.validate(log.getUserName(), log.getPassword()))
 			{
-				HttpSession session = req.getSession();
-				session.setAttribute("user", ses);
+				System.out.println("We validated.");
+				HttpSession session = req.getSession(true);
+				session.setAttribute("user", log);
 			}
 		}
-		
 		PrintWriter out = resp.getWriter();
-
 		resp.setContentType("application/json");
-
-		String outJSON = mapper.writeValueAsString(ses);
-
+		String outJSON = mapper.writeValueAsString(log);
 		out.write(outJSON);
-		
-		
-		
-		
 	}
 }

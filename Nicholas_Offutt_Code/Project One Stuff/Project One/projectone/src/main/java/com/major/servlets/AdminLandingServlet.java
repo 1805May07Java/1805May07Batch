@@ -11,16 +11,15 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import com.major.pojos.ErsUser;
-
-@WebServlet("/viewstatus")
-public class StatusViewServlet extends HttpServlet
+@WebServlet("/adminland")
+public class AdminLandingServlet extends HttpServlet
 {
-	private static Logger logger = Logger.getLogger(StatusViewServlet.class);
+	private static Logger logger = Logger.getLogger(AdminLandingServlet.class);
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+	{
 				
-		logger.info("attempting to depoly status view");
+		logger.info("attempting to depoly admin landing view");
 		HttpSession session = req.getSession();
 		if(session.getAttribute("user") == null) 
 		{
@@ -28,7 +27,7 @@ public class StatusViewServlet extends HttpServlet
 		}
 		else
 		{
-			req.getRequestDispatcher("partials/statusview.html").forward(req,resp);
+			req.getRequestDispatcher("partials/adminlanding.html").forward(req,resp);
 		}
 	}
 }

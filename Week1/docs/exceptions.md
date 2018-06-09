@@ -8,7 +8,7 @@
 
 # Unchecked Exceptions
 * do not have to handle, but can
-* programming mistakes
+* cause programming mistakes
 * examples: `NullPointerException`, `ArithmeticException`, `ArrayIndexOutOfBoundsException`
 
 # Checked Exceptions
@@ -226,3 +226,32 @@ public class MyException extends Exception {
 ```
 
 The biggest difference between novice and expert programmers is the amount of code reuse.
+
+
+Anything that is throwable  (extends throwable), can be caught, but you should not try to catch errors.
+
+Throwable - Exception (Compile time exception/checked exception) - Run time Exception (unchecked exception)
+
+Checked must be handled.  Unchecked do not have to be but should.  
+
+
+
+Throw, throws, try, catch, finally
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

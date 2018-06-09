@@ -51,6 +51,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
 			{
 				out = rs.getInt("USER_ROLE_ID");
 			}
+			
 		} 
 		catch (SQLException e) 
 		{
@@ -62,7 +63,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
 	@Override
 	public ArrayList<UserRoles> getAllRoles() {
 		ArrayList<UserRoles> output = new ArrayList<UserRoles>();
-		UserRoles temp = new UserRoles();
+		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
 			String sql = "select * from ERS_USER_ROLES";
@@ -70,6 +71,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
 			ResultSet rs = ps.executeQuery(sql);
 			while(rs.next()) 
 			{
+				UserRoles temp = new UserRoles();
 				temp.setId(rs.getInt("USER_ROLE_ID"));
 				temp.setRole(rs.getString("USER_ROLE"));
 				output.add(temp);

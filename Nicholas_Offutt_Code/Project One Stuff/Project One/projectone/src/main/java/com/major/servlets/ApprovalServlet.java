@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.major.pojos.ClaimDecision;
+import com.major.pojos.ErsUser;
 import com.major.pojos.IdHolder;
 import com.major.pojos.Reimbursement;
 import com.major.util.LookupService;
@@ -52,9 +53,11 @@ public class ApprovalServlet extends HttpServlet
 			ObjectMapper mapper = new ObjectMapper();
 			ClaimDecision decide = mapper.readValue(json, ClaimDecision.class);
 			Reimbursement changed = ReimbServe.getById(decide.getId());
+			ErsUser x = (ErsUser) session.getAttribute("user");
 			if(changed.getStatusId() == 1) 
 			{
 				changed.setStatusId(looker.getStatusId(decide.isDecision()));
+				changed.setResolverId(x.getId());
 				Reimbursement out = ReimbServe.update(changed);
 				String outJSON = "";
 				outJSON = mapper.writeValueAsString(out);
