@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+	integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+	crossorigin="anonymous"></script>
+
+<title>NDACorp Reimbursement</title>
+</head>
+
+<body style="background-color: powderblue">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light"
+		class="col-sm-12">
+		NDACorp
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li id="viewtick" class="nav-item active"><a class="nav-link"
+					href="#">View tickets</a></li>
+				<li id="addticket" class="nav-item"><a class="nav-link"
+					href="#">Add Ticket</a></li>
+				<li id="upinfo" class="nav-item"><a class="nav-link" href="#">Update
+						personal information</a></li>
+				<li id="ad" class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Sort Tickets </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a id="approved" class="dropdown-item" href="#">Tickets
+							Approved</a> <a class="dropdown-item" id="opentickets" href="#">Tickets
+							that need Approval</a>
+						<div class="dropdown-divider"></div>
+						<a id="denied" class="dropdown-item" href="#">Tickets Denied</a>
+					</div></li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0">
+				<ul class="navbar-nav mr-auto">
+					<li id="whoid"></li>
+					<li id="whorole"></li>
+					<li id="who"></li>
+					<li id="logout" class="nav-item"><a class="nav-link" href="#">LogOut</a></li>
+				</ul>
+			</form>
+		</div>
+	</nav>
+	<div id="logindiv" class="row">
+		<div class="jumbotron" style="background-color: powderblue"
+			class="col-sm-12">
+			<h1 id="foobar" align="center">Welcome to NDACorp Reimbursement</h1>
+			<h3 align="left">Please log in!</h3>
+			<div style="background-color: powderblue" align="left"
+				class="col-sm-4">
+				<br> Username: <input type="text" id="username"
+					class="col4 form-control"> <br> Password: <input
+					type="password" id="pw" class="col4 form-control" class="Password">
+				<br>
+				<button id="logIn" class="btn btn-primary btn-sm">Login</button>
+				<button id="signUp" class="btn btn-primary btn-sm">New
+					User!</button>
+				<div class="text-danger" id="allfields"></div>
+			</div>
+		</div>
+	</div>
+	<div id="signupdiv" class="row">
+		<div class="jumbotron" style="background-color: powderblue"
+			class="col-sm-12">
+			<h1 align="center">Welcome to NDACorp Reimbursement</h1>
+			<h3 align="left">Enter your account information</h3>
+			<div style="background-color: powderblue" align="left"
+				class="col-sm-4">
+				<br> First Name: <input type="text" id="firstname"
+					class="col4 form-control"> <br> Last Name: <input
+					type="text" id="lastname" class="col4 form-control"> <br>
+				Email: <input type="email" id="email" class="col4 form-control">
+				<br> Username: <input type="text" id="usernamenew"
+					class="col4 form-control"> <br> Password: <input
+					type="password" id="pwnew" class="col4 form-control"
+					class="Password"> <br> Re-Enter Password: <input
+					type="password" id="pwnew2" class="col4 form-control"
+					class="Password">
+				<div class="text-danger" id="pwmatch"></div>
+				<br>
+				<div id="foo2">
+					<button id="signUpnew" class="btn btn-primary btn-sm">Sign
+						Up</button>
+				</div>
+				<div class="text-danger" id="allfields2"></div>
+			</div>
+		</div>
+	</div>
+	<div id="view" class="row"></div>
+	<div id="addticketr" class="row"></div>
+	<script type="text/javascript" src="scripts/project1.js"></script>
+</body>
+
+</html>
