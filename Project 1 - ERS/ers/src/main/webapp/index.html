@@ -1,13 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>REAL DEAL</title>
+	<title>please work</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		console.log("script loaded");
+		var xhr = new XMLHttpRequest();
+
+		function findTutorials() {
+			//"/ers/NiceServlet?topic=" + document.getElementById("topic")
+			console.log("tried findTutorials()");
+			// xhr.open("get", "niceserv", true);
+			// xhr.onreadystatechange = processTutorials;
+			// console.log(JSON.stringify(params));
+			// xhr.send(JSON.stringify(params));
+			$.ajax({
+				url: "niceserv",
+				data: {
+					topic: document.getElementById("topic").value
+				},
+				type: "post",
+				dataType: "json",
+				success: (data) => {
+					console.log("GOT INTO SUCCESS");
+					console.log(data);
+					console.log("\nEND OF LOGS")
+					var JSONTopicObject = eval('(' + data + ')');
+					var table = document.getElementById("tutorialstable");
+					table.innerHTML = "";
+					var headrow = table.insertRow(0);
+					var headcell = headrow.insertCell(0);
+					headcell.style.backgroundColor = "lightblue";
+					headcell.innerHTML = JSONTopicObject.topic.name;
+					var tutorials = JSONTopicObject.topic.tutorial;
+					var i=0;
+					while(i<tutorials.length) {
+						row = table.insertRow(i+1);
+						cell = row.insertCell(0);
+						cell.innerHTML = tutorials[i++].name;
+					}
+				}
+			});
+		}
+		function processTutorials() {
+			console.log("tried processTutorials()!!");
+			if(xhr.readyState == 4 && xhr.status == 200) {
+				console.log("readystate is 4")
+				var JSONTopicObject = eval('(' + xhr.responseText + ')');
+				var table = document.getElementById("tutorialstable");
+				table.innerHTML = "";
+				var headrow = table.insertRow(0);
+				var headcell = headrow.insertCell(0);
+				headcell.style.backgroundColor = "lightblue";
+				headcell.innerHTML = JSONTopicObject.topic.name;
+				var tutorials = JSONTopicObject.topic.tutorial;
+				var i=0;
+				while(i<tutorials.length) {
+					row = table.insertRow(i+1);
+					cell = row.insertCell(0);
+					cell.innerHTML = tutorials[i++].name;
+				}
+			}
+		}
+	</script>
 </head>
 <body>
-	<form method="post">
-		<input type="text" name="username">
-		<input type="password" name="password">
-		<input type="submit" value="real">
-	</form>
+	<input type="text" id="topic" name="nice">
+	<button type="button" onclick="findTutorials();"">FIND</button>
+	<br>
+	<table id="tutorialsTable" style="border: 1px solid black"></table>
 </body>
 </html>
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title>REAL DEAL</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style/index.style.css">
+	<link rel="stylesheet" type="text/css" href="index.style.css">
+</head>
+
+<body>
+	<form method="post" action="niceserv">
+		<input class="login" type="text" name="username">
+		<input class="login" type="password" name="password">
+		<input id="test" type="submit" value="real">
+		<!-- <button id="test">click me</button> 
+	</form>
+
+	<div id="stuff">hello</div>
+
+
+	<script type="text/javascript" src="index.script.js"></script>
+</body>
+</html> -->
