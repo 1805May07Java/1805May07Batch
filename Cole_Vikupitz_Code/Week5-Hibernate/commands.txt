@@ -1,0 +1,9 @@
+yum update -y
+yum remove -y java
+yum install -y git java-1.8.0-openjdk-devel tomcat8
+sudo sed -i 's/<Connector port=\"8080\"/<Connector port=\"8085\"/' /usr/share/tomcat8/conf/server.xml
+service tomcat8 start
+wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+rpm --import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+yum install -y jenkins
+service jenkins start

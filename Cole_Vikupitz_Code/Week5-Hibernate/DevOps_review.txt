@@ -1,0 +1,26 @@
+Linux
+	bash scripting
+	cd, mkdir, echo
+	touch, redirection (>, >>)
+	vim, nano
+	ssh, grep, man, yum
+Amazon Web Services:
+	Elastic Cloud Compute (EC2)
+	Amazon Machine Image (AMI)
+	Elastic Block Store (EBS)
+	Autoscaling Groups
+	Elastic Load Balancing (ELB)
+	Security Groups
+	Simple Storage Service (S3)
+DevOps
+	Continuous Integration (CI)
+	Continuous Delivery (CD)
+Jenkins
+	Setup
+	Master
+	Executors, Agents, Nodes
+	Jobs, Builds
+SonarQube
+	Code quality
+	Quality gate
+	Temporary H2DB vs production DB
