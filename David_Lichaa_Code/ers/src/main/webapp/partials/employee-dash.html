@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <form class="form-inline">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex" id="navbarText">
+            <button class="btn btn-outline-secondary" type="button" id="viewRequestsEmp">View Requests</button>
+            <button class="btn btn-outline-secondary" type="button" id="loadSubmit">Submit New Request</button>
+            <button class="btn btn-outline-danger" type="button" id="logout">Logout</button>
+        </div>
+    </form>
+</nav>
+<h3><span id="name"></span>'s Employee Dashboard</h3>
+<div class="container">
+    <div id="action">
+
+
+    </div>
+</div>
+<script>
+    $('#viewRequestsEmp').on('click', viewRequestsEmp);
+    $('#loadSubmit').on('click', loadSubmitRequest);
+    $('#logout').on('click', logout);
+    $('#name').text(globalUser.firstName);
+</script>

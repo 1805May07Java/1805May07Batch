@@ -1,0 +1,23 @@
+body {
+    background-color: rgb(255, 251, 218) !important
+}
+
+.pending {
+    background-color: lightgrey
+}
+
+.approved {
+    background-color: lightgreen
+}
+
+.denied {
+    background-color: lightpink
+}
+
+.updateStatus {
+    cursor: pointer;
+}
+
+h3 {
+    text-align: center;
+}
