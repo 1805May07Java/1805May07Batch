@@ -2,10 +2,12 @@ window.onload = function () {
 	$('#signupdiv').hide();
 	$('#logIn').on('click', login);
 	$('#signUp').on('click', signUp);
+	//$('#signUp').hide();
 	$('#signUpnew').on('click', signUpNew)
 	$('#pwnew2').on('blur', checkPw);
 	$('#logout').on('click', logoutu);
 	loadNav();
+	
 }
 
 function signUpNew(){
@@ -367,7 +369,7 @@ function getTick(){
 }
 
 function makeTable(reim){
-	//console.log(reim);
+	console.log(reim);
 	$('#tmpholdtick').hide();
 	$('#reimtable').empty();
 	for(let i = 0; i < reim.length; i++){
@@ -392,6 +394,7 @@ function makeTable(reim){
 		cell7.innerHTML = reim[i].resolver;
 		cell8.innerHTML = reim[i].status;
 		cell9.innerHTML = reim[i].type;
+		
 
 		row.appendChild(cell1);
 		row.appendChild(cell2);

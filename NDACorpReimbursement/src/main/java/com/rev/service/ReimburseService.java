@@ -38,7 +38,7 @@ public class ReimburseService {
 			ReimAll a = new ReimAll(r.get(i).getReimId(), r.get(i).getReimAmmount(), r.get(i).getDateSub(), 
 					(r.get(i).getDateRes() == null ? "" : r.get(i).getDateRes()), 
 					r.get(i).getNotes(), dao2.getUser(r.get(i).getAuthor()).getUserName(), 
-					(r.get(i).getResolver() == 0 ? "" : r.get(i).getDateRes()),
+					(r.get(i).getResolver() == 0 ? "" : dao2.getUser(r.get(i).getResolver()).getUserName()),
 					dao.getStatus(r.get(i).getStatus()), dao.getType(r.get(i).getType()));
 			q.add(a);
 			
@@ -56,7 +56,7 @@ public class ReimburseService {
 			ReimAll a = new ReimAll(r.get(i).getReimId(), r.get(i).getReimAmmount(), r.get(i).getDateSub(), 
 					(r.get(i).getDateRes() == null ? "" : r.get(i).getDateRes()), 
 					r.get(i).getNotes(), dao2.getUser(r.get(i).getAuthor()).getUserName(), 
-					(r.get(i).getResolver() == 0 ? "" : r.get(i).getDateRes()),
+					(r.get(i).getResolver() == 0 ? "" : dao2.getUser(r.get(i).getResolver()).getUserName()),
 					dao.getStatus(r.get(i).getStatus()), dao.getType(r.get(i).getType()));
 			q.add(a);
 			
@@ -74,7 +74,7 @@ public class ReimburseService {
 			ReimAll a = new ReimAll(r.get(i).getReimId(), r.get(i).getReimAmmount(), r.get(i).getDateSub(), 
 					(r.get(i).getDateRes() == null ? "" : r.get(i).getDateRes()), 
 					r.get(i).getNotes(), dao2.getUser(r.get(i).getAuthor()).getUserName(), 
-					(r.get(i).getResolver() == 0 ? "" : r.get(i).getDateRes()),
+					(r.get(i).getResolver() == 0 ? "" : dao2.getUser(r.get(i).getResolver()).getUserName()),
 					dao.getStatus(r.get(i).getStatus()), dao.getType(r.get(i).getType()));
 			q.add(a);
 			
@@ -92,7 +92,7 @@ public class ReimburseService {
 			ReimAll a = new ReimAll(r.get(i).getReimId(), r.get(i).getReimAmmount(), r.get(i).getDateSub(), 
 					(r.get(i).getDateRes() == null ? "" : r.get(i).getDateRes()), 
 					r.get(i).getNotes(), dao2.getUser(r.get(i).getAuthor()).getUserName(), 
-					(r.get(i).getResolver() == 0 ? "" : r.get(i).getDateRes()),
+					(r.get(i).getResolver() == 0 ? "" : dao2.getUser(r.get(i).getResolver()).getUserName()),
 					dao.getStatus(r.get(i).getStatus()), dao.getType(r.get(i).getType()));
 			q.add(a);
 			
@@ -110,7 +110,7 @@ public class ReimburseService {
 			ReimAll a = new ReimAll(r.get(i).getReimId(), r.get(i).getReimAmmount(), r.get(i).getDateSub(), 
 					(r.get(i).getDateRes() == null ? "" : r.get(i).getDateRes()), 
 					r.get(i).getNotes(), dao2.getUser(r.get(i).getAuthor()).getUserName(), 
-					(r.get(i).getResolver() == 0 ? "" : r.get(i).getDateRes()),
+					(r.get(i).getResolver() == 0 ? "" : dao2.getUser(r.get(i).getResolver()).getUserName()),
 					dao.getStatus(r.get(i).getStatus()), dao.getType(r.get(i).getType()));
 			q.add(a);
 			
