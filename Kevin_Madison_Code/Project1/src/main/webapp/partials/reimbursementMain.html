@@ -1,0 +1,147 @@
+<div>
+		<div class="jumbotron">
+			<h1 class="display-4">Reimbursement</h1>
+			
+			
+			<!-- BUTTON AND MODAL -->
+			<!--
+			<button type="button" class="btn btn-secondary" data-target=".bd-example-modal-lg" data-toggle="modal" data-target="#exampleModal">
+			  New Reimbursement
+			</button>
+				
+			<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title">New Reimbursement</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+						<p class="lead">Provide more information about your reimbursement.</p>
+						
+						<label class="input-label" for="c2">
+							Amount: 
+						</label>
+						
+						<div class="input-group"> 
+					        <span class="input-group-addon">$</span>
+					        <input type="number" value="0.00" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency"  id="modalAmount"/>
+					    </div> 
+
+						<!-- Selecting from the drop-down menu
+						<label class="form-label" for="modalType">
+							Type:
+						</label>
+						
+						<select class="form-control user-success" id="modalType">
+							<option>Lodging</option>
+							<option>Travel</option>
+							<option>Food</option>
+							<option>Other</option>
+						</select>
+											
+						
+						<!-- Entering the field for a brief description
+						<div class="form-group">
+			            	<label for="message-text" class="col-form-label">Description:</label>
+			           		<textarea class="form-control" id="modalDescription"></textarea>
+			          	</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-primary" id="addNewReimb">Add</button>
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			
+			-->
+			<hr class="my-4">
+			
+			<!-- APPROVING OR DENYING REIMBURSEMENT -->
+			
+			<div id="approveOrDenyReimbursementForm">
+				<p class="lead">Approve/Deny Reimbursements</p>
+				
+				<input type="text" placeholder="Reimbursement Id" id="reimbId" /> 
+				
+				<label class="radio-inline"><input type="radio" name="optradio" id="radioApprove">Approve</label>
+				<label class="radio-inline"><input type="radio" name="optradio" id="radioDeny">Deny</label>
+				
+				
+				<br>
+				<input type="button" class="btn btn-secondary" id="confirmBtn" value="Confirm" />
+				<span class="danger" id="radioMessage" style="color:red"></span>
+			</div>
+			
+			<!-- ADDING A NEW REIMBURSEMENT -->
+			
+			<div id="addReimbursementForm">
+				<p class="lead">Add New Reimbursement</p>
+				<label for="exampleFormControlSelect1">Amount: </label>
+				<input type="number" value="0" min="0" step="1" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" id="addAmount" /><br>
+				
+				<label for="addType">Reimbursement Type: </label>
+			    <select class="form-control" id="addType">
+			      <option>Lodging</option>
+			      <option>Travel</option>
+			      <option>Food</option>
+			      <option>Other</option>
+			    </select>
+			    
+			    <label for="addDescription">Description: </label>
+    			<textarea class="form-control" id="addDescription" rows="3"></textarea>
+    			
+    			<input type="button" class="btn btn-secondary" id="addNewReimb" value="Submit New Reimbursement" />
+			    
+			    
+			
+			</div>
+			<hr class="my-4">
+			
+			
+			<p class="lead" id="tableLead">View your reimbursements below.</p>
+			
+			<!-- TABLE -->
+			<div>
+				<label class="radio-inline"><input type="radio" name="optradio" id="radioAll" checked="">All</label>
+				<label class="radio-inline"><input type="radio" name="optradio" id="radioPending">Pending</label>
+				<label class="radio-inline"><input type="radio" name="optradio" id="radioApproved">Approved</label>
+				<label class="radio-inline"><input type="radio" name="optradio" id="radioDenied">Denied</label>
+				
+				<input type="button" class="btn btn-secondary" id="filterBtn" value="Filter" />
+			</div>
+			
+			<table class="table table-hover">
+			  <thead>
+			    <tr>
+			      <th scope="col">Id</th>
+			      <th scope="col">Amount</th>
+			      <th scope="col">Submitted On</th>
+			      <th scope="col">Accepted On</th>
+			      <th scope="col">Description</th>
+			      <th scope="col" id="tableResolverOrAuthor">Resolver</th>
+			      <th scope="col">Status</th>
+			      <th scope="col">Type</th>
+
+			    </tr>
+			  </thead>
+			  <tbody id="reimbursementTable">
+			    <tr>
+			      <td>1</td>
+			      <td>Pending</td>
+			      <td>$10.00</td>
+			      <td>Lodging</td>
+			      <td>description</td>
+			      <td>null</td>
+			      <td>null</td>
+			      <td>null</td>
+			      <td>null</td>
+			    </tr>
+			  </tbody>
+			</table>
+			
+		</div>
+</div>

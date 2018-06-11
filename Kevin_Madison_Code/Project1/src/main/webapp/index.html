@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Welcome!</title>
+
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="Pragma" content="no-cache" />
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+	integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+	crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+	<!-- Top Navigation Bar -->
+	<div id="nav" style="background-color:grey;" >
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		  <a class="navbar-brand" href="#" id="homeNav">ERS</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+		    <ul class="navbar-nav">
+		      <li class="nav-item" >
+		        <a class="nav-link" href="#" id="reimbursementNav" >Reimbursements</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#" id="profileNav">Profile</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#"  id="logoutNav">Logout</a>
+		      </li>
+		      <li id="navUserRole"></li>
+		      <li id="navUserId"></li>
+		    </ul>
+		  </div>
+		</nav>
+	</div>
+
+	<!-- Login Page Functionality -->
+	<div id="view2">
+		<div class="jumbotron">
+			<h1 class="display-4">Welcome to the Employee Reimbursement System</h1>
+			<p class="lead">Please Log in or Register below.</p>
+		</div>
+		
+		<div class="card text-center" >
+			  <div class="card-header">
+			    Login
+			  </div>
+			  <div class="card-body">
+			    <h5 class="card-title"></h5>
+			    <input type="text" placeholder="Username" id="un1" /><br> 
+				<input type="password" placeholder="Password" id="pw1" /><br> 
+				<label>
+          			<input type="checkbox" value="remember-me" onclick="showPassword()"> Show password
+        		</label><br>
+				<input type="button" class="btn btn-secondary" id="login" value="Log In" /> 
+				<!-- 
+				<input type="button" class="btn btn-secondary" id="register1" value="Register" />
+				-->
+				<br> 
+				<span class="danger" id="message" style="color:red"></span>
+			  </div>
+			  <div class="card-footer text-muted">
+			    Made by: Kevin Madison
+			  </div>
+			</div>
+	</div>
+	
+	<div id="view"></div>
+	
+	<!-- 
+	
+	Testing
+	
+	 -->
+	 
+
+
+
+
+	
+	
+
+	<script type="text/javascript" src="scripts/app.js"></script>
+</body>
+</html>
