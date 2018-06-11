@@ -21,7 +21,9 @@ export class UserService {
 }
 
   public getUsers(): Observable<User[]> {
-    return this.http.get('http://localhost:8083/helloservlets/users').catch(this.handleError);
+    return this.http
+    .get('http://localhost:8083/helloservlets/users')
+    .catch(this.handleError);
   }
 
 }

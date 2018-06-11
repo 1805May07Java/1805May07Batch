@@ -14,6 +14,7 @@ import { UserComponent } from './components/user/user.component';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BooksComponent } from './components/books/books.component';
+import { BookStoreService } from './services/bookstore.service';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { BooksComponent } from './components/books/books.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [UserService], // services
+  providers: [UserService, BookStoreService], // services
   bootstrap: [AppComponent] // the root component which is the main view of the app
 })
 /*

@@ -4,6 +4,7 @@ import { DemoComponent } from './components/demo/demo.component';
 import { MainComponent } from './components/main/main.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { UserComponent } from './components/user/user.component';
+import { BooksComponent } from './components/books/books.component';
 
 /*
 ROUTES!
@@ -20,7 +21,8 @@ export const routes: Routes = [
     { path: 'main', component: MainComponent },
     { path: 'demo', component: DemoComponent },
     { path: 'todo', component: TodoComponent},
-    { path: 'users', component: UserComponent}
+    { path: 'users', component: UserComponent},
+    { path: 'books', component: BooksComponent}
 ];
 @NgModule({
     imports: [ RouterModule.forRoot(routes)],
