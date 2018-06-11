@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>ERS</title>
+
+
+</head>
+<body>
+	<table id="employee-table" class="table table-dark">
+		<thead>
+			<tr>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody id="employee-body"></tbody>
+	</table>
+			
+	<h1>Employee Reimbursement System</h1>
+	
+	<form method="get">
+
+		<div id="rform" class="form-group row centered">
+			<div class="col-lg-6">
+			<label for="description"><b>Description</b></label> <input
+				id="description" class="form-control" type="text" placeholder="Reason" name="description">
+			</div>
+			
+			<div class="col-lg-6">
+			<label for="amount"><b>Amount</b></label> <input id="amount" class="form-control"
+				type="number" placeholder="Amount"
+				name="amount"> <br>			
+			<button type="button" action="landing.html" class="btn btn-primary" id="add" name="sub">Submit</button>
+			</div>
+		</div>
+
+	</form>
+		
+		<table id="request-table" class="table table-sm table-striped table-dark table-hover">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">Request ID</th>
+					<th scope="col">Author</th>
+					<th scope="col">Amount</th>
+					<th scope="col">Description</th>
+					<th scope="col">Status</th>
+					<th scope="col">Resolved By</th>
+					<th scope="col">Resolved Date</th>
+					<th scope="col">Submit Date</th>
+				</tr>
+			</thead>
+			<tbody id="requesttable"></tbody>
+		</table>
+	
+	
+	<script type="text/javascript" src="app.js"></script>
+	
