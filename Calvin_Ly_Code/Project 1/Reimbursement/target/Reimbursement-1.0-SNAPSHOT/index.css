@@ -1,0 +1,94 @@
+@font-face {
+    /*font-family: Romana;*/
+    /*src: url('fonts/RomanaBoldBT.ttf'); !* IE9 Compat Modes *!*/
+    /*src: url('fonts/RomanaBoldBT.ttf?#iefix') format('embedded-opentype'), !* IE6-IE8 *!*/
+    /*!*url('fonts/RomanaBT.ttf') format('woff'), !* Modern Browsers *!*!*/
+    /*url('fonts/RomanaBoldBT.ttf')  format('truetype') !* Safari, Android, iOS *!*/
+    /*!*url('webfont.svg#svgFontName') format('svg'); !* Legacy iOS *!*!*/
+    font-family: Helvetica;
+    src: url('fonts/HELVETICA.ttf') format('truetype');
+}
+
+h3
+{
+    font-family: Helvetica;
+    position: center;
+    margin-left: auto;
+    margin-right: auto;
+    left: -50px;
+    right: 0;
+}
+.main_login{
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
+.modal {
+}
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+}
+.homepage-hero-module {
+    border-right: none;
+    border-left: none;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+}
+.no-video .video-container video,
+.touch .video-container video {
+    display: none;
+}
+.no-video .video-container .poster,
+.touch .video-container .poster {
+    display: block !important;
+}
+.video-container {
+    position: relative;
+    bottom: 0%;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+}
+.video-container .poster img {
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+.video-container .filter {
+    z-index: 100;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+.video-container video {
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+}
+.video-container video.fillWidth {
+    width: 100%;
+}
