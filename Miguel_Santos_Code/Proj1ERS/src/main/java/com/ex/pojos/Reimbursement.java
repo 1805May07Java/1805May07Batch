@@ -53,7 +53,7 @@ public class Reimbursement{
 	}
 
 	public Reimbursement(double amount, Timestamp time_submitted, Timestamp time_resolved, String description,
-			String author_fn, String author_ln, String resolver_ln, String status, String type) {
+			String author_fn, String author_ln, String resolver_ln, String status, String type, int id) {
 		super();
 		this.amount = amount;
 		this.time_submitted = time_submitted;
@@ -64,6 +64,7 @@ public class Reimbursement{
 		this.resolver_ln = resolver_ln;
 		this.status = status;
 		this.type = type;
+		this.id = id;
 	}
 
 	public int getId() {

@@ -9,7 +9,7 @@
 
 		<!-- Modal body -->
 		<div class="modal-body mx-auto">
-			<form>
+			<form id="myForm">
 				<div class="form-group">
 					<label for="description">Description:</label>
 					<textarea class="form-control" rows="3" id="description"></textarea>
@@ -18,14 +18,12 @@
 					<div class="form-group col-md-6">
 						<label for="inputType">Type:</label> <select id="inputType"
 							class="form-control">
-							<option value="1" selected>Choose...</option>
-							<option value="2">...</option>
 						</select>
 					</div>
 					<div class="form-group col-md-6">
 						<label for="inputAmount">Amount:</label> <input
 							type="number" class="form-control" id="inputAmount"
-							placeholder="Amount..." pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$">
+							placeholder="Amount..." min="0" step=".01">
 					</div>
 				</div>
 			</form>

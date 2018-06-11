@@ -12,19 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.ex.pojos.ERSUser;
 import com.ex.service.ERSUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebServlet(value="/login", loadOnStartup=1)
 public class LoginServlet extends HttpServlet{
+	private static org.apache.log4j.Logger log = Logger.getLogger(LoginServlet.class);
+	
 	static {
-		System.out.println("IN LOGIN SERVLET. CHANGE PLEASE");
+		log.debug("Bootin up");
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("IN DO GET");
 		HttpSession session = req.getSession(false);
 		session.invalidate();
 	}
@@ -32,12 +35,9 @@ public class LoginServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
-		System.out.println("In login Servlet");
 		
 		Stream<String> text = req.getReader().lines(); 
 		String json = text.collect(Collectors.joining("")).toString();
-		
-		System.out.println(json);
 		
 		ObjectMapper mapper = new ObjectMapper();
 

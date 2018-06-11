@@ -37,7 +37,6 @@ public class LoadDatasServlet extends HttpServlet {
 		resp.setContentType("application/json");
 		
 		String outJSON = mapper.writeValueAsString(data);
-		System.out.println(outJSON);
 		out.write(outJSON);
 	}
 	

@@ -11,13 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet("/view")
-public class LoadViewServlet extends HttpServlet{
+public class LoadViewServlet extends HttpServlet{		//Not used in project 
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("in do get of load view");
 		HttpSession session = req.getSession(false);
-		//int id = (int) session.getAttribute("userId");
 		int role = (int) session.getAttribute("userRoleId");
 		
 		System.out.println("role is " + role);

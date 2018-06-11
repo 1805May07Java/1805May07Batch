@@ -23,4 +23,15 @@ public class ReimbursementService {
 		rdao.addReimbursement(id, amount, description, type_id);
 		
 	}
+
+	public ArrayList<String> getOptions() {
+		return rdao.getOptions();		
+	}
+
+	public void approveDeny(int user_id, String reimb_id, String string) {
+		int approve = Integer.parseInt(string);
+		int man_id = Integer.parseInt(reimb_id);
+		rdao.approveDeny(user_id, man_id, approve);
+		
+	}
 }

@@ -17,19 +17,19 @@ public class ReimbursementDao {
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()){
 			String query = "select reim.reimb_submitted, u.user_firstname, u.user_lastname, status.reimb_status, typ.reimb_type, " + 
 					" reim.reimb_description, reim.reimb_amount, us.user_lastname, " + 
-					" reim.reimb_resolved " + 
+					" reim.reimb_resolved, reim.reimb_id " + 
 					"from ers_users u " + 
 					"inner join ers_reimbursement reim on u.user_id = reim.reimb_author " + 
 					"inner join ers_reimbursement_status status on status.reimb_status_id = reim.reimb_status_id " + 
 					"inner join ers_reimbursement_type typ on reim.reimb_type_id = typ.reimb_type_id " + 
 					"left outer join ers_users us on reim.reimb_resolver = us.user_id " + 
-					"order by reim.reimb_submitted asc";
+					"order by reim.reimb_submitted desc";
 			
 			Statement statement = conn.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			
 			while(rs.next()) {
-				Reimbursement temp = new Reimbursement(rs.getDouble(7), rs.getTimestamp(1), rs.getTimestamp(9), rs.getString(6), rs.getString(2), rs.getString(3), rs.getString(8), rs.getString(4), rs.getString(5));
+				Reimbursement temp = new Reimbursement(rs.getDouble(7), rs.getTimestamp(1), rs.getTimestamp(9), rs.getString(6), rs.getString(2), rs.getString(3), rs.getString(8), rs.getString(4), rs.getString(5), rs.getInt(10));
 				data.add(temp);
 			}
 		} catch (SQLException e) {
@@ -75,6 +75,45 @@ public class ReimbursementDao {
 			ps.setString(2, description);
 			ps.setInt(3, id);
 			ps.setInt(4, type_id);
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public ArrayList<String> getOptions() {
+		ArrayList<String> options = new ArrayList<String>();
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String query = "select reimb_type from ers_reimbursement_type order by REIMB_TYPE_ID asc";
+
+			Statement statement = conn.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+
+			while(rs.next()) {
+				String temp = rs.getString(1);
+				options.add(temp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return options;
+	}
+
+	public void approveDeny(int user_id, int reimb_id, int approve) {
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String query;
+			if (approve == 1) {
+				query = "update ers_reimbursement set reimb_resolved = current_timestamp, reimb_resolver = ?, reimb_status_id=2 where reimb_id = ?";
+			}
+			else {
+				query = "update ers_reimbursement set reimb_resolved = current_timestamp, reimb_resolver = ?, reimb_status_id=3 where reimb_id = ?";
+			}
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, user_id);
+			ps.setInt(2, reimb_id);
 			
 			ps.executeUpdate();
 			

@@ -4,12 +4,10 @@ window.onload = function(){
 }
 
 function login(){
-	console.log("logging in");
 	var username = $("#username").val();
 	var password = $("#password").val();
 	document.getElementById('username').value = "";
 	document.getElementById('password').value = "";
-	console.log(username + " " + password);
 	var user = {
 			id : 0,
 			username : username,
@@ -19,9 +17,7 @@ function login(){
 			email : " ",
 			roleId : 0
 	}
-	console.log("initialized user json");
 	var json = JSON.stringify(user);
-	console.log(json);
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState==4 && xhr.status == 200){
@@ -29,76 +25,81 @@ function login(){
 			if(user == null){
 				$('#loginmessage').html('Invlaid Credentials');
 			}
-			else {
-				$('#myModal').modal('toggle');
-				$('#myModal').html("");
-				// CLEAR MODAL HERE
-				$('#loginname').html(user.firstname + " "+ user.lastname);
-				$('#navigation').html('');
-				//loadView();
-				
-				if(user.roleId == 1){
-					loadEmpView();
+			else {										//successful login:
+				$('#myModal').modal('toggle');			//close modal
+				$('#myModal').html("");					//and clear for new modal html
+
+				$('#loginname').html(user.firstname + " "+ user.lastname);		//change navbar message with user's name
+				$('#navigation').html('');										//clear navbar links
+
+				if(user.roleId == 1){					//if employee,
+					loadEmpView();						//load employee table headers and add appropriate navbar links
 					$('#navigation').append('<li class="nav-item "><a id="addER" class="nav-link" href="#">Add Reimbursement Request</a></li>');
-					$('#addER').click(function(){
+					$('#addER').click(function(){		//event listener for new navbar link
 						$('#myModal').modal('toggle');
 					});
-					//Replace modal innerHTML add ER form here
-					loadAddModal();
-					$('#confirmER').click(function(){
-						addNewER();
-						$('#myModal').modal('toggle');
-					});
-					
+					loadAddModal();						//load empty modal with form data
+					//loadDropdownOptions();
+
 				}
-				else{
-					loadManView();
-					
-					//replace modal innerHTML with approve or deny buttons here
+				else{									//if manager,
+					loadManView();						//load table headers for manager
 					loadOptionModal();
-					
-					//place event listener for table row
 				}
-				
-				$('#navigation').append('<li class="nav-item "><a id="loggout" class="nav-link" href="#">Logout</a></li>');
-				console.log("adding logout function");
-				$('#loggout').ready(function(){
+
+				$('#navigation').append('<li class="nav-item "><a id="loggout" class="nav-link" href="">Logout</a></li>');
+				$('#loggout').ready(function(){			//add logout navbar link and event listener
 					$('#loggout').on('click',logout)
 				});
-				loadData(user.roleId);
-				//loadData();
+				//loadData(user.roleId);
 			}
 		}
 	}
 	xhr.open("POST", "login", true);
 	xhr.send(json);
-	console.log("http request sent");
 }
 
-function addNewER(){
-	
-	console.log("adding new Expense");
+function loadDropdownOptions(){							//pull types of reimbursement from db 
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status==200){
+			var options = JSON.parse(xhr.responseText);
+
+			for(let i in options){
+				var opt = document.createElement("option");
+				opt.innerHTML = options[i];
+				opt.setAttribute("value", (parseInt(i)+1));	
+
+				document.getElementById("inputType").appendChild(opt);
+
+			}
+		}
+	}
+
+	xhr.open("GET", "dropdown", true);
+	xhr.send();
+}
+
+function addNewER(){							//submit new reimbursement request
+
 	var type_id = $("select[id=inputType]").val();
 	var amount = $("#inputAmount").val();
 	var description = $('#description').val();
-	//document.getElementById('amount').value = 0;
-	//document.getElementById('description').value = "";
-	console.log(type_id + " " + amount + " " + description);
+	document.getElementById('myForm').reset();
 	var reimb = {
 			amount : amount,
 			description : description,
 			type_id : type_id
 	}
-	
+
 	var json = JSON.stringify(reimb);
-	console.log(json);
-	
+
 	var xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function(){
-		console.log(xhr.readyState + " " + xhr.status);
 		if(xhr.readyState == 4 && xhr.status==200){
-			$('#myTable').html('');
+			$('#myTable').html('');		// clear table before loading updated table
 			loadData(1);
 		}
 	}
@@ -107,13 +108,13 @@ function addNewER(){
 	xhr.send(json);
 }
 
-function loadOptionModal(){
+function loadOptionModal(){							//loads partial html to modal for approve or deny of reimbs
 	var xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function(){
-		console.log(xhr.readyState + " " + xhr.status);
 		if(xhr.readyState == 4 && xhr.status==200){
 			$('#myModal').html(xhr.responseText);
+
 		}
 	}
 
@@ -121,13 +122,19 @@ function loadOptionModal(){
 	xhr.send();
 }
 
-function loadAddModal(){
+function loadAddModal(){						//loads partial html to modal for expense submission form 
 	var xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function(){
-		console.log(xhr.readyState + " " + xhr.status);
 		if(xhr.readyState == 4 && xhr.status==200){
 			$('#myModal').html(xhr.responseText);
+
+			$('#confirmER').on('click',function(){
+				addNewER();
+				$('#myModal').modal('toggle');
+			});
+			loadDropdownOptions();
+
 		}
 	}
 
@@ -135,13 +142,45 @@ function loadAddModal(){
 	xhr.send();
 }
 
-function loadManView(){
+function approveDeny(event){						
 	var xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function(){
-		console.log(xhr.readyState + " " + xhr.status);
 		if(xhr.readyState == 4 && xhr.status==200){
-			$('#sitebody').html(xhr.responseText);
+			$('#myModal').modal('toggle');
+			$('#myTable').html('');		// clear table before loading updated table
+			loadData(2);
+		}
+	}
+
+	xhr.open("POST", "approve", true);
+	xhr.send(event.data.reimb_id + ":" + event.data.approve);
+}
+
+function loadManView(){					//loads managers table
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status==200){
+			$('#sitebody').html(xhr.responseText);			//manager's table headers
+
+			loadData(2);									//manager's data
+			//---ADD EVENT LISTENER FOR ROWS
+			$('#myTable').on('click', 'tr', function(){
+				if(this.children[3].innerHTML == "Pending"){
+					$('.modal-title').html(this.children[1].innerHTML + " " + this.children[2].innerHTML + "<br>reimbursement for:<br>" + this.children[5].innerHTML + "<br>for: $" + this.children[6].innerHTML );
+					//---update EVENT LISTENERS FOR APPROVE OR DENY BUTTONS for current row 
+					$('#approve').off();			//unbind any previous event listeners
+					$('#deny').off();
+					$('#approve').on('click', {reimb_id: this.attributes[0].value, approve: "1"}, approveDeny);
+					$('#deny').on('click', {reimb_id: this.attributes[0].value, approve: "0"}, approveDeny);
+
+					$('#myModal').modal('toggle');
+				}
+
+			});
+
+
 		}
 	}
 
@@ -152,9 +191,10 @@ function loadEmpView(){
 	var xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function(){
-		console.log(xhr.readyState + " " + xhr.status);
 		if(xhr.readyState == 4 && xhr.status==200){
 			$('#sitebody').html(xhr.responseText);
+
+			loadData(1);
 		}
 	}
 
@@ -163,33 +203,14 @@ function loadEmpView(){
 }
 
 function logout(){
-	console.log("clicking log out");
 	var xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function(){
-		console.log(xhr.readyState);
 		if(xhr.readyState == 4 && xhr.status==200){
-			console.log("logging out");
 			location.reload();
 		}
 	}
 	xhr.open("GET", "login", true);
-	console.log("xhr opened");
-	xhr.send();
-	console.log("xhr sent");
-}
-
-function loadView(){
-	var xhr = new XMLHttpRequest();
-
-	xhr.onreadystatechange = function(){
-		console.log(xhr.readyState + " " + xhr.status);
-		if(xhr.readyState == 4 && xhr.status==200){
-			$('#sitebody').html(xhr.responseText);
-		}
-	}
-
-	xhr.open("GET", "view", true);
 	xhr.send();
 }
 
@@ -209,7 +230,7 @@ function loadData(id){
 					var cell5 = document.createElement("td");
 					var cell6 = document.createElement("td");
 					var cell7 = document.createElement("td");
-					
+
 					cell1.innerHTML = data[i].status;
 					cell2.innerHTML = data[i].type;
 					cell3.innerHTML = data[i].description;
@@ -224,7 +245,7 @@ function loadData(id){
 						date = new Date(data[i].time_resolved);
 						cell7.innerHTML = date.toLocaleString();
 					}
-					
+
 					row.appendChild(cell1);
 					row.appendChild(cell2);
 					row.appendChild(cell3);
@@ -232,7 +253,7 @@ function loadData(id){
 					row.appendChild(cell5);
 					row.appendChild(cell6);
 					row.appendChild(cell7);
-					
+
 					document.getElementById("myTable").appendChild(row);
 				}
 			}
@@ -249,7 +270,7 @@ function loadData(id){
 					var cell7 = document.createElement("td");
 					var cell8 = document.createElement("td");
 					var cell9 = document.createElement("td");
-					
+
 					date = new Date(data[i].time_submitted);
 					cell1.innerHTML = date.toLocaleString();
 					cell2.innerHTML = data[i].author_fn;
@@ -266,7 +287,7 @@ function loadData(id){
 						date = new Date(data[i].time_resolved);
 						cell9.innerHTML = date.toLocaleString();
 					}
-					
+
 					row.appendChild(cell1);
 					row.appendChild(cell2);
 					row.appendChild(cell3);
@@ -276,18 +297,20 @@ function loadData(id){
 					row.appendChild(cell7);
 					row.appendChild(cell8);
 					row.appendChild(cell9);
-					
+
+					row.setAttribute("data-id", data[i].id);	// store reimb_id as value in description td
+
 					document.getElementById("myTable").appendChild(row);
-					
+
 				}
 				$('#tableview').ready(function(){			//Adds search functionality to Manager Data Table
 					$("#myInput").on("keyup", function() {
-					var value = $(this).val().toLowerCase();
-					$("#myTable tr").filter(function() {
-					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+						var value = $(this).val().toLowerCase();
+						$("#myTable tr").filter(function() {
+							$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+						});
 					});
-					});
-					});
+				});
 			}
 		}
 	}

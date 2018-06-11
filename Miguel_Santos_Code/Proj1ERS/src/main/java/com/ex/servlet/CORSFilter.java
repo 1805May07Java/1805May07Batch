@@ -18,7 +18,6 @@ public class CORSFilter implements Filter{
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-    	System.out.println("in filter init");
    
     }
 
@@ -32,7 +31,7 @@ public class CORSFilter implements Filter{
             throws IOException, ServletException {
  
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        System.out.println("CORSFilter HTTP Request: " + request.getMethod());
+        //System.out.println("CORSFilter HTTP Request: " + request.getMethod());
  
         // Authorize (allow) all domains to consume the content
         ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", "*");
