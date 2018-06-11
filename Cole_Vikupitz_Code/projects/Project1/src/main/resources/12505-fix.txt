@@ -1,0 +1,9 @@
+To fix the vendor code error 12505, do this:
+
+Go to Windows home, search for 'Services' (with the gear icon)
+Run the following services:
+	OracleMTSRecoveryService
+	OracleServiceXE
+	OracleXEClrAgent
+
+Restart the app and try again
