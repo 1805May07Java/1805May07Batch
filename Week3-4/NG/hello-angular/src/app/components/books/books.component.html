@@ -1,3 +1,49 @@
-<p>
-  books works!
-</p>
+<h1 align="center">
+
+  Welcome to Rev Books</h1>
+<div class="jumbotron">
+  <h4>Add a new book:</h4>
+  <br> ISBN:
+  <input type="number" id="isbn" class="col-4 form-control" maxlength="10" minlength="10">
+  <div class="danger" id="isbnwarning"></div>
+  <br> Title:
+  <input type="text" id="title" class="col-4 form-control">
+  <br> Price:
+  <input type="text" id="price" class="col-4 form-control">
+  <br> Genre:
+  <select>
+    <option class="col-4 form-control" *ngFor="let genre of genres" [ngValue]="genre.id"> {{ genre.name }} </option>
+  </select>
+  <br> Author:
+  <div id="form-group">
+    <select id="authors" class="col-4 form-control">
+    </select>
+    <!-- add plus glyphicon for new artist -->
+  </div>
+
+
+</div>
+
+
+<button id="add" class="btn btn-primary">Add Book!</button>
+<hr>
+<table class="table table-sm table-hover table-bordered thead-light">
+  <thead>
+    <tr>
+      <th scope="col">ISBN</th>
+      <th scope="col">Title</th>
+      <th scope="col">Price</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Author(s)</th>
+    </tr>
+  </thead>
+  <tbody id="tablebody">
+    <tr *ngFor="let book of books">
+      <td><b>{{ book.isbn }}</b></td>
+      <td>{{ book.title }}</td>
+      <td>{{ book.price }}</td>
+      <td>{{ getGenreById(book.genre) }}</td>
+      <td>{{ getAuthorsById(book.id) }} </td>
+    </tr>
+  </tbody>
+</table>

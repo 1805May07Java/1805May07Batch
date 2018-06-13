@@ -16,10 +16,12 @@
 		<property name="hibernate.connection.username">demo</property>
 		<property name="hibernate.connection.password">demo</property>
 		
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="show_sql">true</property>
 		
 		<mapping class="com.ex.beans.Genre" />
+		<mapping class="com.ex.beans.Author" />
+		<mapping class="com.ex.beans.Book" />
 		
 		
 

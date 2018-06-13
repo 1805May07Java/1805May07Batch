@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+	
+	<diskStore path="C:\temp\cache"/>
+ 	<defaultCache 
+ 		maxElementsInMemory="100" 
+ 		eternal="false"
+ 		timeToIdleSeconds="120"
+ 		timeToLiveSeconds="200"> 
+ 	</defaultCache>   
+
+	<cache
+    	name="employee"
+    	maxElementsInMemory="10000"
+    	eternal="false"
+    	timeToIdleSeconds="300"
+    	timeToLiveSeconds="600"
+    	overflowToDisk="true">
+    </cache>
+    
+    <cache 
+    	name="org.hibernate.cache.internal.StandardQueryCache"
+    	maxElementsInMemory="1"
+        eternal="false" 
+        timeToLiveSeconds="120">
+    </cache>
+    
+    
+    <cache 
+    	name="org.hibernate.cache.spi.UpdateTimestampsCache"
+    	maxElementsInMemory="1"
+        eternal="true">
+    </cache>
+    
+</ehcache>

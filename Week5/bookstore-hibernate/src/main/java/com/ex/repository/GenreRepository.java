@@ -6,8 +6,9 @@ import com.ex.beans.Genre;
 
 public interface GenreRepository {
 
-	public Genre addGenre(Genre g);
-	public List<Genre> getAll();
+	Genre addGenre(Genre g);
+	List<Genre> getAll();
+	Genre updateGenre(Genre g);
 	
 	
 }

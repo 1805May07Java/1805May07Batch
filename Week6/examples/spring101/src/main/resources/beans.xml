@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<!-- Our first Spring Bean definition -->
+	<bean id="thisIsABean" class="com.ex.hello.HelloWorld" 
+			init-method="initializeBean" destroy-method="destroyBean">
+		<!--  first type of DI we will cover is setter injection, 
+				we see this with the "property" tag -->
+		<property name="text" value="Welcome to Spring! This is Dependency Injection!"/>
+		<constructor-arg name="count" value="100"/>
+	</bean>
+	
+	<!-- inject one bean into another aka Bean Wiring -->
+	<bean id="parent" class="com.ex.hello.ParentWorld">
+		<property name="hello" ref="thisIsABean"/>
+	</bean>
+	
+	<!-- AUTOWIRING OUR BEANS -->
+	<!--  WE WILL NOW USE ANNOTATIONS / WARNING DO NOT DO BOTH FOR THE SAME BEAN -->
+	<!-- 
+	<bean id="employee" class="com.ex.autowiring.Employee" autowire="byType">
+		<property name="name" value="Genesis Bonds"/>
+	</bean>
+	
+	<bean id="department" class="com.ex.autowiring.Department">
+		<property name="name" value="Training team"/>
+	</bean>
+	 -->
+	 <!-- MUST CONFIGURE AUTOWIRING WITH ANNOTATIONS -->
+	 <context:annotation-config/>
+	 <context:component-scan base-package="com.ex"/>
+	
+
+</beans>
