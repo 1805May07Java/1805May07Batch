@@ -124,8 +124,5 @@ public class Book {
 				+ ", authors=" + authors.toString() + "]";
 	}
 	
-	
-	
-	
 
 }
