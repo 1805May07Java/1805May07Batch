@@ -9,10 +9,9 @@ import org.springframework.stereotype.Service;
 import com.ex.beans.User;
 
 @Component
-@Service("loginService")
 public class ServiceImpl implements LoginService{
 	
-	static ArrayList<User> users;
+	static ArrayList<User> users = new ArrayList<User>();
 	
 	static {
 		users.add(new User("Genesis", "123", "N/A"));
