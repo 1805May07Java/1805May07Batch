@@ -6,8 +6,6 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-
-
 	<!-- Enables annotations in this context -->
 	<context:annotation-config />
 
@@ -36,11 +34,20 @@
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
 	</bean>
 
+
+	<bean id="transactionManager" 
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager"> 
+		<property name="sessionFactory" ref="mySessionFactory"></property> 
+	</bean>
+
+<!-- 	<bean id="myDao" class="com.ex.orm.ORMDao"> -->
+<!-- 		<property name="sessionFactory" ref="mySessionFactory"></property> -->
+<!-- 	</bean> -->
 
 
 </beans>
