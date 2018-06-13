@@ -43,6 +43,13 @@ public class Book {
 	private Set<Author> authors;
 	
 	public Book() {}
+	
+	public Book(String isbn, String title, double price) {
+		super();
+		this.isbn = isbn;
+		this.title = title;
+		this.price = price;
+	}
 
 	public Book(int id, String isbn, String title, double price, Genre genreId, Set<Author> authors) {
 		super();

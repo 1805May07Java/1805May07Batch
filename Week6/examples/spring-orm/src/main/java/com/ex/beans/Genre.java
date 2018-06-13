@@ -26,6 +26,11 @@ public class Genre {
 
 	public Genre() {}
 	
+	public Genre(String genre) {
+		super();
+		this.genre = genre;
+	}
+	
 	public Genre(int id, String genre) {
 		super();
 		this.id = id;
