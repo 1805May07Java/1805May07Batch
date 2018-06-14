@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  <display-name>spring-mvc</display-name>
+  <display-name>spring-mvc-rest</display-name>
 
 	<!-- needed for ContextLoaderListener -->
 	<context-param>
@@ -8,18 +8,17 @@
 		<param-value>/WEB-INF/beans.xml</param-value>
 	</context-param>
 
-	<!-- Bootstraps the root web application context before servlet initialization
-	Loads middle-tier and data-tier beans. DS only loads beans containing web
-	components (Components, handler mapping, view resolver, etc) -->
+	<!-- Bootstraps the root web application context before servlet initialization -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
 	<!-- The front controller of this Spring Web application, responsible for handling all application requests -->
 	<servlet>
 		<servlet-name>springDispatcherServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-				<init-param>
-					<param-name>contextConfigLocation</param-name>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/beans.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -30,6 +29,4 @@
 		<servlet-name>springDispatcherServlet</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
-	
-	
 </web-app>
