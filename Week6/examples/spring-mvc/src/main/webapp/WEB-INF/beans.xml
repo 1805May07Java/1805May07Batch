@@ -17,10 +17,24 @@
 	<!-- Configure our resources folder -->
 	<mvc:resources location="/static" mapping="/**"></mvc:resources>
 
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<!-- InternalResourceViewResolver - Bean which provides the required view based
+	on view name obtained from controller method
+	Note* this is set up for server-side view rendering (we use JS for
+	client-side rendering). This uses tools to combine template (HTML) 
+	with model data to generate the view BEFORE returning the response 
+	to the client 
+	This bean (IRVR) can be used to deliver any kind of template baed on
+	predefined prefix and suffix
+	RE: WEB-INF (Web-information metadata). Putting content in the WEB-INF
+	folder makes it an "internal resource", accessible only through our 
+	Dispatcher servlet or through a controller via its name -->
+	<bean id="viewResolver" 
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/static/"></property>
 		<property name="suffix" value=".html"></property>
 	</bean>
+	
+	
 	
 	
 </beans>
