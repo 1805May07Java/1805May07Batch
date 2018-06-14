@@ -2,6 +2,7 @@ package com.ex.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public User findOne(int id) {
-		return new User();
+		Optional<User> test = users.stream().filter( u -> u.getId() == id).findFirst();
+		if(test.isPresent()) return test.get();
+		return null;
 	}
 
 	public User findByUsername(String username) {
@@ -35,6 +38,23 @@ public class UserServiceImpl implements UserService{
 		u.setId(count++);
 		users.add(u);
 		return u;
+	}
+
+	@Override
+	public User update(User u) {
+		User oldUser = findOne(u.getId());
+		if(oldUser == null) {
+			return null;
+		} else {
+			oldUser = u;
+		}
+		return u;
+	}
+
+	@Override
+	public void delete(User u) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
