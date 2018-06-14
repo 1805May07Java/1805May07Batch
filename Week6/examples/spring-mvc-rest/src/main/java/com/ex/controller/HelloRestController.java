@@ -56,7 +56,6 @@ public class HelloRestController {
 		else {
 			return new ResponseEntity<User>(user, HttpStatus.I_AM_A_TEAPOT);
 		}
-		
 	}
 
 }
