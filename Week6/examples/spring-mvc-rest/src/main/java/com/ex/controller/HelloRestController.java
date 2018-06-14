@@ -16,7 +16,7 @@ import com.ex.beans.User;
 import com.ex.service.UserService;
 
 @RestController
-@RequestMapping("/api")
+//@RequestMapping("/api")
 public class HelloRestController {
 	
 	@Autowired
@@ -34,7 +34,7 @@ public class HelloRestController {
 		 return service.getAll();
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/user/{id}")
+	@RequestMapping(method=RequestMethod.GET, value="/user/{id}/{name}")
 	public User getById(@PathVariable int id) {
 		return service.findOne(id);
 	}
