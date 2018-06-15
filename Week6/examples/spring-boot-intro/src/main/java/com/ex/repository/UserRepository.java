@@ -8,4 +8,5 @@ import com.ex.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 
+	User findByUsernameIgnoreCase(String username);
 }
