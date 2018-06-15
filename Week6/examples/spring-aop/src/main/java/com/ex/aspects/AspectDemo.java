@@ -1,5 +1,7 @@
 package com.ex.aspects;
 
+
+import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -10,10 +12,14 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StopWatch;
 
 @Aspect
 @Component
 public class AspectDemo {
+	
+
+	final static Logger logger = Logger.getLogger(AspectDemo.class);
 	
 	//BEFORE ADVICE
 	@Before("execution(* com.ex.application.Methods.*(..))")
@@ -47,11 +53,23 @@ public class AspectDemo {
 		System.out.println("doing more things after execution");
 	}
 	
-	@Pointcut("execution(* com.ex.application.Methods.*(..))")
+	@Pointcut("execution(* com.ex.application.*.*(..))")
 	public void methodsMethods() {}
 	
-	void timer() {
-		
+	@Pointcut("execution(* com.ex.application.Methods.do*(..))")
+	public void startsWithDo() {}
+	
+	@Around("methodsMethods()")
+	void timer(ProceedingJoinPoint pjp) throws Throwable{
+		StopWatch timer = new StopWatch();
+		timer.start();
+		pjp.proceed();
+		timer.stop();
+		String logMessage = "METHOD EXECUTION INFO:\n";
+		logMessage += pjp.getTarget().getClass().getName() + ".";
+		logMessage += pjp.getSignature().getName() + "\n";
+		logMessage += "Execution Time: " + timer.getTotalTimeMillis() + "ms";
+		logger.info(logMessage);
 	}
 	
 	
