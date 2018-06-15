@@ -36,11 +36,15 @@ public class UserController {
 			u = service.addUser(u);
 			if(u == null) return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
 			return new ResponseEntity<User>(u, HttpStatus.CREATED);
-	
 	}
 	
+	@RequestMapping(value="/name", method=RequestMethod.POST, 
+			consumes=MediaType.APPLICATION_JSON_VALUE, 
+			produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> getByUsername(@RequestBody String name){
-		return null;
+		User u = service.findByUsername(name);
+		if(u == null) return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<User>(u, HttpStatus.OK);
 	}
 	
 	public ResponseEntity<User> updateUser(@RequestBody User u){
