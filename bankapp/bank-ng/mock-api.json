@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "test",
+      "password": "password",
+      "firstname": "fn",
+      "lastname": "ln"
+    },
+    {
+      "firstname": "G",
+      "lastname": "B",
+      "password": "bye",
+      "username": "hi",
+      "id": 2
+    },
+    {
+      "firstname": "GB",
+      "lastname": "GB",
+      "password": "GB",
+      "username": "testing",
+      "id": 3
+    },
+    {
+      "firstname": "patrick",
+      "lastname": "folena",
+      "password": "123",
+      "username": "pf",
+      "id": 4
+    },
+    {
+      "firstname": "carl",
+      "lastname": "bilboe?",
+      "password": "123",
+      "username": "t",
+      "id": 5
+    }
+  ]
+}

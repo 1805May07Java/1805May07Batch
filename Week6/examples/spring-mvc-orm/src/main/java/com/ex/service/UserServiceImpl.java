@@ -21,9 +21,9 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User add(User u) {
-		if(dao.findByUsername(u.getUsername())==null) {
-			return null;
-		}
+//		if(dao.findByUsername(u.getUsername())==null) {
+//			return null;
+//		}
 		return dao.add(u);
 	}
 

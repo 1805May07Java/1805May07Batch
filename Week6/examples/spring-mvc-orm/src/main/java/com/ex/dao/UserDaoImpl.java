@@ -16,7 +16,9 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public User add(User u) {
-		return (User) sf.getCurrentSession().save(u);
+		int i = (Integer) sf.getCurrentSession().save(u);
+		u.setId(i);
+		return u ;
 	}
 
 	@Override
