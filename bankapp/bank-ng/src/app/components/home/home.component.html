@@ -1,6 +1,6 @@
-<div>
-  <input type="text" [(ngModel)]="username">
-  <input type="password" [(ngModel)]="password">
-  <button (click)="login()">Log In</button>
-  <button (click)="register()">Register</button>
+<div class="form-group">
+  <input type="text" [(ngModel)]="username" placeholder="Username" class="col-4 form-control">
+  <input type="password" [(ngModel)]="password" placeholder="Password" class="col-4 form-control">
+  <button (click)="login()" class="col-2 form-control btn btn-secondary">Log In</button>
+  <button (click)="register()"class="col-2 form-control btn btn-primary">Register</button>
 </div>

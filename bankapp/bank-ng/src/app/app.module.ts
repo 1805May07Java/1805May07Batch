@@ -9,13 +9,16 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './components/register/register.component';
+import { UserService } from './services/user.service';
+import { LandingComponent } from './components/landing/landing.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,7 @@ import { RegisterComponent } from './components/register/register.component';
     HttpClientModule
 
   ],
-  providers: [],
+  providers: [ UserService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

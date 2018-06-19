@@ -1,3 +1,7 @@
-<p>
-  register works!
-</p>
+<input type="text" [(ngModel)]="firstname" placeholder="First name">
+<input type="text" [(ngModel)]="lastname" placeholder="Last name">
+<input type="text" [(ngModel)]="username" (change)="validate()" placeholder="Username">
+<input type="password" [(ngModel)]="password" placeholder="Password">
+<button (click)="register()" [disabled] = '!valid' *ngIf="registered==false">Register</button>
+<button (click)="toLogin()" *ngIf="registered==true">Log In</button>
+{{message}}

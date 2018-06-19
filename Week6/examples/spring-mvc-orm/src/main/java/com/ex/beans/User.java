@@ -7,7 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 @Table(name="BANK_USERS")
 public class User {
@@ -18,9 +23,11 @@ public class User {
 	@GeneratedValue(generator="b_u_id", strategy=GenerationType.SEQUENCE)
 	private Integer id;
 	
+	@NotEmpty
 	@Column(name="USERNAME")
 	private String username;
 	
+	@Size(min=3, max=20)
 	@Column(name="PASSWORD")
 	private String password;
 	
