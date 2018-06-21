@@ -1,0 +1,7 @@
+#bootstrap.yml or .properties is first to load, 
+#then application.yml or .properties 
+#name should go here
+spring:
+  application:
+    name: flashcard-service
+      
