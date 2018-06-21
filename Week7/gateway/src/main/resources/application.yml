@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: gateway-server
+
+server:
+  port: 8765
+  
+info:
+  component: Zuul Server
+  description: Showing off Zuul basics
+  
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
