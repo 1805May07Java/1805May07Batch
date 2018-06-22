@@ -7,7 +7,7 @@ As the name implies, it is a queue of messages. They are used for IPC (inter-pro
 ## Basic Architecture
   
 <p align="center">
-  <img src="https://github.com/cvikupitz/mq/blob/master/mq-arch.png?raw=true" alt="img/mq-arch.png">
+  <img src="img/mq-arch.png" alt="MQ Architecture">
 </p>
   
 ## Benefits
@@ -50,11 +50,11 @@ As the name implies, it is a queue of messages. They are used for IPC (inter-pro
 ## Apache Kafka Architecture
 
 <p align="center">
-  <img src="https://github.com/cvikupitz/mq/blob/master/kafka-arch.png?raw=true" alt="img/kafka-arch.png">
+  <img src="img/kafka-arch.png" alt="Kafka">
 </p>
 
 ## RabbitMQ Architecture
 
 <p align="center">
-  <img src="https://github.com/cvikupitz/mq/blob/master/rabbitmq-arch.png?raw=true" alt="img/rabbitmq-arch.png">
+  <img src="img/rabbitmq-arch.png" alt="Rabbit MQ">
 </p>
